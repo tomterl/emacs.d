@@ -26,7 +26,10 @@
           (ruby-mode . inf-ruby)
           (elixir-mode . elixir-mode-iex)))
 #+END_SRC
-
+*** Fullscreen execution
+#+BEGIN_SRC emacs-lisp
+  (require 'efullscreen)
+#+END_SRC
 ** Key bindings
    :PROPERTIES:
    :ID:       b186cad4-7355-4c52-a1a2-21f52a49aa5f
@@ -206,7 +209,7 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
   
   ;; byte compile line-format function calls
   ;;(gnus-compile)
-#+end_src emacs-lisp
+#+end_src
 
 * org-mode
 ** Variables
@@ -442,24 +445,13 @@ python, ...) beziehen.
 *** Key
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
-#+end_src emacs-lisp
+#+end_src
 
 *** Fullscreen
 Doesn't work with e2wm - but adding magit-status to the e2wm main
 window regexp config helps...
 #+BEGIN_SRC emacs-lisp
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
-
-(defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
-  (interactive)
-  (kill-buffer)
-  (jump-to-register :magit-fullscreen))
-
-(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+(efullscreen magit-status magit-mode-quit-window :magit-fullscreen t)
 #+END_SRC
 ** REPL toggle
 #+BEGIN_SRC emacs-lisp
