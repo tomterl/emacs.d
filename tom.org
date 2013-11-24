@@ -1,4 +1,7 @@
 * Init
+Using =pallet= allows to use Cask and =list-packages= together --
+manuall operations performed using =packages.el= are reflected in the
+Cask file.
 #+BEGIN_SRC emacs-lisp
 (require 'pallet)
 #+END_SRC
@@ -12,19 +15,12 @@
 (require 'org-macs)
 #+end_src
 *** Completion
+I decided to use company mode for auto completion; so disable
+auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
+  (global-auto-complete-mode -1)
   (require 'company)
   (global-company-mode)
-#+END_SRC
-*** REPL handling
-#+BEGIN_SRC emacs-lisp
-  (require 'repl-toggle)
-  (setq rtog/mode-repl-alist
-        '(
-          (php-mode . php-boris)
-          (emacs-lisp-mode . ielm)
-          (ruby-mode . inf-ruby)
-          (elixir-mode . elixir-mode-iex)))
 #+END_SRC
 *** Fullscreen execution
 #+BEGIN_SRC emacs-lisp
@@ -461,8 +457,7 @@ python, ...) beziehen.
 #+end_src
 
 *** Fullscreen
-Doesn't work with e2wm - but adding magit-status to the e2wm main
-window regexp config helps...
+
 #+BEGIN_SRC emacs-lisp
 (efullscreen magit-status magit-mode-quit-window :magit-fullscreen nil)
 #+END_SRC
@@ -473,4 +468,5 @@ window regexp config helps...
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)))
+  (setq rtog/fullscreen t)
 #+END_SRC

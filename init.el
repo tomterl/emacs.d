@@ -1,11 +1,9 @@
 ;;; init.el --- Where all the magic begins
 ;;
-;; Part of the Emacs Starter Kit
-;;
-;; This is the first thing to get loaded.
+;; 
 ;;
 
-;; load Org-mode from source when the ORG_HOME environment variable is set
+;; load Org-mode and gnus from source 
 
 (setq tom/--emacs-dir "/home/tom/.emacs.d"
       tom/--src-base "/home/tom/.emacs.src.d")
@@ -24,11 +22,14 @@
     (require 'gnus-load)
     (require 'gnus-util)))
 
+;; package management 
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+;; 'basic' setup :-)
 (require 'graphene)
 
+;; load my own customizations 
 (org-babel-load-file (expand-file-name "tom.org" tom/--emacs-dir))
 
 
