@@ -5,3 +5,4 @@ auto-save-list/*
 tom.el
 project-persist
 
+eshell/*
