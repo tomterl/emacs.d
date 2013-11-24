@@ -6,3 +6,4 @@ tom.el
 project-persist
 
 eshell/*
+/ac-comphist.dat
