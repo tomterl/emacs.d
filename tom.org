@@ -1,0 +1,466 @@
+* Init
+#+BEGIN_SRC emacs-lisp
+(require 'pallet)
+#+END_SRC
+* Global stuff
+** packages
+   :PROPERTIES:
+   :ID:       235d5a56-f46e-40c4-9f1e-29e8c8c2cb27
+   :END:
+*** org-mode 
+#+begin_src emacs-lisp
+(require 'org-macs)
+#+end_src
+*** Completion
+#+BEGIN_SRC emacs-lisp
+  (require 'company)
+  (global-company-mode)
+#+END_SRC
+*** REPL handling
+#+BEGIN_SRC emacs-lisp
+  (require 'repl-toggle)
+  (setq rtog/mode-repl-alist
+        '(
+          (php-mode . php-boris)
+          (emacs-lisp-mode . ielm)
+          (ruby-mode . inf-ruby)
+          (elixir-mode . elixir-mode-iex)))
+#+END_SRC
+
+** Key bindings
+   :PROPERTIES:
+   :ID:       b186cad4-7355-4c52-a1a2-21f52a49aa5f
+   :END:
+ - Meta-Pause will delete the current frame
+ - use f2 as tool-bar toggle (analog to f1 for menu-bar-mode)
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-<pause>") 'delete-frame)
+  (global-set-key (kbd "<f2>") 'tool-bar-mode)
+  (global-set-key (kbd "<f5>") 'flyspell-mode)
+  (global-set-key (kbd "<f6>") 'flyspell-prog-mode)
+  (global-set-key (kbd "<f9>") 'flymake-mode)
+#+end_src
+*** Git
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f7>") 'magit-status)
+#+end_src emacs-lisp
+*** Company completion
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-SPC") 'company-complete)
+
+#+END_SRC
+*** EShell
+I like it to switch to the shell with one keystroke
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c C-S-s") 'eshell)
+#+END_SRC
+* Appearance
+** Font
+#+begin_src emacs-lisp
+  (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
+#+end_src
+** Fontlock et.al.
+   :PROPERTIES:
+   :ID:       7edcd500-dcee-4484-9f44-9a65a3f29c71
+   :END:
+
+#+begin_src emacs-lisp
+  (global-font-lock-mode 1)
+  (global-hl-line-mode 1)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (setq mouse-buffer-menu-mode-mult 1)
+#+end_src
+
+** Scrollbar
+   :PROPERTIES:
+   :ID:       88e6ec5b-6aa6-4e18-b25e-7b2756d0918f
+   :END:
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+#+end_src
+** Menu and Toolbar
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+#+END_SRC
+** Color Theme
+   :PROPERTIES:
+   :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
+   :END:
+My current dark theme is twilight-anti-bright.
+#+begin_src emacs-lisp
+(load-theme 'twilight-anti-bright t)
+#+end_src
+** TreeView
+*** Show nice(?) icons
+#+begin_src emacs-lisp
+(setq tree-widget-image-enable 1)
+#+end_src
+
+** Tabbar
+Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
+#+begin_src emacs-lisp
+  (require 'tabbar)
+  (setq tabbar-use-images nil)
+  (tabbar-mode)
+#+end_src
+   
+** Powerline
+#+BEGIN_SRC emacs-lisp
+(powerline-default-theme)
+#+END_SRC
+* former .gnus.el
+#+begin_src emacs-lisp
+  (setq load-path (cons (expand-file-name "~/.emacs.d/src/gnus/lisp") load-path))
+  (require 'gnus-load) 
+  (require 'gnus-util)
+  ;;(require 'gnus)
+  (require 'smtpmail)
+  (require 'nnimap)
+  (setq user-mail-address "tom@goochesa.de")
+  (setq user-full-name "Tom Regner")
+  (setq smtpmail-smtp-server "sec.goochesa.de"
+        send-mail-function 'smtpmail-send-it)
+  (setq message-send-mail-function 'smtpmail-send-it)
+  (setq smtpmail-smtp-service 25)
+  (setq
+   starttls-use-gnutls t
+   starttls-gnutls-program "gnutls-cli"
+   starttls-extra-arguments "")
+  (setq smtpmail-debug-info t)
+  (setq smtpmail-debug-verb t)
+  
+  
+  ;; display nice arrows in thread-view (summary buffer)
+  ;; the font must have the glyphs!
+  (setq-default
+   gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%s%)\n"
+   gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
+   gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+   gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+   gnus-sum-thread-tree-false-root ""
+   gnus-sum-thread-tree-indent " "
+   gnus-sum-thread-tree-leaf-with-other "├► "
+   gnus-sum-thread-tree-root ""
+   gnus-sum-thread-tree-single-leaf "╰► "
+   gnus-sum-thread-tree-vertical "│"
+   )
+  
+  (setq gnus-select-method
+        '(nnimap "tomsdiner"
+                 (nnimap-address "mail.tomsdiner.org")
+                 (nnimap-server-port 993)
+                 (nnimap-authinfo-file "/home/tom/.authinfo")
+                 (nnimap-stream ssl)
+                 )
+        )
+  (setq gnus-secondary-select-methods
+        '(
+          (nnimap "Goochesa"
+                  (nnimap-address "sec.goochesa.de")
+                  (nnimap-authinfo-file "/home/tom/.authinfo")
+                  (nnimap-stream tls)
+                                          ;                    (nnimap-server-port 993)
+                                          ;                    (nnimap-authenticator "plain")
+                  )
+          (nnimap "Joocom"
+                  (nnimap-address "mail.xidras.com")
+                  (nnimap-authinfo-file "/home/tom/.authinfo")
+                  (nnimap-server-port 993)
+                  (nnimap-stream tls)
+                                          ;        (nnimap-authenticator "plain")
+                  )
+          )
+        )
+  ;; (setq gnus-secondary-select-methods
+  ;;       '(
+  ;;         ;; (nnimap "Joocom"
+  ;;         ;;          (nnimap-address "127.0.0.1")
+  ;;         ;;          (nnimap-server-port 20251)
+  ;;         ;;          (nnimap-authinfo-file "/home/tom/.authinfo")
+  ;;         ;;          (nnimap-stream ssl)
+  ;;         ;;          (nnimap-authenticator "login")
+  ;;         ;;          )
+  ;;         (nntp "news.t-online.de")
+  ;;         )
+  ;;       )
+  
+  
+  ;; lez gnus-demon check for new news and mail every 5mins, if emacs
+  ;; is idle
+  (defun gnus-demon-scan-mail-or-news-and-update ()
+    "Scan for new mail/news and update the *Group* buffer"
+    (when (gnus-alive-p)
+      (save-window-excursion
+        (save-excursion
+          (set-buffer gnus-group-buffer)
+          (gnus-group-get-new-news)))))
+  
+  (defun gnus-demon-scan-and-update ()
+    (gnus-demon-scan-mail-or-news-and-update))
+  
+  (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
+  (setq gnus-use-demon t)
+  (gnus-demon-init)
+  
+  (require 'gnus-desktop-notify)
+  (gnus-desktop-notify-mode)
+  (gnus-demon-add-scanmail)
+  
+  ;; byte compile line-format function calls
+  ;;(gnus-compile)
+#+end_src emacs-lisp
+
+* org-mode
+** Variables
+   :PROPERTIES:
+   :ID:       d2eb3552-1033-4e26-ad19-f4fb5b92e551
+   :END:
+*** Basis / Agenda
+#+begin_src emacs-lisp
+     (setq
+      org-agenda-files (quote ("~/orgMode/todos.org"  "~/orgMode/joocom.org"))
+      org-directory "~/orgMode"
+      org-return-follows-link t
+      org-src-fontify-natively t
+      org-tags-exclude-from-inheritance '("PROJECT")
+      org-list-allow-alphabetical nil
+  )
+#+end_src
+*** mobileorg for android
+#+begin_src emacs-lisp
+   (setq
+    org-mobile-directory "/scpc:tom@sec.goochesa.de:/home/tom/orgMode/"
+    org-mobile-files (quote (org-agenda-files))
+    org-mobile-inbox-for-pull "~/orgMode/mobileorg.org"
+)
+#+end_src
+*** Refile
+#+begin_src emacs-lisp
+(setq
+    org-refile-targets (quote ((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9)))
+    )
+#+end_src
+
+#+results:
+
+*** babel
+The languages I like to use.
+#+begin_src emacs-lisp 
+  (org-babel-do-load-languages 'org-babel-load-languages 
+                               (quote
+                                ((emacs-lisp . t) (R . t) (sh . t)
+                               (ditaa . t) (sass . t)
+                                 (lisp . t) (gnuplot . t))))
+  
+#+end_src emacs-lisp
+
+The =ditaa.jar= location;
+#+begin_src emacs-lisp
+  (setq org-ditaa-jar-path  "~/.emacs.d/elpa/contrib/scripts/ditaa.jar")
+#+end_src
+
+I really like org-babel to use zsh
+#+begin_src emacs-lisp
+  (setq org-babel-sh-command "zsh")
+#+end_src
+
+** Tangle hook
+
+Hier und da werde ich sicherlich Code-Referenzen benutzen, um in
+literate programmierten Projekten in der Prosa direkten Bezug zum Code
+herzustellen. Die Funktion =remove-code-labels= als
+=org-babel-tangle-body-hook= entfernt solche Referenzen aus dem Code,
+sodass die generierten Codedateien syntaktisch korrekt sind, ohne dass
+Referenzen hinter Kommentarzeichen versteckt werden müssen.
+
+Code-Referenzen haben bei mir immer die Form ~(ref:label)~.
+
+#+begin_src emacs-lisp
+  (defun tr/remove-code-labels ()
+    "remove (ref:.*) from all lines"
+    (goto-char (point-min))
+    (let* (
+           (lbl-re "[ \t]*(ref:[a-zA-Z0-9_-]*)"
+                   ))
+      (while (re-search-forward lbl-re nil t)
+        (replace-match "")
+        )))
+  
+  (add-hook 'org-babel-tangle-body-hook
+            (lambda () (tr/remove-code-labels)))
+  
+#+end_src emacs-lisp
+
+** agenda views
+   :PROPERTIES:
+   :ID:       ebf5af82-57f0-490c-9496-f118640b25e5
+   :END:
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+  '(
+
+  ("P" "Projects"
+  ((tags "PROJECT")))
+
+  ("H" "Office and Home Lists"
+       ((agenda)
+            (tags-todo "OFFICE")
+            (tags-todo "HOME")
+            (tags-todo "COMPUTER")
+            (tags-todo "DVD")
+            (tags-todo "READING")))
+  ("O" "Office and Home Lists"
+       ((agenda)
+            (tags-todo "OFFICE")
+            ))
+
+  ("D" "Daily Action List"
+       (
+            (agenda "" ((org-agenda-ndays 1)
+                        (org-agenda-sorting-strategy
+                         (quote ((agenda time-up priority-down tag-up)
+       )))
+                        (org-deadline-warning-days 0)
+                        ))))
+  )
+  )
+#+end_src
+
+** org2blog
+
+Die Blogbeiträge nicht mehr über den Browser schreiben, sondern in
+emacs als org-Dokumente. Installiert über elpa.
+
+#+begin_src emacs-lisp
+  (require 'netrc)
+  (setq blog (netrc-machine (netrc-parse "~/.netrc") "joocomblog" t))
+  (setq org2blog/wp-blog-alist '(("joocom"
+                                  :url "http://www.joocom.de/blog/xmlrpc.php"
+                                  :username (netrc-get blog "login")
+                                  :password (netrc-get blog "password")
+                                          ; :default-title "Toms Discovery: "
+                                          ; :default-categories ("Geeks!", "Software Entwicklung", "Systemadministration")
+                                          ; :tags-as-categories nil
+                                  )
+                                 ))
+
+#+end_src emacs-lisp
+
+** minted
+#+begin_src emacs-lisp
+  (setq org-latex-listings 'minted)
+  (setq org-latex-custom-lang-environments
+        '(
+          (emacs-lisp "common-lispcode")
+          (R "rcode")
+          ))
+  (setq org-latex-minted-options
+        '(("frame" "lines")
+          ("fontsize" "\\scriptsize")
+          ))
+  (setq org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode  -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode  -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode  -output-directory %o %f"))
+  
+  
+#+end_src
+
+* Behaviour
+** vi-like paren-jump
+   :PROPERTIES:
+   :ID:       1fada2eb-6533-42da-9c90-63042b99cbc1
+   :END:
+Use % to jump to corresponding parens
+
+#+begin_src emacs-lisp
+  (defun goto-match-paren (arg)
+    "Go to the matching parenthesis if on parenthesis, otherwise insert
+  the character typed."
+    (interactive "p")
+    (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+      ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+      (t                    (self-insert-command (or arg 1))) ))
+  (global-set-key "%" `goto-match-paren)
+#+end_src
+
+** indentation
+Mit tabs einrücken (file-größen minimieren); tab mit 4 spaces
+darstellen.
+
+#+begin_src emacs-lisp
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode t)
+(setq-default c-basic-offset 4)
+#+end_src
+
+Default style muss aktuell noch undefiniert bleiben, da die magora
+richtlinien sich nicht auf einen Standardfall (k&r, gnu, linux,
+python, ...) beziehen.
+
+#+begin_src emacs-lisp
+; (setq c-default-style "")
+#+end_src
+
+** Flyspell Wörterbuch wechseln
+#+begin_src emacs-lisp
+  (defun fd-switch-dictionary()
+    (interactive)
+    (let* ((dic ispell-current-dictionary)
+           (change (if (string= dic "deutsch8") "english" "deutsch8")))
+      (ispell-change-dictionary change)
+      (message "Dictionary switched from %s to %s" dic change)
+      ))
+  
+  (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
+#+end_src emacs-lisp
+
+** Multiple Cursors
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C-c M-.") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-c M-,") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c M-a") 'mc/mark-all-like-this)
+#+END_SRC
+** Expand region
+#+BEGIN_SRC emacs-lisp
+  (require 'expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+** Ace jump
+#+BEGIN_SRC emacs-lisp
+  (autoload
+    'ace-jump-mode
+    "ace-jump-mode"
+    "Emacs quick move minor mode"
+    t)
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+#+END_SRC
+** Magit fullscreen
+Doesn't work with e2wm - but adding magit-status to the e2wm main
+window regexp config helps...
+#+BEGIN_SRC emacs-lisp
+(defadvice magit-status (around magit-fullscreen activate)
+  (window-configuration-to-register :magit-fullscreen)
+  ad-do-it
+  (delete-other-windows))
+
+(defun magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
+
+(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+#+END_SRC
+** REPL toggle
+#+BEGIN_SRC emacs-lisp
+  (setq rtog/mode-repl-alist '(
+                               (php-mode . php-boris) 
+                               (emacs-lisp-mode . ielm)
+                               (elixir-mode . elixir-mode-iex)
+                               (ruby-mode . inf-ruby)))
+#+END_SRC

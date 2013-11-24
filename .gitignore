@@ -1,0 +1,7 @@
+.cask/*
+auto-save-list/*
+
+.graphene-geometry
+tom.el
+project-persist
+
