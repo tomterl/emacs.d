@@ -464,7 +464,7 @@ python, ...) beziehen.
 Doesn't work with e2wm - but adding magit-status to the e2wm main
 window regexp config helps...
 #+BEGIN_SRC emacs-lisp
-(efullscreen magit-status magit-mode-quit-window :magit-fullscreen t)
+(efullscreen magit-status magit-mode-quit-window :magit-fullscreen nil)
 #+END_SRC
 ** REPL toggle
 #+BEGIN_SRC emacs-lisp
