@@ -40,10 +40,6 @@
   (global-set-key (kbd "<f6>") 'flyspell-prog-mode)
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
-*** Git
-#+begin_src emacs-lisp
-  (global-set-key (kbd "<f7>") 'magit-status)
-#+end_src emacs-lisp
 *** Company completion
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
@@ -439,7 +435,16 @@ python, ...) beziehen.
     t)
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 #+END_SRC
-** Magit fullscreen
+** Magit 
+#+BEGIN_SRC emacs-lisp
+  (require 'magit)
+#+END_SRC
+*** Key
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f7>") 'magit-status)
+#+end_src emacs-lisp
+
+*** Fullscreen
 Doesn't work with e2wm - but adding magit-status to the e2wm main
 window regexp config helps...
 #+BEGIN_SRC emacs-lisp
