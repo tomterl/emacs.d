@@ -213,8 +213,6 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
   (setq gnus-use-demon t)
   (gnus-demon-init)
   
-  (require 'gnus-desktop-notify)
-  (gnus-desktop-notify-mode)
   (gnus-demon-add-scanmail)
   
   ;; byte compile line-format function calls
