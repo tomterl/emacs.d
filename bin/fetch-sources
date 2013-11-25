@@ -8,7 +8,7 @@ git checkout maint
 git checkout -b local
 make compile
 make autoloads
-pop
+popd
 
 git clone http://git.gnus.org/gnus.git
 pushd gnus
