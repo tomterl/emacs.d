@@ -39,6 +39,7 @@
 (depends-on "flymake-cursor")
 (depends-on "flymake-elixir")
 (depends-on "fringe-helper")
+(depends-on "fullframe")
 (depends-on "git-commit-mode")
 (depends-on "git-gutter")
 (depends-on "git-gutter+")
