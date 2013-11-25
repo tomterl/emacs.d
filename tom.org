@@ -119,6 +119,10 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
 #+BEGIN_SRC emacs-lisp
 (powerline-default-theme)
 #+END_SRC
+** Colors on terminals
+#+BEGIN_SRC emacs-lisp
+(require 'color-theme-approximate)
+#+END_SRC
 * former .gnus.el
 #+begin_src emacs-lisp
   (setq load-path (cons (expand-file-name "~/.emacs.d/src/gnus/lisp") load-path))
