@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pushd ${HOME}/.emacs.src.d
+
+git clone git://orgmode.org/org-mode.git
+pushd org-mode
+git checkout maint
+git checkout -b local
+make compile
+make autoloads
+pop
+
+git clone http://git.gnus.org/gnus.git
+pushd gnus
+git checkout -b local
+./configure && make
+popd
+
+popd
