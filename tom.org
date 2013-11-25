@@ -466,10 +466,11 @@ python, ...) beziehen.
 #+END_SRC
 ** REPL toggle
 #+BEGIN_SRC emacs-lisp
-  (setq rtog/mode-repl-alist '(
+  (setq rtog/fullscreen t)
+  (require 'repl-toggle)
+  (setq rtog/mode-repl-list '(
                                (php-mode . php-boris) 
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)))
-  (setq rtog/fullscreen t)
 #+END_SRC
