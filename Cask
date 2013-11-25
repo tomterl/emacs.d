@@ -3,7 +3,6 @@
 (source marmalade)
 (source gnu)
 
-(depends-on "graphene")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
 (depends-on "ag")
@@ -12,6 +11,7 @@
 (depends-on "bind-key")
 (depends-on "cask")
 (depends-on "closure-lint-mode")
+(depends-on "color-theme-approximate")
 (depends-on "commander")
 (depends-on "company")
 (depends-on "company-inf-ruby")
@@ -46,6 +46,7 @@
 (depends-on "git-gutter-fringe+")
 (depends-on "git-rebase-mode")
 (depends-on "google-this")
+(depends-on "graphene")
 (depends-on "haskell-mode")
 (depends-on "htmlize")
 (depends-on "image+")
