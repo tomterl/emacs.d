@@ -51,6 +51,7 @@ I like it to switch to the shell with one keystroke
 #+END_SRC
 * Desktop
 #+BEGIN_SRC emacs-lisp
+  (require 'desktop)
   (setq desktop-buffers-not-to-save
           (concat "\\("
                   "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
