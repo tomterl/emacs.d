@@ -24,7 +24,7 @@ auto-completion globally and load company.
 #+END_SRC
 *** Fullscreen execution
 #+BEGIN_SRC emacs-lisp
-  (require 'efullscreen)
+  (require 'fullframe)
 #+END_SRC
 ** Key bindings
    :PROPERTIES:
@@ -262,7 +262,7 @@ The languages I like to use.
                                (ditaa . t) (sass . t)
                                  (lisp . t) (gnuplot . t))))
   
-#+end_src emacs-lisp
+#+end_src 
 
 The =ditaa.jar= location;
 #+begin_src emacs-lisp
@@ -299,7 +299,7 @@ Code-Referenzen haben bei mir immer die Form ~(ref:label)~.
   (add-hook 'org-babel-tangle-body-hook
             (lambda () (tr/remove-code-labels)))
   
-#+end_src emacs-lisp
+#+end_src 
 
 ** agenda views
    :PROPERTIES:
@@ -354,7 +354,7 @@ emacs als org-Dokumente. Installiert über elpa.
                                   )
                                  ))
 
-#+end_src emacs-lisp
+#+end_src 
 
 ** minted
 #+begin_src emacs-lisp
@@ -423,7 +423,7 @@ python, ...) beziehen.
       ))
   
   (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
-#+end_src emacs-lisp
+#+end_src 
 
 ** Multiple Cursors
 #+BEGIN_SRC emacs-lisp
@@ -458,7 +458,7 @@ python, ...) beziehen.
 *** Fullscreen
 
 #+BEGIN_SRC emacs-lisp
-(efullscreen magit-status magit-mode-quit-window :magit-fullscreen nil)
+(fullframe magit-status magit-mode-quit-window :magit-fullscreen nil)
 #+END_SRC
 ** REPL toggle
 #+BEGIN_SRC emacs-lisp
