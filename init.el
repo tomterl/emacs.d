@@ -17,7 +17,7 @@
 
 
 ;; load my own customizations 
-(org-babel-load-file (expand-file-name "tom.org" tom/--emacs-dir))
+(org-babel-load-file (expand-file-name "personal.org" tom/--emacs-dir))
 
 
 ;;; init.el ends here
