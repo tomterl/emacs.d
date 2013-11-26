@@ -569,6 +569,12 @@ python, ...) beziehen.
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)))
 #+END_SRC
+* Languages
+** Elixir
+#+BEGIN_SRC emacs-lisp
+  (require 'elixir-mix)
+  (global-elixir-mix-mode)
+#+END_SRC
 * Imenu 
 
 Add speedbar support for elixir files.
