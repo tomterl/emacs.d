@@ -46,6 +46,7 @@
 (depends-on "inflections")
 (depends-on "js-comint")
 (depends-on "js3-mode")
+(depends-on "jump")
 (depends-on "magit")
 (depends-on "multiple-cursors")
 (depends-on "pallet")
