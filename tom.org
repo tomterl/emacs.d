@@ -68,12 +68,6 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
 
-*** Company completion
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-SPC") 'company-complete)
-#+END_SRC
-
 *** EShell
 
 I like it to switch to the shell with one keystroke
@@ -89,6 +83,11 @@ auto-completion globally and load company.
   (global-auto-complete-mode -1)
   (require 'company)
   (global-company-mode)
+#+END_SRC
+** Key bindings
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-SPC") 'company-complete)
 #+END_SRC
 
 * Projects
@@ -548,7 +547,7 @@ python, ...) beziehen.
   (require 'magit)
 #+END_SRC
 
-*** Key
+*** Key bindings
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
 #+end_src
@@ -569,4 +568,12 @@ python, ...) beziehen.
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)))
+#+END_SRC
+* Imenu 
+
+Add speedbar support for elixir files.
+
+#+BEGIN_SRC emacs-lisp
+  (speedbar-add-supported-extension ".ex")
+  (speedbar-add-supported-extension ".exs")
 #+END_SRC
