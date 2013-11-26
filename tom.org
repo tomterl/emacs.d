@@ -190,7 +190,7 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
 (require 'color-theme-approximate)
 #+END_SRC
 
-* former .gnus.el
+* GNUS 
 
 #+begin_src emacs-lisp
   (setq tom/--gnus-home (expand-file-name "gnus" tom/--src-base))
