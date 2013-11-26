@@ -8,6 +8,15 @@ Package managment and loading of utility packages.
 
 ** Managment
 
+Cask manages the packages installed.
+
+#+BEGIN_SRC emacs-lisp
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+#+END_SRC
+
+*** Pallet
+
 Using =pallet= allows to use Cask and =M-x list-packages= together --
 manuall operations performed using =packages.el= are reflected in the
 Cask file.
@@ -16,27 +25,34 @@ Cask file.
 (require 'pallet)
 #+END_SRC
 
+* Emacs =custom=
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
+#+END_SRC
+
+* Graphene
+
+Graphene as basic setup -- only tuned a bit in the sections to come.
+
+#+BEGIN_SRC emacs-lisp
+(require 'graphene)
+#+END_SRC
+* Global stuff
 ** =org-mode= 
 
 #+begin_src emacs-lisp
 (require 'org-macs)
 #+end_src
 
+
 ** Single frame execution
 #+BEGIN_SRC emacs-lisp
   (require 'fullframe)
 #+END_SRC
 
-* Completion
 
-I decided to use company mode for auto completion; so disable
-auto-completion globally and load company.
-#+BEGIN_SRC emacs-lisp
-  (global-auto-complete-mode -1)
-  (require 'company)
-  (global-company-mode)
-#+END_SRC
-* Global stuff
 
 ** Key bindings
    :PROPERTIES:
@@ -63,6 +79,16 @@ auto-completion globally and load company.
 I like it to switch to the shell with one keystroke
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c C-S-s") 'eshell)
+#+END_SRC
+
+* Completion
+
+I decided to use company mode for auto completion; so disable
+auto-completion globally and load company.
+#+BEGIN_SRC emacs-lisp
+  (global-auto-complete-mode -1)
+  (require 'company)
+  (global-company-mode)
 #+END_SRC
 
 * Projects
