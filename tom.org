@@ -40,13 +40,6 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
 (require 'graphene)
 #+END_SRC
 * Global stuff
-** =org-mode= 
-
-#+begin_src emacs-lisp
-(require 'org-macs)
-#+end_src
-
-
 ** Single frame execution
 #+BEGIN_SRC emacs-lisp
   (require 'fullframe)
@@ -461,6 +454,12 @@ emacs als org-Dokumente. Installiert über elpa.
           "pdflatex -shell-escape -interaction nonstopmode  -output-directory %o %f"))
   
   
+#+end_src
+
+** =org-macs= 
+
+#+begin_src emacs-lisp
+(require 'org-macs)
 #+end_src
 
 * Behaviour
