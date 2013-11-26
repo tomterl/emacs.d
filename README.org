@@ -1,0 +1,7 @@
+* Emacs setup
+
+This is a =graphene=, =org-mode= and =cask= based emacs-setup.
+
+Graphene provides the basic setup, =cask= and =pallet= provide package
+management while my own settings are contained in =tom.org= and read
+at startup via =org-babel= in the minimal =init.el=.
