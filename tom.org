@@ -468,7 +468,7 @@ python, ...) beziehen.
 #+BEGIN_SRC emacs-lisp
   (setq rtog/fullscreen t)
   (require 'repl-toggle)
-  (setq rtog/mode-repl-list '(
+  (setq rtog/mode-repl-alist '(
                                (php-mode . php-boris) 
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
