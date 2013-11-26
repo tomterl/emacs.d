@@ -1,20 +1,34 @@
-* Init
-Using =pallet= allows to use Cask and =list-packages= together --
+
+Emacs rocks. This file contains my configurations and adaptations to
+my now graphene based setup.
+
+* Packages
+
+Package managment and loading of utility packages.
+
+** Managment
+
+Using =pallet= allows to use Cask and =M-x list-packages= together --
 manuall operations performed using =packages.el= are reflected in the
 Cask file.
+
 #+BEGIN_SRC emacs-lisp
 (require 'pallet)
 #+END_SRC
-* Global stuff
-** packages
-   :PROPERTIES:
-   :ID:       235d5a56-f46e-40c4-9f1e-29e8c8c2cb27
-   :END:
-*** org-mode 
+
+** =org-mode= 
+
 #+begin_src emacs-lisp
 (require 'org-macs)
 #+end_src
-*** Completion
+
+** Single frame execution
+#+BEGIN_SRC emacs-lisp
+  (require 'fullframe)
+#+END_SRC
+
+* Completion
+
 I decided to use company mode for auto completion; so disable
 auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
@@ -22,10 +36,8 @@ auto-completion globally and load company.
   (require 'company)
   (global-company-mode)
 #+END_SRC
-*** Fullscreen execution
-#+BEGIN_SRC emacs-lisp
-  (require 'fullframe)
-#+END_SRC
+* Global stuff
+
 ** Key bindings
    :PROPERTIES:
    :ID:       b186cad4-7355-4c52-a1a2-21f52a49aa5f
@@ -39,17 +51,27 @@ auto-completion globally and load company.
   (global-set-key (kbd "<f6>") 'flyspell-prog-mode)
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
+
 *** Company completion
+
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
-
 #+END_SRC
+
 *** EShell
+
 I like it to switch to the shell with one keystroke
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c C-S-s") 'eshell)
 #+END_SRC
-* Desktop
+
+* Projects
+
+** Modify graphenes project handling
+
+Graphene sets up project-persist to use =desktop.el=; it's necessary
+to exclude a couple of buffer names =desktop= must ignore.
+
 #+BEGIN_SRC emacs-lisp
   (require 'desktop)
   (setq desktop-buffers-not-to-save
@@ -63,11 +85,15 @@ I like it to switch to the shell with one keystroke
      (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
      (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 #+END_SRC
+
 * Appearance
+
 ** Font
+
 #+begin_src emacs-lisp
   (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
 #+end_src
+
 ** Fontlock et.al.
    :PROPERTIES:
    :ID:       7edcd500-dcee-4484-9f44-9a65a3f29c71
@@ -85,30 +111,41 @@ I like it to switch to the shell with one keystroke
    :PROPERTIES:
    :ID:       88e6ec5b-6aa6-4e18-b25e-7b2756d0918f
    :END:
+
 #+begin_src emacs-lisp
   (scroll-bar-mode -1)
 #+end_src
+
 ** Menu and Toolbar
+
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
   (menu-bar-mode -1)
 #+END_SRC
+
 ** Color Theme
    :PROPERTIES:
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
+
 My current dark theme is twilight-anti-bright.
+
 #+begin_src emacs-lisp
 (load-theme 'twilight-anti-bright t)
 #+end_src
+
 ** TreeView
+
 *** Show nice(?) icons
+
 #+begin_src emacs-lisp
 (setq tree-widget-image-enable 1)
 #+end_src
 
 ** Tabbar
+
 Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
+
 #+begin_src emacs-lisp
   (require 'tabbar)
   (setq tabbar-use-images nil)
@@ -116,14 +153,19 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
 #+end_src
    
 ** Powerline
+
 #+BEGIN_SRC emacs-lisp
 (powerline-default-theme)
 #+END_SRC
+
 ** Colors on terminals
+
 #+BEGIN_SRC emacs-lisp
 (require 'color-theme-approximate)
 #+END_SRC
+
 * former .gnus.el
+
 #+begin_src emacs-lisp
   (setq load-path (cons (expand-file-name "~/.emacs.d/src/gnus/lisp") load-path))
   (require 'gnus-load) 
@@ -224,11 +266,14 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
 #+end_src
 
 * org-mode
+
 ** Variables
    :PROPERTIES:
    :ID:       d2eb3552-1033-4e26-ad19-f4fb5b92e551
    :END:
+
 *** Basis / Agenda
+
 #+begin_src emacs-lisp
      (setq
       org-agenda-files (quote ("~/orgMode/todos.org"  "~/orgMode/joocom.org"))
@@ -239,7 +284,9 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
       org-list-allow-alphabetical nil
   )
 #+end_src
+
 *** mobileorg for android
+
 #+begin_src emacs-lisp
    (setq
     org-mobile-directory "/scpc:tom@sec.goochesa.de:/home/tom/orgMode/"
@@ -247,7 +294,9 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
     org-mobile-inbox-for-pull "~/orgMode/mobileorg.org"
 )
 #+end_src
+
 *** Refile
+
 #+begin_src emacs-lisp
 (setq
     org-refile-targets (quote ((nil :maxlevel . 9)
@@ -255,10 +304,10 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
     )
 #+end_src
 
-#+results:
-
 *** babel
+
 The languages I like to use.
+
 #+begin_src emacs-lisp 
   (org-babel-do-load-languages 'org-babel-load-languages 
                                (quote
@@ -269,11 +318,13 @@ The languages I like to use.
 #+end_src 
 
 The =ditaa.jar= location;
+
 #+begin_src emacs-lisp
   (setq org-ditaa-jar-path  "~/.emacs.d/elpa/contrib/scripts/ditaa.jar")
 #+end_src
 
 I really like org-babel to use zsh
+
 #+begin_src emacs-lisp
   (setq org-babel-sh-command "zsh")
 #+end_src
@@ -309,6 +360,7 @@ Code-Referenzen haben bei mir immer die Form ~(ref:label)~.
    :PROPERTIES:
    :ID:       ebf5af82-57f0-490c-9496-f118640b25e5
    :END:
+
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
   '(
@@ -361,6 +413,7 @@ emacs als org-Dokumente. Installiert über elpa.
 #+end_src 
 
 ** minted
+
 #+begin_src emacs-lisp
   (setq org-latex-listings 'minted)
   (setq org-latex-custom-lang-environments
@@ -381,6 +434,7 @@ emacs als org-Dokumente. Installiert über elpa.
 #+end_src
 
 * Behaviour
+
 ** vi-like paren-jump
    :PROPERTIES:
    :ID:       1fada2eb-6533-42da-9c90-63042b99cbc1
@@ -399,6 +453,7 @@ Use % to jump to corresponding parens
 #+end_src
 
 ** indentation
+
 Mit tabs einrücken (file-größen minimieren); tab mit 4 spaces
 darstellen.
 
@@ -417,6 +472,7 @@ python, ...) beziehen.
 #+end_src
 
 ** Flyspell Wörterbuch wechseln
+
 #+begin_src emacs-lisp
   (defun fd-switch-dictionary()
     (interactive)
@@ -430,18 +486,23 @@ python, ...) beziehen.
 #+end_src 
 
 ** Multiple Cursors
+
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C-c M-.") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-c M-,") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c M-a") 'mc/mark-all-like-this)
 #+END_SRC
+
 ** Expand region
+
 #+BEGIN_SRC emacs-lisp
   (require 'expand-region)
   (global-set-key (kbd "C-=") 'er/expand-region)
 #+END_SRC
+
 ** Ace jump
+
 #+BEGIN_SRC emacs-lisp
   (autoload
     'ace-jump-mode
@@ -450,10 +511,12 @@ python, ...) beziehen.
     t)
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 #+END_SRC
+
 ** Magit 
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
 #+END_SRC
+
 *** Key
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
@@ -464,7 +527,9 @@ python, ...) beziehen.
 #+BEGIN_SRC emacs-lisp
 (fullframe magit-status magit-mode-quit-window :magit-fullscreen nil)
 #+END_SRC
+
 ** REPL toggle
+
 #+BEGIN_SRC emacs-lisp
   (setq rtog/fullscreen t)
   (require 'repl-toggle)
