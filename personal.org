@@ -61,9 +61,17 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
 
-*** EShell
+* EShell
+
+I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'eshell-visual-commands "htop")
+  (add-to-list 'eshell-visual-commands "vim")
+#+END_SRC
 
 I like it to switch to the shell with one keystroke
+
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c C-S-s") 'eshell)
 #+END_SRC
