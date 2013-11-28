@@ -472,23 +472,26 @@ emacs als org-Dokumente. Installiert über elpa.
 
 * Chat and instant messaging
 #+BEGIN_SRC emacs-lisp
- (setq
-   erc-auto-query (quote frame)
-   erc-email-userid "thomas.regner@joocom.de"
-   erc-frame-dedicated-flag t
-   erc-join-buffer (quote frame)
-   erc-modules (quote (autoaway autojoin button completion fill irccontrols list
- log match menu move-to-prompt netsplit networks noncommands readonly ring smile
-y stamp track))
-   erc-nick "tom"
-   erc-port 6667
-   erc-query-display (quote frame)
-   erc-reuse-frames t
-   erc-server "localhost"
-   erc-server-coding-system (quote (utf-8 . utf-8))
-   erc-speedbar-sort-users-type (quote alphabetical)
-   erc-user-full-name "Tom Regner"
-   )
+   (setq
+     erc-auto-query (quote frame)
+     erc-email-userid "thomas.regner@joocom.de"
+     erc-frame-dedicated-flag t
+     erc-join-buffer (quote frame)
+     erc-modules (quote 
+                  (autoaway autojoin button completion
+                            fill irccontrols list log match
+                            menu move-to-prompt netsplit
+                            networksnoncommands readonly
+                            ring smiley stamp track))
+     erc-nick "tom"
+     erc-port 6667
+     erc-query-display (quote frame)
+     erc-reuse-frames t
+     erc-server "localhost"
+     erc-server-coding-system (quote (utf-8 . utf-8))
+     erc-speedbar-sort-users-type (quote alphabetical)
+     erc-user-full-name "Tom Regner"
+     )
 #+END_SRC
 * Behaviour
 
