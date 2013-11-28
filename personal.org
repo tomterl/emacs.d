@@ -481,7 +481,7 @@ emacs als org-Dokumente. Installiert über elpa.
                   (autoaway autojoin button completion
                             fill irccontrols list log match
                             menu move-to-prompt netsplit
-                            networksnoncommands readonly
+                            networks noncommands readonly
                             ring smiley stamp track))
      erc-nick "tom"
      erc-port 6667
