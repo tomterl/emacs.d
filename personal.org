@@ -187,6 +187,8 @@ Show uncomitted changes in the fringe.
 #+BEGIN_SRC emacs-lisp
   (require 'diff-hl)
   (global-diff-hl-mode)
+  (defadvice magit-commit (after update-diff-hl-after-commit nil)
+    (diff-hl-update))
 #+END_SRC
 * GNUS 
 
