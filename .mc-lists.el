@@ -4,6 +4,8 @@
 (setq mc/cmds-to-run-for-all
       '(
 		org-self-insert-command
+		smex
+		sp--self-insert-command
 		wgrep-finish-edit
 		))
 
