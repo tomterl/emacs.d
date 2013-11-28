@@ -18,6 +18,7 @@
 (depends-on "ctable")
 (depends-on "dash")
 (depends-on "deferred")
+(depends-on "diff-hl")
 (depends-on "diminish")
 (depends-on "drag-stuff")
 (depends-on "ecukes")

@@ -182,6 +182,12 @@ Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
 (require 'color-theme-approximate)
 #+END_SRC
 
+** Highlight uncommited changes
+Show uncomitted changes in the fringe.
+#+BEGIN_SRC emacs-lisp
+  (require 'diff-hl)
+  (global-diff-hl-mode)
+#+END_SRC
 * GNUS 
 
 #+begin_src emacs-lisp
