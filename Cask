@@ -85,4 +85,5 @@
 (depends-on "wgrep-ag")
 (depends-on "window-layout")
 (depends-on "wrap-region")
+(depends-on "xml-rpc")
 (depends-on "yasnippet")
