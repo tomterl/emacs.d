@@ -67,6 +67,8 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
 
 #+BEGIN_SRC emacs-lisp
+  (require 'eshell)
+  (require 'em-term)
   (add-to-list 'eshell-visual-commands "htop")
   (add-to-list 'eshell-visual-commands "vim")
 #+END_SRC
