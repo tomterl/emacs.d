@@ -62,7 +62,7 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
 
-* EShell
+* Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
 
@@ -113,6 +113,15 @@ to exclude a couple of buffer names =desktop= must ignore.
      (add-to-list 'desktop-modes-not-to-save 'Info-mode)
      (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
      (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+#+END_SRC
+
+** projectile
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'project-persist-after-load-hook
+            (lambda () (projectile-mode 1)))
+  (add-hook 'project-persist-after-close-hook
+            (lambda () (projectile-mode -1)))
 #+END_SRC
 
 * Appearance
@@ -201,7 +210,7 @@ Show uncomitted changes in the fringe.
   (defadvice magit-mode-quit-window (after update-diff-hl-after-commit activate)
     (diff-hl-update))
 #+END_SRC
-* GNUS 
+* GNUS News and Mail
 
 #+begin_src emacs-lisp
   (setq tom/--gnus-home (expand-file-name "gnus" tom/--src-base))
