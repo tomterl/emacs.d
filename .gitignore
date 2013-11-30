@@ -8,3 +8,4 @@ project-persist
 eshell/*
 ac-comphist.dat
 url/*
+/projectile-bookmarks.eld
