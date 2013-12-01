@@ -510,28 +510,72 @@ emacs als org-Dokumente. Installiert über elpa.
 #+end_src
 
 * Chat and instant messaging
+
+I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
+today :-).
+
+** =circe= Options
+
+Reduce the 'leaving/enter' messages.
+
 #+BEGIN_SRC emacs-lisp
-   (setq
-     erc-auto-query (quote frame)
-     erc-email-userid "thomas.regner@joocom.de"
-     erc-frame-dedicated-flag t
-     erc-join-buffer (quote frame)
-     erc-modules (quote 
-                  (autoaway autojoin button completion
-                            fill irccontrols list log match
-                            menu move-to-prompt netsplit
-                            networks noncommands readonly
-                            ring smiley stamp track))
-     erc-nick "tom"
-     erc-port 6667
-     erc-query-display (quote frame)
-     erc-reuse-frames t
-     erc-server "localhost"
-     erc-server-coding-system (quote (utf-8 . utf-8))
-     erc-speedbar-sort-users-type (quote alphabetical)
-     erc-user-full-name "Tom Regner"
-     )
+  (setq circe-reduce-lurker-spam t)
 #+END_SRC
+
+Enable logging for channels, this is nice for bitlbee conversations.
+
+#+BEGIN_SRC emacs-lisp
+  (enable-lui-logging)
+#+END_SRC
+
+** Spellchecking
+
+#+BEGIN_SRC emacs-lisp
+  (setq lui-flyspell-p t
+        lui-flyspell-alist '((".*" "american")))
+#+END_SRC
+
+** Server 
+#+BEGIN_SRC emacs-lisp
+  (setq circe-network-options
+        `(("Freenode"
+           :nick "tomterl"
+           :channels ("#emacs" "#emacs-circe")
+           :nickserv-password ,freenode-password
+           )
+          ("Bitlbee"
+           :nick "tom"
+           :nickserv-password ,bitlbee-password)))
+#+END_SRC
+
+** Smart connect
+
+Straight out of the =circe= wiki
+
+#+BEGIN_SRC emacs-lisp
+  (defun circe-network-connected-p (network)
+    "Return non-nil if there's any Circe server-buffer whose
+  `circe-server-netwok' is NETWORK."
+    (catch 'return
+      (dolist (buffer (circe-server-buffers))
+        (with-current-buffer buffer
+          (if (string= network circe-server-network)
+              (throw 'return t))))))
+  
+  (defun circe-maybe-connect (network)
+    "Connect to NETWORK, but ask user for confirmation if it's
+  already been connected to."
+    (interactive "sNetwork: ")
+    (if (or (not (circe-network-connected-p network))
+            (y-or-n-p (format "Already connected to %s, reconnect?" network)))
+        (circe network)))
+  (defun irc ()
+    "Connect to all configured IRC servers"
+    (interactive)
+    (circe-maybe-connect "Freenode")
+    (circe-maybe-connect "Bitlbee"))
+#+END_SRC
+
 * Behaviour
 
 ** vi-like paren-jump
