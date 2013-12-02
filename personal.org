@@ -579,7 +579,8 @@ Straight out of the =circe= wiki
 
 ** Desktop notifications
 
-Notify me when tracked buffers have activity -- but not more than a certain amount of time.
+Notify me when tracked buffers have activity -- but not more than one
+notification in a given time intervall.
 
 In my emacs setup I have to patch notifications.el --
 notifications-close-notification expects an uint32 but gets a int32.
@@ -595,7 +596,7 @@ notifications-close-notification expects an uint32 but gets a int32.
   (defvar tom/lastbufferlist nil
     "The value of tracking-buffers when we last notified")
   (defvar tom/chatnotifyintervall 90
-    "Minimal delay between chat activity notifications in seconds")
+    "Minimum delay between chat activity notifications in seconds")
   
   (defadvice tracking-add-buffer (after tracking-desktop-notify activate)
     (let ((current-t (float-time))
