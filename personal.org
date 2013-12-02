@@ -128,6 +128,8 @@ to exclude a couple of buffer names =desktop= must ignore.
 
 ** Font
 
+One thing adobe got right...
+
 #+begin_src emacs-lisp
   (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
 #+end_src
@@ -182,7 +184,8 @@ My current dark theme is twilight-anti-bright.
 
 ** Tabbar
 
-Keine Bilder nutzen für die tabbar! Wegen transparenz zu langsam
+Do not use images in tabbar-mode, as there is a transparency issue
+slowing down emacs a lot when using images.
 
 #+begin_src emacs-lisp
   (require 'tabbar)
@@ -401,14 +404,11 @@ I really like org-babel to use zsh
 
 ** Tangle hook
 
-Hier und da werde ich sicherlich Code-Referenzen benutzen, um in
-literate programmierten Projekten in der Prosa direkten Bezug zum Code
-herzustellen. Die Funktion =remove-code-labels= als
-=org-babel-tangle-body-hook= entfernt solche Referenzen aus dem Code,
-sodass die generierten Codedateien syntaktisch korrekt sind, ohne dass
-Referenzen hinter Kommentarzeichen versteckt werden müssen.
+Remove code references in code prior to tangling; that way I can use
+them anywhere in the code and get nice links/references in the weaved
+document, but don't have to hide them in code comments. 
 
-Code-Referenzen haben bei mir immer die Form ~(ref:label)~.
+I always use the form ~(ref:label)~ for code references.
 
 #+begin_src emacs-lisp
   (defun tr/remove-code-labels ()
@@ -464,8 +464,7 @@ Code-Referenzen haben bei mir immer die Form ~(ref:label)~.
 
 ** org2blog
 
-Die Blogbeiträge nicht mehr über den Browser schreiben, sondern in
-emacs als org-Dokumente. Installiert über elpa.
+Currently not functioning correctly.
 
 #+begin_src emacs-lisp
   (require 'netrc)
@@ -483,6 +482,8 @@ emacs als org-Dokumente. Installiert über elpa.
 #+end_src 
 
 ** minted
+
+Settings to set code in latex documents with syntax highlighting.
 
 #+begin_src emacs-lisp
   (setq org-latex-listings 'minted)
@@ -635,24 +636,15 @@ Use % to jump to corresponding parens
 
 ** indentation
 
-Mit tabs einrücken (file-größen minimieren); tab mit 4 spaces
-darstellen.
+Indent using spaces, 2 spaces for each indentation step.
 
 #+begin_src emacs-lisp
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode t)
-(setq-default c-basic-offset 4)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 2)
 #+end_src
 
-Default style muss aktuell noch undefiniert bleiben, da die magora
-richtlinien sich nicht auf einen Standardfall (k&r, gnu, linux,
-python, ...) beziehen.
-
-#+begin_src emacs-lisp
-; (setq c-default-style "")
-#+end_src
-
-** Flyspell Wörterbuch wechseln
+** Flyspell: Change dictionary 
 
 #+begin_src emacs-lisp
   (defun fd-switch-dictionary()
