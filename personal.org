@@ -603,7 +603,7 @@ notifications-close-notification expects an uint32 but gets a int32.
                        '(("&" . "-and-")("@" . "-at-"))
                        (s-join "\n" tracking-buffers))))
       ;; min tom/chatnotifyintervall seconds since last delay?
-      (if (and (not (eql current-bl tom/lastbufferlist))
+      (if (and (not (eql current-bl "")) (not (eql current-bl tom/lastbufferlist))
                (> (- current-t tom/lastchatnotification) tom/chatnotifyintervall))
           (progn
             ;; delete alst notification id any
