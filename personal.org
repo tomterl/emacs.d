@@ -584,12 +584,14 @@ notifications-close-notification expects an uint32 but gets a int32.
 #+BEGIN_SRC emacs-lisp
   (require 'notifications)
   (require 's)
+  
   (defvar tom/chatnotification nil
     "ID of the last send desktop notification.")
   (defvar tom/lastchatnotification 0
     "Time of the last send notification, seconds since epoch as float")
   (defvar tom/chatnotifyintervall 30
     "Minimal delay between chat activity notifications in seconds")
+  
   (defadvice tracking-add-buffer (after tracking-desktop-notify activate)
     (let ((current-t (float-time)))
       ;; min tom/chatnotifyintervall seconds since last delay?
