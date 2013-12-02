@@ -578,6 +578,8 @@ Straight out of the =circe= wiki
 
 ** Desktop notifications
 
+Notify me when tracked buffers have activity -- but not more than a certain amount of time.
+
 In my emacs setup I have to patch notifications.el --
 notifications-close-notification expects an uint32 but gets a int32.
 
