@@ -529,6 +529,12 @@ Enable logging for channels, this is nice for bitlbee conversations.
   (enable-lui-logging)
 #+END_SRC
 
+** Color the nicknames.
+
+#+BEGIN_SRC emacs-lisp
+  (enable-circe-color-nicks)
+#+END_SRC
+
 ** Spellchecking
 
 #+BEGIN_SRC emacs-lisp
