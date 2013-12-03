@@ -605,9 +605,7 @@ notifications-close-notification expects an uint32 but gets a int32.
   
   (defadvice tracking-add-buffer (after tracking-desktop-notify activate)
     (let ((current-t (float-time))
-          (current-bl (s-replace-all
-                       '(("&" . "-and-")("@" . "-at-"))
-                       (s-join "\n" tracking-buffers))))
+          (current-bl (s-join "\n" tracking-buffers)))
       ;; min tom/chatnotifyintervall seconds since last delay?
       (if (and (not (eql current-bl "")) (not (eql current-bl tom/lastbufferlist))
                (> (- current-t tom/lastchatnotification) tom/chatnotifyintervall))
