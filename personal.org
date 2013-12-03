@@ -577,6 +577,7 @@ Straight out of the =circe= wiki
   (defun irc ()
     "Connect to all configured IRC servers"
     (interactive)
+    (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
     (circe-maybe-connect "Freenode")
     (circe-maybe-connect "Bitlbee"))
 #+END_SRC
