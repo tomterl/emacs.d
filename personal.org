@@ -349,23 +349,21 @@ Show uncomitted changes in the fringe.
 
 #+begin_src emacs-lisp
      (setq
-      org-agenda-files (quote ("~/orgMode/todos.org"  "~/orgMode/joocom.org"))
-      org-directory "~/orgMode"
+      org-agenda-files (quote ("~/org-mode/todos.org"  "~/org-mode/joocom.org"))
+      org-directory "~/org-mode"
       org-return-follows-link t
       org-src-fontify-natively t
       org-tags-exclude-from-inheritance '("PROJECT")
-      org-list-allow-alphabetical nil
-  )
+      org-list-allow-alphabetical nil)
 #+end_src
 
 *** mobileorg for android
 
 #+begin_src emacs-lisp
    (setq
-    org-mobile-directory "/scpc:tom@sec.goochesa.de:/home/tom/orgMode/"
+    org-mobile-directory "/home/tom/ownCloud/org-mode"
     org-mobile-files (quote (org-agenda-files))
-    org-mobile-inbox-for-pull "~/orgMode/mobileorg.org"
-)
+    org-mobile-inbox-for-pull "/home/tom/ownCloud/org-mode/mobileorg.org")
 #+end_src
 
 *** Refile
