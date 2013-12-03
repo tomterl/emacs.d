@@ -625,7 +625,10 @@ notifications-close-notification expects an uint32 but gets a int32.
 #+END_SRC
 
 * Behaviour
-
+** =ibuffer= as buffer screen
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
 ** vi-like paren-jump
    :PROPERTIES:
    :ID:       1fada2eb-6533-42da-9c90-63042b99cbc1
