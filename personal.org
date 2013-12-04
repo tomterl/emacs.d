@@ -84,7 +84,7 @@ I like it to switch to the shell with one keystroke
 I decided to use company mode for auto completion; so disable
 auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
-  (global-auto-complete-mode -1)
+  ;(global-auto-complete-mode -1)
   (require 'company)
   (global-company-mode)
 #+END_SRC
@@ -523,8 +523,12 @@ Reduce the 'leaving/enter' messages.
 
 Enable logging for channels, this is nice for bitlbee conversations.
 
+The manual must be out of date, this doesn't load.
+
 #+BEGIN_SRC emacs-lisp
-  (enable-lui-logging)
+;  (require 'circe)
+;  (require 'lui-autoloads)
+;  (enable-lui-logging)
 #+END_SRC
 
 ** Color the nicknames.
@@ -748,6 +752,7 @@ Use =elixir-mix-mode= where applicable.
 Automatically add =end= when typing =do=.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'elixir-mode)
   (add-to-list
    'elixir-mode-hook
    (defun auto-activate-ruby-end-mode-for-elixir-mode ()
@@ -762,6 +767,7 @@ Automatically add =end= when typing =do=.
 Add speedbar support for elixir files.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'speedbar)
   (speedbar-add-supported-extension ".ex")
   (speedbar-add-supported-extension ".exs")
 #+END_SRC
