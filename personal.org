@@ -546,15 +546,21 @@ The manual must be out of date, this doesn't load.
 
 ** Server 
 #+BEGIN_SRC emacs-lisp
-  (setq circe-network-options
-        `(("Freenode"
-           :nick "tomterl"
-           :channels ("#emacs" "#emacs-circe")
-           :nickserv-password ,freenode-password
-           )
-          ("Bitlbee"
-           :nick "tom"
-           :nickserv-password ,bitlbee-password)))
+  (defun tom/set-circe-options ()
+    "Set the networks options dynamically just before connection,
+  after loading the passwords"
+    (progn
+      (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
+      (setq circe-network-options
+            (list
+             (list "Freenode"
+              :nick "tomterl"
+              :channels '("#emacs" "#emacs-circe")
+              :nickserv-password (symbol-value 'freenode-password)
+              )
+             (list "Bitlbee"
+              :nick "tom"
+              :nickserv-password (symbol-value 'bitlbee-password))))))
 #+END_SRC
 
 ** Smart connect
@@ -581,7 +587,7 @@ Straight out of the =circe= wiki
   (defun irc ()
     "Connect to all configured IRC servers"
     (interactive)
-    (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
+    (tom/set-circe-options)
     (circe-maybe-connect "Freenode")
     (circe-maybe-connect "Bitlbee"))
 #+END_SRC
