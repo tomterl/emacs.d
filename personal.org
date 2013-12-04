@@ -628,7 +628,7 @@ notifications-close-notification expects an uint32 but gets a int32.
                    tom/chatnotification (notifications-notify 
                                          :title "Emacs Active Buffers"
                                          :body current-bl
-                                         :timeout 750
+                                         :timeout 1500
                                          :desktop-entry "emacs24"
                                          :sound-name "message-new-entry"
                                          :transient))))))
