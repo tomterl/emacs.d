@@ -62,6 +62,11 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+end_src
 
+** Undo as tree
+
+#+BEGIN_SRC emacs-lisp
+  (global-undo-tree-mode)
+#+END_SRC
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
