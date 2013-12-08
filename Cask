@@ -80,6 +80,7 @@
 (depends-on "twilight-anti-bright-theme")
 (depends-on "twilight-bright-theme")
 (depends-on "underwater-theme")
+(depends-on "undo-tree")
 (depends-on "use-package")
 (depends-on "vagrant")
 (depends-on "w3m")
