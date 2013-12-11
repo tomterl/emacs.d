@@ -560,7 +560,7 @@ The manual must be out of date, this doesn't load.
             (list
              (list "Freenode"
               :nick "tomterl"
-              :channels '("#emacs" "#emacs-circe")
+              :channels '("#emacs" "#emacs-circe" "#elixir-lang")
               :nickserv-password (symbol-value 'freenode-password)
               )
              (list "Bitlbee"
