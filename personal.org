@@ -67,6 +67,35 @@ Graphene as basic setup -- only tuned a bit in the sections to come.
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
 #+END_SRC
+* GPG setup
+
+GPG is handled almost transparently in emacs nowadays; this setup
+helps for remote sessions.
+
+<wgreenhouse> tomterl: this assumes emacsclient/emacs --daemon are      [15:35]
+    invoked from a shell that is properly setting GPG_AGENT_INFO
+    already
+<wgreenhouse> but according to documentation, GPG_TTY needs to be
+    adjusted for each terminal
+> wgreenhouse: thanks -- should be the case, I'll make a note
+<taylanub> "arc4random_uniform(9000) + 1000" should give me a good      [15:36]
+    4-digit random number, right ?
+<wgreenhouse> tomterl: also, I really don't like it because it will     [15:38]
+    screw up DISPLAY for any jobs started from the gui emacsclient
+    when I am back at that machine
+> wgreenhouse: Yepp - we see, when I have the time to tackle gpg,       [15:39]
+    maybe I find a cleaner solution
+<baboon`> how can I call several functions over a single selection
+    without re-selecting between each
+
+
+(defun tom/kludge-gpg-agent (frame)
+  (unless (display-graphic-p)
+    (setenv "DISPLAY" nil)
+    (setenv "GPG_TTY" (terminal-name frame))))
+
+(add-hook 'after-make-frame-functions 'wg/kludge-gpg-agent)
+
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
@@ -560,14 +589,14 @@ The manual must be out of date, this doesn't load.
             (list
              (list "Freenode"
               :nick "tomterl"
-              :channels '("#emacs" "#emacs-circe" "#elixir-lang")
+              :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm")
               :nickserv-password (symbol-value 'freenode-password)
               )
              (list "Bitlbee"
               :nick "tom"
               :nickserv-password (symbol-value 'bitlbee-password))))))
 #+END_SRC
-
+   
 ** Smart connect
 
 Straight out of the =circe= wiki
@@ -731,13 +760,14 @@ Indent using spaces, 2 spaces for each indentation step.
 ** REPL toggle
 
 #+BEGIN_SRC emacs-lisp
-  (setq rtog/fullscreen t)
-  (require 'repl-toggle)
-  (setq rtog/mode-repl-alist '(
-                               (php-mode . php-boris) 
-                               (emacs-lisp-mode . ielm)
-                               (elixir-mode . elixir-mode-iex)
-                               (ruby-mode . inf-ruby)))
+    (setq rtog/fullscreen t)
+    (require 'repl-toggle)
+    (setq rtog/mode-repl-alist '(
+                                 (php-mode . php-boris) 
+                                 (emacs-lisp-mode . ielm)
+                                 (elixir-mode . elixir-mode-iex)
+                                 (ruby-mode . inf-ruby)
+                                 (js2-mode . nodejs-repl)))
 #+END_SRC
 ** Opening URLs
 
