@@ -32,6 +32,25 @@ Cask file.
   (load custom-file)
 #+END_SRC
 
+* Helper functions
+** Escape html entities
+
+Basics found on ergoemacs.org.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/replace-html-chars (text)
+    "Replace “<” to “&lt;” and other chars in TEXT."
+    (save-restriction      
+      (with-temp-buffer
+        (insert text)
+        (goto-char (point-min))
+        (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
+        (goto-char (point-min))
+        (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
+        (goto-char (point-min))
+        (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
+        (buffer-string))))
+#+END_SRC
 * Graphene
 
 Graphene as basic setup -- only tuned a bit in the sections to come.
@@ -661,7 +680,7 @@ notifications-close-notification expects an uint32 but gets a int32.
                    tom/lastbufferlist current-bl
                    tom/chatnotification (notifications-notify 
                                          :title "Emacs Active Buffers"
-                                         :body current-bl
+                                         :body (tom/replace-html-chars current-bl)
                                          :timeout 1500
                                          :desktop-entry "emacs24"
                                          :sound-name "message-new-entry"
