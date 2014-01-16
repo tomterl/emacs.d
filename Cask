@@ -10,6 +10,7 @@
 (depends-on "bash-completion")
 (depends-on "bind-key")
 (depends-on "cask")
+(depends-on "centered-cursor-mode")
 (depends-on "circe")
 (depends-on "color-theme-approximate")
 (depends-on "commander")
