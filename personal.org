@@ -783,6 +783,7 @@ Send them to firefox, with keysnail much better then anything else.
 I like speedbar to update automaticly, to always reflect the current state of affairs.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'sr-speedbar)
   (sr-speedbar-refresh-turn-on)
 #+END_SRC
 
