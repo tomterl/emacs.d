@@ -364,11 +364,11 @@ Show uncomitted changes in the fringe.
       (defun gnus-demon-scan-and-update ()
         (gnus-demon-scan-mail-or-news-and-update))
       
-      (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
-      (setq gnus-use-demon t)
-      (gnus-demon-init)
+      ;; (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
+      ;; (setq gnus-use-demon t)
+      ;; (gnus-demon-init)
       
-      (gnus-demon-add-scanmail)
+      ;; (gnus-demon-add-scanmail)
       (gnus)))
 #+end_src
 
