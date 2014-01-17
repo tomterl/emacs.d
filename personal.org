@@ -266,6 +266,23 @@ Show uncomitted changes in the fringe.
   (defadvice magit-mode-quit-window (after update-diff-hl-after-commit activate)
     (diff-hl-update))
 #+END_SRC
+** Whitespace visualization
+
+I find it unnecessary to mark normal spaces, but to visualize tab
+characters and newlines is a possible lifesaver.
+
+#+BEGIN_SRC emacs-lisp
+  (setq whitespace-display-mappings
+        '(
+          (newline-mark 10 [8629 10])
+          (tab-mark 9 [8677 9] [92 9])
+          ))
+  
+  (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+  
+  (global-whitespace-mode)
+#+END_SRC
+
 * GNUS News and Mail
 
 #+begin_src emacs-lisp
