@@ -1,5 +1,4 @@
 ;;; init.el --- Where all the magic begins
-;;
 ;; 
 ;;; Commentary:
 ;;
