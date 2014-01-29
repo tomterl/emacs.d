@@ -32,6 +32,25 @@ Cask file.
   (load custom-file)
 #+END_SRC
 
+* Helper functions
+** Escape html entities
+
+Basics found on ergoemacs.org.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/replace-html-chars (text)
+    "Replace “<” to “&lt;” and other chars in TEXT."
+    (save-restriction      
+      (with-temp-buffer
+        (insert text)
+        (goto-char (point-min))
+        (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
+        (goto-char (point-min))
+        (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
+        (goto-char (point-min))
+        (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
+        (buffer-string))))
+#+END_SRC
 * Graphene
 
 Graphene as basic setup -- only tuned a bit in the sections to come.
@@ -247,6 +266,54 @@ Show uncomitted changes in the fringe.
   (defadvice magit-mode-quit-window (after update-diff-hl-after-commit activate)
     (diff-hl-update))
 #+END_SRC
+** Whitespace visualization
+
+I find it unnecessary to mark normal spaces, but to visualize tab
+characters and newlines is a possible lifesaver.
+
+#+BEGIN_SRC emacs-lisp
+  (setq whitespace-display-mappings
+        '(
+          (newline-mark 10 [8629 10])
+          (tab-mark 9 [8677 9] [92 9])
+          ))
+  
+  (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+  
+  (global-whitespace-mode)
+#+END_SRC
+
+** Hide the mode line
+
+This is interesting for presentations (e.g.).
+
+#+BEGIN_SRC emacs-lisp
+(defvar-local hidden-mode-line-mode nil)
+(defvar-local hide-mode-line nil)
+
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global nil
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+#+END_SRC
+
 * GNUS News and Mail
 
 #+begin_src emacs-lisp
@@ -345,11 +412,11 @@ Show uncomitted changes in the fringe.
       (defun gnus-demon-scan-and-update ()
         (gnus-demon-scan-mail-or-news-and-update))
       
-      (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
-      (setq gnus-use-demon t)
-      (gnus-demon-init)
+      ;; (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
+      ;; (setq gnus-use-demon t)
+      ;; (gnus-demon-init)
       
-      (gnus-demon-add-scanmail)
+      ;; (gnus-demon-add-scanmail)
       (gnus)))
 #+end_src
 
@@ -359,7 +426,7 @@ Show uncomitted changes in the fringe.
 (require 'mm-url)
 (defadvice mm-url-insert (after DE-convert-atom-to-rss () )
   "Converts atom to RSS by calling xsltproc."
-  (when (re-search-forward "xmlns=\\"http://www.w3.org/.*/Atom\\""
+  (when (re-search-forward "xmlns=\"http://www.w3.org/.*/Atom\""
                nil t)
     (message "Converting Atom to RSS... ")
     (goto-char (point-min))
@@ -661,7 +728,7 @@ notifications-close-notification expects an uint32 but gets a int32.
                    tom/lastbufferlist current-bl
                    tom/chatnotification (notifications-notify 
                                          :title "Emacs Active Buffers"
-                                         :body current-bl
+                                         :body (tom/replace-html-chars current-bl)
                                          :timeout 1500
                                          :desktop-entry "emacs24"
                                          :sound-name "message-new-entry"
