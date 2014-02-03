@@ -609,7 +609,7 @@ Settings to set code in latex documents with syntax highlighting.
 (require 'org-macs)
 #+end_src
 
-* Chat and instant messaging
+* Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
 today :-).
@@ -647,21 +647,22 @@ The manual must be out of date, this doesn't load.
 
 ** Server 
 #+BEGIN_SRC emacs-lisp
-  (defun tom/set-circe-options ()
-    "Set the networks options dynamically just before connection,
-  after loading the passwords"
-    (progn
-      (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
-      (setq circe-network-options
-            (list
-             (list "Freenode"
-              :nick "tomterl"
-              :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm")
-              :nickserv-password (symbol-value 'freenode-password)
-              )
-             (list "Bitlbee"
-              :nick "tom"
-              :nickserv-password (symbol-value 'bitlbee-password))))))
+    (defun tom/set-circe-options ()
+      "Set the networks options dynamically just before connection,
+    after loading the passwords"
+      (progn
+        (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
+        (setq circe-network-options
+              (list
+               (list "Freenode"
+                :nick "tomterl"
+                :host "chat.freenode.net"
+                :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm")
+                :nickserv-password (symbol-value 'freenode-password)
+                )
+               (list "Bitlbee"
+                :nick "tom"
+                :nickserv-password (symbol-value 'bitlbee-password))))))
 #+END_SRC
    
 ** Smart connect
