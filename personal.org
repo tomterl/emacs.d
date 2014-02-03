@@ -822,7 +822,7 @@ Indent using spaces, 2 spaces for each indentation step.
 *** Fullscreen
 
 #+BEGIN_SRC emacs-lisp
-(fullframe magit-status magit-mode-quit-window :magit-fullscreen nil)
+(fullframe magit-status magit-mode-quit-window nil)
 #+END_SRC
 
 ** REPL toggle
