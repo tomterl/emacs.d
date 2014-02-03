@@ -878,6 +878,11 @@ Automatically add =end= when typing =do=.
      (ruby-end-mode +1)))
 #+END_SRC
 
+* Slime
+
+#+BEGIN_SRC emacs-lisp
+(slime-setup '(slime-repl))
+#+END_SRC
 * Imenu 
 
 Add speedbar support for elixir files.
