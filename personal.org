@@ -283,6 +283,20 @@ characters and newlines is a possible lifesaver.
   (global-whitespace-mode)
 #+END_SRC
 
+I like the tabs and newline characters to have a fixed color.
+
+#+BEGIN_SRC emacs-lisp
+  (custom-set-faces
+   '(tom/whitespace-face ((((class color))(:foreground "#999999"))) t))
+  (add-hook
+   'font-lock-mode-hook
+   (function
+    (lambda ()
+      (setq font-lock-keywords
+            (append font-lock-keywords
+                    '(("\n" (0 'tom/whitespace-face t))
+                      ("\t" (0 'tom/whitespace-face t))))))))
+#+END_SRC
 ** Hide the mode line
 
 This is interesting for presentations (e.g.).
