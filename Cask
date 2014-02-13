@@ -39,6 +39,7 @@
 (depends-on "flymake-elixir")
 (depends-on "fringe-helper")
 (depends-on "fullframe")
+(depends-on "geben")
 (depends-on "git-commit-mode")
 (depends-on "git-rebase-mode")
 (depends-on "graphene")
