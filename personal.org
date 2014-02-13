@@ -397,6 +397,13 @@ This is interesting for presentations (e.g.).
                       (nnimap-stream tls)
                                           ;        (nnimap-authenticator "plain")
                       )
+              (nnimap "Wpextern"
+                      (nnimap-address "mail.wpextern.de")
+                      (nnimap-authinfo-file "/home/tom/.authinfo")
+                      (nnimap-server-port 143)
+                      (nnimap-stream network)
+                      (nnimap-authenticator login)
+                      )
               )
             )
       ;; (setq gnus-secondary-select-methods
