@@ -885,6 +885,34 @@ Automatically add =end= when typing =do=.
      (ruby-end-mode +1)))
 #+END_SRC
 
+** PHP
+
+*** Use php-mode, not web-mode
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+#+END_SRC
+
+*** Remote debugging
+
+Geben is old and un(der)maintained, but it works...
+
+The port is 10000, because the standar of 9000 is taken by fpm per
+default, easier to change my debug port than everybodies default
+fastcgi port...
+ #+BEGIN_SRC emacs-lisp
+   (setq geben-dbgp-default-port 10000)
+ #+END_SRC
+
+Reroute remote paths to my dev-server and the vagrant user.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/geben-tramp-spec (remote-path)
+    ""
+    (print "/sshx:vagrant@192.168.2.162:"))
+  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
