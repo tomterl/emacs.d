@@ -178,7 +178,6 @@ to exclude a couple of buffer names =desktop= must ignore.
 #+END_SRC
 
 * Appearance
-
 ** Font
 
 One thing adobe got right...
@@ -294,9 +293,10 @@ I like the tabs and newline characters to have a fixed color.
     (lambda ()
       (setq font-lock-keywords
             (append font-lock-keywords
-                    '(("\n" (0 'tom/whitespace-face t))
+                    '(("\r" (0 'tom/whitespace-face t))
                       ("\t" (0 'tom/whitespace-face t))))))))
 #+END_SRC
+	
 ** Hide the mode line
 
 This is interesting for presentations (e.g.).
