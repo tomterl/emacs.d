@@ -115,6 +115,91 @@ helps for remote sessions.
 
 (add-hook 'after-make-frame-functions 'wg/kludge-gpg-agent)
 
+* Languages
+** Elixir
+
+Use =elixir-mix-mode= where applicable.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'elixir-mix)
+  (global-elixir-mix-mode)
+#+END_SRC
+
+Automatically add =end= when typing =do=.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'elixir-mode)
+  (add-to-list
+   'elixir-mode-hook
+   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+     (ruby-end-mode +1)))
+#+END_SRC
+
+** PHP
+
+*** Use php-mode, not web-mode
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+#+END_SRC
+
+*** Indentation
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-mode-hook ()
+    ""
+    (setq tab-width 4
+          c-basic-offset 4
+          indent-tabs-mode t))
+  (add-hook 'php-mode-hook 'tom/php-mode-hook)
+#+END_SRC
+*** Remote debugging
+
+Geben is old and un(der)maintained, but it works...
+
+The port is 10000, because the standar of 9000 is taken by fpm per
+default, easier to change my debug port than everybodies default
+fastcgi port...
+ #+BEGIN_SRC emacs-lisp
+   (setq geben-dbgp-default-port 10000)
+ #+END_SRC
+
+Reroute remote paths to my dev-server and the vagrant user.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/geben-tramp-spec (remote-path)
+    ""
+    (print "/sshx:vagrant@192.168.2.162:"))
+  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
+#+END_SRC
+** C
+*** Indentation
+#+BEGIN_SRC emacs-lisp
+  (defun tom/c-mode-hook ()
+    ""
+    (setq tab-width 4
+          c-basic-offset 4
+          indent-tabs-mode t))
+  (add-hook 'c-mode-hook 'tom/c-mode-hook)
+  
+#+END_SRC
+** Lisp
+
+Lambda as λ
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro λ (&rest body)
+    `(lambda ()
+       (interactive)
+       ,@body))
+  
+  (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
+#+END_SRC
+
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
@@ -146,7 +231,6 @@ auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
 #+END_SRC
-
 * Projects
 
 ** Modify graphenes project handling
@@ -172,9 +256,9 @@ to exclude a couple of buffer names =desktop= must ignore.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'project-persist-after-load-hook
-            (lambda () (projectile-mode 1)))
+            (λ () (projectile-mode 1)))
   (add-hook 'project-persist-after-close-hook
-            (lambda () (projectile-mode -1)))
+            (λ () (projectile-mode -1)))
 #+END_SRC
 
 * Appearance
@@ -313,7 +397,6 @@ This is interesting for presentations (e.g.).
      (concat "Hidden Mode Line Mode enabled.  "
              "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
 #+END_SRC
-
 * GNUS News and Mail
 
 #+begin_src emacs-lisp
@@ -528,7 +611,7 @@ I always use the form ~(ref:label)~ for code references.
         )))
   
   (add-hook 'org-babel-tangle-body-hook
-            (lambda () (tr/remove-code-labels)))
+            (λ () (tr/remove-code-labels)))
   
 #+end_src 
 
@@ -615,7 +698,6 @@ Settings to set code in latex documents with syntax highlighting.
 #+begin_src emacs-lisp
 (require 'org-macs)
 #+end_src
-
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
@@ -742,7 +824,6 @@ notifications-close-notification expects an uint32 but gets a int32.
                                          :sound-name "message-new-entry"
                                          :transient))))))
 #+END_SRC
-
 * Behaviour
 ** =ibuffer= as buffer screen
 #+BEGIN_SRC emacs-lisp
@@ -860,79 +941,6 @@ I like speedbar to update automaticly, to always reflect the current state of af
 #+BEGIN_SRC emacs-lisp
   (require 'sr-speedbar)
   (sr-speedbar-refresh-turn-on)
-#+END_SRC
-
-* Languages
-** Elixir
-
-Use =elixir-mix-mode= where applicable.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'elixir-mix)
-  (global-elixir-mix-mode)
-#+END_SRC
-
-Automatically add =end= when typing =do=.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'elixir-mode)
-  (add-to-list
-   'elixir-mode-hook
-   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
-     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
-          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
-     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
-     (ruby-end-mode +1)))
-#+END_SRC
-
-** PHP
-
-*** Use php-mode, not web-mode
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-#+END_SRC
-
-*** Indentation
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-mode-hook ()
-    ""
-    (setq tab-width 4
-          c-basic-offset 4
-          indent-tabs-mode t))
-  (add-hook 'php-mode-hook 'tom/php-mode-hook)
-#+END_SRC
-*** Remote debugging
-
-Geben is old and un(der)maintained, but it works...
-
-The port is 10000, because the standar of 9000 is taken by fpm per
-default, easier to change my debug port than everybodies default
-fastcgi port...
- #+BEGIN_SRC emacs-lisp
-   (setq geben-dbgp-default-port 10000)
- #+END_SRC
-
-Reroute remote paths to my dev-server and the vagrant user.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/geben-tramp-spec (remote-path)
-    ""
-    (print "/sshx:vagrant@192.168.2.162:"))
-  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
-#+END_SRC
-** C
-*** Indentation
-#+BEGIN_SRC emacs-lisp
-  (defun tom/c-mode-hook ()
-    ""
-    (setq tab-width 4
-          c-basic-offset 4
-          indent-tabs-mode t))
-  (add-hook 'c-mode-hook 'tom/c-mode-hook)
-  
 #+END_SRC
 * Slime
 
