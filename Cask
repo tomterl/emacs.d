@@ -55,6 +55,7 @@
 (depends-on "js3-mode")
 (depends-on "jump")
 (depends-on "magit")
+(depends-on "minimap")
 (depends-on "multiple-cursors")
 (depends-on "nodejs-repl")
 (depends-on "pallet")

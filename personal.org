@@ -314,6 +314,18 @@ This is interesting for presentations (e.g.).
              "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
 #+END_SRC
 
+** Minimap
+
+This is a birds eye view of the current buffer.
+
+#+BEGIN_SRC emacs-lisp
+  (setq minimap-dedicated-window t
+       minimap-hide-scroll-bar t
+       minimap-hide-fringes t
+       )
+  (global-set-key (kbd "H-M") 'minimap-toggle)
+  
+#+END_SRC
 * GNUS News and Mail
 
 #+begin_src emacs-lisp
