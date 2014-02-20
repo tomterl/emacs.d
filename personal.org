@@ -319,7 +319,7 @@ One thing adobe got right...
 My current dark theme is twilight-anti-bright.
 
 #+begin_src emacs-lisp
-(load-theme 'twilight-anti-bright t)
+  (load-theme 'misterioso t)
 #+end_src
 
 ** TreeView
