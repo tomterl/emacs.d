@@ -65,7 +65,7 @@ loaded at startup.
 #+BEGIN_SRC emacs-lisp
 (setq graphene-font-height 83)
 #+END_SRC
-
+** Load
 Load ~graphene~
 #+BEGIN_SRC emacs-lisp
 (require 'graphene)
