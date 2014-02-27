@@ -80,8 +80,6 @@
 (depends-on "s")
 (depends-on "simple-httpd")
 (depends-on "slime")
-(depends-on "slime-js")
-(depends-on "slime-repl")
 (depends-on "smartparens")
 (depends-on "smarty-mode")
 (depends-on "smex")

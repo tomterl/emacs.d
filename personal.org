@@ -976,6 +976,7 @@ I like speedbar to update automaticly, to always reflect the current state of af
 * Slime
 
 #+BEGIN_SRC emacs-lisp
+(require 'slime)
 (slime-setup '(slime-repl))
 #+END_SRC
 * Imenu 
