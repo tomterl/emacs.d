@@ -774,7 +774,7 @@ The manual must be out of date, this doesn't load.
                (list "Freenode"
                 :nick "tomterl"
                 :host "chat.freenode.net"
-                :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm")
+                :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
                 :nickserv-password (symbol-value 'freenode-password)
                 )
                (list "Bitlbee"
