@@ -55,16 +55,6 @@ Basics found on ergoemacs.org.
 
 Graphene as basic setup -- only tuned a bit in the sections to come.
 
-** Fix theme
-
-=graphene-theme.el= sets other font height values relative to
-=graphene-font-height=. This should work without intervention, but
-there seems to be an error in the sequence theme related packages are
-loaded at startup.
-
-#+BEGIN_SRC emacs-lisp
-(setq graphene-font-height 83)
-#+END_SRC
 ** Load
 Load ~graphene~
 #+BEGIN_SRC emacs-lisp
@@ -319,8 +309,20 @@ One thing adobe got right...
 My current dark theme is twilight-anti-bright.
 
 #+begin_src emacs-lisp
-  (load-theme 'misterioso t)
+  (load-theme 'flatland t)
 #+end_src
+
+** Fix and load graphene theme
+
+=graphene-theme.el= sets other font height values relative to
+=graphene-font-height=. This should work without intervention, but
+there seems to be an error in the sequence theme related packages are
+loaded at startup.
+
+#+BEGIN_SRC emacs-lisp
+(setq graphene-font-height 83)
+(load-theme 'graphene)
+#+END_SRC
 
 ** TreeView
 
