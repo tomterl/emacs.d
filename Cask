@@ -34,6 +34,7 @@
 (depends-on "ess")
 (depends-on "expand-region")
 (depends-on "f")
+(depends-on "flatland-theme")
 (depends-on "flycheck")
 (depends-on "flymake-cursor")
 (depends-on "flymake-elixir")
