@@ -17,4 +17,9 @@ git checkout -b local
 ./configure && make
 popd
 
+git clone https://github.com/fujii/Sublain.git
+pushd Sublain
+git checkout -b local
+popd
+
 popd

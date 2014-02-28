@@ -923,22 +923,6 @@ Indent using spaces, 2 spaces for each indentation step.
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 #+END_SRC
 
-** Magit 
-#+BEGIN_SRC emacs-lisp
-  (require 'magit)
-#+END_SRC
-
-*** Key bindings
-#+begin_src emacs-lisp
-  (global-set-key (kbd "<f7>") 'magit-status)
-#+end_src
-
-*** Fullscreen
-
-#+BEGIN_SRC emacs-lisp
-(fullframe magit-status magit-mode-quit-window nil)
-#+END_SRC
-
 ** REPL toggle
 
 #+BEGIN_SRC emacs-lisp
@@ -988,3 +972,28 @@ Add speedbar support for elixir files.
   (speedbar-add-supported-extension ".ex")
   (speedbar-add-supported-extension ".exs")
 #+END_SRC
+* Version control
+** Subversion
+Use Sublain as subversion browser.
+#+BEGIN_SRC emacs-lisp
+  (setq tom/--sublain-home (expand-file-name "Sublain" tom/--src-base))
+  (add-to-list 'load-path tom/--sublain-home)
+  (require 'sublain)
+#+END_SRC
+** Magit 
+#+BEGIN_SRC emacs-lisp
+  (require 'magit)
+#+END_SRC
+
+*** Key bindings
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f7>") 'magit-status)
+#+end_src
+
+*** Fullscreen
+
+#+BEGIN_SRC emacs-lisp
+(fullframe magit-status magit-mode-quit-window nil)
+#+END_SRC
+
+
