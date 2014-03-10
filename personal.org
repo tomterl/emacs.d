@@ -579,10 +579,10 @@ This is a birds eye view of the current buffer.
 *** mobileorg for android
 
 #+begin_src emacs-lisp
-   (setq
-    org-mobile-directory "/home/tom/ownCloud/org-mode"
-    org-mobile-files (quote (org-agenda-files))
-    org-mobile-inbox-for-pull "/home/tom/ownCloud/org-mode/mobileorg.org")
+  (setq
+   org-mobile-directory "/home/tom/ownCloud/org-mode"
+   org-mobile-files (quote (org-agenda-files))
+   org-mobile-inbox-for-pull "/home/tom/ownCloud/org-mode/mobileorg.org")
 #+end_src
 
 *** Refile
