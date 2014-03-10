@@ -84,6 +84,7 @@
 (depends-on "smartparens")
 (depends-on "smarty-mode")
 (depends-on "smex")
+(depends-on "smooth-scrolling")
 (depends-on "stumpwm-mode")
 (depends-on "sunrise-commander")
 (depends-on "sunrise-x-loop")

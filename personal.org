@@ -959,6 +959,15 @@ I like speedbar to update automaticly, to always reflect the current state of af
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "H-N") 'sr-speedbar-toggle)
 #+END_SRC
+** Scrolling
+
+Scroll as much as other programs do, one line at a time and with
+enough context around point visible.
+
+#+BEGIN_SRC emacs-lisp
+(require 'smooth-scrolling)
+#+END_SRC
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp
