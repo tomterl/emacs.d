@@ -1013,11 +1013,17 @@ Use Sublain as subversion browser.
 
 Manage ssh tunnel via prodigy.
 
+#+BEGIN_SRC emacs-lisp
+(require 'prodigy)
+#+END_SRC
+
 *** Access a property value
+
 #+BEGIN_SRC emacs-lisp
   (defmacro tom/assoc (key list)
     `(cdr (assoc ,key ,list)))
 #+END_SRC
+
 *** Build the argument list
 
 #+BEGIN_SRC emacs-lisp
