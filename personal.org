@@ -1008,3 +1008,61 @@ Use Sublain as subversion browser.
 #+END_SRC
 
 
+* Services
+** =ssh= tunnel
+
+Manage ssh tunnel via prodigy.
+
+*** Access a property value
+#+BEGIN_SRC emacs-lisp
+  (defmacro tom/assoc (key list)
+    `(cdr (assoc ,key ,list)))
+#+END_SRC
+*** Build the argument list
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/build-tunnel-args (args)
+    ""
+    (let ((arglist '("-v")))
+      (progn
+        (add-to-list 'arglist "-N" t)
+        (add-to-list 'arglist "-L" t)
+        (add-to-list 'arglist
+                     (concat (tom/assoc :localport args)
+                             ":"
+                             (tom/assoc :tunnel-ip args)
+                             ":"
+                             (tom/assoc :tunnel-port args)) t)
+        (add-to-list 'arglist "-l" t)
+        (add-to-list 'arglist (tom/assoc :user args) t)
+        (add-to-list 'arglist "-p" t)
+        (add-to-list 'arglist (tom/assoc :port args) t)
+        (add-to-list 'arglist (tom/assoc :host args))
+        arglist)))
+#+END_SRC
+
+*** Tunnel tag
+
+#+BEGIN_SRC emacs-lisp
+  (prodigy-define-tag
+    :name 'ssh-tunnel
+    :command "ssh"
+    :cwd (getenv "HOME")
+    :ready-message "debug1: Entering interactive session.")
+#+END_SRC
+
+*** Tunnel services
+
+#+BEGIN_SRC emacs-lisp
+  (prodigy-define-service
+    :name "joocom-u12-c10"
+    :tags '(ssh-tunnel)
+    :args (lambda ()
+            (tom/build-tunnel-args
+             '((:localport . "11111")
+              (:tunnel-ip . "192.168.2.40")
+              (:tunnel-port . "22")
+              (:user . "tomte")
+              (:host . "walker.wpextern.de")
+              (:port . "20248")))))
+#+END_SRC
