@@ -18,6 +18,9 @@
     (add-to-list 'load-path org-lisp-dir)
     (require 'org)
     ;; Load my own customizations.
-    (org-babel-load-file (expand-file-name "personal.org" tom/--emacs-dir))))
+    (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir))
+          (el-file (expand-file-name "personal.el" tom/--emacs-dir)))
+      (org-babel-tangle-file org-file el-file "emacs-lisp")
+      (byte-compile-file el-file t))))
 
 ;;; init.el ends here
