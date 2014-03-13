@@ -1043,7 +1043,7 @@ Manage ssh tunnel via prodigy.
         (add-to-list 'arglist (tom/assoc :user args) t)
         (add-to-list 'arglist "-p" t)
         (add-to-list 'arglist (tom/assoc :port args) t)
-        (add-to-list 'arglist (tom/assoc :host args))
+        (add-to-list 'arglist (tom/assoc :host args) t)
         arglist)))
 #+END_SRC
 
