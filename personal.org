@@ -461,7 +461,7 @@ This is a birds eye view of the current buffer.
       ;; display nice arrows in thread-view (summary buffer)
       ;; the font must have the glyphs!
       (setq-default
-       gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%s%)\n"
+       gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%-80,80s%)\n"
        gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
        gnus-thread-sort-functions '(gnus-thread-sort-by-date)
