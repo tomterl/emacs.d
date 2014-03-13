@@ -26,10 +26,12 @@
       (require 'org)
       ;; Load my own customizations.
       (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir))
-            (el-file (expand-file-name "personal.el" tom/--emacs-dir)))
+            (el-file (expand-file-name "personal.el" tom/--emacs-dir))
+            (elc-file (expand-file-name "personal.elc" tom/--emacs-dir)))
         (when (not (and (file-exists-p el-file)
                         (> (age org-file) (age el-file))))
           (org-babel-tangle-file org-file el-file "emacs-lisp")
-          (byte-compile-file el-file t))))))
+          (byte-compile-file el-file t))
+        (load-file elc-file)))))
 
 ;;; init.el ends here
