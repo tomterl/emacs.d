@@ -51,6 +51,7 @@
 (depends-on "inf-ruby")
 (depends-on "inflections")
 (depends-on "itail")
+(depends-on "ix")
 (depends-on "js-comint")
 (depends-on "js2-mode")
 (depends-on "js3-mode")
@@ -102,4 +103,5 @@
 (depends-on "window-layout")
 (depends-on "wrap-region")
 (depends-on "xml-rpc")
+(depends-on "yagist")
 (depends-on "yasnippet")

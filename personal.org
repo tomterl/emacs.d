@@ -767,22 +767,23 @@ The manual must be out of date, this doesn't load.
 
 ** Server 
 #+BEGIN_SRC emacs-lisp
-    (defun tom/set-circe-options ()
-      "Set the networks options dynamically just before connection,
-    after loading the passwords"
-      (progn
-        (load-file (expand-file-name ".chat.el.gpg" tom/--emacs-dir))
-        (setq circe-network-options
-              (list
-               (list "Freenode"
-                :nick "tomterl"
-                :host "chat.freenode.net"
-                :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
-                :nickserv-password (symbol-value 'freenode-password)
-                )
-               (list "Bitlbee"
-                :nick "tom"
-                :nickserv-password (symbol-value 'bitlbee-password))))))
+  (defun tom/set-circe-options ()
+    "Set the networks options dynamically just before connection,
+  after loading the passwords"
+    (progn
+      (let ((freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
+            (bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
+        (setq circe-network-option
+            (list
+             (list "Freenode"
+                  :nick (netrc-get freenode "login")
+                  :host "chat.freenode.net"
+                  :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
+                  :nickserv-password (netrc-get freenode "password")
+             )
+            (list "Bitlbee"
+             :nick (netrc-get bitlbee "login")
+             :nickserv-password (netrc-get bitlbee "password")))))))
 #+END_SRC
    
 ** Smart connect
@@ -1010,7 +1011,6 @@ Use Sublain as subversion browser.
 (fullframe magit-status magit-mode-quit-window nil)
 #+END_SRC
 
-
 * Services
 ** =ssh= tunnel
 
@@ -1074,4 +1074,16 @@ Manage ssh tunnel via prodigy.
               (:user . "tomte")
               (:host . "walker.wpextern.de")
               (:port . "20248")))))
+#+END_SRC
+* Paste services
+** ix.io
+#+BEGIN_SRC emacs-lisp
+  (let ((ix-io (netrc-machine (netrc-parse "~/.netrc") "ix-io")))
+    (setq ix-user (netrc-get ix-io "login"))
+    (setq ix-token (netrc-get ix-io "password")))
+#+END_SRC
+** yagist
+#+BEGIN_SRC emacs-lisp
+  (let ((github (netrc-machine (netrc-parse "~/.netrc") "yagist")))
+    (setq yagist-github-token (netrc-get github "password")))
 #+END_SRC
