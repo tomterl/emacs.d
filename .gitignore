@@ -3,9 +3,12 @@ auto-save-list/*
 
 .graphene-geometry
 personal.el
+personal.elc
 project-persist
 
+.org-id-locations
 eshell/*
 ac-comphist.dat
 url/*
 /projectile-bookmarks.eld
+tramp
