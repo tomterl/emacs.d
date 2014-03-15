@@ -824,37 +824,39 @@ In my emacs setup I have to patch notifications.el --
 notifications-close-notification expects an uint32 but gets a int32.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'notifications)
-  (require 's)
-  
-  (defvar tom/chatnotification nil
-    "ID of the last send desktop notification.")
-  (defvar tom/lastchatnotification 0
-    "Time of the last send notification, seconds since epoch as float")
-  (defvar tom/lastbufferlist nil
-    "The value of tracking-buffers when we last notified")
-  (defvar tom/chatnotifyintervall 90
-    "Minimum delay between chat activity notifications in seconds")
-  
-  (defadvice tracking-add-buffer (after tracking-desktop-notify activate)
-    (let ((current-t (float-time))
-          (current-bl (s-join "\n" tracking-buffers)))
-      ;; min tom/chatnotifyintervall seconds since last delay?
-      (if (and (not (eql current-bl "")) (not (eql current-bl tom/lastbufferlist))
-               (> (- current-t tom/lastchatnotification) tom/chatnotifyintervall))
-          (progn
-            ;; delete alst notification id any
-            (and tom/chatnotification (notifications-close-notification tom/chatnotification))
-            ;; remember time and notify
-            (setq  tom/lastchatnotification current-t
-                   tom/lastbufferlist current-bl
-                   tom/chatnotification (notifications-notify 
-                                         :title "Emacs Active Buffers"
-                                         :body (tom/replace-html-chars current-bl)
-                                         :timeout 1500
-                                         :desktop-entry "emacs24"
-                                         :sound-name "message-new-entry"
-                                         :transient))))))
+    (require 'notifications)
+    (require 's)
+    
+    (defvar tom/chatnotification nil
+      "ID of the last send desktop notification.")
+    (defvar tom/lastchatnotification 0
+      "Time of the last send notification, seconds since epoch as float")
+    (defvar tom/lastbufferlist nil
+      "The value of tracking-buffers when we last notified")
+    (defvar tom/chatnotifyintervall 90
+      "Minimum delay between chat activity notifications in seconds")
+    (defun tom/tracking-buffer-notifications ()
+      ""
+      (let ((current-t (float-time))
+            (current-bl (s-join "\n" tracking-buffers)))
+        ;; min tom/chatnotifyintervall seconds since last delay?
+        (if (and (not (eql current-bl "")) (not (eql current-bl tom/lastbufferlist))
+                 (> (- current-t tom/lastchatnotification) tom/chatnotifyintervall))
+            (progn
+              ;; delete alst notification id any
+              (and tom/chatnotification (notifications-close-notification tom/chatnotification))
+              ;; remember time and notify
+              (setq  tom/lastchatnotification current-t
+                     tom/lastbufferlist current-bl
+                     tom/chatnotification (notifications-notify 
+                                           :title "Active Buffers"
+                                           :body (tom/replace-html-chars current-bl)
+                                           :timeout 1500
+                                           :desktop-entry "emacs24"
+                                           :sound-name "message-new-entry"
+                                           :transient))))))
+    (defadvice tracking-add-buffer (after tracking-desktop-notify activate)
+      (tom/tracking-buffer-notifications))
 #+END_SRC
 * Behaviour
 ** =ibuffer= as buffer screen
