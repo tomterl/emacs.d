@@ -31,7 +31,7 @@
         (when (not (and (file-exists-p el-file)
                         (> (age org-file) (age el-file))))
           (org-babel-tangle-file org-file el-file "emacs-lisp")
-          (byte-compile-file el-file t))
+          (byte-recompile-file el-file t))
         (load-file elc-file)))))
 
 ;;; init.el ends here
