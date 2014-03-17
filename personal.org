@@ -1028,22 +1028,16 @@ Manage ssh tunnel via prodigy.
 #+BEGIN_SRC emacs-lisp
   (defun tom/build-tunnel-args (args)
     ""
-    (let ((arglist '("-v")))
-      (progn
-        (add-to-list 'arglist "-N" t)
-        (add-to-list 'arglist "-L" t)
-        (add-to-list 'arglist
-                     (concat (getf args :localport)
+    `("-v" "-N" "-L" ,(concat (getf args :localport)
                              ":"
                              (getf args :tunnel-ip)
                              ":"
-                             (getf args :tunnel-port)) t)
-        (add-to-list 'arglist "-l" t)
-        (add-to-list 'arglist (getf args :user) t)
-        (add-to-list 'arglist "-p" t)
-        (add-to-list 'arglist (getf args :port) t)
-        (add-to-list 'arglist (getf args :host) t)
-        arglist)))
+                             (getf args :tunnel-port))
+        "-l" 
+        ,(getf args :user)
+        "-p"
+        ,(getf args :port)
+        ,(getf args :host)))
 #+END_SRC
 
 *** Tunnel tag
