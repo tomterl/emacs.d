@@ -1027,7 +1027,7 @@ Manage ssh tunnel via prodigy.
 
 #+BEGIN_SRC emacs-lisp
   (defun tom/build-tunnel-args (args)
-    ""
+    "Assemble the ssh tunnel argument list."
     `("-v" ;; allows us to parse for the ready message
       "-N" ;; don't start an interactive shell remotely
       "-L" ,(concat (getf args :localport) ;; the tunnel spec
