@@ -1022,12 +1022,6 @@ Manage ssh tunnel via prodigy.
 (require 'prodigy)
 #+END_SRC
 *** Helper functions
-**** Access a property value
-
-#+BEGIN_SRC emacs-lisp
-  (defmacro tom/assoc (key list)
-    `(cdr (assoc ,key ,list)))
-#+END_SRC
 
 **** Build the argument list
 
@@ -1039,16 +1033,16 @@ Manage ssh tunnel via prodigy.
         (add-to-list 'arglist "-N" t)
         (add-to-list 'arglist "-L" t)
         (add-to-list 'arglist
-                     (concat (tom/assoc :localport args)
+                     (concat (getf args :localport)
                              ":"
-                             (tom/assoc :tunnel-ip args)
+                             (getf args :tunnel-ip)
                              ":"
-                             (tom/assoc :tunnel-port args)) t)
+                             (getf args :tunnel-port)) t)
         (add-to-list 'arglist "-l" t)
-        (add-to-list 'arglist (tom/assoc :user args) t)
+        (add-to-list 'arglist (getf args :user) t)
         (add-to-list 'arglist "-p" t)
-        (add-to-list 'arglist (tom/assoc :port args) t)
-        (add-to-list 'arglist (tom/assoc :host args) t)
+        (add-to-list 'arglist (getf args :port) t)
+        (add-to-list 'arglist (getf args :host) t)
         arglist)))
 #+END_SRC
 
@@ -1070,12 +1064,12 @@ Manage ssh tunnel via prodigy.
     :tags '(ssh-tunnel)
     :args (lambda ()
             (tom/build-tunnel-args
-             '((:localport . "11111")
-              (:tunnel-ip . "192.168.2.40")
-              (:tunnel-port . "22")
-              (:user . "tomte")
-              (:host . "walker.wpextern.de")
-              (:port . "20248")))))
+             '(:localport  "11111"
+              :tunnel-ip  "192.168.2.40"
+              :tunnel-port  "22"
+              :user  "tomte"
+              :host  "walker.wpextern.de"
+              :port  "20248"))))
 #+END_SRC
 * Paste services
 ** ix.io
