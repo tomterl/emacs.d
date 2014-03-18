@@ -770,20 +770,19 @@ The manual must be out of date, this doesn't load.
   (defun tom/set-circe-options ()
     "Set the networks options dynamically just before connection,
   after loading the passwords"
-    (progn
-      (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
-            (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
-        (setq circe-network-options
-              (list
-               (list "Freenode"
-                     :nick (netrc-get --freenode "login")
-                     :host "chat.freenode.net"
-                     :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
-                     :nickserv-password (netrc-get --freenode "password")
-                     )
-               (list "Bitlbee"
-                     :nick (netrc-get --bitlbee "login")
-                     :nickserv-password (netrc-get --bitlbee "password")))))))
+    (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
+          (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
+      (setq circe-network-options
+            (list
+             (list "Freenode"
+                   :nick (netrc-get --freenode "login")
+                   :host "chat.freenode.net"
+                   :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
+                   :nickserv-password (netrc-get --freenode "password")
+                   )
+             (list "Bitlbee"
+                   :nick (netrc-get --bitlbee "login")
+                   :nickserv-password (netrc-get --bitlbee "password"))))))
 #+END_SRC
    
 ** Smart connect
