@@ -44,6 +44,7 @@
 (depends-on "git-commit-mode")
 (depends-on "git-rebase-mode")
 (depends-on "graphene")
+(depends-on "grapnel")
 (depends-on "haskell-mode")
 (depends-on "htmlize")
 (depends-on "image+")
