@@ -11,8 +11,6 @@ Package managment and loading of utility packages.
 Cask manages the packages installed.
 
 #+BEGIN_SRC emacs-lisp
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
 #+END_SRC
 
 *** Pallet
@@ -309,12 +307,26 @@ One thing adobe got right...
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 
-My current dark theme is twilight-anti-bright.
+My current dark theme is flatland.
 
 #+begin_src emacs-lisp
   (load-theme 'flatland t)
 #+end_src
 
+*** Fix a few elements
+
+#+BEGIN_SRC emacs-lisp
+  (deftheme tom/theme
+    "A few adjustments to the used dark themes")
+  
+  (flatland-with-color-variables
+    (custom-theme-set-faces
+     'tom/theme
+     `(paren-showing-faces
+       ((t (:foreground ,flatland-orange-2
+                        :background ,flatland-bg
+                        :weight bold))))))
+#+END_SRC
 ** Fix and load graphene theme
 
 =graphene-theme.el= sets other font height values relative to
@@ -1009,7 +1021,7 @@ Use Sublain as subversion browser.
 *** Fullscreen
 
 #+BEGIN_SRC emacs-lisp
-(fullframe magit-status magit-mode-quit-window nil)
+(fullframe magit-status magit-mode-quit-window nil) 
 #+END_SRC
 
 * Services
