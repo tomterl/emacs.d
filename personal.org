@@ -326,6 +326,7 @@ My current dark theme is flatland.
        ((t (:foreground ,flatland-orange-2
                         :background ,flatland-bg
                         :weight bold))))))
+  (enable-theme 'tom/theme)
 #+END_SRC
 ** Fix and load graphene theme
 
