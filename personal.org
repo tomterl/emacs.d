@@ -327,7 +327,10 @@ My current dark theme is flatland.
                         :background ,flatland-bg
                         :weight bold))))
      `(whitespace-newline
-       ((t (:foreground ,flatland-blue-3))))))
+       ((t (:foreground ,flatland-blue-3))))
+     `(whitespace-tab
+       ((t (:foreground ,flatland-blue-3
+                        :background ,flatland-bg-1))))))
   (enable-theme 'tom/theme)
 #+END_SRC
 ** Fix and load graphene theme
@@ -393,7 +396,7 @@ characters and newlines is a possible lifesaver.
           (tab-mark 9 [8677 9] [92 9])
           ))
   
-  (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+  (setq whitespace-style '(face spaces tabs newline space-mark tab-mark newline-mark))
   
   (global-whitespace-mode)
 #+END_SRC
