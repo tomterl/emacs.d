@@ -325,7 +325,9 @@ My current dark theme is flatland.
      `(sp-show-pair-match-face
        ((t (:foreground ,flatland-orange-2
                         :background ,flatland-bg
-                        :weight bold))))))
+                        :weight bold))))
+     `(whitespace-newline
+       ((t (:foreground ,flatland-blue-3))))))
   (enable-theme 'tom/theme)
 #+END_SRC
 ** Fix and load graphene theme
