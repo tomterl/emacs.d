@@ -989,8 +989,8 @@ enough context around point visible.
 * Slime
 
 #+BEGIN_SRC emacs-lisp
-(require 'slime)
-(slime-setup '(slime-repl))
+  (require 'slime)
+  (slime-setup '(slime-repl))
 #+END_SRC
 * Imenu 
 
