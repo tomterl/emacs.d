@@ -322,7 +322,7 @@ My current dark theme is flatland.
   (flatland-with-color-variables
     (custom-theme-set-faces
      'tom/theme
-     `(paren-showing-faces
+     `(sp-show-pair-match-face
        ((t (:foreground ,flatland-orange-2
                         :background ,flatland-bg
                         :weight bold))))))
