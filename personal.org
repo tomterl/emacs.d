@@ -272,10 +272,13 @@ to exclude a couple of buffer names =desktop= must ignore.
 #+BEGIN_SRC emacs-lisp
   (defvar tom/default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
     "The font to use under normal circumstances")
-  (defvar tom/fallback-font "Symbola"
+  (defvar tom/fallback-font "-unknown-Symbola-normal-normal-semicondensed-*-11-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
 
-  (setq default-frame-alist '((font . tom/default-font)))
+  (set-frame-font tom/default-font t t)
+
+
+  (setq default-frame-alist `((font . ,tom/default-font)))
 
   (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
 
@@ -284,8 +287,6 @@ to exclude a couple of buffer names =desktop= must ignore.
    (lambda (frame)
      (set-fontset-font "fontset-default"
                        '(#x10000 . #x1ffff) tom/fallback-font frame)))
-
-  (set-frame-font tom/default-font t t)
 
 #+END_SRC
 
