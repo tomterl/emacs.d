@@ -896,6 +896,14 @@ notifications-close-notification expects an uint32 but gets a int32.
       (tom/tracking-buffer-notifications))
 #+END_SRC
 * Behaviour
+** File encoding
+
+Everything should be in utf-8. 
+
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+
 ** =ibuffer= as buffer screen
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
