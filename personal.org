@@ -270,8 +270,23 @@ to exclude a couple of buffer names =desktop= must ignore.
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  ;;  (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
-  (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" t t)
+  (defvar tom/default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
+    "The font to use under normal circumstances")
+  (defvar tom/fallback-font "Symbola"
+    "Font to use, if the default font misses a glyph.")
+
+  (setq default-frame-alist '((font . tom/default-font)))
+
+  (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
+
+  (add-hook
+   'after-make-frame-functions
+   (lambda (frame)
+     (set-fontset-font "fontset-default"
+                       '(#x10000 . #x1ffff) tom/fallback-font frame)))
+
+  (set-frame-font tom/default-font t t)
+
 #+END_SRC
 
 ** Fontlock et.al.
