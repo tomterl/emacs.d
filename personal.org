@@ -272,7 +272,8 @@ to exclude a couple of buffer names =desktop= must ignore.
 One thing adobe got right...
 
 #+BEGIN_SRC emacs-lisp
-  (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
+  ;;  (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
+  (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" t t)
 #+END_SRC
 
 ** Fontlock et.al.
@@ -323,7 +324,7 @@ My current dark theme is flatland.
 #+BEGIN_SRC emacs-lisp
   (deftheme tom/theme
     "A few adjustments to the used dark themes")
-  
+
   (flatland-with-color-variables
     (custom-theme-set-faces
      'tom/theme
