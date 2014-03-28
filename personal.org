@@ -269,8 +269,6 @@ to exclude a couple of buffer names =desktop= must ignore.
 * Appearance
 ** Font
 
-One thing adobe got right...
-
 #+BEGIN_SRC emacs-lisp
   ;;  (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
   (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" t t)
