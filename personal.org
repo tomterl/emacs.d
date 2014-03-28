@@ -1,22 +1,27 @@
-
 Emacs rocks. This file contains my configurations and adaptations to
 my now graphene based setup.
 
+:PROPERTIES:
+:tangle: personal.el
+:END:
+
 * Packages
 
-Package managment and loading of utility packages.
+Package management and loading of utility packages.
 
-** Managment
+** Management
 
 Cask manages the packages installed.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'cask "~/.cask/cask.el")
+  (cask-initialize)
 #+END_SRC
 
 *** Pallet
 
 Using =pallet= allows to use Cask and =M-x list-packages= together --
-manuall operations performed using =packages.el= are reflected in the
+manual operations performed using =packages.el= are reflected in the
 Cask file.
 
 #+BEGIN_SRC emacs-lisp
@@ -31,7 +36,7 @@ Cask file.
 #+END_SRC
 
 * Helper functions
-** Escape html entities
+** Escape HTML entities
 
 Basics found on ergoemacs.org.
 
@@ -72,14 +77,14 @@ Load ~graphene~
    :END:
  - Meta-Pause will delete the current frame
  - use f2 as tool-bar toggle (analog to f1 for menu-bar-mode)
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-<pause>") 'delete-frame)
   (global-set-key (kbd "<f1>") 'menu-bar-mode)
   (global-set-key (kbd "<f2>") 'tool-bar-mode)
   (global-set-key (kbd "<f5>") 'flyspell-mode)
   (global-set-key (kbd "<f6>") 'flyspell-prog-mode)
   (global-set-key (kbd "<f9>") 'flymake-mode)
-#+end_src
+#+END_SRC
 
 ** Undo as tree
 
@@ -152,7 +157,7 @@ Automatically add =end= when typing =do=.
 #+BEGIN_SRC emacs-lisp
   (defun tom/php-mode-hook ()
     ""
-    (setq tab-width 4
+    (set tab-width 4
           c-basic-offset 4
           indent-tabs-mode t))
   (add-hook 'php-mode-hook 'tom/php-mode-hook)
@@ -266,32 +271,32 @@ to exclude a couple of buffer names =desktop= must ignore.
 
 One thing adobe got right...
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (set-frame-font "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t t)
-#+end_src
+#+END_SRC
 
 ** Fontlock et.al.
    :PROPERTIES:
    :ID:       7edcd500-dcee-4484-9f44-9a65a3f29c71
    :END:
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-font-lock-mode 1)
   (global-hl-line-mode 1)
   (line-number-mode 1)
   (column-number-mode 1)
   (setq mouse-buffer-menu-mode-mult 1)
-#+end_src
+#+END_SRC
 
 ** Scrollbar
    :PROPERTIES:
    :ID:       88e6ec5b-6aa6-4e18-b25e-7b2756d0918f
    :END:
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
-#+end_src
+#+END_SRC
 
 ** Menu and Toolbar
 
@@ -309,9 +314,9 @@ One thing adobe got right...
 
 My current dark theme is flatland.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (load-theme 'flatland t)
-#+end_src
+#+END_SRC
 
 *** Fix a few elements
 
@@ -349,20 +354,20 @@ loaded at startup.
 
 *** Show nice(?) icons
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq tree-widget-image-enable 1)
-#+end_src
+#+END_SRC
 
 ** Tabbar
 
 Do not use images in tabbar-mode, as there is a transparency issue
 slowing down emacs a lot when using images.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (require 'tabbar)
   (setq tabbar-use-images nil)
   (tabbar-mode)
-#+end_src
+#+END_SRC
    
 ** Powerline
 
@@ -448,7 +453,7 @@ This is a birds eye view of the current buffer.
 
 * GNUS News and Mail
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun tom/gnus ()
     "Setup and start GNUS"
     (interactive)
@@ -557,7 +562,7 @@ This is a birds eye view of the current buffer.
       
       ;; (gnus-demon-add-scanmail)
       (gnus)))
-#+end_src
+#+END_SRC
 
 ** Filter atom feeds
 
@@ -587,7 +592,7 @@ This is a birds eye view of the current buffer.
 
 *** Basis / Agenda
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (setq
       org-agenda-files (quote ("~/org-mode/todos.org"  "~/org-mode/joocom.org"))
       org-directory "~/org-mode"
@@ -595,50 +600,50 @@ This is a birds eye view of the current buffer.
       org-src-fontify-natively t
       org-tags-exclude-from-inheritance '("PROJECT")
       org-list-allow-alphabetical nil)
-#+end_src
+#+END_SRC
 
 *** mobileorg for android
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq
    org-mobile-directory "/home/tom/ownCloud/org-mode"
    org-mobile-files (quote (org-agenda-files))
    org-mobile-inbox-for-pull "/home/tom/ownCloud/org-mode/mobileorg.org")
-#+end_src
+#+END_SRC
 
 *** Refile
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq
     org-refile-targets (quote ((nil :maxlevel . 9)
                                (org-agenda-files :maxlevel . 9)))
     )
-#+end_src
+#+END_SRC
 
 *** babel
 
 The languages I like to use.
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
   (org-babel-do-load-languages 'org-babel-load-languages 
                                (quote
                                 ((emacs-lisp . t) (R . t) (sh . t)
                                (ditaa . t) (sass . t)
                                  (lisp . t) (gnuplot . t))))
   
-#+end_src 
+#+END_SRC 
 
 The =ditaa.jar= location;
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq org-ditaa-jar-path  "~/.emacs.d/elpa/contrib/scripts/ditaa.jar")
-#+end_src
+#+END_SRC
 
 I really like org-babel to use zsh
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq org-babel-sh-command "zsh")
-#+end_src
+#+END_SRC
 
 ** Tangle hook
 
@@ -648,7 +653,7 @@ document, but don't have to hide them in code comments.
 
 I always use the form ~(ref:label)~ for code references.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun tr/remove-code-labels ()
     "remove (ref:.*) from all lines"
     (goto-char (point-min))
@@ -662,14 +667,14 @@ I always use the form ~(ref:label)~ for code references.
   (add-hook 'org-babel-tangle-body-hook
             (λ () (tr/remove-code-labels)))
   
-#+end_src 
+#+END_SRC 
 
 ** agenda views
    :PROPERTIES:
    :ID:       ebf5af82-57f0-490c-9496-f118640b25e5
    :END:
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq org-agenda-custom-commands
   '(
 
@@ -698,13 +703,13 @@ I always use the form ~(ref:label)~ for code references.
                         ))))
   )
   )
-#+end_src
+#+END_SRC
 
 ** org2blog
 
 Currently not functioning correctly.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (require 'netrc)
   (setq blog (netrc-machine (netrc-parse "~/.netrc") "joocomblog" t))
   (setq org2blog/wp-blog-alist '(("joocom"
@@ -717,13 +722,13 @@ Currently not functioning correctly.
                                   )
                                  ))
 
-#+end_src 
+#+END_SRC 
 
 ** minted
 
 Settings to set code in latex documents with syntax highlighting.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq org-latex-listings 'minted)
   (setq org-latex-custom-lang-environments
         '(
@@ -740,13 +745,13 @@ Settings to set code in latex documents with syntax highlighting.
           "pdflatex -shell-escape -interaction nonstopmode  -output-directory %o %f"))
   
   
-#+end_src
+#+END_SRC
 
 ** =org-macs= 
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (require 'org-macs)
-#+end_src
+#+END_SRC
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
@@ -886,7 +891,7 @@ notifications-close-notification expects an uint32 but gets a int32.
    :END:
 Use % to jump to corresponding parens
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun goto-match-paren (arg)
     "Go to the matching parenthesis if on parenthesis, otherwise insert
   the character typed."
@@ -895,21 +900,21 @@ Use % to jump to corresponding parens
       ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
       (t                    (self-insert-command (or arg 1))) ))
   (global-set-key "%" `goto-match-paren)
-#+end_src
+#+END_SRC
 
 ** indentation
 
 Indent using spaces, 2 spaces for each indentation step.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 2)
-#+end_src
+#+END_SRC
 
 ** Flyspell: Change dictionary 
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun fd-switch-dictionary()
     (interactive)
     (let* ((dic ispell-current-dictionary)
@@ -919,7 +924,7 @@ Indent using spaces, 2 spaces for each indentation step.
       ))
   
   (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
-#+end_src 
+#+END_SRC 
 
 ** Multiple Cursors
 
@@ -964,10 +969,10 @@ Indent using spaces, 2 spaces for each indentation step.
 
 Send them to firefox, with keysnail much better then anything else.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq
    browse-url-browser-function (quote browse-url-firefox))
-#+end_src
+#+END_SRC
 
 ** Speedbar
 *** Automatic update
@@ -1020,9 +1025,9 @@ Use Sublain as subversion browser.
 #+END_SRC
 
 *** Key bindings
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
-#+end_src
+#+END_SRC
 
 *** Fullscreen
 
