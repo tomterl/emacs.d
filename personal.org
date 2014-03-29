@@ -598,6 +598,23 @@ This is a birds eye view of the current buffer.
 
 (ad-activate 'mm-url-insert)
 #+END_SRC
+
+** Reload gnus 
+
+Force unload gnus (all files loaded known to me as of 2014-03-23).
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/reloadgnus ()
+    "Unload all gnus files known to this function and reload gnus."
+    (interactive)
+    (let ((gnusfiles '(gnus gnus-agent gnus-art gnus-async gnus-bcklg
+                            gnus-cache gnus-cite gnus-ems gnus-group gnus-int gnus-load
+                            gnus-ml gnus-msg gnus-range gnus-score gnus-spec gnus-srvr
+                            gnus-start gnus-sum gnus-undo gnus-util gnus-win)))
+      (cl-loop for lib in gnusfiles do
+               (ignore-errors (call-interactively (unload-feature lib))))
+      (tom/gnus)))
+#+END_SRC
 * org-mode
 
 ** Variables
