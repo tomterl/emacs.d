@@ -610,7 +610,9 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
     (let ((gnusfiles 
            (directory-files (expand-file-name "lisp" tom/--gnus-home) nil ".*\.el$" t)))
       (cl-loop for lib in gnusfiles do
-               (ignore-errors (call-interactively (unload-feature (substring-no-properties lib 0 -3)))))
+               (ignore-errors 
+                 (call-interactively
+                  (unload-feature (substring-no-properties lib 0 -3)))))
       (tom/gnus)))
 #+END_SRC
 * org-mode
