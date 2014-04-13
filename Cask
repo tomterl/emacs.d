@@ -1,7 +1,7 @@
-(source melpa)
-(source SC)
-(source marmalade)
 (source gnu)
+(source marmalade)
+(source SC)
+(source melpa)
 
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
@@ -29,6 +29,7 @@
 (depends-on "elixir-mode")
 (depends-on "elixir-yasnippets")
 (depends-on "epc")
+(depends-on "epresent")
 (depends-on "erc-image")
 (depends-on "erc-tweet")
 (depends-on "espuds")
