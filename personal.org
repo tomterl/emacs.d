@@ -1109,6 +1109,9 @@ Manage ssh tunnel via prodigy.
     :name 'ssh-tunnel
     :command "ssh"
     :cwd (getenv "HOME")
+    :args (prodigy-callback (service)
+            (tom/build-tunnel-args
+             (getf service :tunnel)))
     :ready-message "debug1: Entering interactive session.")
 #+END_SRC
 
