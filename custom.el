@@ -29,9 +29,11 @@
      ("#F771AC" . 85)
      ("#eee8d5" . 100))))
  '(magit-diff-use-overlays nil)
+ '(magit-use-overlays nil)
  '(safe-local-variable-values
    (quote
-    ((eval hs-hide-all)
+    ((org-confirm-babel-evaluate)
+     (eval hs-hide-all)
      (eval when
            (and
             (buffer-file-name)
