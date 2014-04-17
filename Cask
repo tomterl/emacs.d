@@ -93,7 +93,6 @@
 (depends-on "sunrise-commander")
 (depends-on "sunrise-x-loop")
 (depends-on "sunrise-x-mirror")
-(depends-on "tabbar")
 (depends-on "twilight-anti-bright-theme")
 (depends-on "twilight-bright-theme")
 (depends-on "underwater-theme")

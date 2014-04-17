@@ -373,17 +373,6 @@ loaded at startup.
 (setq tree-widget-image-enable 1)
 #+END_SRC
 
-** Tabbar
-
-Do not use images in tabbar-mode, as there is a transparency issue
-slowing down emacs a lot when using images.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'tabbar)
-  (setq tabbar-use-images nil)
-  (tabbar-mode)
-#+END_SRC
-   
 ** Powerline
 
 #+BEGIN_SRC emacs-lisp
