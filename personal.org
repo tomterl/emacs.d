@@ -1032,6 +1032,22 @@ enough context around point visible.
 (require 'smooth-scrolling)
 #+END_SRC
 
+** Insert current date
+
+Use the 'calendar' to get and format the date.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'calendar)
+  (defun tom/insert-current-date (&optional omit-day-of-week-p)
+    "Insert today's date using the current locale.
+    With a prefix argument, the date is inserted without the day of
+    the week."
+    (interactive "P*")
+    (insert (calendar-date-string (calendar-current-date) nil
+                                  omit-day-of-week-p)))
+  (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
+#+END_SRC
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp
@@ -1059,7 +1075,7 @@ Use Sublain as subversion browser.
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
 #+END_SRC
-
+   
 *** Key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
