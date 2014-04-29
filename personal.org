@@ -1039,10 +1039,11 @@ Use the 'calendar' to get and format the date.
 
 #+BEGIN_SRC emacs-lisp
   (require 'calendar)
+
   (defun tom/insert-current-date (&optional omit-day-of-week-p)
     "Insert today's date using the current locale.
-    With a prefix argument, the date is inserted without the day of
-    the week."
+      With a prefix argument, the date is inserted without the day of
+      the week."
     (interactive "P*")
     (insert (calendar-date-string (calendar-current-date) nil
                                   omit-day-of-week-p)))
