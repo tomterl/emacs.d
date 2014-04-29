@@ -373,17 +373,6 @@ loaded at startup.
 (setq tree-widget-image-enable 1)
 #+END_SRC
 
-** Tabbar
-
-Do not use images in tabbar-mode, as there is a transparency issue
-slowing down emacs a lot when using images.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'tabbar)
-  (setq tabbar-use-images nil)
-  (tabbar-mode)
-#+END_SRC
-   
 ** Powerline
 
 #+BEGIN_SRC emacs-lisp
@@ -1044,6 +1033,22 @@ enough context around point visible.
 (require 'smooth-scrolling)
 #+END_SRC
 
+** Insert current date
+
+Use the 'calendar' to get and format the date.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'calendar)
+  (defun tom/insert-current-date (&optional omit-day-of-week-p)
+    "Insert today's date using the current locale.
+    With a prefix argument, the date is inserted without the day of
+    the week."
+    (interactive "P*")
+    (insert (calendar-date-string (calendar-current-date) nil
+                                  omit-day-of-week-p)))
+  (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
+#+END_SRC
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp
@@ -1071,7 +1076,7 @@ Use Sublain as subversion browser.
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
 #+END_SRC
-
+   
 *** Key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<f7>") 'magit-status)
