@@ -1008,7 +1008,7 @@ Indent using spaces, 2 spaces for each indentation step.
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)
                                (js2-mode . nodejs-repl)))
-  (rtog/add-repl 'octave-mode (rtog/switch-to-shell-buffer 'inferior-octave-buffer 'inferior-octave))
+  ;;(rtog/add-repl 'octave-mode (rtog/switch-to-shell-buffer 'inferior-octave-buffer 'inferior-octave))
 #+END_SRC
 ** Opening URLs
 
