@@ -1,6 +1,6 @@
+(source SC)
 (source gnu)
 (source marmalade)
-(source SC)
 (source melpa)
 
 (depends-on "ace-jump-buffer")
@@ -85,6 +85,7 @@
 (depends-on "s")
 (depends-on "simple-httpd")
 (depends-on "slime")
+(depends-on "smart-cursor-color")
 (depends-on "smartparens")
 (depends-on "smarty-mode")
 (depends-on "smex")
