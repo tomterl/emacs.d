@@ -613,7 +613,6 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
       (tom/gnus)))
 #+END_SRC
 * org-mode
-
 ** Variables
    :PROPERTIES:
    :ID:       d2eb3552-1033-4e26-ad19-f4fb5b92e551
@@ -623,12 +622,29 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 
 #+BEGIN_SRC emacs-lisp
      (setq
-      org-agenda-files (quote ("~/org-mode/todos.org"  "~/org-mode/joocom.org"))
-      org-directory "~/org-mode"
+      org-agenda-files (quote ("~/ownCloud/org-mode/todos.org"  "~/ownCloud/org-mode/joocom.org"))
+      org-directory "~/ownCloud/org-mode"
       org-return-follows-link t
       org-src-fontify-natively t
       org-tags-exclude-from-inheritance '("PROJECT")
       org-list-allow-alphabetical nil)
+#+END_SRC
+*** owncloud
+Use ~org-cladav~ to integrate with an owncloud calendar.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar tom/--org-caldav-dir (expand-file-name "org-caldav" tom/--src-base))
+  (add-to-list 'load-path tom/--org-caldav-dir)
+  (require 'org-caldav)
+
+  (defvar tom/--owncloud-base "https://muehlenweg.dyndns-home.com/owncloud/remote.php/")
+  (setq
+   org-caldav-url  (concat tom/--owncloud-base "caldav/calendars/tom")
+   org-caldav-calendar-id "orgmode"
+   org-caldav-inbox "~/ownCloud/org-mode/incoming.org"
+   org-caldav-files (quote ("~/ownCloud/org-mode/todos.org"  "~/ownCloud/org-mode/joocom.org"))
+   org-icalendar-timezone "Europe/Berlin")
+
 #+END_SRC
 
 *** mobileorg for android
