@@ -22,4 +22,9 @@ pushd Sublain
 git checkout -b local
 popd
 
+git clone https://github.com/dengste/org-caldav.git
+pushd org-caldav
+git checkout -b local
+popd
+
 popd
