@@ -5,6 +5,7 @@
 
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
+(depends-on "ace-window")
 (depends-on "ag")
 (depends-on "ansi")
 (depends-on "bash-completion")
