@@ -63,6 +63,7 @@ Load ~graphene~
 #+BEGIN_SRC emacs-lisp
 (require 'graphene)
 #+END_SRC
+
 * Global stuff
 ** Single frame execution
 #+BEGIN_SRC emacs-lisp
@@ -1155,18 +1156,10 @@ Manage ssh tunnel via prodigy.
 
 *** Tunnel services
 
-#+BEGIN_SRC emacs-lisp
-  (prodigy-define-service
-    :name "joocom-u12-c10"
-    :tags '(ssh-tunnel)
-    :tunnel (list 
-             :localport  "11111"
-             :tunnel-ip  "192.168.2.40"
-             :tunnel-port  "22"
-             :user  "tomte"
-             :host  "walker.wpextern.de"
-             :port  "20248"))
-#+END_SRC
+Tunnel definitions are held outside this config to protect the innocent...
+
+#+INCLUDE: "~/ownCloud/dotfiles/prodigy.org"
+
 * Paste services
 ** ix.io
 #+BEGIN_SRC emacs-lisp
