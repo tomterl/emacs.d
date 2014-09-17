@@ -351,7 +351,7 @@ to exclude a couple of buffer names =desktop= must ignore.
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
+  (defvar tom/default-font "-unknown-Ubuntu Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
     "The font to use under normal circumstances")
   (defvar tom/fallback-font "-unknown-Symbola-normal-normal-semicondensed-*-11-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
