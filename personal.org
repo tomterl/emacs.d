@@ -927,11 +927,10 @@ The manual must be out of date, this doesn't load.
           (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
       (setq circe-network-options
             (list
-             (list "Freenode"
-                   :nick (netrc-get --freenode "login")
-                   :host "chat.freenode.net"
-                   :channels '("#emacs" "#emacs-circe" "#elixir-lang" "#stumpwm" "#hhvm")
-                   :nickserv-password (netrc-get --freenode "password")
+             (list "ZNC"
+                   :user (netrc-get --freenode "login")
+                   :host "muehlenweg.dyndns-home.com"
+                   :pass (netrc-get --freenode "password")
                    )
              (list "Bitlbee"
                    :nick (netrc-get --bitlbee "login")
@@ -963,7 +962,7 @@ Straight out of the =circe= wiki
     "Connect to all configured IRC servers"
     (interactive)
     (tom/set-circe-options)
-    (circe-maybe-connect "Freenode")
+    (circe-maybe-connect "ZNC")
     (circe-maybe-connect "Bitlbee"))
 #+END_SRC
 
