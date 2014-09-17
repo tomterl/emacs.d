@@ -44,6 +44,7 @@
 (depends-on "fringe-helper")
 (depends-on "fullframe")
 (depends-on "geben")
+(depends-on "ggtags")
 (depends-on "git-commit-mode")
 (depends-on "git-rebase-mode")
 (depends-on "go-direx")
