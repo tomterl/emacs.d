@@ -1,8 +1,11 @@
-Emacs rocks. This file contains my configurations and adaptations to
+
+* Emacs rocks
+
+This file contains my configurations and adaptations to
 my now graphene based setup.
 
 :PROPERTIES:
-:tangle: personal.el
+:tangle:	personal.el
 :END:
 
 * Packages
