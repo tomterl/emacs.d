@@ -626,7 +626,7 @@ auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
   ;(global-auto-complete-mode -1)
   (require 'company)
-  (global-company-mode)
+  (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
 ** Key bindings
 
