@@ -50,7 +50,6 @@
 (depends-on "go-eldoc")
 (depends-on "go-errcheck")
 (depends-on "go-mode")
-(depends-on "graphene")
 (depends-on "grapnel")
 (depends-on "haskell-mode")
 (depends-on "htmlize")

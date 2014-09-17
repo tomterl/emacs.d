@@ -59,14 +59,330 @@ Basics found on ergoemacs.org.
 #+END_SRC
 * Graphene
 
-Graphene as basic setup -- only tuned a bit in the sections to come.
-
-** Load
-Load ~graphene~
+Stuff looted from graphene.
+** helper functions
 #+BEGIN_SRC emacs-lisp
-(require 'graphene)
-#+END_SRC
+(defun kill-default-buffer ()
+  "Kill the currently active buffer -- set to C-x k so that users are not asked which buffer they want to kill."
+  (interactive)
+  (let (kill-buffer-query-functions) (kill-buffer)))
 
+(defun kill-buffer-if-file (buf)
+  "Kill a buffer only if it is file-based."
+  (when (buffer-file-name buf)
+    (when (buffer-modified-p buf)
+        (when (y-or-n-p (format "Buffer %s is modified - save it?" (buffer-name buf)))
+            (save-some-buffers nil buf)))
+    (set-buffer-modified-p nil)
+    (kill-buffer buf)))
+
+(defun kill-all-buffers ()
+    "Kill all file-based buffers."
+    (interactive)
+    (mapc (lambda (buf) (kill-buffer-if-file buf))
+     (buffer-list)))
+
+(defun kill-buffer-and-window ()
+  "Close the current window and kill the buffer it's visiting."
+  (interactive)
+  (progn
+    (kill-buffer)
+    (delete-window)))
+
+(defun create-new-buffer ()
+  "Create a new buffer named *new*[num]."
+  (interactive)
+  (switch-to-buffer (generate-new-buffer-name "*new*")))
+
+(defun insert-semicolon-at-end-of-line ()
+  "Add a closing semicolon from anywhere in the line."
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (insert ";")))
+
+(defun comment-current-line-dwim ()
+  "Comment or uncomment the current line."
+  (interactive)
+  (save-excursion
+    (push-mark (beginning-of-line) t t)
+    (end-of-line)
+    (comment-dwim nil)))
+
+(defun newline-anywhere ()
+  "Add a newline from anywhere in the line."
+  (interactive)
+  (end-of-line)
+  (newline-and-indent))
+
+(defun increase-window-height (&optional arg)
+  "Make the window taller by one line. Useful when bound to a repeatable key combination."
+  (interactive "p")
+  (enlarge-window arg))
+
+(defun decrease-window-height (&optional arg)
+  "Make the window shorter by one line. Useful when bound to a repeatable key combination."
+  (interactive "p")
+  (enlarge-window (- 0 arg)))
+
+(defun decrease-window-width (&optional arg)
+  "Make the window narrower by one column. Useful when bound to a repeatable key combination."
+  (interactive "p")
+  (enlarge-window (- 0 arg) t))
+
+(defun increase-window-width (&optional arg)
+  "Make the window wider by one column. Useful when bound to a repeatable key combination."
+  (interactive "p")
+  (enlarge-window arg t))
+
+;; Create a new instance of emacs
+(when window-system
+  (defun new-emacs-instance ()
+    (interactive)
+    (let ((path-to-emacs
+           (locate-file invocation-name
+                        (list invocation-directory) exec-suffixes)))
+      (call-process path-to-emacs nil 0 nil))))
+
+#+END_SRC
+** editing
+
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode t)
+  (global-visual-line-mode t)
+  (setq linum-format " %4d ")
+  (setq-default tab-width 2)
+  (setq-default indent-tabs-mode nil)
+  (prefer-coding-system 'utf-8)
+  (set-language-environment 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+
+  (linum-mode t)
+
+  (require 'smartparens)
+  (smartparens-mode t)
+
+  (show-paren-mode nil)
+  (setq blink-matching-paren nil)
+  (show-smartparens-mode t)
+  (setq sp-show-pair-delay 0)
+
+  (require 'flycheck)
+  (flycheck-mode)
+
+  (push '("\\.json\\'" . json-mode) auto-mode-alist)
+
+  ;; don't compile sass/scss on saving
+  (setq scss-compile-at-save nil)
+
+  ;; 2-space indent for CSS
+  (setq css-indent-offset 2)
+
+  ;; Default Ruby filetypes
+  (dolist (regex
+           '("\\.watchr$" "\\.arb$" "\\.rake$" "\\.gemspec$" "\\.ru$" "Rakefile$" "Gemfile$" "Capfile$" "Guardfile$" "Rakefile$" "Cheffile$" "Vagrantfile$"))
+    (add-to-list 'auto-mode-alist `(,regex . ruby-mode)))
+
+  ;; Remap newline to newline-and-indent in ruby-mode
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              (define-key (current-local-map) [remap newline] 'reindent-then-newline-and-indent)))
+
+#+END_SRC
+** env
+#+BEGIN_SRC emacs-lisp
+  (require 'smex)
+  (smex-initialize)
+
+  (setq inhibit-startup-message t
+        color-theme-is-global t
+        uniquify-buffer-name-style 'forward
+        backup-directory-alist `((".*" . ,temporary-file-directory))
+        auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+        ido-enable-flex-matching t
+        ido-auto-merge-work-directories-length nil
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-everywhere t)
+
+  (fset 'yes-or-no-p 'y-or-n-p)
+
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'forward)
+
+  (global-auto-revert-mode t)
+
+  (ido-mode 1)
+
+  (put 'ido-complete 'disabled nil)
+  (put 'ido-exit-minibuffer 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
+  (put 'autopair-newline 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+#+END_SRC
+** speedbar
+#+BEGIN_SRC emacs-lisp
+  (autoload 'sr-speedbar-open "sr-speedbar" "Open the in-frame speedbar" t)
+
+  (eval-after-load 'sr-speedbar
+    '(progn
+       (setq speedbar-hide-button-brackets-flag t
+             speedbar-show-unknown-files t
+             speedbar-smart-directory-expand-flag t
+             speedbar-directory-button-trim-method 'trim
+             speedbar-use-images nil
+             speedbar-indentation-width 2
+             speedbar-use-imenu-flag t
+             speedbar-file-unshown-regexp "flycheck-.*"
+             sr-speedbar-width 40
+             sr-speedbar-width-x 40
+             sr-speedbar-auto-refresh nil
+             sr-speedbar-skip-other-window-p t
+             sr-speedbar-right-side nil)
+
+       ;; Refresh the speedbar when relevant hooks are run.
+       (defvar tom/speedbar-refresh-hooks)
+       (defvar tom/speedbar-refresh-hooks-added nil
+         "Whether hooks have been added to refresh speedbar.")
+
+       (add-hook 'speedbar-mode-hook
+                 '(lambda ()
+                    (hl-line-mode 1)
+                    (visual-line-mode -1)
+                    (setq automatic-hscrolling nil)
+                    (let ((speedbar-display-table (make-display-table)))
+                      (set-display-table-slot speedbar-display-table 0 8230)
+                      (setq buffer-display-table speedbar-display-table))
+                    (when (not tom/speedbar-refresh-hooks-added)
+                      (lambda ()
+                        (mapc (lambda (hook)
+                                (add-hook hook 'speedbar-refresh))
+                              tom/speedbar-refresh-hooks)
+                        (setq tom/speedbar-refresh-hooks-added t)))))
+
+       ;; More familiar keymap settings.
+       (add-hook 'speedbar-reconfigure-keymaps-hook
+                 '(lambda ()
+                    (define-key speedbar-mode-map [S-up] 'speedbar-up-directory)
+                    (define-key speedbar-mode-map [right] 'speedbar-flush-expand-line)
+                    (define-key speedbar-mode-map [left] 'speedbar-contract-line)))
+
+       ;; Pin and unpin the speedbar
+       (defvar tom/speedbar-pinned-directory)
+
+       (defadvice speedbar-update-directory-contents
+         (around tom/speedbar-pin-directory activate disable)
+         "Pin the speedbar to the directory set in tom/speedbar-pinned-directory."
+         (let ((default-directory tom/speedbar-pinned-directory))
+           ad-do-it))
+
+       (defadvice speedbar-dir-follow
+         (around tom/speedbar-prevent-follow activate disable)
+         "Prevent speedbar changing directory on button clicks."
+         (speedbar-toggle-line-expansion))
+
+       (defadvice speedbar-directory-buttons-follow
+         (around tom/speedbar-prevent-root-follow activate disable)
+         "Prevent speedbar changing root directory on button clicks.")
+
+       (defvar tom/speedbar-pin-advice
+         '((speedbar-update-directory-contents around tom/speedbar-pin-directory)
+           (speedbar-dir-follow around tom/speedbar-prevent-follow)
+           (speedbar-directory-buttons-follow around tom/speedbar-prevent-root-follow))
+         "Advice to be enabled and disabled on tom/[un]-pin-speedbar.")
+
+       (defun tom/speedbar-pin-advice-activate ()
+         "Activate the advice applied to speedbar functions in order to pin it to a directory."
+         (mapc 'ad-activate (mapcar 'car tom/speedbar-pin-advice)))
+
+       (defun tom/pin-speedbar (directory)
+         "Prevent the speedbar from changing the displayed root directory."
+         (setq tom/speedbar-pinned-directory directory)
+         (mapc (lambda (ls) (apply 'ad-enable-advice ls)) tom/speedbar-pin-advice)
+         (tom/speedbar-pin-advice-activate))
+
+       (defun tom/unpin-speedbar ()
+         "Allow the speedbar to change the displayed root directory."
+         (mapc (lambda (ls) (apply 'ad-disable-advice ls)) tom/speedbar-pin-advice)
+         (tom/speedbar-pin-advice-activate))
+
+       ;; Always use the last selected window for loading files from speedbar.
+       (defvar last-selected-window
+         (if (not (eq (selected-window) sr-speedbar-window))
+             (selected-window)
+           (other-window 1)))
+
+       (defadvice select-window (after remember-selected-window activate)
+         "Remember the last selected window."
+         (unless (or (eq (selected-window) sr-speedbar-window)
+                     (not (window-live-p (selected-window))))
+           (setq last-selected-window (selected-window))))
+
+       (defun sr-speedbar-before-visiting-file-hook ()
+         "Function that hooks `speedbar-before-visiting-file-hook'."
+         (select-window last-selected-window))
+
+       (defun sr-speedbar-before-visiting-tag-hook ()
+         "Function that hooks `speedbar-before-visiting-tag-hook'."
+         (select-window last-selected-window))
+
+       (defun sr-speedbar-visiting-file-hook ()
+         "Function that hooks `speedbar-visiting-file-hook'."
+         (select-window last-selected-window))
+
+       (defun sr-speedbar-visiting-tag-hook ()
+         "Function that hooks `speedbar-visiting-tag-hook'."
+         (select-window last-selected-window))))
+
+#+END_SRC
+** keys
+#+BEGIN_SRC emacs-lisp
+
+(global-set-key (kbd "C-x k")
+                'kill-default-buffer)
+(global-set-key (kbd "C-x C-k")
+                'kill-buffer-and-window)
+(global-set-key (kbd "C-c n")
+                'create-new-buffer)
+(global-set-key (kbd "C-c N")
+                'new-emacs-instance)
+(global-set-key (kbd "C-;")
+                'insert-semicolon-at-end-of-line)
+(global-set-key (kbd "M-RET")
+                'newline-anywhere)
+(global-set-key (kbd "C-M-;")
+                'comment-current-line-dwim)
+(global-set-key (kbd "C->")
+                'increase-window-height)
+(global-set-key (kbd "C-<")
+                'decrease-window-height)
+(global-set-key (kbd "C-,")
+                'decrease-window-width)
+(global-set-key (kbd "C-.")
+                'increase-window-width)
+(global-set-key (kbd "M-x")
+                'smex)
+(global-set-key (kbd "M-X")
+                'smex-major-mode-commands)
+(global-set-key (kbd "C-c s")
+                'sr-speedbar-select-window)
+
+#+END_SRC
+** look
+#+BEGIN_SRC emacs-lisp
+;; Work around Emacs frame sizing bug when line-spacing
+;; is non-zero, which impacts e.g. grizzl.
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (set (make-local-variable 'line-spacing) 0)
+            (setq resize-mini-windows (featurep 'ido-vertical-mode))))
+
+(setq redisplay-dont-pause t)
+#+END_SRC
 * Global stuff
 ** Single frame execution
 #+BEGIN_SRC emacs-lisp
