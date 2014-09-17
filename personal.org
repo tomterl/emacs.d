@@ -1237,7 +1237,9 @@ Manage ssh tunnel via prodigy.
 
 Tunnel definitions are held outside this config to protect the innocent...
 
-#+INCLUDE: "~/ownCloud/dotfiles/prodigy.org"
+#+BEGIN_SRC emacs-lisp
+(load-file "~/ownCloud/dotfiles/prodigy.el")
+#+END_SRC
 
 * Paste services
 ** ix.io
