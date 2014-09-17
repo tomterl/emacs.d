@@ -5,18 +5,13 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#fdf6e3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
+ '(column-number-mode t)
  '(compilation-message-face (quote default))
- '(custom-enabled-themes (quote (graphene)))
  '(custom-safe-themes
    (quote
     ("f1ea873350bbb910a551854d700dfa7a16f0b6e7b9e88e12e012d9f0f881d083" "f331e68646ee2f8c66d7b6cd21e17d134bafa6b63c5b4e14bbac978523cdfef1" "86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "5a1a016301ecf6874804aef2df36ca8b957443b868049d35043a02a0c1368517" "9ea054db5cdbd5baa4cda9d373a547435ba88d4e345f4b06f732edbc4f017dc3" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#eee8d5")
- '(graphene-autocomplete-auto nil)
- '(graphene-default-font
-   "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1")
- '(graphene-fixed-pitch-font
-   "-adobe-Source Code Pro-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1")
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-tail-colors
    (quote
@@ -55,6 +50,7 @@
                (require
                 (quote package-build))))
            (package-build-minor-mode)))))
+ '(show-paren-mode t)
  '(smartparens-global-mode t)
  '(syslog-debug-face
    (quote
@@ -71,6 +67,7 @@
  '(syslog-warn-face
    (quote
     ((t :background unspecified :foreground "#cb4b16" :weight bold))))
+ '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -101,4 +98,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 83 :width normal)))))
+ '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 108 :width normal)))))
