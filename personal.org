@@ -1569,3 +1569,12 @@ Tunnel definitions are held outside this config to protect the innocent...
   (let ((github (netrc-machine (netrc-parse "~/.netrc") "yagist")))
     (setq yagist-github-token (netrc-get github "password")))
 #+END_SRC
+* Server
+
+Always have an emacs server running.
+
+#+BEGIN_SRC emacs-lisp
+(require 'server)
+(unless (server-running-p)
+  (start-server))
+#+END_SRC

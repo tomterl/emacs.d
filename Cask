@@ -3,6 +3,7 @@
 (source marmalade)
 (source melpa)
 
+(depends-on "2048-game")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
 (depends-on "ace-window")
@@ -39,6 +40,7 @@
 (depends-on "ess")
 (depends-on "expand-region")
 (depends-on "f")
+(depends-on "fill-column-indicator")
 (depends-on "flatland-theme")
 (depends-on "flycheck")
 (depends-on "flymake-cursor")
