@@ -656,6 +656,19 @@ to exclude a couple of buffer names =desktop= must ignore.
 
 ** projectile
 
+Use projectile automatically.
+#+BEGIN_SRC emacs-lisp
+  (projectile-global-mode)
+#+END_SRC 
+
+*** Keys
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-p") 'projectile-commander)
+
+#+END_SRC
+*** deprecated
+The following is old graphene/project-persist related stuff; should go.
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'project-persist-after-load-hook
             (λ () (projectile-mode 1)))
@@ -1368,6 +1381,11 @@ Indent using spaces, 2 spaces for each indentation step.
 (setq-default c-basic-offset 2)
 #+END_SRC
 
+Indent autimatically as aggressive as possible:
+
+#+BEGIN_SRC emacs-lisp
+  (aggressive-indent-global-mode)
+#+END_SRC
 ** Flyspell: Change dictionary 
 
 #+BEGIN_SRC emacs-lisp
