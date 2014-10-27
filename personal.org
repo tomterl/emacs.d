@@ -708,7 +708,6 @@ The following is old graphene/project-persist related stuff; should go.
 #+BEGIN_SRC emacs-lisp
   (global-font-lock-mode 1)
   (global-hl-line-mode -1)
-  (smart-cursor-color-mode 1)
   (line-number-mode 1)
   (column-number-mode 1)
   (setq mouse-buffer-menu-mode-mult 1)
