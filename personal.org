@@ -57,6 +57,7 @@ Basics found on ergoemacs.org.
         (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
         (buffer-string))))
 #+END_SRC
+
 * Graphene
 
 Stuff looted from graphene.
@@ -740,28 +741,28 @@ The following is old graphene/project-persist related stuff; should go.
 My current dark theme is flatland.
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'flatland t)
+  (load-theme 'alect-black t)
 #+END_SRC
 
 *** Fix a few elements
 
 #+BEGIN_SRC emacs-lisp
-  (deftheme tom/theme
-    "A few adjustments to the used dark themes")
+  ;; (deftheme tom/theme
+  ;;   "A few adjustments to the used dark themes")
 
-  (flatland-with-color-variables
-    (custom-theme-set-faces
-     'tom/theme
-     `(sp-show-pair-match-face
-       ((t (:foreground ,flatland-orange-2
-                        :background ,flatland-bg
-                        :weight bold))))
-     `(whitespace-newline
-       ((t (:foreground ,flatland-blue-3))))
-     `(whitespace-tab
-       ((t (:foreground ,flatland-blue-3
-                        :background ,flatland-bg-1))))))
-  (enable-theme 'tom/theme)
+  ;; (flatland-with-color-variables
+  ;;   (custom-theme-set-faces
+  ;;    'tom/theme
+  ;;    `(sp-show-pair-match-face
+  ;;      ((t (:foreground ,flatland-orange-2
+  ;;                       :background ,flatland-bg
+  ;;                       :weight bold))))
+  ;;    `(whitespace-newline
+  ;;      ((t (:foreground ,flatland-blue-3))))
+  ;;    `(whitespace-tab
+  ;;      ((t (:foreground ,flatland-blue-3
+  ;;                       :background ,flatland-bg-1))))))
+  ;; (enable-theme 'tom/theme)
 #+END_SRC
 ** Fix and load graphene theme
 
@@ -771,8 +772,8 @@ there seems to be an error in the sequence theme related packages are
 loaded at startup.
 
 #+BEGIN_SRC emacs-lisp
-(setq graphene-font-height 83)
-(load-theme 'graphene)
+  ;; (setq graphene-font-height 83)          
+  ;; (load-theme 'graphene)
 #+END_SRC
 
 ** TreeView
@@ -815,7 +816,7 @@ characters and newlines is a possible lifesaver.
           (tab-mark 9 [8677 9] [92 9])
           ))
   
-  (setq whitespace-style '(face spaces tabs newline space-mark tab-mark newline-mark))
+          (setq whitespace-style '(face tabs newline tab-mark newline-mark))
   
   (global-whitespace-mode)
 #+END_SRC
@@ -1383,7 +1384,7 @@ Indent using spaces, 2 spaces for each indentation step.
 Indent autimatically as aggressive as possible:
 
 #+BEGIN_SRC emacs-lisp
-  (aggressive-indent-global-mode)
+  (add-hook 'prog-mode-hook 'aggressive-indent-mode)
 #+END_SRC
 ** Flyspell: Change dictionary 
 
@@ -1439,6 +1440,7 @@ Indent autimatically as aggressive as possible:
                                (js2-mode . nodejs-repl)))
   ;;(rtog/add-repl 'octave-mode (rtog/switch-to-shell-buffer 'inferior-octave-buffer 'inferior-octave))
 #+END_SRC
+
 ** Opening URLs
 
 Send them to firefox, with keysnail much better then anything else.
@@ -1457,10 +1459,13 @@ I like speedbar to update automaticly, to always reflect the current state of af
   (require 'sr-speedbar)
   (sr-speedbar-refresh-turn-on)
 #+END_SRC
+
 *** Toggle key
+
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "H-N") 'sr-speedbar-toggle)
 #+END_SRC
+
 ** Scrolling
 
 Scroll as much as other programs do, one line at a time and with
@@ -1493,6 +1498,7 @@ Use the 'calendar' to get and format the date.
   (require 'slime)
   (slime-setup '(slime-repl))
 #+END_SRC
+
 * Imenu 
 
 Add speedbar support for elixir files.
@@ -1502,6 +1508,7 @@ Add speedbar support for elixir files.
   (speedbar-add-supported-extension ".ex")
   (speedbar-add-supported-extension ".exs")
 #+END_SRC
+
 * Version control
 ** Subversion
 Use Sublain as subversion browser.
@@ -1576,16 +1583,20 @@ Tunnel definitions are held outside this config to protect the innocent...
 
 * Paste services
 ** ix.io
+
 #+BEGIN_SRC emacs-lisp
   (let ((ix-io (netrc-machine (netrc-parse "~/.netrc") "ix-io")))
     (setq ix-user (netrc-get ix-io "login"))
     (setq ix-token (netrc-get ix-io "password")))
 #+END_SRC
+
 ** yagist
+
 #+BEGIN_SRC emacs-lisp
   (let ((github (netrc-machine (netrc-parse "~/.netrc") "yagist")))
     (setq yagist-github-token (netrc-get github "password")))
 #+END_SRC
+
 * Server
 
 Always have an emacs server running.
@@ -1595,3 +1606,4 @@ Always have an emacs server running.
 (unless (server-running-p)
   (server-start))
 #+END_SRC
+
