@@ -94,7 +94,6 @@
 (depends-on "php-eldoc")
 (depends-on "php-mode")
 (depends-on "popwin")
-(depends-on "powerline")
 (depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "repl-toggle")
