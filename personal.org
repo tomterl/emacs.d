@@ -738,10 +738,10 @@ The following is old graphene/project-persist related stuff; should go.
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 
-My current dark theme is flatland.
+My current dark theme.
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'alect-black t)
+  (load-theme 'soothe t)
 #+END_SRC
 
 *** Fix a few elements
