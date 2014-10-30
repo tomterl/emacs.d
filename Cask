@@ -109,6 +109,7 @@
 (depends-on "s")
 (depends-on "simple-httpd")
 (depends-on "slime")
+(depends-on "smart-mode-line")
 (depends-on "smartparens")
 (depends-on "smarty-mode")
 (depends-on "smex")

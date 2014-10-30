@@ -784,10 +784,12 @@ loaded at startup.
 (setq tree-widget-image-enable 1)
 #+END_SRC
 
-** Powerline
+** Modeline
 
 #+BEGIN_SRC emacs-lisp
-(powerline-default-theme)
+  (sml/setup)
+  (sml/apply-theme 'respectful)
+  ;;(powerline-default-theme)
 #+END_SRC
 
 ** Colors on terminals
