@@ -871,121 +871,164 @@ This is a birds eye view of the current buffer.
 * GNUS News and Mail
 
 #+BEGIN_SRC emacs-lisp
-    (defun tom/gnus ()
-      "Setup and start GNUS"
+  (defun tom/gnus ()
+    "Setup and start GNUS"
+    (interactive)
+    (setq tom/--gnus-home (expand-file-name "gnus" tom/--src-base))
+    (let ((lisp-dir (expand-file-name "lisp" tom/--gnus-home)))
+      (when (file-directory-p lisp-dir)
+        (add-to-list 'load-path lisp-dir)
+        (require 'gnus-load)
+        (load-file (expand-file-name "gnus-util.elc" lisp-dir)))
+      
+      ;;(require 'gnus)
+      (require 'smtpmail)
+      (require 'nnimap)
+      (setq user-mail-address "tom@goochesa.de")
+      (setq user-full-name "Tom Regner")
+      (setq smtpmail-smtp-server "sec.goochesa.de"
+            send-mail-function 'smtpmail-send-it)
+      (setq message-send-mail-function 'smtpmail-send-it)
+      (setq smtpmail-smtp-service 25)
+      (setq
+       starttls-use-gnutls t
+       starttls-gnutls-program "gnutls-cli"
+       starttls-extra-arguments "")
+      (setq smtpmail-debug-info t)
+      (setq smtpmail-debug-verb t)
+      
+      
+      ;; display nice arrows in thread-view (summary buffer)
+      ;; the font must have the glyphs!
+      (setq-default
+       gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%-80,80s%)\n"
+       gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
+       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+       gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+       gnus-sum-thread-tree-false-root ""
+       gnus-sum-thread-tree-indent " "
+       gnus-sum-thread-tree-leaf-with-other "├► "
+       gnus-sum-thread-tree-root ""
+       gnus-sum-thread-tree-single-leaf "╰► "
+       gnus-sum-thread-tree-vertical "│"
+       )
+      
+      (setq gnus-select-method
+            '(nnimap "tomsdiner"
+                     (nnimap-address "mail.tomsdiner.org")
+                     (nnimap-server-port 993)
+                     (nnimap-authinfo-file "/home/tom/.authinfo")
+                     (nnimap-stream ssl)
+                     )
+            )
+      (setq gnus-secondary-select-methods
+            '(
+              (nnimap "Goochesa"
+                      (nnimap-address "sec.goochesa.de")
+                      (nnimap-authinfo-file "/home/tom/.authinfo")
+                      (nnimap-stream tls)
+                                          ;                    (nnimap-server-port 993)
+                                          ;                    (nnimap-authenticator "plain")
+                      )
+              (nnimap "Joocom"
+                      (nnimap-address "mail.xidras.com")
+                      (nnimap-authinfo-file "/home/tom/.authinfo")
+                      (nnimap-server-port 993)
+                      (nnimap-stream tls)
+                                          ;        (nnimap-authenticator "plain")
+                      )
+              (nnimap "Foren"
+                      (nnimap-address "mail.magora.com")
+                      (nnimap-authinfo-file "/home/tom/.authinfo")
+                      (nnimap-server-port 993)
+                      (nnimap-stream tls)
+                                          ;        (nnimap-authenticator "plain")
+                      )
+              (nnimap "Wpextern"
+                      (nnimap-address "mail.wpextern.de")
+                      (nnimap-authinfo-file "/home/tom/.authinfo")
+                      (nnimap-server-port 143)
+                      (nnimap-stream network)
+                      (nnimap-authenticator login)
+                      )
+              )
+            )
+      ;; (setq gnus-secondary-select-methods
+      ;;       '(
+      ;;         ;; (nnimap "Joocom"
+      ;;         ;;          (nnimap-address "127.0.0.1")
+      ;;         ;;          (nnimap-server-port 20251)
+      ;;         ;;          (nnimap-authinfo-file "/home/tom/.authinfo")
+      ;;         ;;          (nnimap-stream ssl)
+      ;;         ;;          (nnimap-authenticator "login")
+      ;;         ;;          )
+      ;;         (nntp "news.t-online.de")
+      ;;         )
+      ;;       )
+      
+      
+      ;; lez gnus-demon check for new news and mail every 5mins, if emacs
+      ;; is idle
+      (defun gnus-demon-scan-mail-or-news-and-update ()
+        "Scan for new mail/news and update the *Group* buffer"
+        (when (gnus-alive-p)
+          (save-window-excursion
+            (save-excursion
+              (set-buffer gnus-group-buffer)
+              (gnus-group-get-new-news)))))
+      
+      (defun gnus-demon-scan-and-update ()
+        (gnus-demon-scan-mail-or-news-and-update))
+      
+      ;; (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
+      ;; (setq gnus-use-demon t)
+      ;; (gnus-demon-init)
+      
+      ;; (gnus-demon-add-scanmail)
+      (gnus))
+
+    (require 'ldap)
+    (require 'eudc)
+
+    (setq eudc-default-return-attributes nil
+          eudc-strict-return-matches nil)
+
+    (setq ldap-ldapsearch-args (quote ("-tt" "-LL" "-x" "-ZZ")))
+    (setq eudc-inline-query-format '((name)
+                                     (firstname)
+                                     (firstname name)
+                                     (email)
+                                     ))
+
+    (let ((ldapv (netrc-machine (netrc-parse "~/.netrc") "ldapv")))
+      (setq ldap-host-parameters-alist
+            `(("ldapv.magora.com" base "ou=Users,dc=magora,dc=com"
+               binddn ,(netrc-get ldapv "login")
+               passwd ,(netrc-get ldapv "password")
+               ))))
+    (setq ldap-default-host "ldapv.magora.com")
+    (eudc-set-server "ldapv.magora.com" 'ldap t)
+    (setq eudc-server-hotlist '(("ldapv.magora.com" . ldap)))
+    (setq eudc-inline-expansion-servers 'hotlist)
+
+    (defun enz-eudc-expand-inline()
       (interactive)
-      (setq tom/--gnus-home (expand-file-name "gnus" tom/--src-base))
-      (let ((lisp-dir (expand-file-name "lisp" tom/--gnus-home)))
-        (when (file-directory-p lisp-dir)
-          (add-to-list 'load-path lisp-dir)
-          (require 'gnus-load)
-          (load-file (expand-file-name "gnus-util.elc" lisp-dir)))
-        
-        ;;(require 'gnus)
-        (require 'smtpmail)
-        (require 'nnimap)
-        (setq user-mail-address "tom@goochesa.de")
-        (setq user-full-name "Tom Regner")
-        (setq smtpmail-smtp-server "sec.goochesa.de"
-              send-mail-function 'smtpmail-send-it)
-        (setq message-send-mail-function 'smtpmail-send-it)
-        (setq smtpmail-smtp-service 25)
-        (setq
-         starttls-use-gnutls t
-         starttls-gnutls-program "gnutls-cli"
-         starttls-extra-arguments "")
-        (setq smtpmail-debug-info t)
-        (setq smtpmail-debug-verb t)
-        
-        
-        ;; display nice arrows in thread-view (summary buffer)
-        ;; the font must have the glyphs!
-        (setq-default
-         gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%-80,80s%)\n"
-         gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
-         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-         gnus-thread-sort-functions '(gnus-thread-sort-by-date)
-         gnus-sum-thread-tree-false-root ""
-         gnus-sum-thread-tree-indent " "
-         gnus-sum-thread-tree-leaf-with-other "├► "
-         gnus-sum-thread-tree-root ""
-         gnus-sum-thread-tree-single-leaf "╰► "
-         gnus-sum-thread-tree-vertical "│"
-         )
-        
-        (setq gnus-select-method
-              '(nnimap "tomsdiner"
-                       (nnimap-address "mail.tomsdiner.org")
-                       (nnimap-server-port 993)
-                       (nnimap-authinfo-file "/home/tom/.authinfo")
-                       (nnimap-stream ssl)
-                       )
-              )
-        (setq gnus-secondary-select-methods
-              '(
-                (nnimap "Goochesa"
-                        (nnimap-address "sec.goochesa.de")
-                        (nnimap-authinfo-file "/home/tom/.authinfo")
-                        (nnimap-stream tls)
-                                            ;                    (nnimap-server-port 993)
-                                            ;                    (nnimap-authenticator "plain")
-                        )
-                (nnimap "Joocom"
-                        (nnimap-address "mail.xidras.com")
-                        (nnimap-authinfo-file "/home/tom/.authinfo")
-                        (nnimap-server-port 993)
-                        (nnimap-stream tls)
-                                            ;        (nnimap-authenticator "plain")
-                        )
-                (nnimap "Foren"
-                        (nnimap-address "mail.magora.com")
-                        (nnimap-authinfo-file "/home/tom/.authinfo")
-                        (nnimap-server-port 993)
-                        (nnimap-stream tls)
-                                            ;        (nnimap-authenticator "plain")
-                        )
-                (nnimap "Wpextern"
-                        (nnimap-address "mail.wpextern.de")
-                        (nnimap-authinfo-file "/home/tom/.authinfo")
-                        (nnimap-server-port 143)
-                        (nnimap-stream network)
-                        (nnimap-authenticator login)
-                        )
-                )
-              )
-        ;; (setq gnus-secondary-select-methods
-        ;;       '(
-        ;;         ;; (nnimap "Joocom"
-        ;;         ;;          (nnimap-address "127.0.0.1")
-        ;;         ;;          (nnimap-server-port 20251)
-        ;;         ;;          (nnimap-authinfo-file "/home/tom/.authinfo")
-        ;;         ;;          (nnimap-stream ssl)
-        ;;         ;;          (nnimap-authenticator "login")
-        ;;         ;;          )
-        ;;         (nntp "news.t-online.de")
-        ;;         )
-        ;;       )
-        
-        
-        ;; lez gnus-demon check for new news and mail every 5mins, if emacs
-        ;; is idle
-        (defun gnus-demon-scan-mail-or-news-and-update ()
-          "Scan for new mail/news and update the *Group* buffer"
-          (when (gnus-alive-p)
-            (save-window-excursion
-              (save-excursion
-                (set-buffer gnus-group-buffer)
-                (gnus-group-get-new-news)))))
-        
-        (defun gnus-demon-scan-and-update ()
-          (gnus-demon-scan-mail-or-news-and-update))
-        
-        ;; (gnus-demon-add-handler 'gnus-demon-scan-and-update nil 5)
-        ;; (setq gnus-use-demon t)
-        ;; (gnus-demon-init)
-        
-        ;; (gnus-demon-add-scanmail)
-        (gnus)))
+      (move-end-of-line 1)
+      (insert "*")
+      (unless (condition-case nil
+                  (eudc-expand-inline)
+                (error nil))
+        (backward-delete-char-untabify 1))
+      )
+
+    ;; Adds some hooks
+
+    (eval-after-load "message"
+      '(define-key message-mode-map (kbd "TAB") 'enz-eudc-expand-inline))
+    (eval-after-load "sendmail"
+      '(define-key mail-mode-map (kbd "TAB") 'enz-eudc-expand-inline))
+    (eval-after-load "post"
+      '(define-key post-mode-map (kbd "TAB") 'enz-eudc-expand-inline)))The 
 #+END_SRC
 
 ** Filter atom feeds
