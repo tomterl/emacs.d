@@ -29,6 +29,7 @@ Cask file.
 
 #+BEGIN_SRC emacs-lisp
 (require 'pallet)
+(pallet-mode t)
 #+END_SRC
 
 * Emacs =custom=
