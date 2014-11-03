@@ -113,6 +113,7 @@
 (depends-on "smarty-mode")
 (depends-on "smex")
 (depends-on "smooth-scrolling")
+(depends-on "soothe-theme")
 (depends-on "stumpwm-mode")
 (depends-on "stylus-mode")
 (depends-on "sunrise-commander")
