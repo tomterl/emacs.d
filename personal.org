@@ -556,8 +556,8 @@ Automatically add =end= when typing =do=.
 #+BEGIN_SRC emacs-lisp
   (defun tom/php-mode-hook ()
     ""
-    (set tab-width 4
-          c-basic-offset 4
+    (set tab-width 2
+          c-basic-offset 2
           indent-tabs-mode t))
   (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
@@ -585,8 +585,8 @@ Reroute remote paths to my dev-server and the vagrant user.
 #+BEGIN_SRC emacs-lisp
   (defun tom/c-mode-hook ()
     ""
-    (setq tab-width 4
-          c-basic-offset 4
+    (setq tab-width 2
+          c-basic-offset 2
           indent-tabs-mode t))
   (add-hook 'c-mode-hook 'tom/c-mode-hook)
   
@@ -603,7 +603,10 @@ Lambda as λ
   
   (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
 #+END_SRC
-
+** JavaScript
+#+BEGIN_SRC emacs-lisp
+  (setq 'js-indent-level 2)
+#+END_SRC
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
@@ -1029,7 +1032,7 @@ This is a birds eye view of the current buffer.
     (eval-after-load "sendmail"
       '(define-key mail-mode-map (kbd "TAB") 'enz-eudc-expand-inline))
     (eval-after-load "post"
-      '(define-key post-mode-map (kbd "TAB") 'enz-eudc-expand-inline)))The 
+      '(define-key post-mode-map (kbd "TAB") 'enz-eudc-expand-inline))) 
 #+END_SRC
 
 ** Filter atom feeds
