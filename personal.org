@@ -605,7 +605,7 @@ Lambda as λ
 #+END_SRC
 ** JavaScript
 #+BEGIN_SRC emacs-lisp
-  (setq 'js-indent-level 2)
+  (setq js-indent-level 2)
 #+END_SRC
 * Emacs shell
 
@@ -1292,6 +1292,10 @@ The manual must be out of date, this doesn't load.
   (enable-circe-color-nicks)
 #+END_SRC
 
+** Don't show the names list at join
+#+BEGIN_SRC emacs-lisp
+(circe-set-display-handler "353" (lambda (&rest args) nil))
+#+END_SRC
 ** Spellchecking
 
 #+BEGIN_SRC emacs-lisp
