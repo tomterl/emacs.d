@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        delete-indentation
         org-self-insert-command
         smex
         sp--self-insert-command
