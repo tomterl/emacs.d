@@ -32,6 +32,16 @@ Cask file.
 (pallet-mode t)
 #+END_SRC
 
+* Home <-> Work
+
+Some things have to be configured differently depending on where I am -- at home or at work.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/work? ()
+    "Returns `T` if the current machine is at work, `NIL` otherwise"
+    (file-exists-p (expand-file-name "~/.work")))
+#+END_SRC
+
 * Emacs =custom=
 
 #+BEGIN_SRC emacs-lisp
@@ -551,14 +561,16 @@ Automatically add =end= when typing =do=.
   (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 #+END_SRC
 
-*** Indentation
+*** Indentation and behaviour
 
 #+BEGIN_SRC emacs-lisp
   (defun tom/php-mode-hook ()
     ""
-    (set tab-width 2
-          c-basic-offset 2
-          indent-tabs-mode t))
+    (progn 
+      (setq tab-width 4
+            c-basic-offset 4
+            indent-tabs-mode nil)
+      (ggtags-mode)))
   (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
@@ -577,7 +589,7 @@ Reroute remote paths to my dev-server and the vagrant user.
 #+BEGIN_SRC emacs-lisp
   (defun tom/geben-tramp-spec (remote-path)
     ""
-    (print "/sshx:vagrant@192.168.2.162:"))
+    (print "/sshx:vagrant@192.168.16.229:"))
   (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
 #+END_SRC
 ** C
@@ -604,8 +616,21 @@ Lambda as λ
   (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
 #+END_SRC
 ** JavaScript
+
 #+BEGIN_SRC emacs-lisp
   (setq js-indent-level 2)
+#+END_SRC
+
+** YAML
+
+Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
+definitions as used in fb-core et.al.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
 #+END_SRC
 * Emacs shell
 
@@ -637,6 +662,48 @@ auto-completion globally and load company.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
+#+END_SRC
+
+** GNU global
+
+#+BEGIN_SRC emacs-lisp
+(defun gtags-root-dir ()
+    "Returns GTAGS root directory or nil if doesn't exist."
+    (with-temp-buffer
+      (if (zerop (call-process "global" nil t nil "-pr"))
+          (buffer-substring (point-min) (1- (point-max)))
+        nil)))
+
+(defun gtags-update ()
+    "Make GTAGS incremental update"
+    (call-process "global" nil nil nil "-u"))
+
+(defun gtags-root-dir ()
+    "Returns GTAGS root directory or nil if doesn't exist."
+    (with-temp-buffer
+      (if (zerop (call-process "global" nil t nil "-pr"))
+          (buffer-substring (point-min) (1- (point-max)))
+        nil)))
+
+(defun gtags-update-single(filename)  
+      "Update Gtags database for changes in a single file"
+      (interactive)
+      (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))
+
+(defun gtags-update-current-file()
+      (interactive)
+      (defvar filename)
+      (setq filename (replace-regexp-in-string (gtags-root-dir) "." (buffer-file-name (current-buffer))))
+      (gtags-update-single filename)
+      (message "Gtags updated for %s" filename))
+
+(defun gtags-update-hook()
+      "Update GTAGS file incrementally upon saving a file"
+      (when ggtags-mode
+        (when (gtags-root-dir)
+          (gtags-update-current-file))))
+
+(add-hook 'after-save-hook 'gtags-update-hook)
 #+END_SRC
 * Projects
 
@@ -888,12 +955,23 @@ This is a birds eye view of the current buffer.
       ;;(require 'gnus)
       (require 'smtpmail)
       (require 'nnimap)
-      (setq user-mail-address "tom@goochesa.de")
-      (setq user-full-name "Tom Regner")
-      (setq smtpmail-smtp-server "sec.goochesa.de"
-            send-mail-function 'smtpmail-send-it)
-      (setq message-send-mail-function 'smtpmail-send-it)
-      (setq smtpmail-smtp-service 25)
+      (if (tom/work?)
+          (progn
+            (setq user-mail-address "thomas.regner@fb-research.de")
+            (setq user-full-name "Tom Regner")
+            (setq smtpmail-smtp-server "omega"
+                  send-mail-function 'smtpmail-send-it)
+            (setq message-send-mail-function 'smtpmail-send-it)
+            (setq smtpmail-smtp-service 25))
+        (progn
+          (setq user-mail-address "tom@goochesa.de")
+          (setq user-full-name "Tom Regner")
+          (setq smtpmail-smtp-server "sec.goochesa.de"
+                send-mail-function 'smtpmail-send-it)
+          (setq message-send-mail-function 'smtpmail-send-it)
+          (setq smtpmail-smtp-service 25))
+        
+        )
       (setq
        starttls-use-gnutls t
        starttls-gnutls-program "gnutls-cli"
@@ -918,51 +996,37 @@ This is a birds eye view of the current buffer.
        )
       
       (setq gnus-select-method
-            '(nnimap "tomsdiner"
-                     (nnimap-address "mail.tomsdiner.org")
-                     (nnimap-server-port 993)
-                     (nnimap-authinfo-file "/home/tom/.authinfo")
-                     (nnimap-stream ssl)
-                     )
-            )
-      (setq gnus-secondary-select-methods
-            '(
-              (nnimap "Goochesa"
-                      (nnimap-address "sec.goochesa.de")
-                      (nnimap-authinfo-file "/home/tom/.authinfo")
-                      (nnimap-stream tls)
+            (if (not (tom/work?))
+                '(nnimap "tomsdiner"
+                         (nnimap-address "mail.tomsdiner.org")
+                         (nnimap-server-port 993)
+                         (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
+                         (nnimap-stream ssl)
+                         )
+              '(nnimap "franke & bornberg"
+                       (nnimap-address "omega")
+                       (nnimap-server-port 143)
+                       (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
+                       (nnimap-stream network)
+                       )
+              ))
+      (if (not (tom/work?))
+          (setq gnus-secondary-select-methods
+                '(
+                  (nnimap "Goochesa"
+                          (nnimap-address "sec.goochesa.de")
+                          (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
+                          (nnimap-stream tls)
                                           ;                    (nnimap-server-port 993)
                                           ;                    (nnimap-authenticator "plain")
-                      )
-              (nnimap "Joocom"
-                      (nnimap-address "mail.xidras.com")
-                      (nnimap-authinfo-file "/home/tom/.authinfo")
-                      (nnimap-server-port 993)
-                      (nnimap-stream tls)
-                                          ;        (nnimap-authenticator "plain")
-                      )
-              (nnimap "Foren"
-                      (nnimap-address "mail.magora.com")
-                      (nnimap-authinfo-file "/home/tom/.authinfo")
-                      (nnimap-server-port 993)
-                      (nnimap-stream tls)
-                                          ;        (nnimap-authenticator "plain")
-                      )
-              (nnimap "Wpextern"
-                      (nnimap-address "mail.wpextern.de")
-                      (nnimap-authinfo-file "/home/tom/.authinfo")
-                      (nnimap-server-port 143)
-                      (nnimap-stream network)
-                      (nnimap-authenticator login)
-                      )
-              )
-            )
+                          )
+                  )))
       ;; (setq gnus-secondary-select-methods
       ;;       '(
       ;;         ;; (nnimap "Joocom"
       ;;         ;;          (nnimap-address "127.0.0.1")
       ;;         ;;          (nnimap-server-port 20251)
-      ;;         ;;          (nnimap-authinfo-file "/home/tom/.authinfo")
+      ;;         ;;          (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
       ;;         ;;          (nnimap-stream ssl)
       ;;         ;;          (nnimap-authenticator "login")
       ;;         ;;          )
@@ -988,7 +1052,7 @@ This is a birds eye view of the current buffer.
       ;; (setq gnus-use-demon t)
       ;; (gnus-demon-init)
       
-      ;; (gnus-demon-add-scanmail)
+      ;; (gnus-demon-add-scanmaoupil)
       (gnus))
 
     (require 'ldap)
@@ -997,33 +1061,35 @@ This is a birds eye view of the current buffer.
     (setq eudc-default-return-attributes nil
           eudc-strict-return-matches nil)
 
-    (setq ldap-ldapsearch-args (quote ("-tt" "-LL" "-x" "-ZZ")))
+    (setq ldap-ldapsearch-args (quote ("-tt" "-LL" "-x")))
     (setq eudc-inline-query-format '((name)
                                      (firstname)
                                      (firstname name)
                                      (email)
                                      ))
 
-    (let ((ldapv (netrc-machine (netrc-parse "~/.netrc") "ldapv")))
-      (setq ldap-host-parameters-alist
-            `(("ldapv.magora.com" base "ou=Users,dc=magora,dc=com"
-               binddn ,(netrc-get ldapv "login")
-               passwd ,(netrc-get ldapv "password")
-               ))))
-    (setq ldap-default-host "ldapv.magora.com")
-    (eudc-set-server "ldapv.magora.com" 'ldap t)
-    (setq eudc-server-hotlist '(("ldapv.magora.com" . ldap)))
-    (setq eudc-inline-expansion-servers 'hotlist)
+    (if (tom/work?)
+        (progn
+          (let ((ldapv (netrc-machine (netrc-parse "~/.netrc") "ldapv")))
+            (setq ldap-host-parameters-alist
+                  `(("omega" base "OU=SBSUsers,OU=Users,OU=MyBusiness,DC=fbr-zentrale,DC=local"
+                     binddn ,(netrc-get ldapv "login")
+                     passwd ,(netrc-get ldapv "password")
+                     port 389
+                     ))))
+          (setq ldap-default-host "omega")
+          (eudc-set-server "omega" 'ldap t)
+          (setq eudc-server-hotlist '(("omega" . ldap)))
+          (setq eudc-inline-expansion-servers 'hotlist)
 
-    (defun enz-eudc-expand-inline()
-      (interactive)
-      (move-end-of-line 1)
-      (insert "*")
-      (unless (condition-case nil
-                  (eudc-expand-inline)
-                (error nil))
-        (backward-delete-char-untabify 1))
-      )
+          (defun enz-eudc-expand-inline()
+            (interactive)
+            (move-end-of-line 1)
+            (insert "*")
+            (unless (condition-case nil
+                        (eudc-expand-inline)
+                      (error nil))
+              (backward-delete-char-untabify 1)))))
 
     ;; Adds some hooks
 
@@ -1032,7 +1098,7 @@ This is a birds eye view of the current buffer.
     (eval-after-load "sendmail"
       '(define-key mail-mode-map (kbd "TAB") 'enz-eudc-expand-inline))
     (eval-after-load "post"
-      '(define-key post-mode-map (kbd "TAB") 'enz-eudc-expand-inline))) 
+      '(define-key post-mode-map (kbd "TAB") 'enz-eudc-expand-inline)))
 #+END_SRC
 
 ** Filter atom feeds
@@ -1110,9 +1176,9 @@ Use ~org-cladav~ to integrate with an owncloud calendar.
 
 #+BEGIN_SRC emacs-lisp
   (setq
-   org-mobile-directory "/home/tom/ownCloud/org-mode"
+   org-mobile-directory (expand-file-name "~/ownCloud/org-mode")
    org-mobile-files (quote (org-agenda-files))
-   org-mobile-inbox-for-pull "/home/tom/ownCloud/org-mode/mobileorg.org")
+   org-mobile-inbox-for-pull (expand-file-name "~/ownCloud/org-mode/mobileorg.org"))
 #+END_SRC
 
 *** Refile
@@ -1348,7 +1414,7 @@ Straight out of the =circe= wiki
     (interactive)
     (tom/set-circe-options)
     (circe-maybe-connect "ZNC")
-    (circe-maybe-connect "Bitlbee"))
+    (if (not (tom/work?)) (circe-maybe-connect "Bitlbee")))
 #+END_SRC
 
 ** Desktop notifications
@@ -1545,6 +1611,22 @@ Use the 'calendar' to get and format the date.
   (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
 #+END_SRC
 
+** Window movement
+
+*** Goto neighbouring windows
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-<left>") 'window-jump-left)
+  (global-set-key (kbd "C-<right>") 'window-jump-right)
+  (global-set-key (kbd "C-<down>") 'window-jump-down)
+  (global-set-key (kbd "C-<up>") 'window-jump-up)
+#+END_SRC
+*** Window Layouts / Rotation
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-r") 'rotate-window)
+  (global-set-key (kbd "H-L") 'rotate-layout)
+#+END_SRC
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp
@@ -1563,13 +1645,6 @@ Add speedbar support for elixir files.
 #+END_SRC
 
 * Version control
-** Subversion
-Use Sublain as subversion browser.
-#+BEGIN_SRC emacs-lisp
-  (setq tom/--sublain-home (expand-file-name "Sublain" tom/--src-base))
-  (add-to-list 'load-path tom/--sublain-home)
-  (require 'sublain)
-#+END_SRC
 ** Magit 
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
