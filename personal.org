@@ -657,6 +657,7 @@ auto-completion globally and load company.
   ;(global-auto-complete-mode -1)
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
+  
 #+END_SRC
 ** Key bindings
 
@@ -730,7 +731,7 @@ to exclude a couple of buffer names =desktop= must ignore.
 
 Use projectile automatically.
 #+BEGIN_SRC emacs-lisp
-  (projectile-global-mode)
+  (add-hook 'prog-mode-hook (λ () (progn (require 'dash)(projectile-mode 1))))
 #+END_SRC 
 
 *** Keys
@@ -742,10 +743,10 @@ Use projectile automatically.
 The following is old graphene/project-persist related stuff; should go.
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'project-persist-after-load-hook
-            (λ () (projectile-mode 1)))
-  (add-hook 'project-persist-after-close-hook
-            (λ () (projectile-mode -1)))
+;  (add-hook 'project-persist-after-load-hook
+;        (add-hook 'prog-mode-hook (λ () (projectile-mode 1)))
+;  (add-hook 'project-persist-after-close-hook
+;            (λ () (projectile-mode -1)))
 #+END_SRC
 
 * Appearance
@@ -1610,6 +1611,19 @@ Use the 'calendar' to get and format the date.
                                   omit-day-of-week-p)))
   (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
 #+END_SRC
+** Multicursor mark region
+After using expand-region the point remains at the start of the
+region. Switch point and mark and call multi-cursor.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/mcdwim ()
+    ""
+    (interactive)
+    (progn
+      (exchange-point-and-mark)
+      (mc/mark-all-dwim nil)))
+  (global-set-key (kbd "\C-c r") 'tom/mcdwim)
+#+END_SRC
 
 ** Window movement
 
@@ -1630,8 +1644,9 @@ Use the 'calendar' to get and format the date.
 * Slime
 
 #+BEGIN_SRC emacs-lisp
-  (require 'slime)
-  (slime-setup '(slime-repl))
+  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;; Replace "sbcl" with the path to your implementation
+  (setq inferior-lisp-program "sbcl")
 #+END_SRC
 
 * Imenu 
