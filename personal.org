@@ -563,15 +563,19 @@ Automatically add =end= when typing =do=.
 
 *** Indentation and behaviour
 
+Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd.
+
 #+BEGIN_SRC emacs-lisp
   (defun tom/php-mode-hook ()
     ""
     (progn 
       (setq tab-width 4
             c-basic-offset 4
-            indent-tabs-mode nil)
-      (ggtags-mode)))
-  (add-hook 'php-mode-hook 'tom/php-mode-hook)
+            indent-tabs-mode nil
+            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode"))
+      (ggtags-mode)
+      (flycheck-mode)))
+      (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 
@@ -813,7 +817,7 @@ The following is old graphene/project-persist related stuff; should go.
 My current dark theme.
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'soothe t)
+  (load-theme 'underwater t)
 #+END_SRC
 
 *** Fix a few elements
