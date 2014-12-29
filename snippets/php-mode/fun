@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Method
+# key: fun
+# --
+/**
+ * @author `fb-author`
+ * @since  `(tom/insert-current-date 4)`
+ */
+${1:public} function ${2:name}(${3:\$params}) {
+    $0
+}

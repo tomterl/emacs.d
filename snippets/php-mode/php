@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: PHP file header
+# key: php
+# --
+<?php
+/**
+ * User: `fb-author`
+ * Date: `(format-time-string "%m.%d.%Y")`
+ * Time: `(format-time-string "%H:%M")`
+ */
+
+$0

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: class
+# key: cls
+# --
+/**
+ * @author `fb-author`
+ * @since  `(tom/insert-current-date 4)`
+ */
+class ${1:Name} {
+    /**
+     * @author `fb-author`
+     */
+    public function __construct() {
+        $0
+    } 
+};

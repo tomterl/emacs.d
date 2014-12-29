@@ -3,13 +3,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(Linum-format "%7i ")
  '(ansi-color-names-vector
    ["#fdf6e3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
  '(column-number-mode t)
  '(compilation-message-face (quote default))
  '(custom-safe-themes
    (quote
-    ("3a727bdc09a7a141e58925258b6e873c65ccf393b2240c51553098ca93957723" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "159b754a1fb5b20d43499cdb5ef13936cedfbaabf9d70f65377a5df61ddc409f" "f1ea873350bbb910a551854d700dfa7a16f0b6e7b9e88e12e012d9f0f881d083" "f331e68646ee2f8c66d7b6cd21e17d134bafa6b63c5b4e14bbac978523cdfef1" "86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "5a1a016301ecf6874804aef2df36ca8b957443b868049d35043a02a0c1368517" "9ea054db5cdbd5baa4cda9d373a547435ba88d4e345f4b06f732edbc4f017dc3" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("758da0cfc4ecb8447acb866fb3988f4a41cf2b8f9ca28de9b21d9a68ae61b181" "3a727bdc09a7a141e58925258b6e873c65ccf393b2240c51553098ca93957723" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "159b754a1fb5b20d43499cdb5ef13936cedfbaabf9d70f65377a5df61ddc409f" "f1ea873350bbb910a551854d700dfa7a16f0b6e7b9e88e12e012d9f0f881d083" "f331e68646ee2f8c66d7b6cd21e17d134bafa6b63c5b4e14bbac978523cdfef1" "86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "5a1a016301ecf6874804aef2df36ca8b957443b868049d35043a02a0c1368517" "9ea054db5cdbd5baa4cda9d373a547435ba88d4e345f4b06f732edbc4f017dc3" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
@@ -34,6 +35,7 @@ static char *note[] = {
 \"#######..#\" };")))
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#eee8d5")
+ '(fringe-mode 4 nil (fringe))
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
@@ -71,7 +73,12 @@ static char *gnus-pointer[] = {
      ("#eee8d5" . 100))))
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
  '(menu-bar-mode nil)
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111")
  '(projectile-global-mode t)
  '(safe-local-variable-values
    (quote

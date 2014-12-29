@@ -500,6 +500,16 @@ Inspired/copied from endless parentheses blog
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
 #+END_SRC
+** yasnippet Setup
+
+   A few variables to be used in snippets.
+#+BEGIN_SRC emacs-lisp
+  (setq fb-author "tregner")
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'yasnippet)
+  (yas-reload-all)
+#+END_SRC
 * GPG setup
 
 GPG is handled almost transparently in emacs nowadays; this setup
@@ -551,7 +561,17 @@ Automatically add =end= when typing =do=.
      (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
      (ruby-end-mode +1)))
 #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun tom/elixir-mode-hook ()
+    ""
+    (progn 
+      (set (make-local-variable 'company-backends)
+           '((company-elixir :with company-yasnippet company-dabbrev-code)))
+      (flycheck-mode 1)
+      (yas-minor-mode 1)))
+          (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
 
+#+END_SRC
 ** PHP
 
 *** Use php-mode, not web-mode
@@ -572,20 +592,21 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
+            php-template-compatibility nil
             flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode"))
-      (ggtags-mode)
-      (flycheck-mode)))
-      (add-hook 'php-mode-hook 'tom/php-mode-hook)
+      (set (make-local-variable 'company-backends)
+           '((company-gtags :with company-yasnippet company-dabbrev-code)))
+      (ggtags-mode 1)
+      (flycheck-mode 1)
+      (yas-minor-mode 1)))
+          (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 
 Geben is old and un(der)maintained, but it works...
 
-The port is 10000, because the standar of 9000 is taken by fpm per
-default, easier to change my debug port than everybodies default
-fastcgi port...
  #+BEGIN_SRC emacs-lisp
-   (setq geben-dbgp-default-port 10000)
+   (setq geben-dbgp-default-port 9000)
  #+END_SRC
 
 Reroute remote paths to my dev-server and the vagrant user.
@@ -593,7 +614,7 @@ Reroute remote paths to my dev-server and the vagrant user.
 #+BEGIN_SRC emacs-lisp
   (defun tom/geben-tramp-spec (remote-path)
     ""
-    (print "/sshx:vagrant@192.168.16.229:"))
+    (print "/sshx:vagrant@192.168.254.254:"))
   (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
 #+END_SRC
 ** C
@@ -658,10 +679,11 @@ I like it to switch to the shell with one keystroke
 I decided to use company mode for auto completion; so disable
 auto-completion globally and load company.
 #+BEGIN_SRC emacs-lisp
-  ;(global-auto-complete-mode -1)
+                                          ;(global-auto-complete-mode -1)
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
-  
+  (setq company-dabbrev-downcase nil
+        company-dabbrev-ignore-case 't)
 #+END_SRC
 ** Key bindings
 
@@ -819,39 +841,18 @@ My current dark theme.
 #+BEGIN_SRC emacs-lisp
   (load-theme 'underwater t)
 #+END_SRC
-
-*** Fix a few elements
-
+*** Adapt company-mode
 #+BEGIN_SRC emacs-lisp
-  ;; (deftheme tom/theme
-  ;;   "A few adjustments to the used dark themes")
-
-  ;; (flatland-with-color-variables
-  ;;   (custom-theme-set-faces
-  ;;    'tom/theme
-  ;;    `(sp-show-pair-match-face
-  ;;      ((t (:foreground ,flatland-orange-2
-  ;;                       :background ,flatland-bg
-  ;;                       :weight bold))))
-  ;;    `(whitespace-newline
-  ;;      ((t (:foreground ,flatland-blue-3))))
-  ;;    `(whitespace-tab
-  ;;      ((t (:foreground ,flatland-blue-3
-  ;;                       :background ,flatland-bg-1))))))
-  ;; (enable-theme 'tom/theme)
+(require 'color)
+  
+  (let ((bg (face-attribute 'default :background)))
+    (custom-set-faces
+     `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+     `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+     `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+     `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+     `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 #+END_SRC
-** Fix and load graphene theme
-
-=graphene-theme.el= sets other font height values relative to
-=graphene-font-height=. This should work without intervention, but
-there seems to be an error in the sequence theme related packages are
-loaded at startup.
-
-#+BEGIN_SRC emacs-lisp
-  ;; (setq graphene-font-height 83)          
-  ;; (load-theme 'graphene)
-#+END_SRC
-
 ** TreeView
 
 *** Show nice(?) icons
@@ -1648,7 +1649,7 @@ region. Switch point and mark and call multi-cursor.
 * Slime
 
 #+BEGIN_SRC emacs-lisp
-  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;;;(load (expand-file-name "~/quicklisp/slime-helper.el"))
   ;; Replace "sbcl" with the path to your implementation
   (setq inferior-lisp-program "sbcl")
 #+END_SRC
