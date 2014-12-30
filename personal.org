@@ -21,6 +21,19 @@ Cask manages the packages installed.
   (cask-initialize)
 #+END_SRC
 
+*** Code Loading
+
+Recompile elisp code on load or require.
+
+Since auto-compile is installed via cask, we cannot require it before
+package Management is setup.
+
+#+BEGIN_SRC emacs-lisp
+  (setq load-prefer-newer t)
+  (require 'auto-compile)
+  (auto-compile-on-load-mode 1)
+#+END_SRC
+
 *** Pallet
 
 Using =pallet= allows to use Cask and =M-x list-packages= together --
@@ -565,8 +578,9 @@ Automatically add =end= when typing =do=.
   (defun tom/elixir-mode-hook ()
     ""
     (progn 
+      (require 'alchemist)
       (set (make-local-variable 'company-backends)
-           '((company-elixir :with company-yasnippet company-dabbrev-code)))
+           '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
       (flycheck-mode 1)
       (yas-minor-mode 1)))
           (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
@@ -683,7 +697,7 @@ auto-completion globally and load company.
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil
-        company-dabbrev-ignore-case 't)
+        company-dabbrev-ignore-case t)
 #+END_SRC
 ** Key bindings
 
