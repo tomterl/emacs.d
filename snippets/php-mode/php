@@ -5,7 +5,7 @@
 <?php
 /**
  * User: `fb-author`
- * Date: `(format-time-string "%m.%d.%Y")`
+ * Date: `(format-time-string "%d.%m.%Y")`
  * Time: `(format-time-string "%H:%M")`
  */
 
