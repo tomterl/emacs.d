@@ -84,6 +84,7 @@
 (depends-on "json-mode")
 (depends-on "json-reformat")
 (depends-on "jump")
+(depends-on "lua-mode")
 (depends-on "lui")
 (depends-on "magit")
 (depends-on "markdown-mode")
