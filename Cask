@@ -13,6 +13,7 @@
 (depends-on "alect-themes")
 (depends-on "ample-theme")
 (depends-on "ansi")
+(depends-on "auto-compile")
 (depends-on "bash-completion")
 (depends-on "bind-key")
 (depends-on "cask")
