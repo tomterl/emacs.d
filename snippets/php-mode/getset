@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Getter / Setter
+# key: getset
+# --
+/**
+ * @return ${3:type}
+ * @author `fb-author`
+ * @since  `(tom/insert-current-date 4)`
+ */
+${1:public} function get${2:Name}() {
+    return \$this->${2:$(downcase yas-text)};
+}
+
+/**
+ * @param $3 ${2:$(downcase yas-text)}
+ * @author `fb-author`
+ * @since  `(tom/insert-current-date 4)`
+ */
+$1 function set$2(\$${2:$(downcase yas-text)}) {
+    \$this->${2:$(downcase yas-text)} = \$${2:$(downcase yas-text)};
+}
