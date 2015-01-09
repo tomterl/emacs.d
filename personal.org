@@ -662,11 +662,14 @@ Check the doc comment of the current function for @param tags, create them if no
                                "")))
             (save-excursion
               (unless (search-backward-regexp (concat "@param .*" name) nil t)
-                (if (search-backward "/**" nil t)
-                    (forward-char 3)
-                  (insert "/**\n"))
-                (insert (s-join " " (list "\n* @param" typemsg name defaultmsg)))
-                (indent-according-to-mode))))))
+                (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
+                       (param-text (s-join " " (list "\n* @param" text1))))
+                  (if (> (length text1) 0)
+                      (progn (if (search-backward "/**" nil t)
+                                 (forward-char 3)
+                               (progn (insert "/**\n*/\n")(backward-char 3)))
+                             (insert param-text)
+                             (indent-according-to-mode)))))))))
       (widen)))
 #+END_SRC
 ** C
