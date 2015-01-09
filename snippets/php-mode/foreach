@@ -2,6 +2,6 @@
 # name: forEach Array
 # key: for
 # --
-foreach(${0:iterator} as ${1:item}) {
+foreach(${1:\$iterator} as ${2:\$item}) {
     $0
 }

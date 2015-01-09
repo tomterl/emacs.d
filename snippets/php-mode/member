@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Attribute
+# key: member
+# --
+/**
+ * @var ${1:type}
+ */
+${2:protected} \$${name};
