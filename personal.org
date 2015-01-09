@@ -21,6 +21,17 @@ Cask manages the packages installed.
   (cask-initialize)
 #+END_SRC
 
+*** Pallet
+
+Using =pallet= allows to use Cask and =M-x list-packages= together --
+manual operations performed using =packages.el= are reflected in the
+Cask file.
+
+#+BEGIN_SRC emacs-lisp
+(require 'pallet)
+(pallet-mode t)
+#+END_SRC
+
 *** Code Loading
 
 Recompile elisp code on load or require.
@@ -34,16 +45,6 @@ package Management is setup.
   (auto-compile-on-load-mode 1)
 #+END_SRC
 
-*** Pallet
-
-Using =pallet= allows to use Cask and =M-x list-packages= together --
-manual operations performed using =packages.el= are reflected in the
-Cask file.
-
-#+BEGIN_SRC emacs-lisp
-(require 'pallet)
-(pallet-mode t)
-#+END_SRC
 
 * Home <-> Work
 
@@ -631,6 +632,43 @@ Reroute remote paths to my dev-server and the vagrant user.
     (print "/sshx:vagrant@192.168.254.254:"))
   (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
 #+END_SRC
+*** Check/correct @param tags
+Check the doc comment of the current function for @param tags, create them if not present.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-check-params ()
+    ""
+    (interactive)
+    (save-excursion
+      (narrow-to-defun t)
+      (goto-char (point-min))
+      (search-forward-regexp "function[^(]*(\\(.*\\)) {")
+      (message "%s" (match-string-no-properties 1))
+      (let ((params (split-string (match-string-no-properties 1) ", ")))
+        (dolist (param (reverse params))
+          (let* ((parts (s-split " " param))
+                 (pname (if (cadr parts) (cadr parts) (car parts)))
+                 (param-parts (s-split "=" pname))
+                 (type (if (cadr parts) (car parts) nil))
+                 (name (car param-parts))
+                 (default (cadr param-parts))
+                 (typemsg (if type type (if (numberp default) "int" "")))
+                 (defaultmsg (if default
+                                 (concat "optional, default '"
+                                         (if (numberp default)
+                                             (number-to-string default)
+                                           default)
+                                         "'")
+                               "")))
+            (save-excursion
+              (unless (search-backward-regexp (concat "@param .*" name) nil t)
+                (if (search-backward "/**" nil t)
+                    (forward-char 3)
+                  (insert "/**\n"))
+                (insert (s-join " " (list "\n* @param" typemsg name defaultmsg)))
+                (indent-according-to-mode))))))
+      (widen)))
+#+END_SRC
 ** C
 *** Indentation
 #+BEGIN_SRC emacs-lisp
@@ -869,7 +907,7 @@ My current dark theme.
 #+END_SRC
 ** Fringe
 #+BEGIN_SRC emacs-lisp
-(fringe-mode nil . 8)
+(fringe-mode (cons nil  8))
 #+END_SRC
 ** TreeView
 

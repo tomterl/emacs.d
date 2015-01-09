@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: forEach Array
+# key: for
+# --
+foreach(${0:iterator} as ${1:item}) {
+    $0
+}
