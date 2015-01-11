@@ -588,7 +588,6 @@ Automatically add =end= when typing =do=.
 
 #+END_SRC
 ** PHP
-
 *** Use php-mode, not web-mode
 
 #+BEGIN_SRC emacs-lisp
@@ -614,7 +613,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (ggtags-mode 1)
       (flycheck-mode 1)
       (yas-minor-mode 1)))
-          (add-hook 'php-mode-hook 'tom/php-mode-hook)
+  (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 
@@ -894,7 +893,7 @@ The following is old graphene/project-persist related stuff; should go.
 My current dark theme.
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'underwater t)
+  (load-theme 'ample t)
 #+END_SRC
 *** Adapt company-mode
 #+BEGIN_SRC emacs-lisp
