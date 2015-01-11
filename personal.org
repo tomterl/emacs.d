@@ -45,7 +45,6 @@ package Management is setup.
   (auto-compile-on-load-mode 1)
 #+END_SRC
 
-
 * Home <-> Work
 
 Some things have to be configured differently depending on where I am -- at home or at work.
@@ -666,7 +665,7 @@ Check the doc comment of the current function for @param tags, create them if no
                   (if (> (length text1) 0)
                       (progn (if (search-backward "/**" nil t)
                                  (forward-char 3)
-                               (progn (insert "/**\n*/\n")(backward-char 3)))
+                               (progn (goto-char (point-min))(insert "/**\n*/\n")(backward-char 4)))
                              (insert param-text)
                              (indent-according-to-mode)))))))))
       (widen)))
