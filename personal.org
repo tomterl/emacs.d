@@ -923,7 +923,7 @@ My current dark theme.
 
 #+BEGIN_SRC emacs-lisp
   (sml/setup)
-  (sml/apply-theme 'respectful)
+  (sml/apply-theme 'dark)
   ;;(powerline-default-theme)
 #+END_SRC
 
