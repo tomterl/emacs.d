@@ -86,6 +86,7 @@
 (depends-on "json-mode")
 (depends-on "json-reformat")
 (depends-on "jump")
+(depends-on "lentic")
 (depends-on "lua-mode")
 (depends-on "lui")
 (depends-on "magit")
