@@ -586,6 +586,17 @@ Automatically add =end= when typing =do=.
           (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
 
 #+END_SRC
+*** Imenu 
+
+Add speedbar support for elixir files.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'speedbar)
+  (speedbar-add-supported-extension ".ex")
+  (speedbar-add-supported-extension ".exs")
+#+END_SRC
+
+
 ** PHP
 *** Use php-mode, not web-mode
 
@@ -796,25 +807,6 @@ the stuff I entered.
 (add-hook 'after-save-hook 'gtags-update-hook)
 #+END_SRC
 * Projects
-
-** Modify graphenes project handling
-
-Graphene sets up project-persist to use =desktop.el=; it's necessary
-to exclude a couple of buffer names =desktop= must ignore.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'desktop)
-  (setq desktop-buffers-not-to-save
-          (concat "\\("
-                  "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-                  "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-                  "\\| +org-src-.+"
-              "\\)$"))
-     (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-     (add-to-list 'desktop-modes-not-to-save 'Info-mode)
-     (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-     (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-#+END_SRC
 
 ** projectile
 
@@ -1602,7 +1594,24 @@ Indent autimatically as aggressive as possible:
   (global-set-key (kbd "C-c M-a") 'mc/mark-all-like-this)
 #+END_SRC
 
+*** Multicursor mark region
+
+After using expand-region the point remains at the start of the
+region. Switch point and mark and call multi-cursor.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/mcdwim ()
+    ""
+    (interactive)
+    (progn
+      (exchange-point-and-mark)
+      (mc/mark-all-dwim nil)))
+  (global-set-key (kbd "\C-c r") 'tom/mcdwim)
+#+END_SRC
+
 ** Expand region
+
+Context/Language aware region expansion/contraction.
 
 #+BEGIN_SRC emacs-lisp
   (require 'expand-region)
@@ -1684,20 +1693,6 @@ Use the 'calendar' to get and format the date.
                                   omit-day-of-week-p)))
   (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
 #+END_SRC
-** Multicursor mark region
-After using expand-region the point remains at the start of the
-region. Switch point and mark and call multi-cursor.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/mcdwim ()
-    ""
-    (interactive)
-    (progn
-      (exchange-point-and-mark)
-      (mc/mark-all-dwim nil)))
-  (global-set-key (kbd "\C-c r") 'tom/mcdwim)
-#+END_SRC
-
 ** Window movement
 
 *** Goto neighbouring windows
@@ -1720,16 +1715,6 @@ region. Switch point and mark and call multi-cursor.
   ;;;(load (expand-file-name "~/quicklisp/slime-helper.el"))
   ;; Replace "sbcl" with the path to your implementation
   (setq inferior-lisp-program "sbcl")
-#+END_SRC
-
-* Imenu 
-
-Add speedbar support for elixir files.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'speedbar)
-  (speedbar-add-supported-extension ".ex")
-  (speedbar-add-supported-extension ".exs")
 #+END_SRC
 
 * Version control
