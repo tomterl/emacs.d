@@ -729,8 +729,18 @@ I like it to switch to the shell with one keystroke
 
 * Completion
 
-I decided to use company mode for auto completion; so disable
-auto-completion globally and load company.
+I use ~company-mode~ as completion system. For most languages I use
+the newer GNU global -- with pygmentize backend -- to provide tags for
+code traversal and (additional) completion.
+
+** Configure ~company-mode~
+
+Use ~company-mode~ globally.
+
+I live in a case sensitive world, so don't alter the case of
+completions, but provide completions without regard for the case fo
+the stuff I entered.
+
 #+BEGIN_SRC emacs-lisp
                                           ;(global-auto-complete-mode -1)
   (require 'company)
@@ -738,7 +748,7 @@ auto-completion globally and load company.
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t)
 #+END_SRC
-** Key bindings
+*** Key bindings
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
