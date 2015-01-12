@@ -906,10 +906,6 @@ My current dark theme.
      `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
      `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 #+END_SRC
-** Fringe
-#+BEGIN_SRC emacs-lisp
-(fringe-mode (cons nil  8))
-#+END_SRC
 ** TreeView
 
 *** Show nice(?) icons
@@ -1000,6 +996,11 @@ This is a birds eye view of the current buffer.
        )
   (global-set-key (kbd "H-M") 'minimap-toggle)
   
+#+END_SRC
+
+** Fringe
+#+BEGIN_SRC emacs-lisp
+(fringe-mode (cons nil  8))
 #+END_SRC
 
 * GNUS News and Mail
