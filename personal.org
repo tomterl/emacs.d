@@ -1709,6 +1709,22 @@ Use the 'calendar' to get and format the date.
   (global-set-key (kbd "H-L") 'rotate-layout)
 #+END_SRC
 
+** EDiff
+
+Sensible setup found at 'or emacs('.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-diff-options "-w")
+  (defun tom/ediff-hook ()
+    (ediff-setup-keymap)
+    (define-key ediff-mode-map "j" 'ediff-next-difference)
+    (define-key ediff-mode-map "k" 'ediff-previous-difference))
+
+  (add-hook 'ediff-mode-hook 'tom/ediff-hook)
+
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
