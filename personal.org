@@ -596,7 +596,6 @@ Add speedbar support for elixir files.
   (speedbar-add-supported-extension ".exs")
 #+END_SRC
 
-
 ** PHP
 *** Use php-mode, not web-mode
 
@@ -651,7 +650,7 @@ Check the doc comment of the current function for @param tags, create them if no
     (save-excursion
       (narrow-to-defun t)
       (goto-char (point-min))
-      (search-forward-regexp "function[^(]*(\\(.*\\));\\|( {)")
+      (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
       (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
         (dolist (param (reverse params))
           (let* ((parts (split-string param " "))
