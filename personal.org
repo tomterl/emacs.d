@@ -1796,7 +1796,11 @@ Tunnel definitions are held outside this config to protect the innocent...
 #+BEGIN_SRC emacs-lisp
 (load-file "~/ownCloud/dotfiles/prodigy.el")
 #+END_SRC
-
+** Work Services
+#+BEGIN_SRC emacs-lisp
+  (when (tom/work?)
+    (load-file "~/ownCloud/dotfiles/workservices.el"))
+#+END_SRC
 * Paste services
 ** ix.io
 
