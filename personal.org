@@ -219,6 +219,7 @@ Stuff looted from graphene.
 ** env
 #+BEGIN_SRC emacs-lisp
   (require 'smex)
+  (require 'flx-ido)
   (smex-initialize)
 
   (setq inhibit-startup-message t
@@ -226,11 +227,14 @@ Stuff looted from graphene.
         uniquify-buffer-name-style 'forward
         backup-directory-alist `((".*" . ,temporary-file-directory))
         auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+        ido-mode 1
+        flx-ido-mode 1
         ido-enable-flex-matching t
         ido-auto-merge-work-directories-length nil
         ido-create-new-buffer 'always
         ido-use-filename-at-point 'guess
-        ido-everywhere t)
+        ido-everywhere t
+        ido-use-faces nil)
 
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -813,6 +817,10 @@ Use projectile automatically.
   (add-hook 'prog-mode-hook (λ () (progn (require 'dash)(projectile-mode 1))))
 #+END_SRC 
 
+#+BEGIN_SRC emacs-lisp
+  (setq projectile-switch-project-action 'projectile-find-dir)
+  (setq projectile-find-dir-includes-top-level t)
+#+END_SRC
 *** Keys
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-p") 'projectile-commander)
@@ -896,15 +904,16 @@ My current dark theme.
 #+END_SRC
 *** Adapt company-mode
 #+BEGIN_SRC emacs-lisp
-(require 'color)
-  
-  (let ((bg (face-attribute 'default :background)))
+  (require 'color)
+
+  (let ((bg (face-attribute 'default :background))
+        (fg (face-attribute 'default :foreground)))
     (custom-set-faces
-     `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+     `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 15)))))
      `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
      `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
      `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-     `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+     `(company-tooltip-common ((t (:inherit default :background ,(color-lighten-name bg 10) :foreground ,(color-darken-name fg 20)))))))
 #+END_SRC
 ** TreeView
 
