@@ -87,6 +87,7 @@
 (depends-on "js3-mode")
 (depends-on "json-mode")
 (depends-on "json-reformat")
+(depends-on "json-rpc")
 (depends-on "jump")
 (depends-on "lentic")
 (depends-on "lua-mode")
