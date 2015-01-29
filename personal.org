@@ -460,7 +460,7 @@ Inspired/copied from endless parentheses blog
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
 (define-key launcher-map "f" #'find-dired)
-(define-key launcher-map "g" #'lgrep)
+(define-key launcher-map "g" #'git-timemachine)
 (define-key launcher-map "G" #'rgrep)
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
