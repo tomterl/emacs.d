@@ -445,7 +445,8 @@ Stuff looted from graphene.
   (global-set-key (kbd "<f9>") 'flymake-mode)
 #+END_SRC
 
-*** laucher map 
+ 
+*** launcher map 
 
 Launch seldom used emacs tools via C-x l <KEY>.
 
