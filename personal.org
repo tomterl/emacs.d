@@ -1413,6 +1413,12 @@ Why the hell do I do this?
 #+BEGIN_SRC emacs-lisp
 (require 'org-macs)
 #+END_SRC
+** Journal
+#+BEGIN_SRC emacs-lisp
+  (if (not (tom/work?))
+      (setq org-journal-dir (expand-file-name "~/ownCloud/org-mode/journal/"))
+    (setq org-journal-dir (expand-file-name "~/Documents/journal/")))
+#+END_SRC
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
