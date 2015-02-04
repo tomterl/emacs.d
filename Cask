@@ -74,6 +74,7 @@
 (depends-on "haskell-mode")
 (depends-on "htmlize")
 (depends-on "httpd")
+(depends-on "hydra")
 (depends-on "image+")
 (depends-on "impatient-mode")
 (depends-on "inf-ruby")
