@@ -1231,12 +1231,20 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 
 #+BEGIN_SRC emacs-lisp
      (setq
-      org-agenda-files (quote ("~/ownCloud/org-mode/todos.org"  "~/ownCloud/org-mode/joocom.org"))
       org-directory "~/ownCloud/org-mode"
       org-return-follows-link t
       org-src-fontify-natively t
       org-tags-exclude-from-inheritance '("PROJECT")
-      org-list-allow-alphabetical nil)
+      org-list-allow-alphabetical nil
+      org-agenda-include-inactive-timestamps t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (if (tom/work?)
+      (setq org-agenda-files (list org-journal-dir)
+            org-agenda-file-regexp "^\[0-9\]+")
+    (setq org-agenda-files (quote ("~/ownCloud/org-mode/todos.org"
+                                   "~/ownCloud/org-mode/joocom.org"))))
 #+END_SRC
 *** owncloud
 Use ~org-cladav~ to integrate with an owncloud calendar.
