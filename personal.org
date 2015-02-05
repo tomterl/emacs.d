@@ -196,13 +196,9 @@ Stuff looted from graphene.
 
   (linum-mode t)
 
-  (require 'smartparens)
-  (smartparens-mode t)
-
-  (show-paren-mode nil)
-  (setq blink-matching-paren nil)
-  (show-smartparens-mode t)
-  (setq sp-show-pair-delay 0)
+  (show-paren-mode t)
+  (setq blink-matching-paren t)
+  (electric-pair-mode t)
 
   (require 'flycheck)
   (flycheck-mode)
