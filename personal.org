@@ -1141,11 +1141,11 @@ This is a birds eye view of the current buffer.
     (setq eudc-default-return-attributes nil
           eudc-strict-return-matches nil)
 
-    (setq ldap-ldapsearch-args (quote ("-tt" "-LL" "-x")))
+    (setq ldap-ldapsearch-args (quote ("-P" "3" "-LL" "-x")))
     (setq eudc-inline-query-format '((name)
                                      (firstname)
                                      (firstname name)
-                                     (email)
+                                     (mail)
                                      ))
 
     (if (tom/work?)
@@ -1170,7 +1170,6 @@ This is a birds eye view of the current buffer.
                         (eudc-expand-inline)
                       (error nil))
               (backward-delete-char-untabify 1)))))
-
     ;; Adds some hooks
 
     (eval-after-load "message"
