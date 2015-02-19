@@ -387,7 +387,7 @@ Stuff looted from graphene.
                 'new-emacs-instance)
 (global-set-key (kbd "C-;")
                 'insert-semicolon-at-end-of-line)
-(global-set-key (kbd "M-RET")
+(global-set-key (kbd "C-RET")
                 'newline-anywhere)
 (global-set-key (kbd "M-C-;")
                 'tom/comment-line-dwim)
