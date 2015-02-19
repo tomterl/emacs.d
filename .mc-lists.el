@@ -8,10 +8,12 @@
         smex
         sp--self-insert-command
         wgrep-finish-edit
+        c-electric-colon
         ))
 
 (setq mc/cmds-to-run-once
       '(
         ido-switch-buffer
         tom/mcdwim
+        yas-expand
         ))
