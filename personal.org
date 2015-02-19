@@ -482,41 +482,36 @@ Launch seldom used emacs tools via C-x l <KEY>.
 Inspired/copied from endless parentheses blog
 
 #+BEGIN_SRC emacs-lisp
-(define-prefix-command 'launcher-map)
-;; The manual recommends C-c for user keys, but C-x l is
-;; always free and is natural to remember.
-(define-key ctl-x-map "l" 'launcher-map)
-(global-set-key (kbd "s-l") 'launcher-map)
-(define-key launcher-map "c" #'calc)
-(define-key launcher-map "d" #'ediff-buffers)
-(define-key launcher-map "f" #'find-dired)
-(define-key launcher-map "g" #'git-timemachine)
-(define-key launcher-map "G" #'rgrep)
-(define-key launcher-map "h" #'man) ; Help
-(define-key launcher-map "i" #'package-install-from-buffer)
-(define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" #'list-packages)
-(define-key launcher-map "s" #'shell)
-(define-key launcher-map "t" #'proced) ; top
+  (global-set-key
+   (kbd "H-L")
+   (defhydra hydra-launch (:color blue)
+     "launch"
+     ("c" calc "calc")
+     ("g" git-timemachine "git timemachine")
+     ("d" ediff-buffers "ediff")
+     ("f" find-dired "find")
+     ("G" rgrep "grep")
+     ("h" man "man")
+     ("p" list-packages "packages")
+     ("s" shell "shell")
+     ("t" proced "proced")
+     ))
+
 #+END_SRC
 
 *** Toggle states
 
 #+BEGIN_SRC emacs-lisp
-(define-prefix-command 'tom/toggle-map)
-;; The manual recommends C-c for user keys, but C-x t is
-;; always free, whereas C-c t is used by some modes.
-(define-key ctl-x-map "t" 'tom/toggle-map)
-(define-key tom/toggle-map "c" 'column-number-mode)
-(define-key tom/toggle-map "d" 'toggle-debug-on-error)
-(define-key tom/toggle-map "e" 'toggle-debug-on-error)
-(define-key tom/toggle-map "f" 'auto-fill-mode)
-(define-key tom/toggle-map "l" 'toggle-truncate-lines)
-(define-key tom/toggle-map "q" 'toggle-debug-on-quit)
-; (define-key tom/toggle-map "t" 'tom/toggle-theme)
-;;; Generalized version of `read-only-mode'.
-(define-key tom/toggle-map "r" 'dired-toggle-read-only)
-(autoload 'dired-toggle-read-only "dired" nil t)
+  (global-set-key
+   (kbd "H-T")
+   (defhydra hydra-toggle (:color red)
+     "toggle"
+     ("c" column-number-mode "col-nums")
+     ("d" toggle-debug-on-error "debug on error")
+     ("f" auto-fill-mode "auto fill")
+     ("l" toggle-truncate-lines "truncate lines")
+     ("q" toggle-debug-on-quit "debug on quit")))
+
 #+END_SRC
 
 **** Narrowing
