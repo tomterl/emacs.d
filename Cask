@@ -68,6 +68,7 @@
 (depends-on "go-eldoc")
 (depends-on "go-errcheck")
 (depends-on "go-mode")
+(depends-on "golden-ratio")
 (depends-on "grapnel")
 (depends-on "grunt")
 (depends-on "handlebars-mode")
