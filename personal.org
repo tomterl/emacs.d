@@ -570,8 +570,7 @@ Inspired/copied from endless parentheses blog
   (popwin-mode 1)
   ;; (pop popwin:special-display-config)
   (push '("*Flycheck error messages*" :height 0.1 :noselect t :position bottom) popwin:special-display-config)
-  (push '("\*GEBEN<.*> context\*" :regexp t :position left :width 0.3 :stick t :dedicated t) popwin:special-display-config)
-  (push '("\*GEBEN<.*> output\*" :regexp t :position left :width 0.3 :stick t) popwin:special-display-config)
+  (push '("\*GEBEN<.*> output\*" :regexp t :position left :width 0.3 :stick t :dedicated t) popwin:special-display-config)
 #+END_SRC
 #+BEGIN_SRC emacs-lisp
   (defun tom/sticky-window (name)
@@ -700,10 +699,10 @@ Reroute remote paths to my dev-server and the vagrant user.
 #+END_SRC
 
 Make the context window sticky
-+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defadvice geben-display-context (after sticky-geben-context-window activate)
     (tom/sticky-window "*GEBEN<192.168.254.254:9000> context*"))
-+END_SRC
+#+END_SRC
 *** Check/correct @param tags
 Check the doc comment of the current function for @param tags, create them if not present.
 
