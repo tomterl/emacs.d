@@ -387,7 +387,7 @@ Stuff looted from graphene.
                 'new-emacs-instance)
 (global-set-key (kbd "C-;")
                 'insert-semicolon-at-end-of-line)
-(global-set-key (kbd "C-RET")
+(global-set-key (kbd "C-<return>")
                 'newline-anywhere)
 (global-set-key (kbd "M-C-;")
                 'tom/comment-line-dwim)
@@ -510,7 +510,9 @@ Inspired/copied from endless parentheses blog
      ("d" toggle-debug-on-error "debug on error")
      ("f" auto-fill-mode "auto fill")
      ("l" toggle-truncate-lines "truncate lines")
-     ("q" toggle-debug-on-quit "debug on quit")))
+     ("g" golden-ratio-mode "1.61803")
+     ("q" toggle-debug-on-quit "debug on quit")
+     ("n" narrow-or-widen-dwim "narrow")))
 
 #+END_SRC
 
@@ -562,6 +564,23 @@ Inspired/copied from endless parentheses blog
   (require 'yasnippet)
   (yas-reload-all)
 #+END_SRC
+** Sticky window
+#+BEGIN_SRC emacs-lisp
+  (require 'popwin)
+  (popwin-mode 1)
+  ;; (pop popwin:special-display-config)
+  (push '("*Flycheck error messages*" :height 0.1 :noselect t :position bottom) popwin:special-display-config)
+  (push '("\*GEBEN<.*> context\*" :regexp t :position left :width 0.3 :stick t :dedicated t) popwin:special-display-config)
+  (push '("\*GEBEN<.*> output\*" :regexp t :position left :width 0.3 :stick t) popwin:special-display-config)
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun tom/sticky-window (name)
+    "Make the window NAME sticky."
+    (let ((curr-win (car (get-buffer-window-list name))))
+      (set-window-buffer curr-win (get-buffer name))
+      (set-window-dedicated-p curr-win t)))
+#+END_SRC
+
 * GPG setup
 
 GPG is handled almost transparently in emacs nowadays; this setup
@@ -679,6 +698,12 @@ Reroute remote paths to my dev-server and the vagrant user.
     (print "/sshx:vagrant@192.168.254.254:"))
   (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
 #+END_SRC
+
+Make the context window sticky
++BEGIN_SRC emacs-lisp
+  (defadvice geben-display-context (after sticky-geben-context-window activate)
+    (tom/sticky-window "*GEBEN<192.168.254.254:9000> context*"))
++END_SRC
 *** Check/correct @param tags
 Check the doc comment of the current function for @param tags, create them if not present.
 
