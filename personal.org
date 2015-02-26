@@ -1780,7 +1780,7 @@ Use the 'calendar' to get and format the date.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-r") 'rotate-window)
-  (global-set-key (kbd "H-L") 'rotate-layout)
+  (global-set-key (kbd "H-C-l") 'rotate-layout)
 #+END_SRC
 
 ** EDiff
