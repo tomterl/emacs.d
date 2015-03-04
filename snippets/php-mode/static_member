@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: static Attribute
+# key: smem
+# --
+/**
+ * @var ${1:type}
+ */
+${2:protected} static \$${name};
