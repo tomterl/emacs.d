@@ -499,6 +499,17 @@ Inspired/copied from endless parentheses blog
 
 #+END_SRC
 
+*** hjkl-navigation
+#+BEGIN_SRC emacs-lisp
+  (global-set-key
+   (kbd "H-v")
+   (defhydra hydra-vim-navi (:color red)
+     "navigate"
+     ("h" backward-char "left")
+     ("j" next-line "up")
+     ("k" previous-line "down")
+     ("l" forward-char "right")))
+#+END_SRC
 *** Toggle states
 
 #+BEGIN_SRC emacs-lisp
@@ -802,6 +813,7 @@ Lambda as λ
 
 #+BEGIN_SRC emacs-lisp
   (setq js-indent-level 2)
+  (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
 #+END_SRC
 
 ** YAML
@@ -815,6 +827,13 @@ definitions as used in fb-core et.al.
   (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
 #+END_SRC
+
+** Groovy
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.gvy$" . groovy-mode))
+#+END_SRC
+
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
@@ -1807,13 +1826,8 @@ Use the 'calendar' to get and format the date.
 #+END_SRC
 ** Window movement
 
-*** Goto neighbouring windows
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-<left>") 'window-jump-left)
-  (global-set-key (kbd "C-<right>") 'window-jump-right)
-  (global-set-key (kbd "C-<down>") 'window-jump-down)
-  (global-set-key (kbd "C-<up>") 'window-jump-up)
-#+END_SRC
+See hydra above for movement!
+
 *** Window Layouts / Rotation
 
 #+BEGIN_SRC emacs-lisp

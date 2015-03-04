@@ -70,6 +70,7 @@
 (depends-on "go-mode")
 (depends-on "golden-ratio")
 (depends-on "grapnel")
+(depends-on "groovy-mode")
 (depends-on "grunt")
 (depends-on "handlebars-mode")
 (depends-on "haskell-mode")
