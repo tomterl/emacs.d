@@ -1863,6 +1863,7 @@ Sensible setup found at 'or emacs('.
 ** Magit 
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
+  (setq magit-last-seen-setup-instructions "1.4.0")
 #+END_SRC
    
 *** Key bindings
