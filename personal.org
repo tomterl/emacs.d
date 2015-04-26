@@ -567,9 +567,9 @@ Inspired/copied from endless parentheses blog
 
   (global-set-key
    (kbd "H-C-r")
-   (defhydra hydra-rectangle (:body-pre (rectangle-mark-mode 1)
-                                        :color pink
-                                        :post (deactivate-mark))
+   (defhydra hydra-rectangle (:color amaranth
+                              :body-pre (rectangle-mark-mode 1)
+                              :post (deactivate-mark))
      "
     ^_k_^     _d_elete    _s_tring     |\\     _,,,--,,_
   _h_   _l_   _o_k        _y_ank       /,`.-'`'   ._  \-;;,_
@@ -1863,6 +1863,7 @@ Sensible setup found at 'or emacs('.
 ** Magit 
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
+  (setq magit-last-seen-setup-instructions "1.4.0")
 #+END_SRC
    
 *** Key bindings
