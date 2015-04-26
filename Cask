@@ -105,6 +105,7 @@
 (depends-on "nodejs-repl")
 (depends-on "noflet")
 (depends-on "org-journal")
+(depends-on "origami")
 (depends-on "package-build")
 (depends-on "packed")
 (depends-on "pallet")
