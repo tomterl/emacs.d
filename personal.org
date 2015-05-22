@@ -828,7 +828,9 @@ Lambda as λ
 ** JavaScript
 
 #+BEGIN_SRC emacs-lisp
-  (setq js-indent-level 2)
+  (setq js-indent-level 4)
+  (setq js2-basic-offset 4)
+  (setq js2-bounce-indent-p t)
   (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
 #+END_SRC
 
