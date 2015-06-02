@@ -1025,10 +1025,29 @@ The following is old graphene/project-persist related stuff; should go.
    :END:
 
 My current dark theme.
-
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'ample t)
+  (deftheme tdark "dark theme with subdued colors")
+  (custom-theme-set-faces 'tdark
+                          '(default ((t (:foreground "#eae2b4" :background "#282828" ))))
+                          '(cursor ((t (:background "#fdf4c1" ))))
+                          '(fringe ((t (:background "#282828" ))))
+                          '(mode-line ((t (:foreground "#282828" :background "#7c6f64" ))))
+                          '(region ((t (:background "#335c41" ))))
+                          '(secondary-selection ((t (:background "#3e3834" ))))
+                          '(font-lock-builtin-face ((t (:foreground "#e2992b" ))))
+                          '(font-lock-comment-face ((t (:foreground "#7c6f64" ))))
+                          '(font-lock-function-name-face ((t (:foreground "#a7a94b" ))))
+                          '(font-lock-keyword-face ((t (:foreground "#cdb056" ))))
+                          '(font-lock-string-face ((t (:foreground "#409399" ))))
+                          '(font-lock-type-face ((t (:foreground "#d3869b" ))))
+                          '(font-lock-constant-face ((t (:foreground "#b478bd" ))))
+                          '(font-lock-variable-name-face ((t (:foreground "#83a598" ))))
+                          '(minibuffer-prompt ((t (:foreground "#b8bb26" :bold t ))))
+                          '(font-lock-warning-face ((t (:foreground "red" :bold t ))))
+                          )
+
 #+END_SRC
+
 *** Adapt company-mode
 #+BEGIN_SRC emacs-lisp
   (require 'color)
