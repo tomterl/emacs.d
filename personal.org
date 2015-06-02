@@ -194,8 +194,6 @@ Stuff looted from graphene.
   (set-terminal-coding-system 'utf-8)
   (set-selection-coding-system 'utf-8)
 
-  (linum-mode t)
-
   (show-paren-mode t)
   (setq blink-matching-paren t)
   (electric-pair-mode t)
@@ -520,7 +518,8 @@ Inspired/copied from endless parentheses blog
      ("c" column-number-mode "col-nums")
      ("d" toggle-debug-on-error "debug on error")
      ("f" auto-fill-mode "auto fill")
-     ("l" toggle-truncate-lines "truncate lines")
+     ("l" linum-mode "show line numbers")
+     ("L" toggle-truncate-lines "truncate lines")
      ("g" golden-ratio-mode "1.61803")
      ("q" toggle-debug-on-quit "debug on quit")
      ("n" narrow-or-widen-dwim "narrow")))
