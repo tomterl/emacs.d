@@ -161,6 +161,7 @@
 (depends-on "undo-tree")
 (depends-on "use-package")
 (depends-on "vagrant")
+(depends-on "volatile-highlights")
 (depends-on "w3m")
 (depends-on "web-mode")
 (depends-on "wgrep-ag")

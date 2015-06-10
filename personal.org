@@ -1895,6 +1895,13 @@ Sensible setup found at 'or emacs('.
   (put 'dired-find-alternate-file 'disabled nil)
   (setq dired-omit-files "^\\..*$")
 #+END_SRC
+** highlights
+#+BEGIN_SRC emacs-lisp
+  (require 'volatile-highlights)
+  (vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
+  (vhl/load-extension 'ut)
+  (add-hook 'prog-mode-hook (λ () (volatile-highlights-mode 1)))
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
