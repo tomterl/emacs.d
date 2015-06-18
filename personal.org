@@ -251,7 +251,6 @@ Stuff looted from graphene.
 
   (put 'ido-complete 'disabled nil)
   (put 'ido-exit-minibuffer 'disabled nil)
-  (put 'dired-find-alternate-file 'disabled nil)
   (put 'autopair-newline 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
@@ -1889,6 +1888,19 @@ Sensible setup found at 'or emacs('.
 
   (add-hook 'ediff-mode-hook 'tom/ediff-hook)
 
+#+END_SRC
+** dired
+#+BEGIN_SRC emacs-lisp
+  (require 'dired-x)
+  (put 'dired-find-alternate-file 'disabled nil)
+  (setq dired-omit-files "^\\..*$")
+#+END_SRC
+** highlights
+#+BEGIN_SRC emacs-lisp
+  (require 'volatile-highlights)
+  (vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
+  (vhl/load-extension 'ut)
+  (add-hook 'prog-mode-hook (λ () (volatile-highlights-mode 1)))
 #+END_SRC
 * Slime
 
