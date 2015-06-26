@@ -982,7 +982,7 @@ The following is old graphene/project-persist related stuff; should go.
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "-adobe-Source Code Pro-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"
+  (defvar tom/default-font "-unknown-Fira Mono-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"
     "The font to use under normal circumstances")
   (defvar tom/fallback-font "-unknown-Symbola-normal-normal-semicondensed-*-9-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
