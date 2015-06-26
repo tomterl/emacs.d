@@ -736,8 +736,9 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
            '((company-gtags :with company-yasnippet company-dabbrev-code)))
       (ggtags-mode 1)
       (flycheck-mode 1)
-      (yas-minor-mode 1)))
-  (add-hook 'php-mode-hook 'tom/php-mode-hook)
+      (yas-minor-mode 1)
+      (php-eldoc-enable)))
+    (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 
