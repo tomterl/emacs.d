@@ -29,6 +29,7 @@
 (depends-on "company")
 (depends-on "company-inf-ruby")
 (depends-on "concurrent")
+(depends-on "csv-mode")
 (depends-on "ctable")
 (depends-on "dash")
 (depends-on "deferred")
