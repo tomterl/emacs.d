@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: interface Method
+# key: ifun
+# --
+/**
+ * @author `fb-author`
+ * @since  `(tom/insert-current-date 4)`
+ */
+${2:public} function ${3:name}(${4:\$params});$0
