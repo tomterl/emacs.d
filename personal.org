@@ -800,6 +800,21 @@ Check the doc comment of the current function for @param tags, create them if no
                              (indent-according-to-mode)))))))))
       (widen)))
 #+END_SRC
+*** ~phpunit~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-unit ()
+    ""
+    (interactive)
+    (let* ((pr (projectile-project-root))
+           (confdir (concat pr "/tests"))
+           (conf (concat confdir "/phpunit.xml"))
+           (wd default-directory))
+      (if (and (file-directory-p confdir) (file-exists-p conf))
+          (progn
+            (cd confdir)
+            (phpunit-run '())
+            (cd wd)))))
+#+END_SRC
 ** C
 *** Indentation
 #+BEGIN_SRC emacs-lisp

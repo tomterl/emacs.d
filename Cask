@@ -120,6 +120,7 @@
 (depends-on "php-boris")
 (depends-on "php-eldoc")
 (depends-on "php-mode")
+(depends-on "phpunit")
 (depends-on "pkg-info")
 (depends-on "popup")
 (depends-on "popwin")
