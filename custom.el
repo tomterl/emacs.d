@@ -8,6 +8,7 @@
    ["#fdf6e3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
  '(column-number-mode t)
  '(compilation-message-face (quote default))
+ '(csv-separators (quote ("," "	" ";")))
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
@@ -72,7 +73,7 @@ static char *gnus-pointer[] = {
      ("#F2804F" . 70)
      ("#F771AC" . 85)
      ("#eee8d5" . 100))))
- '(linum-format " %6d ")
+ '(linum-format " %6d " t)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
  '(main-line-color1 "#1E1E1E")
