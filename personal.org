@@ -1964,6 +1964,16 @@ Sensible setup found at 'or emacs('.
   (vhl/load-extension 'ut)
   (add-hook 'prog-mode-hook (λ () (volatile-highlights-mode 1)))
 #+END_SRC
+** Edit as root
+#+BEGIN_SRC emacs-lisp
+  (defun tom/sudo ()
+    "Use TRAMP to `sudo' the current buffer"
+    (interactive)
+    (when buffer-file-name
+      (find-alternate-file
+       (concat "/sudo:root@localhost:"
+               buffer-file-name))))
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
