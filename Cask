@@ -116,6 +116,7 @@
 (depends-on "packed")
 (depends-on "pallet")
 (depends-on "paredit")
+(depends-on "persp-projectile")
 (depends-on "perspective")
 (depends-on "php-auto-yasnippets")
 (depends-on "php-boris")

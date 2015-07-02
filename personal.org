@@ -996,7 +996,6 @@ the stuff I entered.
 (add-hook 'after-save-hook 'gtags-update-hook)
 #+END_SRC
 * Projects
-
 ** projectile
 
 Use projectile automatically.
@@ -1009,6 +1008,11 @@ Use projectile automatically.
   (setq projectile-project-root-files-functions '(projectile-root-top-down projectile-root-bottom-up projectile-root-top-down-recurring))
   (setq projectile-switch-project-action 'projectile-find-dir)
   (setq projectile-find-dir-includes-top-level t)
+#+END_SRC
+*** Perspectives
+#+BEGIN_SRC emacs-lisp
+(persp-mode)
+(require 'persp-projectile)
 #+END_SRC
 *** Keys
 #+BEGIN_SRC emacs-lisp
