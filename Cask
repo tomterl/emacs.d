@@ -152,6 +152,7 @@
 (depends-on "smooth-scrolling")
 (depends-on "soothe-theme")
 (depends-on "sr-speedbar")
+(depends-on "string-inflection")
 (depends-on "stumpwm-mode")
 (depends-on "stylus-mode")
 (depends-on "sunrise-commander")

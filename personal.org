@@ -1978,6 +1978,10 @@ Sensible setup found at 'or emacs('.
        (concat "/sudo:root@localhost:"
                buffer-file-name))))
 #+END_SRC
+** Case handling
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-c") 'string-inflection-cycle)
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
