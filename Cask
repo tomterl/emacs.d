@@ -33,6 +33,7 @@
 (depends-on "ctable")
 (depends-on "dash")
 (depends-on "deferred")
+(depends-on "dic-lookup-w3m")
 (depends-on "diff-hl")
 (depends-on "diminish")
 (depends-on "dired-single")
