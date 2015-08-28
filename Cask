@@ -111,6 +111,7 @@
 (depends-on "names")
 (depends-on "nodejs-repl")
 (depends-on "noflet")
+(depends-on "omni-scratch")
 (depends-on "org-journal")
 (depends-on "origami")
 (depends-on "package-build")
