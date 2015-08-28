@@ -9,10 +9,14 @@
  '(column-number-mode t)
  '(compilation-message-face (quote default))
  '(csv-separators (quote ("," "	" ";")))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
-    ("90e4b4a339776e635a78d398118cb782c87810cb384f1d1223da82b612338046" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "19ba41b6dc0b5dd34e1b8628ad7ae47deb19f968fe8c31853d64ea8c4df252b8" "7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "c5a044ba03d43a725bd79700087dea813abcb6beb6be08c7eb3303ed90782482" "758da0cfc4ecb8447acb866fb3988f4a41cf2b8f9ca28de9b21d9a68ae61b181" "3a727bdc09a7a141e58925258b6e873c65ccf393b2240c51553098ca93957723" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "159b754a1fb5b20d43499cdb5ef13936cedfbaabf9d70f65377a5df61ddc409f" "f1ea873350bbb910a551854d700dfa7a16f0b6e7b9e88e12e012d9f0f881d083" "f331e68646ee2f8c66d7b6cd21e17d134bafa6b63c5b4e14bbac978523cdfef1" "86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "5a1a016301ecf6874804aef2df36ca8b957443b868049d35043a02a0c1368517" "9ea054db5cdbd5baa4cda9d373a547435ba88d4e345f4b06f732edbc4f017dc3" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "90e4b4a339776e635a78d398118cb782c87810cb384f1d1223da82b612338046" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "19ba41b6dc0b5dd34e1b8628ad7ae47deb19f968fe8c31853d64ea8c4df252b8" "7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "c5a044ba03d43a725bd79700087dea813abcb6beb6be08c7eb3303ed90782482" "758da0cfc4ecb8447acb866fb3988f4a41cf2b8f9ca28de9b21d9a68ae61b181" "3a727bdc09a7a141e58925258b6e873c65ccf393b2240c51553098ca93957723" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "159b754a1fb5b20d43499cdb5ef13936cedfbaabf9d70f65377a5df61ddc409f" "f1ea873350bbb910a551854d700dfa7a16f0b6e7b9e88e12e012d9f0f881d083" "f331e68646ee2f8c66d7b6cd21e17d134bafa6b63c5b4e14bbac978523cdfef1" "86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "5a1a016301ecf6874804aef2df36ca8b957443b868049d35043a02a0c1368517" "9ea054db5cdbd5baa4cda9d373a547435ba88d4e345f4b06f732edbc4f017dc3" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
@@ -63,6 +67,12 @@ static char *gnus-pointer[] = {
 \"###..######.######\",
 \"###########.######\" };")) t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
  '(highlight-tail-colors
    (quote
     (("#eee8d5" . 0)
@@ -73,13 +83,22 @@ static char *gnus-pointer[] = {
      ("#F2804F" . 70)
      ("#F771AC" . 85)
      ("#eee8d5" . 100))))
- '(linum-format " %6d " t)
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(linum-format " %6d ")
  '(magit-diff-use-overlays nil)
- '(magit-use-overlays nil)
+ '(magit-pull-arguments (quote ("--rebase")))
+ '(magit-use-overlays nil t)
  '(main-line-color1 "#1E1E1E")
  '(main-line-color2 "#111111")
  '(main-line-separator-style (quote chamfer))
  '(menu-bar-mode nil)
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
  '(powerline-color1 "#1E1E1E")
  '(powerline-color2 "#111111")
  '(projectile-global-mode t)
@@ -111,6 +130,7 @@ static char *gnus-pointer[] = {
            (package-build-minor-mode)))))
  '(show-paren-mode t)
  '(smartparens-global-mode t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(syslog-debug-face
    (quote
     ((t :background unspecified :foreground "#2aa198" :weight bold))))
@@ -126,6 +146,8 @@ static char *gnus-pointer[] = {
  '(syslog-warn-face
    (quote
     ((t :background unspecified :foreground "#cb4b16" :weight bold))))
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
