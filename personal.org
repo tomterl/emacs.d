@@ -1636,7 +1636,17 @@ Why the hell do I do this?
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
-today :-).
+today :-). At work I use jabber.el.
+
+** jabber.el
+#+BEGIN_SRC emacs-lisp
+  (let ((fbjabb (netrc-machine (netrc-parse "~/.netrc") "fbjabb")))
+  (setq jabber-account-list
+         `((,(netrc-get fbjabb "login")
+           (:network-server . ,(netrc-get fbjabb "account"))
+           (:password . ,(netrc-get fbjabb "password"))
+           (:connection-type . network)))))
+#+END_SRC
 
 ** =circe= Options
 
