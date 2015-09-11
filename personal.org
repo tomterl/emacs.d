@@ -1641,11 +1641,11 @@ today :-). At work I use jabber.el.
 ** jabber.el
 #+BEGIN_SRC emacs-lisp
   (let ((fbjabb (netrc-machine (netrc-parse "~/.netrc") "fbjabb")))
-  (setq jabber-account-list
-         `((,(netrc-get fbjabb "login")
-           (:network-server . ,(netrc-get fbjabb "account"))
-           (:password . ,(netrc-get fbjabb "password"))
-           (:connection-type . network)))))
+    (setq jabber-account-list
+          `((,(netrc-get fbjabb "login")
+             (:network-server . ,(netrc-get fbjabb "account"))
+             (:password . ,(netrc-get fbjabb "password"))
+             (:connection-type . starttls)))))
 #+END_SRC
 
 ** =circe= Options
