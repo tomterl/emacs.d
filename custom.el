@@ -184,4 +184,6 @@ static char *gnus-pointer[] = {
  '(company-scrollbar-fg ((t (:background "#152e48"))))
  '(company-tooltip ((t (:inherit default :background "#12273c"))))
  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face)))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ '(jabber-chat-prompt-local ((t (:foreground "deep sky blue" :weight bold))))
+ '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight bold)))))
