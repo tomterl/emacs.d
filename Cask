@@ -168,6 +168,7 @@
 (depends-on "undo-tree")
 (depends-on "use-package")
 (depends-on "vagrant")
+(depends-on "vimish-fold")
 (depends-on "volatile-highlights")
 (depends-on "w3m")
 (depends-on "web-mode")
