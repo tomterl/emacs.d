@@ -2096,6 +2096,16 @@ Tunnel definitions are held outside this config to protect the innocent...
     (setq yagist-github-token (netrc-get github "password")))
 #+END_SRC
 
+* Search 
+** the silver searcher
+
+ I use ag.el to interact with ag, a fine replacement for grep.
+ Ignore all ignore-files :-)
+
+#+BEGIN_SRC emacs-lisp
+(setq ag-arguments (list "-U" "--line-number" "--smart-case" "--nogroup" "--column" "--stats" "--"))
+#+END_SRC
+
 * Server
 
 Always have an emacs server running.
@@ -2106,11 +2116,4 @@ Always have an emacs server running.
   (server-start))
 #+END_SRC
 
-* Search 
-** the silver searcher
 
- I use ag.el to interact with ag, a fine replacement for grep.
- Ignore all ignore-files :-)
-#+BEGIN_SRC emacs-lisp
-(setq ag-arguments (list "-U" "--line-number" "--smart-case" "--nogroup" "--column" "--stats" "--"))
-#+END_SRC
