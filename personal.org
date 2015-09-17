@@ -1230,6 +1230,13 @@ This is a birds eye view of the current buffer.
 (fringe-mode (cons nil  8))
 #+END_SRC
 
+** Frametitle
+#+BEGIN_SRC emacs-lisp
+  (setq frame-title-format
+        '("" invocation-name ": "(:eval (if (buffer-name)
+                                            (abbreviate-file-name (buffer-name))
+                                          "%b"))))
+#+END_SRC
 * GNUS News and Mail
 
 #+BEGIN_SRC emacs-lisp
