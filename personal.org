@@ -1640,6 +1640,55 @@ Why the hell do I do this?
       (setq org-journal-dir (expand-file-name "~/ownCloud/org-mode/journal/"))
     (setq org-journal-dir (expand-file-name "~/Documents/journal/")))
 #+END_SRC
+** tomsdiner.org
+#+BEGIN_SRC emacs-lisp
+  ;;  (require 'org-publish)
+  (let* ((tdo (netrc-machine (netrc-parse "~/.netrc") "tdo"))
+         (remote-dir (concat (netrc-get tdo "login") (netrc-get tdo "account")))
+         (remote-static-dir (concat remote-dir "static/")))
+    (setq org-publish-project-alist
+          `(("tdo"
+             :components ("tdo-content" "tdo-static"))
+            ("tdo-content"
+             :base-directory "~/Projekte/tomsdiner.org/"
+             :base-extension "org"
+             :publishing-directory ,remote-dir
+             :recursive t
+             :publishing-function org-html-publish-to-html
+             :export-with-tags nil
+             :headline-levels 4             ; Just the default for this project.
+             :with-toc nil
+             :section-numbers nil
+             :with-sub-superscript nil
+             :with-todo-keywords nil
+             :with-author nil
+             :with-creator nil
+             :html-preamble "<div class=\"navi\">
+                             <b>
+                               <a href=\"/index.html\" class=\"home\">Me+Myself+I</a>
+                             </b>
+                             &nbsp;&mdash;&nbsp;
+                             <a href=\"/myself/index.html\">myself</a>
+                             &nbsp;&mdash;&nbsp;
+                             <a href=\"http://github.com/tomterl\">projects</a>
+                           </div>
+                           <hr/>"
+             :html-postamble "<hr/><div class=\"footer\">
+                              <a href=\"imprint.html\">imprint</a>
+                            </div>"
+             :html-head "<link rel=\"stylesheet\"
+                           href=\"/static/css/style.css\" type=\"text/css\"/>"
+             :html-head-include-default-style nil
+             :with-timestamp t
+             :exclude-tags ("noexport" "todo")
+             :auto-preamble t)
+            ("tdo-static"
+             :base-directory "~/Projekte/tomsdiner.org/static/"
+             :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|otf"
+             :publishing-directory ,remote-static-dir
+             :recursive t
+             :publishing-function org-publish-attachment))))
+#+END_SRC
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
