@@ -3,12 +3,13 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        c-electric-colon
+        c-electric-paren
         delete-indentation
         org-self-insert-command
         smex
         sp--self-insert-command
         wgrep-finish-edit
-        c-electric-colon
         ))
 
 (setq mc/cmds-to-run-once
