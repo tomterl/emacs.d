@@ -79,6 +79,7 @@
 (depends-on "grunt")
 (depends-on "handlebars-mode")
 (depends-on "haskell-mode")
+(depends-on "highlight-thing")
 (depends-on "htmlize")
 (depends-on "httpd")
 (depends-on "httprepl")
