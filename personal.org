@@ -2117,3 +2117,37 @@ Always have an emacs server running.
 #+END_SRC
 
 
+ I use ag.el to interact with ag, a fine replacement for grep.
+ Ignore all ignore-files :-)
+#+BEGIN_SRC emacs-lisp
+(setq ag-arguments (list "-U" "--line-number" "--smart-case" "--nogroup" "--column" "--stats" "--"))
+#+END_SRC
+* Passwords
+** Basic setup
+#+BEGIN_SRC emacs-lisp
+  (require 'org-passwords)
+  (setq org-passwords-file "~/.auth.gpg")
+  (setq org-passwords-random-words-dictionary "/etc/dictionaries-common/words")
+#+END_SRC
+** capture template
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-capture-templates
+               '("p" "password" entry (file "~/.auth.gpg")
+                 "* %^{Title}\n  %^{URL}p %^{USERNAME}p %^{PASSWORD}p"))
+#+END_SRC
+** keybindings
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "org-passwords"
+    '(progn
+       (define-key org-passwords-mode-map
+         (kbd "C-c C-c")
+         'org-passwords-copy-username)
+       (define-key org-passwords-mode-map
+         (kbd "C-c C-p")
+         'org-passwords-copy-password)
+       (define-key org-passwords-mode-map
+         (kbd "C-c C-o")
+         'org-passwords-open-url)))
+
+#+END_SRC
+
