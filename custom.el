@@ -42,6 +42,7 @@ static char *note[] = {
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#eee8d5")
  '(fringe-mode 4 nil (fringe))
+ '(ggtags-highlight-tag-delay 1.0)
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
