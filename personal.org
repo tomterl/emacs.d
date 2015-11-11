@@ -2165,6 +2165,7 @@ Tunnel definitions are held outside this config to protect the innocent...
  #+END_SRC
 *** capture template
  #+BEGIN_SRC emacs-lisp
+   (require 'org-capture)
    (add-to-list 'org-capture-templates
                 '("p" "password" entry (file "~/.auth.gpg")
                   "* %^{Title}\n  %^{URL}p %^{USERNAME}p %^{PASSWORD}p"))
