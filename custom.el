@@ -180,7 +180,7 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray3" :foreground "#eae2b4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 83 :width normal :foundry "unknown" :family "Hack"))))
+ '(default ((t (:inherit nil :background "gray3" :foreground "dark gray"))))
  '(company-scrollbar-bg ((t (:background "#1b3b5c"))))
  '(company-scrollbar-fg ((t (:background "#152e48"))))
  '(company-tooltip ((t (:inherit default :background "#12273c"))))
@@ -188,7 +188,7 @@ static char *gnus-pointer[] = {
  '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(font-lock-comment-face ((t (:foreground "bisque4" :slant oblique))))
  '(font-lock-constant-face ((t (:foreground "LightBlue2"))))
- '(font-lock-function-name-face ((t (:foreground "medium spring green"))))
+ '(font-lock-function-name-face ((t (:foreground "olive drab"))))
  '(font-lock-keyword-face ((t (:foreground "NavajoWhite2"))))
  '(font-lock-string-face ((t (:foreground "aquamarine3"))))
  '(font-lock-variable-name-face ((t (:foreground "steel blue"))))
