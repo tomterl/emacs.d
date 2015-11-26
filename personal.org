@@ -8,6 +8,18 @@ my now graphene based setup.
 :PROPERTIES:
 :tangle:	personal.el
 :END:
+** Lambda
+
+ Lambda as λ
+
+ #+BEGIN_SRC emacs-lisp
+   (defmacro λ (&rest body)
+     `(lambda ()
+        (interactive)
+        ,@body))
+  
+   (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
+ #+END_SRC
 
 * Packages
 
@@ -668,251 +680,6 @@ helps for remote sessions.
 
 (add-hook 'after-make-frame-functions 'wg/kludge-gpg-agent)
 
-* Languages
-** Elixir
-
-Use =elixir-mix-mode= where applicable.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'elixir-mix)
-  (global-elixir-mix-mode)
-#+END_SRC
-
-Automatically add =end= when typing =do=.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'elixir-mode)
-  (add-to-list
-   'elixir-mode-hook
-   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
-     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
-          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
-     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
-     (ruby-end-mode +1)))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp
-  (defun tom/elixir-mode-hook ()
-    ""
-    (progn 
-      (require 'alchemist)
-      (set (make-local-variable 'company-backends)
-           '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
-      (flycheck-mode 1)
-      (yas-minor-mode 1)))
-          (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
-
-#+END_SRC
-*** Imenu 
-
-Add speedbar support for elixir files.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'speedbar)
-  (speedbar-add-supported-extension ".ex")
-  (speedbar-add-supported-extension ".exs")
-#+END_SRC
-
-** PHP
-*** Use php-mode, not web-mode
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-#+END_SRC
-
-*** Indentation and behaviour
-
-Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-mode-hook ()
-    ""
-    (progn 
-      (setq tab-width 4
-            c-basic-offset 4
-            indent-tabs-mode nil
-            php-template-compatibility nil
-            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode")
-            php-mode-coding-style (quote wordpress)
-            php-lineup-cascaded-calls t)
-      (set (make-local-variable 'company-backends)
-           '((company-gtags :with company-yasnippet company-dabbrev-code)))
-      (ggtags-mode 1)
-      (flycheck-mode 1)
-      (yas-minor-mode 1)
-      (php-eldoc-enable)))
-  (add-hook 'php-mode-hook 'tom/php-mode-hook)
-#+END_SRC
-*** Remote debugging
-
-Geben is old and un(der)maintained, but it works...
-
- #+BEGIN_SRC emacs-lisp
-   (setq geben-dbgp-default-port 9000)
- #+END_SRC
-
-Reroute remote paths to my dev-server and the vagrant user.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/geben-tramp-spec (remote-path)
-    ""
-    (print "/sshx:vagrant@192.168.254.254:"))
-  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
-#+END_SRC
-
-Make the context window sticky
-#+BEGIN_SRC emacs-lisp
-  (defadvice geben-display-context (after sticky-geben-context-window activate)
-    (tom/sticky-window "*GEBEN<192.168.254.254:9000> context*"))
-#+END_SRC
-*** Check/correct @param tags
-Check the doc comment of the current function for @param tags, create them if not present.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-check-params ()
-    ""
-    (interactive)
-    (save-excursion
-      (narrow-to-defun t)
-      (goto-char (point-min))
-      (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
-      (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
-        (dolist (param (reverse params))
-          (let* ((parts (split-string param " "))
-                 (pname (if (cadr parts) (cadr parts) (car parts)))
-                 (param-parts (split-string pname "=" t " "))
-                 (type (if (cadr parts) (car parts) nil))
-                 (name (car param-parts))
-                 (default (cadr param-parts))
-                 (typemsg (if type type (if (numberp default) "int" "")))
-                 (defaultmsg (if default
-                                 (concat "optional, default '"
-                                         (if (numberp default)
-                                             (number-to-string default)
-                                           default)
-                                         "'")
-                               "")))
-            (save-excursion
-              (unless (search-backward-regexp (concat "@param .*" name) nil t)
-                (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
-                       (param-text (s-join " " (list "\n* @param" text1))))
-                  (if (> (length text1) 0)
-                      (progn (if (search-backward "/**" nil t)
-                                 (forward-char 3)
-                               (progn (goto-char (point-min))(insert "/**\n*/\n")(backward-char 4)))
-                             (insert param-text)
-                             (indent-according-to-mode)))))))))
-      (widen)))
-#+END_SRC
-*** ~phpunit~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-unit ()
-    ""
-    (interactive)
-    (let* ((pr (projectile-project-root))
-           (confdir (concat pr "/tests"))
-           (conf (concat confdir "/phpunit.xml"))
-           (wd default-directory))
-      (if (and (file-directory-p confdir) (file-exists-p conf))
-          (progn
-            (cd confdir)
-            (phpunit-run '())
-            (cd wd)))))
-#+END_SRC
-*** ~phing~
-#+BEGIN_SRC emacs-lisp
-  (defun phing-call (target) 
-    "Call Phing's build.xml"
-    
-    ;; Ask for target to execute
-    (interactive "MPhing Target: ")
-    
-    ;; Open a new *phing-compilation* buffer & kill the old one
-    (let ((oldbuf (get-buffer "*phing-compilation*")))
-      (if (not (null oldbuf))
-          (kill-buffer "*phing-compilation*")))
-    
-    ;; Execute thing
-    (let* ((buildfile (phing-file-search-upward (file-name-directory (buffer-file-name)) "build.xml"))
-           (outbuf (get-buffer-create "*phing-compilation*"))
-           (curbuf (current-buffer)))
-      
-      ;; Switch to new compilation window
-      (switch-to-buffer-other-window outbuf)
-      
-      ;; Display command line 
-      (insert "#> phing -f " buildfile " " target "\n")
-      
-      ;; Switch back to called window
-      (switch-to-buffer-other-window curbuf)
-      
-      ;; Call phing with no ANSI formatting
-      (call-process "phing" nil outbuf t "-logger" "phing.listener.DefaultLogger" "-f" buildfile target)))
-
-  (defun phing-file-search-upward (directory file)
-    "Search for a file in a directory. If not found, will search in the directories above"
-    (let* ((updir (file-truename (concat (file-name-directory directory) "../")))
-           (curfd (if (not (string= (substring directory (- (length directory) 1)) "/"))
-                      (concat directory "/" file)
-                    (concat directory file))))
-      (if (file-exists-p curfd)
-          curfd
-        (if (and (not (string= (file-truename directory) updir))
-                 (< (length updir) (length (file-truename directory))))
-            (phing-file-search-upward updir file)
-          nil))))
-
-#+END_SRC
-** C
-*** Indentation
-#+BEGIN_SRC emacs-lisp
-  (defun tom/c-mode-hook ()
-    ""
-    (setq tab-width 2
-          c-basic-offset 2
-          indent-tabs-mode t))
-  (add-hook 'c-mode-hook 'tom/c-mode-hook)
-  
-#+END_SRC
-** Lisp
-
-Lambda as λ
-
-#+BEGIN_SRC emacs-lisp
-  (defmacro λ (&rest body)
-    `(lambda ()
-       (interactive)
-       ,@body))
-  
-  (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
-#+END_SRC
-** JavaScript
-
-#+BEGIN_SRC emacs-lisp
-  (setq js-indent-level 4)
-  (setq js2-basic-offset 4)
-  (setq js2-bounce-indent-p t)
-  (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
-#+END_SRC
-
-** YAML
-
-Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
-definitions as used in fb-core et.al.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
-#+END_SRC
-
-** Groovy
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.gvy$" . groovy-mode))
-#+END_SRC
-
 * Emacs shell
 
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
@@ -1036,7 +803,7 @@ The following is old graphene/project-persist related stuff; should go.
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "-unknown-Hack-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
+  (defvar tom/default-font "-unknown-Input Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
     "The font to use under normal circumstances")
   (defvar tom/fallback-font "-unknown-Symbola-normal-normal-semicondensed-*-10-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
@@ -1945,7 +1712,6 @@ Context/Language aware region expansion/contraction.
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)
                                (js2-mode . nodejs-repl)))
-  ;;(rtog/add-repl 'octave-mode (rtog/switch-to-shell-buffer 'inferior-octave-buffer 'inferior-octave))
 #+END_SRC
 
 ** Opening URLs
@@ -2052,6 +1818,242 @@ Sensible setup found at 'or emacs('.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-c") 'string-inflection-cycle)
 #+END_SRC
+* Languages
+** Elixir
+
+Use =elixir-mix-mode= where applicable.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'elixir-mix)
+  (global-elixir-mix-mode)
+#+END_SRC
+
+Automatically add =end= when typing =do=.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'elixir-mode)
+  (add-to-list
+   'elixir-mode-hook
+   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+     (ruby-end-mode +1)))
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun tom/elixir-mode-hook ()
+    ""
+    (progn 
+      (require 'alchemist)
+      (set (make-local-variable 'company-backends)
+           '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
+      (flycheck-mode 1)
+      (yas-minor-mode 1)))
+          (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
+
+#+END_SRC
+*** Imenu 
+
+Add speedbar support for elixir files.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'speedbar)
+  (speedbar-add-supported-extension ".ex")
+  (speedbar-add-supported-extension ".exs")
+#+END_SRC
+
+** PHP
+*** Use php-mode, not web-mode
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+#+END_SRC
+
+*** Indentation and behaviour
+
+Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-mode-hook ()
+    ""
+    (progn 
+      (setq tab-width 4
+            c-basic-offset 4
+            indent-tabs-mode nil
+            php-template-compatibility nil
+            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode")
+            php-mode-coding-style (quote wordpress)
+            php-lineup-cascaded-calls t)
+      (set (make-local-variable 'company-backends)
+           '((company-gtags :with company-yasnippet company-dabbrev-code)))
+      (ggtags-mode 1)
+      (flycheck-mode 1)
+      (yas-minor-mode 1)
+      (php-eldoc-enable)))
+  (add-hook 'php-mode-hook 'tom/php-mode-hook)
+#+END_SRC
+*** Remote debugging
+
+Geben is old and un(der)maintained, but it works...
+
+ #+BEGIN_SRC emacs-lisp
+   (setq geben-dbgp-default-port 9000)
+ #+END_SRC
+
+Reroute remote paths to my dev-server and the vagrant user.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/geben-tramp-spec (remote-path)
+    ""
+    (print "/sshx:vagrant@192.168.254.254:"))
+  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
+#+END_SRC
+
+Make the context window sticky
+#+BEGIN_SRC emacs-lisp
+  (defadvice geben-display-context (after sticky-geben-context-window activate)
+    (tom/sticky-window "*GEBEN<192.168.254.254:9000> context*"))
+#+END_SRC
+*** Check/correct @param tags
+Check the doc comment of the current function for @param tags, create them if not present.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-check-params ()
+    ""
+    (interactive)
+    (save-excursion
+      (narrow-to-defun t)
+      (goto-char (point-min))
+      (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
+      (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
+        (dolist (param (reverse params))
+          (let* ((parts (split-string param " "))
+                 (pname (if (cadr parts) (cadr parts) (car parts)))
+                 (param-parts (split-string pname "=" t " "))
+                 (type (if (cadr parts) (car parts) nil))
+                 (name (car param-parts))
+                 (default (cadr param-parts))
+                 (typemsg (if type type (if (numberp default) "int" "")))
+                 (defaultmsg (if default
+                                 (concat "optional, default '"
+                                         (if (numberp default)
+                                             (number-to-string default)
+                                           default)
+                                         "'")
+                               "")))
+            (save-excursion
+              (unless (search-backward-regexp (concat "@param .*" name) nil t)
+                (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
+                       (param-text (s-join " " (list "\n* @param" text1))))
+                  (if (> (length text1) 0)
+                      (progn (if (search-backward "/**" nil t)
+                                 (forward-char 3)
+                               (progn (goto-char (point-min))(insert "/**\n*/\n")(backward-char 4)))
+                             (insert param-text)
+                             (indent-according-to-mode)))))))))
+      (widen)))
+#+END_SRC
+*** ~phpunit~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/php-unit ()
+    ""
+    (interactive)
+    (let* ((pr (projectile-project-root))
+           (confdir (concat pr "/tests"))
+           (conf (concat confdir "/phpunit.xml"))
+           (wd default-directory))
+      (if (and (file-directory-p confdir) (file-exists-p conf))
+          (progn
+            (cd confdir)
+            (phpunit-run '())
+            (cd wd)))))
+#+END_SRC
+*** ~phing~
+#+BEGIN_SRC emacs-lisp
+  (defun phing-call (target) 
+    "Call Phing's build.xml"
+    
+    ;; Ask for target to execute
+    (interactive "MPhing Target: ")
+    
+    ;; Open a new *phing-compilation* buffer & kill the old one
+    (let ((oldbuf (get-buffer "*phing-compilation*")))
+      (if (not (null oldbuf))
+          (kill-buffer "*phing-compilation*")))
+    
+    ;; Execute thing
+    (let* ((buildfile (phing-file-search-upward (file-name-directory (buffer-file-name)) "build.xml"))
+           (outbuf (get-buffer-create "*phing-compilation*"))
+           (curbuf (current-buffer)))
+      
+      ;; Switch to new compilation window
+      (switch-to-buffer-other-window outbuf)
+      
+      ;; Display command line 
+      (insert "#> phing -f " buildfile " " target "\n")
+      
+      ;; Switch back to called window
+      (switch-to-buffer-other-window curbuf)
+      
+      ;; Call phing with no ANSI formatting
+      (call-process "phing" nil outbuf t "-logger" "phing.listener.DefaultLogger" "-f" buildfile target)))
+
+  (defun phing-file-search-upward (directory file)
+    "Search for a file in a directory. If not found, will search in the directories above"
+    (let* ((updir (file-truename (concat (file-name-directory directory) "../")))
+           (curfd (if (not (string= (substring directory (- (length directory) 1)) "/"))
+                      (concat directory "/" file)
+                    (concat directory file))))
+      (if (file-exists-p curfd)
+          curfd
+        (if (and (not (string= (file-truename directory) updir))
+                 (< (length updir) (length (file-truename directory))))
+            (phing-file-search-upward updir file)
+          nil))))
+
+#+END_SRC
+** C
+*** Indentation
+#+BEGIN_SRC emacs-lisp
+  (defun tom/c-mode-hook ()
+    ""
+    (setq tab-width 2
+          c-basic-offset 2
+          indent-tabs-mode t))
+  (add-hook 'c-mode-hook 'tom/c-mode-hook)
+  
+#+END_SRC
+** JavaScript
+
+#+BEGIN_SRC emacs-lisp
+  (setq js-indent-level 4)
+  (setq js2-basic-offset 4)
+  (setq js2-bounce-indent-p t)
+  (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
+#+END_SRC
+
+** YAML
+
+Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
+definitions as used in fb-core et.al.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
+#+END_SRC
+
+** Groovy
+
+#+BEGIN_SRC emacs-lisp
+  (require 'inf-groovy)
+  (add-to-list 'auto-mode-alist '("\\.gvy$" . groovy-mode))
+  (rtog/add-repl 'groovy-mode (rtog/switch-to-shell-buffer "*groovy*" 'run-groovy))
+#+END_SRC
+
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp

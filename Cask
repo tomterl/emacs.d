@@ -86,6 +86,7 @@
 (depends-on "hydra")
 (depends-on "image+")
 (depends-on "impatient-mode")
+(depends-on "inf-groovy")
 (depends-on "inf-ruby")
 (depends-on "inflections")
 (depends-on "itail")
