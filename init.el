@@ -3,9 +3,13 @@
 ;;; Commentary:
 ;;
 ;;; Code:
+;; will be called from personal.org 
+                                        ;(package-initialize)
+
 ;; load Org-mode and gnus from source.
 
 ;; Variables
+
 (defvar tom/--emacs-dir (expand-file-name "~/.emacs.d")
   "Directory of the Emacs setup.")
 (defvar tom/--src-base (expand-file-name "~/.emacs.src.d")
