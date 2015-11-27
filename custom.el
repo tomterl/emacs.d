@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(Linum-format "%7i ")
  '(ansi-color-names-vector
-   ["#fdf6e3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
+   ["#fdf6e3" "#dc322f" "dark olive green" "dark goldenrod" "#268bd2" "#d33682" "dark cyan" "#657b83"])
  '(column-number-mode t)
  '(compilation-message-face (quote default))
  '(csv-separators (quote ("," "	" ";")))
@@ -42,6 +42,7 @@ static char *note[] = {
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#eee8d5")
  '(fringe-mode 4 nil (fringe))
+ '(ggtags-highlight-tag 1.0)
  '(ggtags-highlight-tag-delay 1.0)
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
@@ -98,6 +99,9 @@ static char *gnus-pointer[] = {
  '(main-line-color2 "#111111")
  '(main-line-separator-style (quote chamfer))
  '(menu-bar-mode nil)
+ '(package-selected-packages
+   (quote
+    (httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smarty-mode smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy powerline popwin popup phpunit php-eldoc php-boris php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js3-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(powerline-color1 "#1E1E1E")
@@ -105,7 +109,8 @@ static char *gnus-pointer[] = {
  '(projectile-global-mode t)
  '(safe-local-variable-values
    (quote
-    ((encoding . utf-8)
+    ((firestarter . ert-run-tests-interactively)
+     (encoding . utf-8)
      (org-confirm-babel-evaluate)
      (eval hs-hide-all)
      (eval when
@@ -199,4 +204,5 @@ static char *gnus-pointer[] = {
  '(jabber-roster-user-away ((t (:foreground "dark gray" :slant italic :weight normal))))
  '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight bold))))
  '(jabber-roster-user-xa ((t (:foreground "dim gray" :slant italic :weight normal))))
+ '(minibuffer-prompt ((t (:foreground "DarkOrange3" :weight bold))))
  '(php-annotations-annotation-face ((t (:inherit font-lock-constant-face :foreground "SlateGray3" :slant oblique)))))
