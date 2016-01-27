@@ -91,6 +91,8 @@ static char *gnus-pointer[] = {
  '(hl-fg-colors
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(js3-auto-indent-p t)
+ '(js3-indent-level 4)
  '(linum-format " %6d ")
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments (quote ("--rebase")))
@@ -101,7 +103,9 @@ static char *gnus-pointer[] = {
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smarty-mode smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy powerline popwin popup phpunit php-eldoc php-boris php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js3-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+    (paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smarty-mode smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy powerline popwin popup phpunit php-eldoc php-boris php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js3-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+ '(paradox-automatically-star nil)
+ '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(powerline-color1 "#1E1E1E")
@@ -191,6 +195,7 @@ static char *gnus-pointer[] = {
  '(company-tooltip ((t (:inherit default :background "#12273c"))))
  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
  '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ '(font-lock-builtin-face ((t (:foreground "RoyalBlue3"))))
  '(font-lock-comment-face ((t (:foreground "bisque4" :slant oblique))))
  '(font-lock-constant-face ((t (:foreground "LightBlue2"))))
  '(font-lock-function-name-face ((t (:foreground "olive drab"))))
@@ -204,5 +209,6 @@ static char *gnus-pointer[] = {
  '(jabber-roster-user-away ((t (:foreground "dark gray" :slant italic :weight normal))))
  '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight bold))))
  '(jabber-roster-user-xa ((t (:foreground "dim gray" :slant italic :weight normal))))
+ '(js3-external-variable-face ((t (:foreground "dark orange"))))
  '(minibuffer-prompt ((t (:foreground "DarkOrange3" :weight bold))))
  '(php-annotations-annotation-face ((t (:inherit font-lock-constant-face :foreground "SlateGray3" :slant oblique)))))
