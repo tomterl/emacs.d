@@ -1873,9 +1873,16 @@ Add speedbar support for elixir files.
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd.
 
 #+BEGIN_SRC emacs-lisp
+  (defun tom/php-tags-update ()
+    ""
+    (if (and (boundp 'call-php-tags-func) call-php-tags-func)
+        (ac-php-remake-tags))
+    )
+  (add-hook 'after-save-hook 'tom/php-tags-update)
   (defun tom/php-mode-hook ()
     ""
     (progn 
+      (require 'ac-php-company)
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
@@ -1884,12 +1891,16 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
             php-mode-coding-style (quote wordpress)
             php-lineup-cascaded-calls t)
       (set (make-local-variable 'company-backends)
-           '((company-gtags :with company-yasnippet company-dabbrev-code)))
-      (ggtags-mode 1)
+           '((company-ac-php-backend :with company-yasnippet)))
+      (set (make-local-variable 'call-php-tags-func) t)
+      (ggtags-mode -1)
       (flycheck-mode 1)
       (yas-minor-mode 1)
-      (php-eldoc-enable)))
-  (add-hook 'php-mode-hook 'tom/php-mode-hook)
+      (setq-local eldoc-documentation-function 'php-eldoc-function)
+      (eldoc-mode 1)
+      (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
+      (local-set-key (kbd "M-,") 'ac-php-find-symbol-at-point)))
+    (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 

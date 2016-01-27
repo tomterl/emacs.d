@@ -4,6 +4,7 @@
 (source melpa)
 
 (depends-on "2048-game")
+(depends-on "ac-php")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
 (depends-on "ace-window")
