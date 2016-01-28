@@ -61,6 +61,8 @@ package Management is setup.
 Github integration.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'netrc)
+
   (let ((github-paradox (netrc-machine (netrc-parse "~/.netrc") "paradox")))
     (setq paradox-github-token (netrc-get github-paradox "password")))
 #+END_SRC
