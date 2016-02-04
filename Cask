@@ -130,7 +130,6 @@
 (depends-on "persp-projectile")
 (depends-on "perspective")
 (depends-on "php-auto-yasnippets")
-(depends-on "php-eldoc")
 (depends-on "php-mode")
 (depends-on "php-refactor-mode")
 (depends-on "phpunit")
