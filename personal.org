@@ -1908,10 +1908,8 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
-      (setq-local eldoc-documentation-function 'php-eldoc-function)
-      (eldoc-mode 1)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
-      (local-set-key (kbd "M-,") 'ac-php-find-symbol-at-point)))
+      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)))
     (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
