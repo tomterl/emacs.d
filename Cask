@@ -163,6 +163,7 @@
 (depends-on "smex")
 (depends-on "smooth-scrolling")
 (depends-on "soothe-theme")
+(depends-on "spinner")
 (depends-on "sr-speedbar")
 (depends-on "string-inflection")
 (depends-on "stumpwm-mode")
