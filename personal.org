@@ -783,6 +783,7 @@ Use projectile automatically.
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'projectile-project-root-files "build.xml")
+  (add-to-list 'projectile-project-root-files "manifest.json")
   (setq projectile-project-root-files-functions '(projectile-root-top-down))
   (setq projectile-switch-project-action 'projectile-find-dir)
   (setq projectile-find-dir-includes-top-level t)
