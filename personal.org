@@ -206,7 +206,7 @@ Stuff looted from graphene.
 #+BEGIN_SRC emacs-lisp
   ;;(delete-selection-mode t)
   (global-visual-line-mode t)
-  (setq linum-format " %4d ")
+  (setq nlinum-format "%4d")
   (setq-default tab-width 2)
   (setq-default indent-tabs-mode nil)
   (prefer-coding-system 'utf-8)
@@ -538,7 +538,7 @@ Inspired/copied from endless parentheses blog
      ("c" column-number-mode "col-nums")
      ("d" toggle-debug-on-error "debug on error")
      ("f" auto-fill-mode "auto fill")
-     ("l" linum-mode "show line numbers")
+     ("l" nlinum-mode "show line numbers")
      ("L" toggle-truncate-lines "truncate lines")
      ("g" golden-ratio-mode "1.61803")
      ("q" toggle-debug-on-quit "debug on quit")

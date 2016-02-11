@@ -117,6 +117,7 @@
 (depends-on "minimap")
 (depends-on "multiple-cursors")
 (depends-on "names")
+(depends-on "nlinum")
 (depends-on "nodejs-repl")
 (depends-on "noflet")
 (depends-on "omni-scratch")
