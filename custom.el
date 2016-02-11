@@ -98,7 +98,6 @@ static char *gnus-pointer[] = {
  '(js3-global-externs "console")
  '(js3-indent-level 4)
  '(js3-indent-on-enter-key t)
- '(linum-format " %6d " t)
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments (quote ("--rebase")))
  '(magit-use-overlays nil t)
