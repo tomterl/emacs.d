@@ -1903,7 +1903,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
             php-mode-coding-style (quote wordpress)
             php-lineup-cascaded-calls t)
       (set (make-local-variable 'company-backends)
-           '((company-ac-php-backend :with company-yasnippet)))
+           '((company-ac-php-backend :with :sorted company-yasnippet)))
       (set (make-local-variable 'call-php-tags-func) t)
       (ggtags-mode -1)
       (flycheck-mode 1)
