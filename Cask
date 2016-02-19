@@ -99,7 +99,6 @@
 (depends-on "js-comint")
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
-(depends-on "js3-mode")
 (depends-on "json-mode")
 (depends-on "json-reformat")
 (depends-on "json-rpc")

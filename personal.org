@@ -1728,8 +1728,7 @@ Context/Language aware region expansion/contraction.
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)
-                               (js2-mode . nodejs-repl)
-                               (js3-mode . nodejs-repl)))
+                               (js2-mode . nodejs-repl)))
 #+END_SRC
 
 ** Opening URLs
