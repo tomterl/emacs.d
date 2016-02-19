@@ -105,6 +105,7 @@
 (depends-on "json-reformat")
 (depends-on "json-rpc")
 (depends-on "json-snatcher")
+(depends-on "julia-mode")
 (depends-on "jump")
 (depends-on "lcs")
 (depends-on "lentic")
