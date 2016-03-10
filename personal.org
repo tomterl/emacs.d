@@ -1612,10 +1612,6 @@ notifications-close-notification expects an uint32 but gets a int32.
 #+BEGIN_SRC emacs-lisp
 (fullframe/split-screen rgrep quit-window "*grep*" 'horizontal 't)
 #+END_SRC
-** ag
-#+BEGIN_SRC emacs-lisp
-(fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
-#+END_SRC
 ** File encoding
 
 Everything should be in utf-8. 
@@ -2183,6 +2179,12 @@ Tunnel definitions are held outside this config to protect the innocent...
 
 #+BEGIN_SRC emacs-lisp
 (setq ag-arguments (list "-U" "--line-number" "--smart-case" "--nogroup" "--column" "--stats" "--"))
+#+END_SRC
+
+Focus on the current window and the ag-result buffer.
+
+#+BEGIN_SRC emacs-lisp
+(fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
 #+END_SRC
 
 * Passwords
