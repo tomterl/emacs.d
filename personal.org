@@ -1763,6 +1763,7 @@ enough context around point visible.
 
 #+BEGIN_SRC emacs-lisp
 (require 'smooth-scrolling)
+(smooth-scrolling-mode)
 #+END_SRC
 
 ** Insert current date
