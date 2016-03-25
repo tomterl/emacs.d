@@ -93,11 +93,7 @@ static char *gnus-pointer[] = {
  '(hl-fg-colors
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
- '(js3-auto-indent-p t)
- '(js3-enter-indents-newline t)
- '(js3-global-externs "console")
- '(js3-indent-level 4)
- '(js3-indent-on-enter-key t)
+ '(linum-format " %6d " t)
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments (quote ("--rebase")))
  '(magit-use-overlays nil t)
