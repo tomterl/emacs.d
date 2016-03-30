@@ -2097,7 +2097,7 @@ Check the doc comment of the current function for @param tags, create them if no
   
 #+END_SRC
 ** JavaScript
-
+*** Indentation etc
 #+BEGIN_SRC emacs-lisp
   (if (tom/work?)
       (setq js-indent-level 4
@@ -2109,7 +2109,24 @@ Check the doc comment of the current function for @param tags, create them if no
   (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
   
 #+END_SRC
-
+*** Completion
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
+  (defun tom/js2-mode-hook ()
+    ""
+    (progn
+      (require 'tern)
+      (require 'company-tern)
+  
+      (set (make-local-variable 'company-backends)
+           '((company-tern :with :sorted company-yasnippet)))
+      (ggtags-mode -1)
+      (flycheck-mode 1)
+      (repl-toggle-mode 1)
+      (yas-minor-mode 1)
+      (tern-mode t)))
+  (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
+#+END_SRC
 ** YAML
 
 Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
