@@ -1212,55 +1212,55 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 #+END_SRC
 * mu4e
 #+BEGIN_SRC emacs-lisp 
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-  (require 'mu4e)
-  (setq mu4e-contexts
-        `( ,(make-mu4e-context
-             :name "goochesa"
-             :match-func (lambda (_) (string-equal "goochesa" (mu4e-context-name mu4e~context-current)))
-             :enter-func '()
-             :leave-func (lambda () (mu4e-clear-caches))
-             :vars '((mu4e-maildir . "~/Mail/Goochesa")
-                     (mu4e-mu-home . "~/.mu-Goochesa")
-                     (mu4e-get-mail-command . "offlineimap -a Goochesa")
-                     (mu4e-drafts-folder . "/INBOX.Drafts") 
-                     (mu4e-sent-folder . "/INBOX.Sent")
-                     (mu4e-trash-folder . "/INBOX.Trash")
-                     (user-mail-address . "tom@goochesa.de")))
-           ,(make-mu4e-context
-             :name "GMail"
-             :match-func (lambda (_) (string-equal "GMail" (mu4e-context-name mu4e~context-current)))
-             :enter-func '()
-             :leave-func (lambda () (mu4e-clear-caches))
-             :vars '((mu4e-maildir . "~/Mail/GMail")
-                     (mu4e-mu-home . "~/.mu-GMail")
-                     (mu4e-get-mail-command . "offlinegmail")
-                     (mu4e-drafts-folder . "/[Google Mail].Drafts") 
-                     (mu4e-sent-folder . "/[Google Mail].Sent Mail")
-                     (mu4e-trash-folder . "/[Google Mail].Trash")
-                     (mu4e-sent-messages-behaviour . 'delete)
-                     (user-mail-address . "tomreg.tr@gmail.com")))))
+  (when (not (tom/work?))
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+    (require 'mu4e)
+    (setq mu4e-contexts
+          `( ,(make-mu4e-context
+               :name "goochesa"
+               :match-func (lambda (_) (string-equal "goochesa" (mu4e-context-name mu4e~context-current)))
+               :enter-func '()
+               :leave-func (lambda () (mu4e-clear-caches))
+               :vars '((mu4e-maildir . "~/Mail/Goochesa")
+                       (mu4e-mu-home . "~/.mu-Goochesa")
+                       (mu4e-get-mail-command . "offlineimap -a Goochesa")
+                       (mu4e-drafts-folder . "/INBOX.Drafts") 
+                       (mu4e-sent-folder . "/INBOX.Sent")
+                       (mu4e-trash-folder . "/INBOX.Trash")
+                       (user-mail-address . "tom@goochesa.de")))
+             ,(make-mu4e-context
+               :name "GMail"
+               :match-func (lambda (_) (string-equal "GMail" (mu4e-context-name mu4e~context-current)))
+               :enter-func '()
+               :leave-func (lambda () (mu4e-clear-caches))
+               :vars '((mu4e-maildir . "~/Mail/GMail")
+                       (mu4e-mu-home . "~/.mu-GMail")
+                       (mu4e-get-mail-command . "offlinegmail")
+                       (mu4e-drafts-folder . "/[Google Mail].Drafts") 
+                       (mu4e-sent-folder . "/[Google Mail].Sent Mail")
+                       (mu4e-trash-folder . "/[Google Mail].Trash")
+                       (mu4e-sent-messages-behaviour . 'delete)
+                       (user-mail-address . "tomreg.tr@gmail.com")))))
 
     ;; something about ourselves
-  (setq
-   user-full-name  "Tom Regner"
-   mu4e-compose-signature ""
-   )
+    (setq
+     user-full-name  "Tom Regner"
+     mu4e-compose-signature ""
+     )
 
-  ;; sending mail -- replace USERNAME with your gmail username
-  ;; also, make sure the gnutls command line utils are installed
-  ;; package 'gnutls-bin' in Debian/Ubuntu
+    ;; sending mail -- replace USERNAME with your gmail username
+    ;; also, make sure the gnutls command line utils are installed
+    ;; package 'gnutls-bin' in Debian/Ubuntu
 
-  (require 'smtpmail)
-  (setq message-send-mail-function 'smtpmail-send-it
-        smtpmail-stream-type 'starttls
-        smtpmail-default-smtp-server "goochesa.de"
-        smtpmail-smtp-server "goochesa.de"
-        smtpmail-smtp-service 587)
+    (require 'smtpmail)
+    (setq message-send-mail-function 'smtpmail-send-it
+          smtpmail-stream-type 'starttls
+          smtpmail-default-smtp-server "goochesa.de"
+          smtpmail-smtp-server "goochesa.de"
+          smtpmail-smtp-service 587)
 
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
-
+    ;; don't keep message buffers around
+    (setq message-kill-buffer-on-exit t))
 #+END_SRC
 * org-mode
 ** Variables
