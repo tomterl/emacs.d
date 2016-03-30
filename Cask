@@ -16,6 +16,8 @@
 (depends-on "async")
 (depends-on "auctex")
 (depends-on "auto-compile")
+(depends-on "auto-complete")
+(depends-on "avy")
 (depends-on "bash-completion")
 (depends-on "bind-key")
 (depends-on "cargo")
