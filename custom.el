@@ -93,7 +93,7 @@ static char *gnus-pointer[] = {
  '(hl-fg-colors
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
- '(linum-format " %6d " t)
+ '(linum-format " %6d ")
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments (quote ("--rebase")))
  '(magit-use-overlays nil t)
