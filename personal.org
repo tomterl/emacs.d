@@ -2106,6 +2106,7 @@ Check the doc comment of the current function for @param tags, create them if no
     (setq js-indent-level 2
           js2-basic-offset 2
           js2-bounce-indent-p t))
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
   
 #+END_SRC
