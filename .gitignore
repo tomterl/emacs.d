@@ -12,3 +12,8 @@ ac-comphist.dat
 url/*
 /projectile-bookmarks.eld
 tramp
+/bookmarks
+/games
+/ido.last
+/session.*
+/network-security.data
