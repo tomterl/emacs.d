@@ -1925,13 +1925,20 @@ Add speedbar support for elixir files.
 #+END_SRC
 
 ** PHP
-*** Use php-mode, not web-mode
+*** Use php-mode, not web-mode for PHP-code
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
   (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 #+END_SRC
 
+*** smarty 
+
+Use ~web-mode~ for smarty templates.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
+#+END_SRC
 *** Indentation and behaviour
 
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd.
