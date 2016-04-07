@@ -1524,6 +1524,8 @@ I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
 today :-). At work I use jabber.el.
 
 ** jabber.el
+
+*** notifications via DBUS
 #+BEGIN_SRC emacs-lisp
   (require 'notify)
 
@@ -1539,6 +1541,18 @@ today :-). At work I use jabber.el.
               text)))
 
   (add-hook 'jabber-alert-message-hooks 'notify-jabber-notify)
+#+END_SRC
+*** Don't clutter the minibuffer when it's active
+#+BEGIN_SRC emacs-lisp
+
+  (define-jabber-alert echo "Show a message in the echo area"
+    (lambda (msg)
+      (unless (minibuffer-prompt)
+        (message "%s" msg))))
+
+#+END_SRC
+*** Accounts and config
+#+BEGIN_SRC emacs-lisp
   (setq jabber-show-offline-contacts nil)
 
   (let ((fbjabb (netrc-machine (netrc-parse "~/.netrc") "fbjabb")))
