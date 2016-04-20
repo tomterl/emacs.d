@@ -3,21 +3,19 @@
 This file contains my configurations and adaptations to
 my now graphene based setup.
 
-:PROPERTIES:
-:tangle:	personal.el
-:END:
 ** Lambda
 
- Lambda as λ
+Lambda as λ
 
- #+BEGIN_SRC emacs-lisp
-   (defmacro λ (&rest body)
-     `(lambda ()
-        (interactive)
-        ,@body))
-  
-   (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defmacro λ (&rest body)
+    `(lambda ()
+       (interactive)
+       ,@body))
+
+  (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
+#+END_SRC
+
 
 * Packages
 
@@ -1214,6 +1212,7 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 #+BEGIN_SRC emacs-lisp 
   (when (not (tom/work?))
     (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+    (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
     (require 'mu4e)
     (setq mu4e-contexts
           `( ,(make-mu4e-context
@@ -1290,7 +1289,7 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 *** owncloud
 Use ~org-cladav~ to integrate with an owncloud calendar.
 
-#+BEGIN_SRC emacs-lisp
+x#+BEGIN_SRC emacs-lisp
   (defvar tom/--org-caldav-dir (expand-file-name "org-caldav" tom/--src-base))
   (add-to-list 'load-path tom/--org-caldav-dir)
   (require 'org-caldav)
@@ -1303,7 +1302,7 @@ Use ~org-cladav~ to integrate with an owncloud calendar.
    org-caldav-files (quote ("~/ownCloud/org-mode/todos.org"  "~/ownCloud/org-mode/joocom.org"))
    org-icalendar-timezone "Europe/Berlin")
 
-#+END_SRC
+x#+END_SRC
 
 *** mobileorg for android
 
@@ -1331,7 +1330,7 @@ The languages I like to use.
   (org-babel-do-load-languages
    'org-babel-load-languages 
    (quote
-    ((emacs-lisp . t) (R . t) (sh . t)
+    ((emacs-lisp . t)  (sh . t)
      (ditaa . t) (sass . t)
      (lisp . t) (gnuplot . t))))
 #+END_SRC 
@@ -1525,6 +1524,10 @@ today :-). At work I use jabber.el.
 
 ** jabber.el
 
+#+BEGIN_SRC emacs-lisp
+(when (tom/work?)
+#+END_SRC
+
 *** notifications via DBUS
 #+BEGIN_SRC emacs-lisp
   (require 'notify)
@@ -1563,6 +1566,11 @@ today :-). At work I use jabber.el.
              (:connection-type . starttls)))))
 #+END_SRC
 
+
+End the 'when'
+#+BEGIN_SRC emacs-lisp
+)
+#+END_SRC
 ** =circe= Options
 
 Reduce the 'leaving/enter' messages.
@@ -1941,7 +1949,7 @@ Automatically add =end= when typing =do=.
            '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
       (flycheck-mode 1)
       (yas-minor-mode 1)))
-          (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
+  (add-hook 'elixir-mode-hook 'tom/elixir-mode-hook)
 
 #+END_SRC
 *** Imenu 
@@ -1954,6 +1962,22 @@ Add speedbar support for elixir files.
   (speedbar-add-supported-extension ".exs")
 #+END_SRC
 
+** Rust
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "RUST_SRC_PATH" "/home/tom/Projects/rust/src")
+  (defun tom/rust-mode-hook ()
+    ""
+    (progn
+      (require 'company-racer)
+      (setq tab-width 4
+            c-basic-offset 4
+            indent-tabs-mode nil
+            )
+      (set (make-local-variable 'company-backends)
+           '((company-racer :with :sorted company-yasnippet)))))
+  (add-hook 'rust-mode-hook 'tom/rust-mode-hook)
+#+END_SRC
 ** PHP
 *** Use php-mode, not web-mode for PHP-code
 

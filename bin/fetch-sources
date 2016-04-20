@@ -1,20 +1,16 @@
 #!/bin/bash
 
+mkdir -p ~/.emacs.src.d
+
 pushd ${HOME}/.emacs.src.d
 
-#git clone https://orgmode.org/org-mode.git
-#pushd org-mode
-#git checkout maint
-#git checkout -b local
-#make compile
-#make autoloads
-#touch README
-#popd
-
-git clone http://git.gnus.org/gnus.git
-pushd gnus
+git clone https://orgmode.org/org-mode.git
+pushd org-mode
+git checkout maint
 git checkout -b local
-./configure && make
+make compile
+make autoloads
+touch README
 popd
 
 git clone https://github.com/fujii/Sublain.git
