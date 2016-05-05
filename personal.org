@@ -1546,15 +1546,6 @@ today :-). At work I use jabber.el.
 
   (add-hook 'jabber-alert-message-hooks 'notify-jabber-notify)
 #+END_SRC
-*** Don't clutter the minibuffer when it's active
-#+BEGIN_SRC emacs-lisp
-
-  (define-jabber-alert echo "Show a message in the echo area"
-    (lambda (msg)
-      (unless (minibuffer-prompt)
-        (message "%s" msg))))
-
-#+END_SRC
 *** Accounts and config
 #+BEGIN_SRC emacs-lisp
   (setq jabber-show-offline-contacts nil)
@@ -1567,6 +1558,15 @@ today :-). At work I use jabber.el.
              (:connection-type . starttls)))))
 #+END_SRC
 
+*** Don't clutter the minibuffer when it's active
++BEGIN_SRC emacs-lisp
+
+  (define-jabber-alert echo "Show a message in the echo area"
+    (lambda (msg)
+      (unless (minibuffer-prompt)
+        (message "%s" msg))))
+
++END_SRC
 
 End the 'when'
 #+BEGIN_SRC emacs-lisp
