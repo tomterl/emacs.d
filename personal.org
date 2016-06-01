@@ -1521,57 +1521,8 @@ Why the hell do I do this?
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
-today :-). At work I use jabber.el.
+today :-). 
 
-** jabber.el
-
-#+BEGIN_SRC emacs-lisp
-(when (tom/work?)
-#+END_SRC
-
-*** notifications via DBUS
-#+BEGIN_SRC emacs-lisp
-  (require 'notify)
-
-  (defun notify-jabber-notify (from buf text proposed-alert)
-    "(jabber.el hook) Notify of new Jabber chat messages via notify.el"
-    (when (or jabber-message-alert-same-buffer
-              (not (memq (selected-window) (get-buffer-window-list buf))))
-      (if (jabber-muc-sender-p from)
-          (notify (format "(PM) %s"
-                          (jabber-jid-displayname (jabber-jid-user from)))
-                  (format "%s: %s" (jabber-jid-resource from) text)))
-      (notify (format "%s" (jabber-jid-displayname from))
-              text)))
-
-  (add-hook 'jabber-alert-message-hooks 'notify-jabber-notify)
-#+END_SRC
-*** Accounts and config
-#+BEGIN_SRC emacs-lisp
-  (setq jabber-show-offline-contacts nil)
-
-  (let ((fbjabb (netrc-machine (netrc-parse "~/.netrc") "fbjabb")))
-    (setq jabber-account-list
-          `((,(netrc-get fbjabb "login")
-             (:network-server . ,(netrc-get fbjabb "account"))
-             (:password . ,(netrc-get fbjabb "password"))
-             (:connection-type . starttls)))))
-#+END_SRC
-
-*** Don't clutter the minibuffer when it's active
-+BEGIN_SRC emacs-lisp
-
-  (define-jabber-alert echo "Show a message in the echo area"
-    (lambda (msg)
-      (unless (minibuffer-prompt)
-        (message "%s" msg))))
-
-+END_SRC
-
-End the 'when'
-#+BEGIN_SRC emacs-lisp
-)
-#+END_SRC
 ** =circe= Options
 
 Reduce the 'leaving/enter' messages.
@@ -1580,6 +1531,20 @@ Reduce the 'leaving/enter' messages.
   (setq circe-reduce-lurker-spam t)
 #+END_SRC
 
+A more fluid display setup 
+#+BEGIN_SRC emacs-lisp
+  (setq
+   lui-time-stamp-position 'right-margin
+   lui-fill-type nil)
+
+  (add-hook 'lui-mode-hook 'tom/lui-setup)
+  (defun tom/lui-setup ()
+    (setq
+     fringes-outside-margins t
+     right-margin-width 7
+     word-wrap t
+     wrap-prefix "    "))
+#+END_SRC
 Enable logging for channels, this is nice for bitlbee conversations.
 
 The manual must be out of date, this doesn't load.
@@ -1598,7 +1563,7 @@ The manual must be out of date, this doesn't load.
 
 ** Don't show the names list at join
 #+BEGIN_SRC emacs-lisp
-(circe-set-display-handler "353" (lambda (&rest args) nil))
+;(circe-set-display-handler "353" (lambda (&rest args) nil))
 #+END_SRC
 ** Spellchecking
 
@@ -1611,19 +1576,27 @@ The manual must be out of date, this doesn't load.
 #+BEGIN_SRC emacs-lisp
   (defun tom/set-circe-options ()
     "Set the networks options dynamically just before connection,
-  after loading the passwords"
-    (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
-          (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
-      (setq circe-network-options
-            (list
-             (list "ZNC"
-                   :user (netrc-get --freenode "login")
-                   :host "muehlenweg.dyndns-home.com"
-                   :pass (netrc-get --freenode "password")
-                   )
-             (list "Bitlbee"
-                   :nick (netrc-get --bitlbee "login")
-                   :nickserv-password (netrc-get --bitlbee "password"))))))
+    after loading the passwords"
+    (if (tom/work?)
+        (let ((--bitlbee (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
+          (setq circe-network-options
+                (list
+                 (list "Bitlbee"
+                       :port 6667
+                       :nick (netrc-get --bitlbee "login")
+                       :nickserv-password (netrc-get --bitlbee "password")))))
+      (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
+            (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
+        (setq circe-network-options
+              (list
+               (list "ZNC"
+                     :user (netrc-get --freenode "login")
+                     :host "muehlenweg.dyndns-home.com"
+                     :pass (netrc-get --freenode "password")
+                     )
+               (list "Bitlbee"
+                     :nick (netrc-get --bitlbee "login")
+                     :nickserv-password (netrc-get --bitlbee "password")))))))
 #+END_SRC
    
 ** Smart connect
@@ -1639,7 +1612,7 @@ Straight out of the =circe= wiki
         (with-current-buffer buffer
           (if (string= network circe-server-network)
               (throw 'return t))))))
-  
+
   (defun circe-maybe-connect (network)
     "Connect to NETWORK, but ask user for confirmation if it's
   already been connected to."
@@ -1652,7 +1625,7 @@ Straight out of the =circe= wiki
     (interactive)
     (tom/set-circe-options)
     (circe-maybe-connect "ZNC")
-    (if (not (tom/work?)) (circe-maybe-connect "Bitlbee")))
+    (circe-maybe-connect "Bitlbee"))
 #+END_SRC
 
 ** Desktop notifications
@@ -1691,7 +1664,7 @@ notifications-close-notification expects an uint32 but gets a int32.
                      tom/chatnotification (notifications-notify 
                                            :title "Active Buffers"
                                            :body (tom/replace-html-chars current-bl)
-                                           :timeout 1500
+                                           :timeout 3000
                                            :desktop-entry "emacs24"
                                            :sound-name "message-new-entry"
                                            :transient))))))
