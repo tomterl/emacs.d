@@ -867,32 +867,8 @@ The following is old graphene/project-persist related stuff; should go.
    :PROPERTIES:
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
-
-My current dark theme.
-
 #+BEGIN_SRC emacs-lisp
-(deftheme tdark "dark theme with subdued colors")
-  (custom-theme-set-faces 'tdark
-                          '(default ((t (:foreground "#eae2b4" :background "#282828" ))))
-                          '(cursor ((t (:background "#fdf4c1" ))))
-                          '(fringe ((t (:background "#282828" ))))
-                          '(mode-line ((t (:foreground "#282828" :background "#7c6f64" ))))
-                          '(region ((t (:background "#335c41" ))))
-                          '(secondary-selection ((t (:background "#3e3834" ))))
-                          '(font-lock-builtin-face ((t (:foreground "#e2992b" ))))
-                          '(font-lock-comment-face ((t (:foreground "#7c6f64" ))))
-                          '(font-lock-function-name-face ((t (:foreground "#a7a94b" ))))
-                          '(font-lock-keyword-face ((t (:foreground "#cdb056" ))))
-                          '(font-lock-string-face ((t (:foreground "#409399" ))))
-                          '(font-lock-type-face ((t (:foreground "#d3869b" ))))
-                          '(font-lock-constant-face ((t (:foreground "#b478bd" ))))
-                          '(font-lock-variable-name-face ((t (:foreground "#83a598" ))))
-                          '(minibuffer-prompt ((t (:foreground "#b8bb26" :bold t ))))
-                          '(font-lock-warning-face ((t (:foreground "red" :bold t ))))
-                          '(magit-item-highlight-face ((t (:background "#cdb056"))))
-                          )
-                          (setq magit-use-overlays t)
-
+  (load-theme 'adwaita)
 #+END_SRC
 
 *** Adapt company-mode
@@ -918,11 +894,10 @@ My current dark theme.
 
 ** Modeline
 
-#+BEGIN_SRC emacs-lisp
+#BEGIN_SRC emacs-lisp
   (sml/setup)
-  (sml/apply-theme 'dark)
-  ;;(powerline-default-theme)
-#+END_SRC
+  (sml/apply-theme 'respectful)
+#END_SRC
 
 ** Colors on terminals
 
@@ -1583,7 +1558,6 @@ The manual must be out of date, this doesn't load.
           (setq circe-network-options
                 (list
                  (list "Bitlbee"
-                       :port 6667
                        :nick (netrc-get --bitlbee "login")
                        :nickserv-password (netrc-get --bitlbee "password")))))
       (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
@@ -1625,7 +1599,8 @@ Straight out of the =circe= wiki
     "Connect to all configured IRC servers"
     (interactive)
     (tom/set-circe-options)
-    (circe-maybe-connect "ZNC")
+    (if (not (tom/work?))
+        (circe-maybe-connect "ZNC"))
     (circe-maybe-connect "Bitlbee"))
 #+END_SRC
 
