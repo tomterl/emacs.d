@@ -1617,7 +1617,8 @@ notification in a given time intervall.
 
   (eval-after-load "circe-notifications"
     '(setq circe-notifications-watch-strings
-           '("Martin" "mregner" "Sascha" "saschab" "bgeisler" "sabrina" "olivers")))
+           '("Martin" "mregner" "Sascha" "saschab" "bgeisler" "sabrina" "olivers")
+           circe-notifications-timeout 3000))
 
   (add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 #+END_SRC
