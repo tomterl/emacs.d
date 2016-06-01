@@ -120,6 +120,7 @@
 (depends-on "noflet")
 (depends-on "notify")
 (depends-on "omni-scratch")
+(depends-on "org")
 (depends-on "org-journal")
 (depends-on "origami")
 (depends-on "package-build")
