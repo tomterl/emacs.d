@@ -141,6 +141,7 @@
 (depends-on "projectile")
 (depends-on "psysh")
 (depends-on "racer")
+(depends-on "ranger")
 (depends-on "repl-toggle")
 (depends-on "restclient")
 (depends-on "rich-minority")
