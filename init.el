@@ -20,12 +20,15 @@
 ;; Code
 (require 'cl-lib)
 
+;; local, not packaged extensions
+(add-to-list 'load-path (expand-file-name "site" tom/--emacs-dir))
 
+;; load personal.org
 (let ((org-lisp-dir (expand-file-name "lisp" tom/--org-base)))
-   (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir)))
-     (when (file-directory-p org-lisp-dir)
-       (add-to-list 'load-path org-lisp-dir)
-       (require 'org)
-       (org-babel-load-file org-file))))
+  (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir)))
+    (when (file-directory-p org-lisp-dir)
+      (add-to-list 'load-path org-lisp-dir)
+      (require 'org)
+      (org-babel-load-file org-file))))
 
 ;;; init.el ends here
