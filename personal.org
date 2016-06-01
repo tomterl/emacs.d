@@ -1981,7 +1981,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
   (defun tom/php-mode-hook ()
     ""
     (progn 
-      (require 'ac-php-company)
+      (require 'company-php)
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
