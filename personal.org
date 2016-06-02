@@ -899,6 +899,13 @@ The following is old graphene/project-persist related stuff; should go.
   (sml/apply-theme 'respectful)
 #END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (diminish 'golden-ratio-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'whitespace-mode)
+  (diminish 'company-mode "cy")
+  (diminish 'org-src-mode "os")
+#+END_SRC
 ** Colors on terminals
 
 #+BEGIN_SRC emacs-lisp
@@ -924,10 +931,11 @@ characters and newlines is a possible lifesaver.
           (newline-mark 10 [8629 10])
           (tab-mark 9 [8677 9] [92 9])
           ))
-  
+
           (setq whitespace-style '(face tabs newline tab-mark newline-mark))
-  
-  (global-whitespace-mode)
+
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+  (add-hook 'text-mode-hook 'whitespace-mode)
 #+END_SRC
 
 	
