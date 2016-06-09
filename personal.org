@@ -658,6 +658,20 @@ Inspired/copied from endless parentheses blog
       (set-window-dedicated-p curr-win t)))
 #+END_SRC
 
+*** perspectives
+#+BEGIN_SRC emacs-lisp
+  (global-set-key
+   (kbd "H-P")
+   (defhydra hydra-persp (:color red)
+     "Perspective"
+     ("d" projectile-persp-switch-project "Switch dired")
+     ("s" (call-interactively 'persp-switch) "Switch/Create")
+     ("m" (call-interactively 'persp-set-buffer) "Move buffer")
+     ("n" persp-next "Next")
+     ("p" persp-prev)
+     ("q" nil "Quit")))
+
+#+END_SRC
 * GPG setup
 
 GPG is handled almost transparently in emacs nowadays; this setup
