@@ -510,7 +510,7 @@ Inspired/copied from endless parentheses blog
      ("G" rgrep "grep")
      ("h" man "man")
      ("p" paradox-list-packages "packages")
-     ("s" eshell "shell")
+     ("s" tom/eshell "shell")
      ("t" proced "proced")
      ))
 
@@ -715,7 +715,18 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
 
   (add-to-list 'eshell-visual-commands "htop")
   (add-to-list 'eshell-visual-commands "vim")
-
+  (add-hook 'eshell-mode-hook 'eshell-smart-initialize)
+  (defun tom/eshell ()
+    "Start or switch to an eshell specific to the current
+        projectile project, or the global '*eshell*' if not in a
+        project"
+    (interactive)
+    (if (projectile-project-p)
+        (let* ((-project-root (projectile-project-root))
+               (-project (projectile-default-project-name -project-root))
+               (eshell-buffer-name (concat "* " -project " eshell *")))
+          (eshell))
+      (eshell)))
 #+END_SRC
 
 * Completion
