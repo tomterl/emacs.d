@@ -19,10 +19,9 @@
  '(cua-normal-cursor-color "#657b83")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
  '(custom-safe-themes
    (quote
-    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "95db78d85e3c0e735da28af774dfa59308db832f84b8a2287586f5b4f21a7a5b" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("ba9be9caf9aa91eb34cf11ad9e8c61e54db68d2d474f99a52ba7e87097fa27f5" "af53ecfbc4ceca20dc5bfc66c88544a216324bee58507c2624dda25cde7e98f4" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "95db78d85e3c0e735da28af774dfa59308db832f84b8a2287586f5b4f21a7a5b" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
@@ -74,6 +73,7 @@ static char *gnus-pointer[] = {
 \"###....####.######\",
 \"###..######.######\",
 \"###########.######\" };")) t)
+ '(golden-ratio-mode t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
@@ -107,7 +107,7 @@ static char *gnus-pointer[] = {
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (diminish color-theme-sanityinc-tomorrow ranger notify company-racer company-tern cargo flycheck-rust racer rust-mode rustfmt fullframe nlinum psysh paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy popwin popup phpunit php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+    (firebelly-theme diminish color-theme-sanityinc-tomorrow ranger notify company-racer company-tern cargo flycheck-rust racer rust-mode rustfmt fullframe nlinum psysh paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy popwin popup phpunit php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
  '(paradox-automatically-star nil)
  '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
  '(pos-tip-background-color "#eee8d5")

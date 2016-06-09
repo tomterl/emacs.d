@@ -61,6 +61,7 @@
 (depends-on "f")
 (depends-on "feature-mode")
 (depends-on "fill-column-indicator")
+(depends-on "firebelly-theme")
 (depends-on "flatland-theme")
 (depends-on "flx-ido")
 (depends-on "flx-isearch")

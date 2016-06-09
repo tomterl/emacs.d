@@ -868,7 +868,7 @@ The following is old graphene/project-persist related stuff; should go.
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'adwaita)
+  (load-theme 'firebelly)
 #+END_SRC
 
 *** Adapt company-mode
@@ -894,10 +894,10 @@ The following is old graphene/project-persist related stuff; should go.
 
 ** Modeline
 
-#BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (sml/setup)
-  (sml/apply-theme 'respectful)
-#END_SRC
+  (sml/apply-theme 'dark)
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (diminish 'golden-ratio-mode)
