@@ -87,6 +87,7 @@
 (depends-on "handlebars-mode")
 (depends-on "haskell-mode")
 (depends-on "highlight-thing")
+(depends-on "hindent")
 (depends-on "htmlize")
 (depends-on "httprepl")
 (depends-on "hydra")
