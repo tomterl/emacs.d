@@ -74,6 +74,11 @@ static char *gnus-pointer[] = {
 \"###..######.######\",
 \"###########.######\" };")) t)
  '(golden-ratio-mode t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote cabal-repl))
+ '(haskell-tags-on-save t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
@@ -91,6 +96,7 @@ static char *gnus-pointer[] = {
      ("#F2804F" . 70)
      ("#F771AC" . 85)
      ("#eee8d5" . 100))))
+ '(hindent-style "gibiansky")
  '(hl-bg-colors
    (quote
     ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
