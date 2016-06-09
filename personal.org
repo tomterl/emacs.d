@@ -917,8 +917,12 @@ The following is old graphene/project-persist related stuff; should go.
   (diminish 'golden-ratio-mode)
   (diminish 'undo-tree-mode)
   (diminish 'whitespace-mode)
-  (diminish 'company-mode "cy")
-  (diminish 'org-src-mode "os")
+  (diminish 'company-mode)
+  (diminish 'org-src-mode)
+  (diminish 'projectile-mode)
+  (diminish 'repl-toggle-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'whitespace-mode)
 #+END_SRC
 ** Colors on terminals
 
