@@ -197,4 +197,5 @@ static char *gnus-pointer[] = {
  '(company-scrollbar-fg ((t (:background "#ffffff"))))
  '(company-tooltip ((t (:inherit default :background "#ffffff"))))
  '(company-tooltip-common ((t (:inherit default :background "#ffffff" :foreground "#191919"))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face)))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "#393939")))))
