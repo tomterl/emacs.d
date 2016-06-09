@@ -965,8 +965,7 @@ characters and newlines is a possible lifesaver.
           (tab-mark 9 [8677 9] [92 9])
           ))
 
-          (setq whitespace-style '(face tabs newline tab-mark newline-mark))
-
+  (setq whitespace-style '(face tabs newline tab-mark newline-mark))
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
 #+END_SRC
@@ -1545,6 +1544,10 @@ today :-).
 Reduce the 'leaving/enter' messages.
 
 #+BEGIN_SRC emacs-lisp
+  (enable-circe-color-nicks)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (setq circe-reduce-lurker-spam t)
 #+END_SRC
 
@@ -1574,9 +1577,6 @@ The manual must be out of date, this doesn't load.
 
 ** Color the nicknames.
 
-#+BEGIN_SRC emacs-lisp
-  (enable-circe-color-nicks)
-#+END_SRC
 
 ** Don't show the names list at join
 #+BEGIN_SRC emacs-lisp
@@ -1593,7 +1593,7 @@ The manual must be out of date, this doesn't load.
 #+BEGIN_SRC emacs-lisp
   (defun tom/set-circe-options ()
     "Set the networks options dynamically just before connection,
-    after loading the passwords"
+      after loading the passwords"
     (if (tom/work?)
         (let ((--bitlbee (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
           (setq circe-network-options
@@ -1609,6 +1609,7 @@ The manual must be out of date, this doesn't load.
                      :user (netrc-get --freenode "login")
                      :host "muehlenweg.dyndns-home.com"
                      :pass (netrc-get --freenode "password")
+                     :port 6667
                      )
                (list "Bitlbee"
                      :nick (netrc-get --bitlbee "login")
