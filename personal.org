@@ -510,7 +510,7 @@ Inspired/copied from endless parentheses blog
      ("G" rgrep "grep")
      ("h" man "man")
      ("p" paradox-list-packages "packages")
-     ("s" shell "shell")
+     ("s" eshell "shell")
      ("t" proced "proced")
      ))
 
