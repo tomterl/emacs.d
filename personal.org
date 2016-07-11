@@ -1534,6 +1534,10 @@ Why the hell do I do this?
                  :recursive t
                  :publishing-function org-publish-attachment)))))
 #+END_SRC
+** Presentations
+#+BEGIN_SRC emacs-lisp
+(setq org-reveal-root "file:///home/tregner/opt/reveal.js")
+#+END_SRC
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
