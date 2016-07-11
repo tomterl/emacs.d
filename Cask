@@ -125,6 +125,7 @@
 (depends-on "org")
 (depends-on "org-journal")
 (depends-on "origami")
+(depends-on "outline-magic")
 (depends-on "package-build")
 (depends-on "packed")
 (depends-on "pallet")

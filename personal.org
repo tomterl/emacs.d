@@ -2176,7 +2176,6 @@ definitions as used in fb-core et.al.
   (rtog/add-repl 'groovy-mode (rtog/switch-to-shell-buffer "*groovy*" 'run-groovy))
 #+END_SRC
 
-** Haskell
 #+BEGIN_SRC emacs-lisp
   (defun tom/haskell-mode-hook ()
       ""
@@ -2209,6 +2208,17 @@ definitions as used in fb-core et.al.
                                      (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
                                      (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
                                      (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
+#+END_SRC
+
+* RESTful
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'outline
+    '(progn
+       (require 'outline-magic)
+       (define-key outline-minor-mode-map
+         (kbd "<C-tab>")
+         'outline-cycle)))
 #+END_SRC
 * Slime
 
