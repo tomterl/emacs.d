@@ -2366,7 +2366,11 @@ Focus on the current window and the ag-result buffer.
  #+END_SRC
 
 * Server
-
+** httpd server
+#+BEGIN_SRC emacs-lisp
+  (setq httpd-port 8081)
+#+END_SRC
+** emacs server
 Always have an emacs server running.
 
 #+BEGIN_SRC emacs-lisp
