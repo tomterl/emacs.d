@@ -1356,7 +1356,7 @@ The languages I like to use.
 The =ditaa.jar= location;
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-ditaa-jar-path  "~/.emacs.d/elpa/contrib/scripts/ditaa.jar")
+  (setq org-ditaa-jar-path  (concat tom/--org-base "/contrib/scripts/ditaa.jar"))
 #+END_SRC
 
 I really like org-babel to use zsh
