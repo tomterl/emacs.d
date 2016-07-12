@@ -541,7 +541,8 @@ Inspired/copied from endless parentheses blog
      ("L" toggle-truncate-lines "truncate lines")
      ("g" golden-ratio-mode "1.61803")
      ("q" toggle-debug-on-quit "debug on quit")
-     ("n" narrow-or-widen-dwim "narrow")))
+     ("n" narrow-or-widen-dwim "narrow")
+     ("b" tom/ob-confirm-toggle "babel confirmation")))
 
 #+END_SRC
 
@@ -1366,11 +1367,11 @@ I really like org-babel to use zsh
 
 Don't confirm evaluation.
 #+BEGIN_SRC emacs-lisp
-  (defun tom/ob-confirm-off ()
-    "Turn confirmation for babel code block evaluation off."
+  (defun tom/ob-confirm-toggle ()
+    "Turn confirmation for babel code block evaluation on/off."
     (interactive)
-    (setq org-confirm-babel-evaluate nil))
-  (global-set-key (kbd "C-c c") 'tom/ob-confirm-off)
+    (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
+  (global-set-key (kbd "C-c c") 'tom/ob-confirm-toggle)
 #+END_SRC
 ** Tangle hook
 
