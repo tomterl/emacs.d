@@ -3,9 +3,11 @@
 # key: fun
 # --
 /**
+ * ${1:Short Description}
+ * 
  * @author `fb-author`
  * @since  `(tom/insert-current-date 4)`
  */
-${1:public} function ${2:name}(${3:\$params}) {
-    ${4: $(tom/php-check-params)}$0
+${2:$$(yas-choose-value '("public" "protected" "private"))}${3:$$(yas-choose-value '(" " "static "))}function ${4:name}(${5:\$params}) {
+    ${6: $(tom/php-check-params)}$0
 } 

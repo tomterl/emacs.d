@@ -549,6 +549,7 @@ Inspired/copied from endless parentheses blog
 **** Narrowing
 
 #+BEGIN_SRC emacs-lisp
+  (setq narrow-to-defun-include-comments t)
   (defun narrow-or-widen-dwim (p)
     "If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
   Intelligently means: region, org-src-block, org-subtree, or defun,
@@ -642,6 +643,7 @@ Inspired/copied from endless parentheses blog
 #+BEGIN_SRC emacs-lisp
   (require 'yasnippet)
   (yas-reload-all)
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 #+END_SRC
 ** Sticky window
 #+BEGIN_SRC emacs-lisp
@@ -2039,7 +2041,7 @@ Check the doc comment of the current function for @param tags, create them if no
                  (type (if (cadr parts) (car parts) nil))
                  (name (car param-parts))
                  (default (cadr param-parts))
-                 (typemsg (if type type (if (numberp default) "int" "")))
+                 (typemsg (if type type (if (numberp default) "int" "mixed")))
                  (defaultmsg (if default
                                  (concat "optional, default '"
                                          (if (numberp default)
@@ -2052,11 +2054,17 @@ Check the doc comment of the current function for @param tags, create them if no
                 (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
                        (param-text (s-join " " (list "\n* @param" text1))))
                   (if (> (length text1) 0)
-                      (progn (if (search-backward "/**" nil t)
-                                 (forward-char 3)
-                               (progn (goto-char (point-min))(insert "/**\n*/\n")(backward-char 4)))
-                             (insert param-text)
-                             (indent-according-to-mode)))))))))
+                      (progn
+                        (goto-char (point-max))
+                        (if (search-backward-regexp "^ +\\* *$" nil t)
+                            (goto-char (line-end-position))
+                          (progn
+                            (goto-char (point-min))
+                            (insert "/**\n*/\n")(backward-char 4)))
+                        (insert param-text)
+                        (indent-according-to-mode)
+                        (insert "\n* ")
+                        (indent-according-to-mode)))))))))
       (widen)))
 #+END_SRC
 *** ~phpunit~
