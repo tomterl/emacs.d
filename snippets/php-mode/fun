@@ -5,6 +5,7 @@
 /**
  * ${1:Short Description}
  * 
+ * @return ${7:type}
  * @author `fb-author`
  * @since  `(tom/insert-current-date 4)`
  */

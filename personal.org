@@ -642,6 +642,7 @@ Inspired/copied from endless parentheses blog
 #+END_SRC
 #+BEGIN_SRC emacs-lisp
   (require 'yasnippet)
+  (require 'warnings)
   (yas-reload-all)
   (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 #+END_SRC
@@ -1997,7 +1998,9 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
-      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)))
+      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
+      (setq-local helm-dash-docsets '("PHP"))))
+  
     (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
@@ -2034,7 +2037,7 @@ Check the doc comment of the current function for @param tags, create them if no
       (goto-char (point-min))
       (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
       (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
-        (dolist (param (reverse params))
+        (dolist (param params)
           (let* ((parts (split-string param " "))
                  (pname (if (cadr parts) (cadr parts) (car parts)))
                  (param-parts (split-string pname "=" t " "))
@@ -2159,14 +2162,15 @@ Check the doc comment of the current function for @param tags, create them if no
     (progn
       (require 'tern)
       (require 'company-tern)
-  
+    
       (set (make-local-variable 'company-backends)
            '((company-tern :with :sorted company-yasnippet)))
       (ggtags-mode -1)
       (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
-      (tern-mode t)))
+      (tern-mode t)
+      (setq-local helm-dash-docsets '("JavaScript"))))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
 #+END_SRC
 ** YAML

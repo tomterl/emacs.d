@@ -5,6 +5,7 @@
 
 (depends-on "2048-game")
 (depends-on "ac-php")
+(depends-on "ac-php-core")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-jump-mode")
 (depends-on "ace-window")
@@ -90,6 +91,7 @@
 (depends-on "grunt")
 (depends-on "handlebars-mode")
 (depends-on "haskell-mode")
+(depends-on "helm-dash")
 (depends-on "highlight-thing")
 (depends-on "hindent")
 (depends-on "htmlize")
