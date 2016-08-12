@@ -1900,6 +1900,10 @@ Sensible setup found at 'or emacs('.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-c") 'string-inflection-cycle)
 #+END_SRC
+** Lookup documentation 
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-z") 'zeal-at-point)
+#+END_SRC
 * Languages
 ** Elixir
 
@@ -1998,8 +2002,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
-      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
-      (setq-local helm-dash-docsets '("PHP"))))
+      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)))
   
     (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
@@ -2169,8 +2172,7 @@ Check the doc comment of the current function for @param tags, create them if no
       (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
-      (tern-mode t)
-      (setq-local helm-dash-docsets '("JavaScript"))))
+      (tern-mode t)))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
 #+END_SRC
 ** YAML

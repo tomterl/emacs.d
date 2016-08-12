@@ -91,7 +91,6 @@
 (depends-on "grunt")
 (depends-on "handlebars-mode")
 (depends-on "haskell-mode")
-(depends-on "helm-dash")
 (depends-on "highlight-thing")
 (depends-on "hindent")
 (depends-on "htmlize")
@@ -207,3 +206,4 @@
 (depends-on "yagist")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+(depends-on "zeal-at-point")
