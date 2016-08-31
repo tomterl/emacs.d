@@ -2201,7 +2201,7 @@ definitions as used in fb-core et.al.
       ""
     (progn
       (hindent-mode 1)
-      (aggressiv-indent-mode -1)))
+      (aggressive-indent-mode -1)))
 
   (add-hook 'haskell-mode-hook 'tom/haskell-mode-hook)
 
