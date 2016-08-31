@@ -1648,6 +1648,7 @@ Straight out of the =circe= wiki
   (defun irc ()
     "Connect to all configured IRC servers"
     (interactive)
+    (persp-switch "chat")
     (tom/set-circe-options)
     (if (not (tom/work?))
         (circe-maybe-connect "ZNC"))
