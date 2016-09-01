@@ -2033,6 +2033,9 @@ Geben is old and un(der)maintained, but it works...
 
  #+BEGIN_SRC emacs-lisp
    (setq geben-dbgp-default-port 9000)
+   (setq geben-display-window-function 'switch-to-buffer)
+   (setq geben-full-frame-mode t)
+
  #+END_SRC
 
 Reroute remote paths to my dev-server and the vagrant user.
