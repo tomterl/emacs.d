@@ -1905,6 +1905,26 @@ Sensible setup found at 'or emacs('.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-z") 'zeal-at-point)
 #+END_SRC
+** Occur ~word-at-point~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/occur-tap ()
+    "Call occur with word-at-point"
+    (interactive)
+    (occur (word-at-point))
+    )
+  (defun tom/kill-occur-window ()
+    "Kill the *Occur* buffer/window"
+    (interactive)
+    (let ((buffer (get-buffer "*Occur*")))
+      (when buffer
+        (with-current-buffer-window
+         buffer
+         nil
+         nil
+         (kill-buffer-and-window)))))
+  (global-set-key (kbd "H-f") 'tom/occur-tap)
+  (global-set-key (kbd "H-F") 'tom/kill-occur-window)
+#+END_SRC
 * Languages
 ** Elixir
 

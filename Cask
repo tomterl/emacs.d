@@ -103,6 +103,7 @@
 (depends-on "itail")
 (depends-on "ix")
 (depends-on "jabber")
+(depends-on "jade")
 (depends-on "jade-mode")
 (depends-on "js-comint")
 (depends-on "js2-mode")
