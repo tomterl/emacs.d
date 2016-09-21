@@ -1925,6 +1925,10 @@ Sensible setup found at 'or emacs('.
   (global-set-key (kbd "H-f") 'tom/occur-tap)
   (global-set-key (kbd "H-F") 'tom/kill-occur-window)
 #+END_SRC
+** View buffers
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-v") 'view-mode)
+#+END_SRC
 * Languages
 ** Elixir
 
