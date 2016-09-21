@@ -519,7 +519,7 @@ Inspired/copied from endless parentheses blog
 *** hjkl-navigation
 #+BEGIN_SRC emacs-lisp
   (global-set-key
-   (kbd "H-v")
+   (kbd "H-V")
    (defhydra hydra-vim-navi (:color red)
      "navigate"
      ("h" backward-char "left")
