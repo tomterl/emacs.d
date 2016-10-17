@@ -810,6 +810,7 @@ Use projectile automatically.
 #+END_SRC 
 
 #+BEGIN_SRC emacs-lisp
+(require 'projectile)
   (add-to-list 'projectile-globally-ignored-directories ".git")
   (add-to-list 'projectile-globally-ignored-directories "base/.git")
   (add-to-list 'projectile-globally-ignored-directories "includes/.git")
