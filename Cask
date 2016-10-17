@@ -120,6 +120,7 @@
 (depends-on "magit")
 (depends-on "magit-popup")
 (depends-on "markdown-mode")
+(depends-on "material-theme")
 (depends-on "minimap")
 (depends-on "multiple-cursors")
 (depends-on "names")
