@@ -845,6 +845,21 @@ The following is old graphene/project-persist related stuff; should go.
 ** Font
 
 #+BEGIN_SRC emacs-lisp
+  (defvar tom/default-font "-CTDB-Fira Code-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+    "The font to use under normal circumstances")
+
+  (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-10-*-*-*-*-0-iso10646-1"
+    "Font to use, if the default font misses a glyph.")
+
+  (setq default-frame-alist `((font . ,tom/default-font)))
+
+  (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
+
+   (add-hook
+    'after-make-frame-functions
+    (lambda (frame)
+      (set-fontset-font "fontset-default"
+                        '(#x10000 . #x1ffff) tom/fallback-font frame)))
   ;;; Fira code
   ;; This works when using emacs --daemon + emacsclient
   (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
@@ -859,7 +874,7 @@ The following is old graphene/project-persist related stuff; should go.
                      (compose-region (match-beginning 1)
                                      (match-end 1)
                                      ;; The first argument to concat is a string containing a literal tab
-                                     ,(concat "   " (list (decode-char 'ucs (cadr regex-char-pair)))))))))
+                                     ,(concat  "	" (list (decode-char 'ucs (cadr regex-char-pair)))))))))
             '(("\\(www\\)"                   #Xe100)
               ("[^/]\\(\\*\\*\\)[^/]"        #Xe101)
               ("\\(\\*\\*\\*\\)"             #Xe102)
@@ -972,26 +987,11 @@ The following is old graphene/project-persist related stuff; should go.
               ("[^\\+<>]\\(\\+\\)[^\\+<>]"   #Xe16d)
               ("[^\\*/<>]\\(\\*\\)[^\\*/<>]" #Xe16f))))
 
-    (defun add-fira-code-symbol-keywords ()
-      (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
+  (defun add-fira-code-symbol-keywords ()
+    (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
 
-    (add-hook 'prog-mode-hook
-              #'add-fira-code-symbol-keywords)
-    (defvar tom/default-font "-CTDB-Fira Code-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-      "The font to use under normal circumstances")
-    (defvar tom/fallback-font "-unknown-Symbola-normal-normal-semicondensed-*-10-*-*-*-*-0-iso10646-1"
-      "Font to use, if the default font misses a glyph.")
-
-    (setq default-frame-alist `((font . ,tom/default-font)))
-
-    ;; (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
-
-    ;; (add-hook
-    ;;  'after-make-frame-functions
-    ;;  (lambda (frame)
-    ;;    (set-fontset-font "fontset-default"
-    ;;                      '(#x10000 . #x1ffff) tom/fallback-font frame)))
-
+  (add-hook 'prog-mode-hook
+            #'add-fira-code-symbol-keywords)
 #+END_SRC
 
 ** Fontlock et.al.
