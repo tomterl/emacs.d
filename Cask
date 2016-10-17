@@ -74,6 +74,7 @@
 (depends-on "flymake-cursor")
 (depends-on "flymake-elixir")
 (depends-on "flymake-yaml")
+(depends-on "focus")
 (depends-on "fringe-helper")
 (depends-on "fsm")
 (depends-on "fullframe")

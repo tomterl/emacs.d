@@ -783,7 +783,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
                            "/")))
             (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "yellow"))
            (or (curr-dir-git-branch-string (eshell/pwd)))
-           (propertize "# " 'face 'default))))
+           (propertize "$ " 'face 'default))))
 
   (setq eshell-highlight-prompt nil)
 #+END_SRC
