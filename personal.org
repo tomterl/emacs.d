@@ -1113,7 +1113,7 @@ The following is old graphene/project-persist related stuff; should go.
 
 #+BEGIN_SRC emacs-lisp
   (sml/setup)
-  (sml/apply-theme 'light)
+  (sml/apply-theme 'automatic)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
