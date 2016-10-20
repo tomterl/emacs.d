@@ -761,7 +761,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
                 (if (> (length git-output) 0)
                     (substring git-output 0 -1)
                   "(no branch)")
-                "]") 'face `(:foreground "green"))
+                "]") 'face `(:foreground "darkgreen"))
         )))
 
   (setq eshell-prompt-function
@@ -781,7 +781,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
                 (mapconcat (lambda (elm) elm)
                            p-lst
                            "/")))
-            (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "yellow"))
+            (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "orange"))
            (or (curr-dir-git-branch-string (eshell/pwd)))
            (propertize "$ " 'face 'default))))
 
