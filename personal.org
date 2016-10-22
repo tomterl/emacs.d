@@ -676,6 +676,10 @@ Inspired/copied from endless parentheses blog
      ("q" nil "Quit")))
 
 #+END_SRC
+** COMMENT Tramp Setup
+#+BEGIN_SRC emacs-lisp
+  (setq tramp-shell-prompt-pattern "\\(?:^\\| \\)[^]#$%>❯\n]*#?[]#$%>❯] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
+#+END_SRC
 * GPG setup
 
 GPG is handled almost transparently in emacs nowadays; this setup
