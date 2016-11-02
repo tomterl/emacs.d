@@ -1085,7 +1085,7 @@ The following is old graphene/project-persist related stuff; should go.
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'material-light)
+  (load-theme 'railscast-reloaded)
 #+END_SRC
 
 *** Adapt company-mode
