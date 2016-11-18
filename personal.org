@@ -1142,8 +1142,7 @@ Show uncomitted changes in the fringe.
 #+BEGIN_SRC emacs-lisp
   (require 'diff-hl)
   (global-diff-hl-mode)
-  (defadvice magit-mode-quit-window (after update-diff-hl-after-commit activate)
-    (diff-hl-update))
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 #+END_SRC
 ** Whitespace visualization
 
