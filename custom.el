@@ -213,4 +213,5 @@ static char *gnus-pointer[] = {
  '(company-tooltip-common ((t (:inherit default :background "#ffffff" :foreground "#191919"))))
  '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#393939"))))
- '(font-lock-variable-name-face ((t (:foreground "#666666")))))
+ '(font-lock-variable-name-face ((t (:foreground "#666666"))))
+ '(woman-italic ((t (:inherit italic)))))
