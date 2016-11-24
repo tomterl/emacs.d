@@ -874,6 +874,7 @@ Use projectile automatically.
   (add-to-list 'projectile-globally-ignored-directories "includes/.git")
   (add-to-list 'projectile-project-root-files "RoboFile.php")
   (add-to-list 'projectile-project-root-files "manifest.json")
+  (add-to-list 'projectile-project-root-files ".projectile")
   (setq projectile-project-root-files-functions '(projectile-root-top-down))
   (setq projectile-switch-project-action 'projectile-find-dir)
   (setq projectile-find-dir-includes-top-level t)
