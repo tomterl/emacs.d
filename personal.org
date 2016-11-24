@@ -863,9 +863,19 @@ the stuff I entered.
 ** projectile
 
 Use projectile automatically.
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook (λ () (progn (require 'dash)(projectile-mode 1))))
 #+END_SRC 
+
+Ignore .git, and especially those in base/includes which are always to
+be treated as part of the project by projectile.
+
+Marking the root of a project are only 
+
+- ~RoboFile.php~ for php-projects
+- ~manifest.json~ for node/foxx applications (javascript)
+- ~.projectile~ as manually added mark for other project types
 
 #+BEGIN_SRC emacs-lisp
 (require 'projectile)
