@@ -1218,6 +1218,12 @@ This is a birds eye view of the current buffer.
                                             (abbreviate-file-name (buffer-name))
                                           "%b"))))
 #+END_SRC
+** Dashboard
+
+#+BEGIN_SRC emacs-lisp
+(dashboard-setup-startup-hook)
+#+END_SRC
+
 * GNUS News and Mail
 
 #+BEGIN_SRC emacs-lisp
