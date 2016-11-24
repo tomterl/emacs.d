@@ -901,15 +901,6 @@ Marking the root of a project are only
   (global-set-key (kbd "H-p") 'projectile-commander)
 
 #+END_SRC
-*** deprecated
-The following is old graphene/project-persist related stuff; should go.
-
-#+BEGIN_SRC emacs-lisp
-;  (add-hook 'project-persist-after-load-hook
-;        (add-hook 'prog-mode-hook (λ () (projectile-mode 1)))
-;  (add-hook 'project-persist-after-close-hook
-;            (λ () (projectile-mode -1)))
-#+END_SRC
 
 * Appearance
 ** Font
