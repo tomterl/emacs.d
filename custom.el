@@ -124,7 +124,10 @@ static char *gnus-pointer[] = {
  '(projectile-global-mode t)
  '(safe-local-variable-values
    (quote
-    ((eval when
+    ((projectile-ignored-directories list ".cask")
+     (projectile-indexing-method . native)
+     (projectile-enable-caching . t)
+     (eval when
            (fboundp
             (quote rainbow-mode))
            (rainbow-mode 1))

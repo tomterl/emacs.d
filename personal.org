@@ -872,6 +872,7 @@ Use projectile automatically.
   (add-to-list 'projectile-globally-ignored-directories ".git")
   (add-to-list 'projectile-globally-ignored-directories "base/.git")
   (add-to-list 'projectile-globally-ignored-directories "includes/.git")
+  (add-to-list 'projectile-globally-ignored-directories ".cask")
   (add-to-list 'projectile-project-root-files "RoboFile.php")
   (add-to-list 'projectile-project-root-files "manifest.json")
   (add-to-list 'projectile-project-root-files ".projectile")
