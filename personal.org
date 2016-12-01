@@ -1918,7 +1918,7 @@ Indent autimatically as aggressive as possible:
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook 'aggressive-indent-mode)
 #+END_SRC
-** Flyspell: Change dictionary 
+** Flyspell: Change dictionary; key-bindings
 
 #+BEGIN_SRC emacs-lisp
   (defun fd-switch-dictionary()
@@ -1932,6 +1932,10 @@ Indent autimatically as aggressive as possible:
   (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
 #+END_SRC 
 
+#+BEGIN_SRC emacs-lisp
+  (require 'flyspell-correct-ido)
+  (define-key flyspell-mode-map (kbd "H-;") 'flyspell-correct-previous-word-generic)
+#+END_SRC
 ** Multiple Cursors
 
 #+BEGIN_SRC emacs-lisp
