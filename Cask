@@ -145,6 +145,7 @@
 (depends-on "ox-reveal")
 (depends-on "package-build")
 (depends-on "packed")
+(depends-on "page-break-lines")
 (depends-on "pallet")
 (depends-on "paradox")
 (depends-on "paredit")
