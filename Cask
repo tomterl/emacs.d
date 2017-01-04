@@ -167,6 +167,7 @@
 (depends-on "railscasts-reloaded-theme")
 (depends-on "ranger")
 (depends-on "repl-toggle")
+(depends-on "request")
 (depends-on "restclient")
 (depends-on "rich-minority")
 (depends-on "rinari")
