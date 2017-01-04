@@ -1,2 +1,2 @@
 alias ff find-file $1
-alias fbup pushd /srv/www/versdiagnose/;  git pull;pushd base; git pull; popd;pushd includes; git pull; popd; robo reset; popd
+alias fbup pushd $(projectile-project-root);  git pull;pushd base; git pull; popd;pushd includes; git pull; popd; robo reset; popd
