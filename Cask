@@ -62,6 +62,7 @@
 (depends-on "epresent")
 (depends-on "erc-image")
 (depends-on "erc-tweet")
+(depends-on "es-mode")
 (depends-on "espuds")
 (depends-on "ess")
 (depends-on "expand-region")

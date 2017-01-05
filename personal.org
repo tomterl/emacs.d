@@ -2424,6 +2424,13 @@ definitions as used in fb-core et.al.
          (kbd "<C-tab>")
          'outline-cycle)))
 #+END_SRC
+* Databases
+** ElasticSearch
+#+BEGIN_SRC emacs-lisp
+  (autoload 'es-mode "es-mode.el" "Major mode for editing Elasticsearch queries." t)
+  (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
+  (add-hook 'es-result-mode-hook 'hs-minor-mode)
+#+END_SRC
 * Slime
 
 #+BEGIN_SRC emacs-lisp
@@ -2496,6 +2503,7 @@ Tunnel definitions are held outside this config to protect the innocent...
 
 #+BEGIN_SRC emacs-lisp
 (load-file "~/ownCloud/dotfiles/prodigy.el")
+
 #+END_SRC
 ** Work Services
 #+BEGIN_SRC emacs-lisp
