@@ -40,6 +40,7 @@
 (depends-on "creamsody-theme")
 (depends-on "csv-mode")
 (depends-on "ctable")
+(depends-on "darktooth-theme")
 (depends-on "dash")
 (depends-on "dash-functional")
 (depends-on "dashboard")
