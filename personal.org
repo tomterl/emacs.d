@@ -2417,16 +2417,20 @@ definitions as used in fb-core et.al.
 * RESTful
 ** Extract json-field data
 #+BEGIN_SRC emacs-lisp
-(defun tom/extract-json (name)
-  "Extract the field NAME from the restclient-result buffer (`*HTTP Response*'). 
-Caution: This parses the hole buffer as json-data, so may be costly.
-"
-  (with-current-buffer "*HTTP Response*"
-    (let*((json-object-type 'hash-table)
-          (json-array-type 'list)
-          (json-key-type 'string)
-          (data (json-read-from-string (buffer-string))))
-      (gethash name data))))
+  (defun tom/extract-json (name)
+    "Extract the field `NAME' from the restclient-result buffer (`*HTTP Response*'). 
+  Caution: This parses the hole buffer as json-data, so may be costly.
+
+  `NAME' may be given as dotted path to address nested json-objects
+  "
+    (with-current-buffer "*HTTP Response*"
+      (let* ((json-object-type 'hash-table)
+             (json-array-type 'list)
+             (json-key-type 'string)
+             (names (split-string name "\\." t))
+             (result nil)
+             (data (json-read-from-string (buffer-string))))
+        (reduce #'(lambda (value key) "" (gethash key value)) names :initial-value data))))
 #+END_SRC
 
 ** Use ~outline-cycle~ in rest-buffers
