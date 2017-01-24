@@ -114,7 +114,7 @@ static char *gnus-pointer[] = {
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (darktooth-theme dashboard railscasts-reloaded-theme creamsody-theme focus material-theme zeal-at-point helm company-php ox-reveal outline-magic firebelly-theme diminish hindent color-theme-sanityinc-tomorrow ranger notify company-racer company-tern cargo flycheck-rust racer rust-mode rustfmt fullframe nlinum psysh paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy popwin popup phpunit php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+    (flyspell-correct darktooth-theme dashboard railscasts-reloaded-theme creamsody-theme focus material-theme zeal-at-point helm company-php ox-reveal outline-magic firebelly-theme diminish hindent color-theme-sanityinc-tomorrow ranger notify company-racer company-tern cargo flycheck-rust racer rust-mode rustfmt fullframe nlinum psysh paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yaml-mode yagist xml-rpc wrap-region window-layout window-jump wgrep-ag web-mode volatile-highlights vimish-fold vagrant use-package undo-tree underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-mode-line smart-cursor-color slime ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari restclient repl-toggle prodigy popwin popup phpunit php-auto-yasnippets persp-projectile paredit pallet origami org-journal omni-scratch nodejs-repl names minimap markdown-mode magit lua-mode lentic json-rpc json-mode js2-refactor js-comint jade-mode jabber ix itail impatient-mode image+ hydra httprepl highlight-thing haskell-mode handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine ggtags geben fringe-helper flymake-yaml flymake-elixir flymake-cursor flycheck flx-isearch flx-ido flatland-theme fill-column-indicator feature-mode expand-region ess erc-tweet erc-image epresent elnode elixir-yasnippets edbi ecukes drag-stuff dockerfile-mode dired-single diff-hl dic-lookup-w3m db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme circe centered-cursor-mode caskxy bash-completion auto-compile auctex ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
  '(paradox-automatically-star nil)
  '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
  '(pos-tip-background-color "#eee8d5")
@@ -156,7 +156,6 @@ static char *gnus-pointer[] = {
                (require
                 (quote package-build))))
            (package-build-minor-mode)))))
- '(show-paren-mode t)
  '(smartparens-global-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(syslog-debug-face
@@ -176,7 +175,6 @@ static char *gnus-pointer[] = {
     ((t :background unspecified :foreground "#cb4b16" :weight bold))))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
- '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -207,11 +205,8 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "#ffffff"))))
- '(company-scrollbar-fg ((t (:background "#ffffff"))))
- '(company-tooltip ((t (:inherit default :background "#ffffff"))))
- '(company-tooltip-common ((t (:inherit default :background "#ffffff" :foreground "#191919"))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
- '(font-lock-comment-delimiter-face ((t (:foreground "#393939"))))
- '(font-lock-variable-name-face ((t (:foreground "#666666"))))
- '(woman-italic ((t (:inherit italic)))))
+ '(company-scrollbar-bg ((t (:background "#464646"))))
+ '(company-scrollbar-fg ((t (:background "#2d2d2d"))))
+ '(company-tooltip ((t (:inherit default :background "#5b5b5b"))))
+ '(company-tooltip-common ((t (:inherit default :background "#464646" :foreground "#ffffff"))))
+ '(company-tooltip-selection ((t (:inherit default :foreground "#464646" :background "#ffffff")))))
