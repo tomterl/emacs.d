@@ -87,6 +87,7 @@
 (depends-on "ggtags")
 (depends-on "git-commit")
 (depends-on "git-timemachine")
+(depends-on "gitlab")
 (depends-on "go-direx")
 (depends-on "go-eldoc")
 (depends-on "go-errcheck")
