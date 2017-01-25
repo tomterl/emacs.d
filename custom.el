@@ -44,6 +44,9 @@ static char *note[] = {
 \"#######...\",
 \"######....\",
 \"#######..#\" };")))
+ '(es-always-pretty-print t)
+ '(es-cc-endpoint "http://192.168.16.249:9200/")
+ '(es-default-url "http://192.168.16.249:9200/_search?pretty=true")
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#383838")
  '(fringe-mode 4 nil (fringe))
