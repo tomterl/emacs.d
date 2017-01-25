@@ -523,8 +523,8 @@ Inspired/copied from endless parentheses blog
    (defhydra hydra-vim-navi (:color red)
      "navigate"
      ("h" backward-char "left")
-     ("j" previous-line "down")
-     ("k" next-line "up")
+     ("j" next-line "down")
+     ("k" previous-line "up")
      ("l" forward-char "right")))
 #+END_SRC
 *** Toggle states
