@@ -2423,9 +2423,12 @@ definitions as used in fb-core et.al.
 *** Edit AQL in ~js2-mode~
 #+BEGIN_SRC emacs-lisp
   (defun tom/edit-aql ()
-    ""
+    "If point is inside a `aql\`...\`' block, create a narrowed,
+  indirect buffer in `aql-mode' to edit the statement.  Press `C-c
+  C-c' inside the buffer to close the window and kill the indirect
+  buffer."
     (interactive)
-    (let ((bufname (concat "*aql-" (buffer-name))))
+    (let ((bufname (concat " *"(buffer-name) ".aql*")))
       (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
         (unless (buffer-narrowed-p)
           (let ((max (- (search-forward "`") 1))
