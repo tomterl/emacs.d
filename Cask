@@ -128,6 +128,7 @@
 (depends-on "macrostep")
 (depends-on "magit")
 (depends-on "magit-popup")
+(depends-on "magithub")
 (depends-on "markdown-mode")
 (depends-on "material-theme")
 (depends-on "minimap")

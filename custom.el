@@ -107,6 +107,8 @@ static char *gnus-pointer[] = {
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(hl-sexp-background-color "#1c1f26")
+ '(js2-global-externs nil)
+ '(js2-include-node-externs t)
  '(linum-format " %6d ")
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments (quote ("--rebase")))

@@ -2345,19 +2345,21 @@ Check the doc comment of the current function for @param tags, create them if no
 *** Completion
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
+
   (defun tom/js2-mode-hook ()
     ""
     (progn
       (require 'tern)
       (require 'company-tern)
-    
+
       (set (make-local-variable 'company-backends)
            '((company-tern :with :sorted company-yasnippet)))
       (ggtags-mode -1)
       (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
-      (tern-mode t)))
+      (tern-mode t)
+      (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
 #+END_SRC
 ** YAML
@@ -2414,6 +2416,26 @@ definitions as used in fb-core et.al.
                                      (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
 #+END_SRC
 
+** AQL
+#+BEGIN_SRC emacs-lisp
+(require 'aql-mode)
+#+END_SRC
+*** Edit AQL in ~js2-mode~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/edit-aql ()
+    ""
+    (interactive)
+    (let ((bufname (concat "*aql-" (buffer-name))))
+      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
+        (unless (buffer-narrowed-p)
+          (let ((max (- (search-forward "`") 1))
+                (min (+ (search-backward "aql`") 5)))
+            (narrow-to-region min max)))
+        (aql-mode)
+        (font-lock-fontify-block)
+        (local-set-key (kbd "C-c C-c") #'(lambda () (interactive) (progn (kill-this-buffer)(delete-window (selected-window)))))
+        (pop-to-buffer bufname))))
+#+END_SRC
 * RESTful
 ** Extract json-field data
 #+BEGIN_SRC emacs-lisp
