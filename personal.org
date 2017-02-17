@@ -2129,6 +2129,17 @@ Sensible setup found at 'or emacs('.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-v") 'view-mode)
 #+END_SRC
+** Multiple Major Modes
+#+BEGIN_SRC emacs-lisp
+  (require 'mmm-mode)
+  (mmm-add-classes
+   '((embedded-aql
+      :submode aql-mode
+      :front "aql`"
+      :back "`")))
+  (setq mmm-global-mode 'maybe)
+  (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
+#+END_SRC
 * Languages
 ** Elixir
 
