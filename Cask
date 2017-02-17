@@ -132,6 +132,7 @@
 (depends-on "markdown-mode")
 (depends-on "material-theme")
 (depends-on "minimap")
+(depends-on "mmm-mode")
 (depends-on "multiple-cursors")
 (depends-on "names")
 (depends-on "nlinum")
