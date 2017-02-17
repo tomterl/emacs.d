@@ -2339,8 +2339,6 @@ Check the doc comment of the current function for @param tags, create them if no
           js2-basic-offset 2
           js2-bounce-indent-p t))
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.aql$" . js2-mode))
-  
 #+END_SRC
 *** Completion
 #+BEGIN_SRC emacs-lisp
@@ -2418,7 +2416,16 @@ definitions as used in fb-core et.al.
 
 ** AQL
 #+BEGIN_SRC emacs-lisp
-(require 'aql-mode)
+  (require 'aql-mode)
+  (defun tom/aql-mode-hook ()
+    ""
+    (progn
+      (setq tab-width 2
+            c-basic-offset 2
+            indent-tabs-mode nil)
+      (yas-minor-mode 1)
+      (local-set-key (kbd "C-c a") 'tom/edit-aql)))
+  (add-hook 'aql-mode-hook 'tom/aql-mode-hook)
 #+END_SRC
 *** Edit AQL in ~js2-mode~
 #+BEGIN_SRC emacs-lisp
