@@ -2324,7 +2324,7 @@ Check the doc comment of the current function for @param tags, create them if no
     ""
     (setq tab-width 2
           c-basic-offset 2
-          indent-tabs-mode t))
+          indent-tabs-mode nil)) 
   (add-hook 'c-mode-hook 'tom/c-mode-hook)
   
 #+END_SRC
