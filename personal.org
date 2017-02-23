@@ -2476,7 +2476,11 @@ definitions as used in fb-core et.al.
             (narrow-to-region min max)))
         (aql-mode)
         (font-lock-fontify-block)
-        (local-set-key (kbd "C-c C-c") #'(lambda () (interactive) (progn (kill-this-buffer)(delete-window (selected-window)))))
+        (local-set-key (kbd "C-c C-c") #'(lambda ()
+                                           (interactive)
+                                           (progn
+                                             (kill-this-buffer)
+                                             (delete-window (selected-window)))))
         (pop-to-buffer bufname))))
 #+END_SRC
 * RESTful
