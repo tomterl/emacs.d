@@ -1869,6 +1869,28 @@ notification in a given time intervall.
 
   (add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 #+END_SRC
+** Away/Return
+#+BEGIN_SRC emacs-lisp
+  (defun tom/chataway ()
+    "Set status to 'away NA' and reduce priority to 0"
+    (with-current-buffer "&bitlbee"
+      (goto-char (point-max))
+      (insert "acc jabber set priority 0")
+      (call-interactively 'lui-send-input)
+      (insert "/away NA")
+      (call-interactively 'lui-send-input)))
+  (global-set-key (kbd "H-C-a") (λ (tom/chataway)))
+
+  (defun tom/chatreturn ()
+    "Set status to 'away NA' and reduce priority to 0"
+    (with-current-buffer "&bitlbee"
+      (goto-char (point-max))
+      (insert "acc jabber set priority 10")
+      (call-interactively 'lui-send-input)
+      (insert "/away")
+      (call-interactively 'lui-send-input)))
+  (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
+#+END_SRC
 * Behaviour
 ** rgrep
 #+BEGIN_SRC emacs-lisp
