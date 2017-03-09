@@ -1881,7 +1881,8 @@ notification in a given time intervall.
       (insert "acc jabber set priority 0")
       (call-interactively 'lui-send-input)
       (insert "/away NA")
-      (call-interactively 'lui-send-input)))
+      (call-interactively 'lui-send-input)
+      (message "You are away... (&bitlbee)")))
   (global-set-key (kbd "H-C-a") (λ (tom/chataway)))
 
   (defun tom/chatreturn ()
@@ -1891,7 +1892,8 @@ notification in a given time intervall.
       (insert "acc jabber set priority 10")
       (call-interactively 'lui-send-input)
       (insert "/away")
-      (call-interactively 'lui-send-input)))
+      (call-interactively 'lui-send-input)
+      (message "Welcome back... (&bitlbee)")))
   (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
 #+END_SRC
 * Behaviour
