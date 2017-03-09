@@ -1,4 +1,4 @@
-alias fbh cd /srv/www/fb-system/
+alias fbh cd $(projectile-project-root)
 alias fbroot cd $(projectile-project-root)
 alias ff find-file $1
-alias fbup pushd /srv/www/fb-system/; git pull; pushd base; git pull; popd; pushd includes; git pull; popd; robo reset; ac-php-remake-tags-all; (projectile-invalidate-cache nil); popd
+alias fbup pushd $(projectile-project-root); git pull; pushd base; git pull; popd; pushd includes; git pull; popd; robo reset; ac-php-remake-tags-all; (projectile-invalidate-cache nil); popd
