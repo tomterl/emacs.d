@@ -1095,7 +1095,7 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'darktooth)
+  (load-theme 'badger)
 #+END_SRC
 
 *** Adapt company-mode

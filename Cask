@@ -19,6 +19,7 @@
 (depends-on "auto-complete")
 (depends-on "autothemer")
 (depends-on "avy")
+(depends-on "badger-theme")
 (depends-on "bash-completion")
 (depends-on "bind-key")
 (depends-on "cargo")
