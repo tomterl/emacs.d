@@ -1876,6 +1876,7 @@ notification in a given time intervall.
 #+BEGIN_SRC emacs-lisp
   (defun tom/chataway ()
     "Set status to 'away NA' and reduce priority to 0"
+(interactive)
     (with-current-buffer "&bitlbee"
       (goto-char (point-max))
       (insert "acc jabber set priority 0")
@@ -1887,6 +1888,7 @@ notification in a given time intervall.
 
   (defun tom/chatreturn ()
     "Set status to 'away NA' and reduce priority to 0"
+(interactive)
     (with-current-buffer "&bitlbee"
       (goto-char (point-max))
       (insert "acc jabber set priority 10")
