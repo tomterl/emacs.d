@@ -2279,7 +2279,6 @@ Geben has a new maintainer, it has some issues, but is overall working sufficien
    (setq geben-dbgp-default-port 9000)
    (setq geben-display-window-function 'switch-to-buffer)
    (setq geben-full-frame-mode t)
-
  #+END_SRC
 
 Reroute remote paths to my dev-server and the vagrant user via tramp.
@@ -2293,8 +2292,12 @@ Reroute remote paths to my dev-server and the vagrant user via tramp.
 
 Make the context window sticky
 #+BEGIN_SRC emacs-lisp
+  (setq tom/geben-context-buffer-name "*GEBEN<127.0.0.1:9000> context*")
   (defadvice geben-display-context (after sticky-geben-context-window activate)
-    (tom/sticky-window "*GEBEN<192.168.254.254:9000> context*"))
+    (tom/sticky-window tom/geben-context-buffer-name))
+  (defadvice geben-display-context (before sticky-geben-context-window activate)
+    (unless (buffer-live-p (get-buffer tom/geben-context-buffer-name))
+      (split-window-right)))
 #+END_SRC
 *** Check/correct @param tags
 Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
