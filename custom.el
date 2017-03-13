@@ -6,10 +6,6 @@
  '(Linum-format "%7i ")
  '(ag-highlight-search t)
  '(ag-reuse-buffers t)
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["2f2ff" "8ac6f2" "f28b86" "ea9847" "e0d063" "84c452" "e18cbb" "e2434c" "fbf9f3" "656868" "bf93c3" "86b187" "c7b299" "65a399" "9aa68e" "635770"])
  '(ansi-term-color-vector
    [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
  '(column-number-mode t)
