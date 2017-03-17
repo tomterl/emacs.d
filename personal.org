@@ -2169,6 +2169,11 @@ Sensible setup found at 'or emacs('.
   (setq mmm-global-mode 'maybe)
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
 #+END_SRC
+** pomodoro
+Configure the pomidor package.
+#+BEGIN_SRC emacs-lisp
+  (setq alert-default-style 'libnotify)
+#+END_SRC
 * Languages
 ** Elixir
 
