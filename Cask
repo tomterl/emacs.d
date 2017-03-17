@@ -107,6 +107,7 @@
 (depends-on "htmlize")
 (depends-on "httprepl")
 (depends-on "hydra")
+(depends-on "ido-vertical-mode")
 (depends-on "image+")
 (depends-on "impatient-mode")
 (depends-on "inf-ruby")

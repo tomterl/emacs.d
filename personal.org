@@ -257,7 +257,7 @@ Stuff looted from graphene.
         ido-create-new-buffer 'always
         ido-use-filename-at-point 'guess
         ido-everywhere t
-        ido-use-faces nil)
+        ido-use-faces t)
 
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -267,7 +267,7 @@ Stuff looted from graphene.
   (global-auto-revert-mode t)
 
   (ido-mode 1)
-
+  (ido-vertical-mode 1)
   (put 'ido-complete 'disabled nil)
   (put 'ido-exit-minibuffer 'disabled nil)
   (put 'autopair-newline 'disabled nil)
