@@ -52,6 +52,7 @@
 (depends-on "diminish")
 (depends-on "dired-single")
 (depends-on "dockerfile-mode")
+(depends-on "dracula-theme")
 (depends-on "drag-stuff")
 (depends-on "ecukes")
 (depends-on "edbi")
