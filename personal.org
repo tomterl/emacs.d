@@ -2165,9 +2165,14 @@ Sensible setup found at 'or emacs('.
    '((embedded-aql
       :submode aql-mode
       :front "aql`"
-      :back "`")))
+      :back "`")
+     (embedded-sql
+      :submode sql-mode
+      :front "$source = '"
+      :back "';")))
   (setq mmm-global-mode 'maybe)
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
+  (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)    
 #+END_SRC
 ** pomodoro
 Configure the pomidor package.
@@ -2272,9 +2277,10 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
-      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)))
-  
-    (add-hook 'php-mode-hook 'tom/php-mode-hook)
+      (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
+      (local-set-key (kbd "C-c a") 'tom/edit-sql)))
+
+  (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
 *** Remote debugging
 
@@ -2498,6 +2504,43 @@ definitions as used in fb-core et.al.
                                              (delete-window (selected-window)))))
         (pop-to-buffer bufname))))
 #+END_SRC
+** SQL
+#+BEGIN_SRC emacs-lisp
+  (require 'sql-mode)
+  (defun tom/sql-mode-hook ()
+    ""
+    (progn
+      (setq tab-width 2
+            c-basic-offset 2
+            indent-tabs-mode nil)
+      (yas-minor-mode 1)
+      (local-set-key (kbd "C-c a") 'tom/edit-sql)))
+  (add-hook 'aql-mode-hook 'tom/sql-mode-hook)
+#+END_SRC
+*** Edit SQL in ~php-mode~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/edit-sql ()
+    "If point is inside a `$source = \'...\';' block, create a narrowed,
+  indirect buffer in `sql-mode' to edit the statement.  Press `C-c
+  C-c' inside the buffer to close the window and kill the indirect
+  buffer."
+    (interactive)
+    (let ((bufname (concat " *"(buffer-name) ".sql*")))
+      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
+        (unless (buffer-narrowed-p)
+          (let ((max (- (search-forward "';") 2))
+                (min (+ (search-backward "$source = '") 11)))
+            (narrow-to-region min max)))
+        (sql-mode)
+        (font-lock-fontify-block)
+        (local-set-key (kbd "C-c C-c") #'(lambda ()
+                                           (interactive)
+                                           (progn
+                                             (kill-this-buffer)
+                                             (delete-window (selected-window)))))
+        (pop-to-buffer bufname))))
+#+END_SRC
+
 * RESTful
 ** Extract json-field data
 #+BEGIN_SRC emacs-lisp
