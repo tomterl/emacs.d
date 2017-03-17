@@ -1550,7 +1550,7 @@ The languages I like to use.
   (org-babel-do-load-languages
    'org-babel-load-languages 
    (quote
-    ((emacs-lisp . t)  (sh . t)
+    ((emacs-lisp . t)  (shell . t)
      (ditaa . t) (sass . t)
      (lisp . t) (gnuplot . t))))
 #+END_SRC 
