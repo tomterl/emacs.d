@@ -2168,8 +2168,8 @@ Sensible setup found at 'or emacs('.
       :back "`")
      (embedded-sql
       :submode sql-mode
-      :front "$source = '"
-      :back "';")))
+      :front "$source = [\"']"
+      :back "[\"'];")))
   (setq mmm-global-mode 'maybe)
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
   (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)    
@@ -2478,6 +2478,7 @@ definitions as used in fb-core et.al.
             c-basic-offset 2
             indent-tabs-mode nil)
       (yas-minor-mode 1)
+      (aggressive-indent-mode nil)
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'aql-mode-hook 'tom/aql-mode-hook)
 #+END_SRC
@@ -2506,7 +2507,7 @@ definitions as used in fb-core et.al.
 #+END_SRC
 ** SQL
 #+BEGIN_SRC emacs-lisp
-  (require 'sql-mode)
+  (require 'sql)
   (defun tom/sql-mode-hook ()
     ""
     (progn
@@ -2514,30 +2515,34 @@ definitions as used in fb-core et.al.
             c-basic-offset 2
             indent-tabs-mode nil)
       (yas-minor-mode 1)
+      (aggressive-indent-mode nil)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)))
-  (add-hook 'aql-mode-hook 'tom/sql-mode-hook)
+  (add-hook 'sql-mode-hook 'tom/sql-mode-hook)
 #+END_SRC
 *** Edit SQL in ~php-mode~
 #+BEGIN_SRC emacs-lisp
   (defun tom/edit-sql ()
     "If point is inside a `$source = \'...\';' block, create a narrowed,
-  indirect buffer in `sql-mode' to edit the statement.  Press `C-c
-  C-c' inside the buffer to close the window and kill the indirect
-  buffer."
+    indirect buffer in `sql-mode' to edit the statement.  Press `C-c
+    C-c' inside the buffer to close the window and kill the indirect
+    buffer."
     (interactive)
     (let ((bufname (concat " *"(buffer-name) ".sql*")))
       (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
         (unless (buffer-narrowed-p)
-          (let ((max (- (search-forward "';") 2))
-                (min (+ (search-backward "$source = '") 11)))
+          (let ((max (- (search-forward-regexp "[\"'];") 2))
+                (min (+ (search-backward-regexp "$source = [\"']") 11)))
             (narrow-to-region min max)))
         (sql-mode)
+        (aggressive-indent-mode nil)
         (font-lock-fontify-block)
+        (load-library "sql-indent")
         (local-set-key (kbd "C-c C-c") #'(lambda ()
                                            (interactive)
                                            (progn
                                              (kill-this-buffer)
                                              (delete-window (selected-window)))))
+        (local-set-key (kbd "<tab>") 'sql-indent-line)
         (pop-to-buffer bufname))))
 #+END_SRC
 
