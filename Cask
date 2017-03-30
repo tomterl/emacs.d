@@ -205,6 +205,7 @@
 (depends-on "sunrise-x-mirror")
 (depends-on "sws-mode")
 (depends-on "tern")
+(depends-on "thinks")
 (depends-on "tracking")
 (depends-on "twilight-anti-bright-theme")
 (depends-on "twilight-bright-theme")
