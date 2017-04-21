@@ -2184,9 +2184,15 @@ Sensible setup found at 'or emacs('.
 #+BEGIN_SRC emacs-lisp
   (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
     "If point is inside a `begin...end' block, create a narrowed,
-    indirect buffer in `mode' to edit the statement.  Press `C-c
-    C-c' inside the buffer to close the window and kill the indirect
-    buffer."
+    indirect buffer in `mode' to edit the contents between those
+    markers. 
+
+    Press `C-c C-c' inside the buffer to close the window
+    and kill the indirect buffer.
+
+    `mark' is used in the construction of the name for the indirect buffer.
+
+    If `fun' is given, it is called with the narrowed buffer as current buffer."
     `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
        (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
          (unless (buffer-narrowed-p)
