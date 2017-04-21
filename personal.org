@@ -2165,18 +2165,24 @@ Sensible setup found at 'or emacs('.
    '((embedded-aql
       :submode aql-mode
       :front "aql`"
-      :back "`")
+      :back "`"
+      :insert ((?a embaql nil
+                   @ "var query = aql`" @ "\n" _ "\n" @ "`;" @)))
      (embedded-sql
       :submode sql-mode
-      :front "$source = [\"']"
-      :back "[\"'];")))
+      :front "$\\(source\\|sql\\) = [\"']"
+      :back "[\"'];"
+      :insert ((?s embsql "Varname (source|sql)? "
+                   @ "$" str " = \"\n" @ _ @ "\n\";" @)
+               (?o embsqlsource ?s . "source")
+               (?q embsqlsql ?s . "sql")))))
   (setq mmm-global-mode 'maybe)
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
   (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)    
 #+END_SRC
 *** Edit in different mode in narrowed buffer
 #+BEGIN_SRC emacs-lisp
-  (defmacro tom/edit-narrowed (mode mark begin end beg+ end- &optional fun)
+  (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
     "If point is inside a `begin...end' block, create a narrowed,
     indirect buffer in `mode' to edit the statement.  Press `C-c
     C-c' inside the buffer to close the window and kill the indirect
@@ -2184,8 +2190,8 @@ Sensible setup found at 'or emacs('.
     `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
        (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
          (unless (buffer-narrowed-p)
-           (let ((max (- (search-forward-regexp ,end) ,end-))
-                 (min (+ (search-backward-regexp ,begin) ,beg+)))
+           (let ((max (- (search-forward-regexp ,end) (- (match-end 0) (match-beginning 0))))
+                 (min (+ (search-backward-regexp ,begin) (- (match-end) (match-beginning 0)))))
              (narrow-to-region min max)))
          (funcall ,mode)
          (aggressive-indent-mode nil)
@@ -2516,7 +2522,7 @@ definitions as used in fb-core et.al.
   C-c' inside the buffer to close the window and kill the indirect
   buffer."
     (interactive)
-    (tom/edit-narrowed 'aql-mode ".aql" "aql`" "`" 5 1))
+    (tom/edit-narrowed 'aql-mode ".aql" "aql`" "`"))
 #+END_SRC
 ** SQL
 #+BEGIN_SRC emacs-lisp
@@ -2542,9 +2548,8 @@ definitions as used in fb-core et.al.
     (interactive)
     (tom/edit-narrowed 'sql-mode
                        ".sql"
-                       "$source = [\"']"
+                       "$\\(source\\|sql\\) = [\"']"
                        "[\"'];"
-                       11 2
                        #'(lambda ()
                          (progn
                            (load-library "sql-indent")
