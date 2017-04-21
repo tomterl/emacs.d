@@ -2182,21 +2182,22 @@ Sensible setup found at 'or emacs('.
     C-c' inside the buffer to close the window and kill the indirect
     buffer."
     `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
-      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
-        (unless (buffer-narrowed-p)
-          (let ((max (- (search-forward-regexp ,end) ,end-))
-                (min (+ (search-backward-regexp ,begin) ,beg+)))
-            (narrow-to-region min max)))
-        (funcall ,mode)
-        (aggressive-indent-mode nil)
-        (font-lock-fontify-block)
-        (if (functionp ,fun) (funcall ,fun))
-        (local-set-key (kbd "C-c C-c") #'(lambda ()
-                                           (interactive)
-                                           (progn
-                                             (kill-this-buffer)
-                                             (delete-window (selected-window)))))
-        (pop-to-buffer bufname))))
+       (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
+         (unless (buffer-narrowed-p)
+           (let ((max (- (search-forward-regexp ,end) ,end-))
+                 (min (+ (search-backward-regexp ,begin) ,beg+)))
+             (narrow-to-region min max)))
+         (funcall ,mode)
+         (aggressive-indent-mode nil)
+         (font-lock-fontify-block)
+         (if (functionp ,fun) (funcall ,fun))
+         (local-set-key (kbd "C-c C-c") #'(lambda ()
+                                            (interactive)
+                                            (progn
+                                              (kill-this-buffer)
+                                              (delete-window (selected-window))
+                                              (mmm-parse-buffer))))
+         (pop-to-buffer bufname))))
 
 #+END_SRC
 ** pomodoro
