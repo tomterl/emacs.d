@@ -2197,7 +2197,7 @@ Sensible setup found at 'or emacs('.
        (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
          (unless (buffer-narrowed-p)
            (let ((max (- (search-forward-regexp ,end) (- (match-end 0) (match-beginning 0))))
-                 (min (+ (search-backward-regexp ,begin) (- (match-end) (match-beginning 0)))))
+                 (min (+ (search-backward-regexp ,begin) (- (match-end 0) (match-beginning 0)))))
              (narrow-to-region min max)))
          (funcall ,mode)
          (aggressive-indent-mode nil)
