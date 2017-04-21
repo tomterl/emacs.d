@@ -2174,6 +2174,31 @@ Sensible setup found at 'or emacs('.
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
   (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)    
 #+END_SRC
+*** Edit in different mode in narrowed buffer
+#+BEGIN_SRC emacs-lisp
+  (defmacro tom/edit-narrowed (mode mark begin end beg+ end- &optional fun)
+    "If point is inside a `begin...end' block, create a narrowed,
+    indirect buffer in `mode' to edit the statement.  Press `C-c
+    C-c' inside the buffer to close the window and kill the indirect
+    buffer."
+    `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
+      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
+        (unless (buffer-narrowed-p)
+          (let ((max (- (search-forward-regexp ,end) ,end-))
+                (min (+ (search-backward-regexp ,begin) ,beg+)))
+            (narrow-to-region min max)))
+        (funcall ,mode)
+        (aggressive-indent-mode nil)
+        (font-lock-fontify-block)
+        (if (functionp ,fun) (funcall ,fun))
+        (local-set-key (kbd "C-c C-c") #'(lambda ()
+                                           (interactive)
+                                           (progn
+                                             (kill-this-buffer)
+                                             (delete-window (selected-window)))))
+        (pop-to-buffer bufname))))
+
+#+END_SRC
 ** pomodoro
 Configure the pomidor package.
 #+BEGIN_SRC emacs-lisp
@@ -2478,7 +2503,7 @@ definitions as used in fb-core et.al.
             c-basic-offset 2
             indent-tabs-mode nil)
       (yas-minor-mode 1)
-      (aggressive-indent-mode nil)
+      (aggressive-indent-mode -1)
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'aql-mode-hook 'tom/aql-mode-hook)
 #+END_SRC
@@ -2490,20 +2515,7 @@ definitions as used in fb-core et.al.
   C-c' inside the buffer to close the window and kill the indirect
   buffer."
     (interactive)
-    (let ((bufname (concat " *"(buffer-name) ".aql*")))
-      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
-        (unless (buffer-narrowed-p)
-          (let ((max (- (search-forward "`") 1))
-                (min (+ (search-backward "aql`") 5)))
-            (narrow-to-region min max)))
-        (aql-mode)
-        (font-lock-fontify-block)
-        (local-set-key (kbd "C-c C-c") #'(lambda ()
-                                           (interactive)
-                                           (progn
-                                             (kill-this-buffer)
-                                             (delete-window (selected-window)))))
-        (pop-to-buffer bufname))))
+    (tom/edit-narrowed 'aql-mode ".aql" "aql`" "`" 5 1))
 #+END_SRC
 ** SQL
 #+BEGIN_SRC emacs-lisp
@@ -2523,27 +2535,19 @@ definitions as used in fb-core et.al.
 #+BEGIN_SRC emacs-lisp
   (defun tom/edit-sql ()
     "If point is inside a `$source = \'...\';' block, create a narrowed,
-    indirect buffer in `sql-mode' to edit the statement.  Press `C-c
-    C-c' inside the buffer to close the window and kill the indirect
-    buffer."
+      indirect buffer in `sql-mode' to edit the statement.  Press `C-c
+      C-c' inside the buffer to close the window and kill the indirect
+      buffer."
     (interactive)
-    (let ((bufname (concat " *"(buffer-name) ".sql*")))
-      (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
-        (unless (buffer-narrowed-p)
-          (let ((max (- (search-forward-regexp "[\"'];") 2))
-                (min (+ (search-backward-regexp "$source = [\"']") 11)))
-            (narrow-to-region min max)))
-        (sql-mode)
-        (aggressive-indent-mode nil)
-        (font-lock-fontify-block)
-        (load-library "sql-indent")
-        (local-set-key (kbd "C-c C-c") #'(lambda ()
-                                           (interactive)
-                                           (progn
-                                             (kill-this-buffer)
-                                             (delete-window (selected-window)))))
-        (local-set-key (kbd "<tab>") 'sql-indent-line)
-        (pop-to-buffer bufname))))
+    (tom/edit-narrowed 'sql-mode
+                       ".sql"
+                       "$source = [\"']"
+                       "[\"'];"
+                       11 2
+                       #'(lambda ()
+                         (progn
+                           (load-library "sql-indent")
+                           (local-set-key (kbd "<tab>") 'sql-indent-line)))))
 #+END_SRC
 
 * RESTful
