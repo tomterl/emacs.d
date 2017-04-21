@@ -2557,9 +2557,9 @@ definitions as used in fb-core et.al.
                        "$\\(source\\|sql\\) = [\"']"
                        "[\"'];"
                        #'(lambda ()
-                         (progn
-                           (load-library "sql-indent")
-                           (local-set-key (kbd "<tab>") 'sql-indent-line)))))
+                           (progn
+                             (load-library "sql-indent")
+                             (set (make-local-variable 'indent-line-function) 'sql-indent-line)))))
 #+END_SRC
 
 * RESTful
