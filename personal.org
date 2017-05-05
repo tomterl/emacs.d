@@ -2128,7 +2128,7 @@ Sensible setup found at 'or emacs('.
 #+END_SRC
 ** Case handling
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-c") 'string-inflection-cycle)
+  (global-set-key (kbd "H-c") 'string-inflection-all-cycle)
 #+END_SRC
 ** Lookup documentation 
 #+BEGIN_SRC emacs-lisp
