@@ -1575,6 +1575,11 @@ Don't confirm evaluation.
     (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
   (global-set-key (kbd "C-c c") 'tom/ob-confirm-toggle)
 #+END_SRC
+
+Use inheritance for properties, needed for e.g. my zshorg project.
+#+BEGIN_SRC emacs-lisp
+  (setq org-use-property-inheritance t)
+#+END_SRC
 ** Tangle hook
 
 Remove code references in code prior to tangling; that way I can use
