@@ -1599,8 +1599,8 @@ I always use the form ~(ref:label)~ for code references.
         (replace-match "")
         )))
   
-  (add-hook 'org-babel-tangle-body-hook
-            (λ () (tr/remove-code-labels)))
+  ;(add-hook 'org-babel-tangle-body-hook
+  ;          (λ () (tr/remove-code-labels)))
   
 #+END_SRC 
 
