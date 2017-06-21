@@ -128,7 +128,8 @@ static char *gnus-pointer[] = {
  '(projectile-global-mode t)
  '(safe-local-variable-values
    (quote
-    ((projectile-ignored-directories list ".cask")
+    ((web-mode-enable-auto-indentation)
+     (projectile-ignored-directories list ".cask")
      (projectile-indexing-method . native)
      (projectile-enable-caching . t)
      (eval when
@@ -209,8 +210,8 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "#464646"))))
- '(company-scrollbar-fg ((t (:background "#2d2d2d"))))
- '(company-tooltip ((t (:inherit default :background "#5b5b5b"))))
- '(company-tooltip-common ((t (:inherit default :background "#464646" :foreground "#ffffff"))))
- '(company-tooltip-selection ((t (:inherit default :foreground "#464646" :background "#ffffff")))))
+ '(company-scrollbar-bg ((t (:background "#3f3f3f"))))
+ '(company-scrollbar-fg ((t (:background "#262626"))))
+ '(company-tooltip ((t (:inherit default :background "#545454"))))
+ '(company-tooltip-common ((t (:inherit default :background "#3f3f3f" :foreground "#ecece9"))))
+ '(company-tooltip-selection ((t (:inherit default :foreground "#3f3f3f" :background "#ecece9")))))
