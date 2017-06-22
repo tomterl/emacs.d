@@ -2175,15 +2175,22 @@ Sensible setup found at 'or emacs('.
                    @ "var query = aql`" @ "\n" _ "\n" @ "`;" @)))
      (embedded-sql
       :submode sql-mode
-      :front "$\\(source\\|sql\\) = [\"']"
+      :front "^\\(.*$\\(source\\|sql\\) = [\"']\\)"
       :back "[\"'];"
       :insert ((?s embsql "Varname (source|sql)? "
                    @ "$" str " = \"\n" @ _ @ "\n\";" @)
                (?o embsqlsource ?s . "source")
-               (?q embsqlsql ?s . "sql")))))
+               (?q embsqlsql ?s . "sql"))
+      :front-offset (length "\\$1"))
+     (embedded-js
+      :submode js2-mode
+      :front "^        body: >"
+      :front-offset (end-of-line 11)
+      :back  "\\(^      - name: \\)\\|\\(^    types:\\)")))
   (setq mmm-global-mode 'maybe)
-  (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)    
-  (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)    
+  (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)
+  (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)
+  (mmm-add-mode-ext-class 'yaml-mode nil 'embedded-js)
 #+END_SRC
 *** Edit in different mode in narrowed buffer
 #+BEGIN_SRC emacs-lisp
@@ -2459,6 +2466,16 @@ Check the doc comment of the current function for @param tags, create them if no
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
 #+END_SRC
+*** Edit js in YAML-files
+#+BEGIN_SRC emacs-lisp
+  (defun tom/edit-js ()
+    "If point is between a `^ body: > ... \\(^ - name: \\)\\|\\(^ types:\\)'
+  block, create a narrowed, indirect buffer in `js2-mode' to edit the
+  function-body.  Press `C-c C-c' inside the buffer to close the window
+  and kill the indirect buffer."
+    (interactive)
+    (tom/edit-narrowed 'js2-mode ".js" "^        body: >" "\\(^      - name: \\)\\|\\(^    types:\\)"))
+#+END_SRC
 ** YAML
 
 Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
@@ -2469,6 +2486,16 @@ definitions as used in fb-core et.al.
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
+  (defun tom/yaml-mode-hook ()
+    ""
+    (progn
+      (setq tab-width 2
+            c-basic-offset 2
+            indent-tabs-mode nil)
+      (yas-minor-mode 1)
+      (aggressive-indent-mode -1)
+      (local-set-key (kbd "C-c a") 'tom/edit-js)))
+  (add-hook 'yaml-mode-hook 'tom/yaml-mode-hook)
 #+END_SRC
 
 ** Groovy
