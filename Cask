@@ -130,6 +130,7 @@
 (depends-on "julia-mode")
 (depends-on "jump")
 (depends-on "lentic")
+(depends-on "link-hint")
 (depends-on "log4e")
 (depends-on "lua-mode")
 (depends-on "m-buffer")
