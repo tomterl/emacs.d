@@ -880,6 +880,11 @@ Marking the root of a project are only
 
 #+BEGIN_SRC emacs-lisp
   (require 'projectile)
+  (defun tom/projectile-ranger ()
+    "Open `ranger' at the root of the project."
+    (interactive)
+    (golden-ratio-mode -1)
+    (ranger (projectile-project-root)))
   (add-to-list 'projectile-globally-ignored-directories ".git")
   (add-to-list 'projectile-globally-ignored-directories "base/.git")
   (add-to-list 'projectile-globally-ignored-directories "includes/.git")
@@ -888,7 +893,7 @@ Marking the root of a project are only
   (add-to-list 'projectile-project-root-files "manifest.json")
   (add-to-list 'projectile-project-root-files ".projectile")
   (setq projectile-project-root-files-functions '(projectile-root-top-down))
-  (setq projectile-switch-project-action 'projectile-find-dir)
+  (setq projectile-switch-project-action 'tom/projectile-ranger)
   (setq projectile-find-dir-includes-top-level t)
   (setq projectile-indexing-method 'native)
   (setq projectile-enable-caching t)
@@ -1069,6 +1074,7 @@ Marking the root of a project are only
   (line-number-mode 1)
   (column-number-mode 1)
   (setq mouse-buffer-menu-mode-mult 1)
+  (setq ranger-show-literal nil)
 #+END_SRC
 
 ** Scrollbar
@@ -1095,7 +1101,7 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (require 'ample-theme)
+  (load-theme 'ample-light)
 #+END_SRC
 
 *** Adapt company-mode
