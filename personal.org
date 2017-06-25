@@ -2304,7 +2304,8 @@ Add speedbar support for elixir files.
             indent-tabs-mode nil
             )
       (set (make-local-variable 'company-backends)
-           '((company-racer :with :sorted company-yasnippet)))))
+           '((company-racer :with :sorted company-yasnippet)))
+      (cargo-minor-mode 1)))
   (add-hook 'rust-mode-hook 'tom/rust-mode-hook)
 #+END_SRC
 ** Shell
