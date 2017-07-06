@@ -786,7 +786,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
                 (mapconcat (lambda (elm) elm)
                            p-lst
                            "/")))
-            (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "orange"))
+            (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "darkorange"))
            (or (curr-dir-git-branch-string (eshell/pwd)))
            (propertize "$ " 'face 'default))))
 
