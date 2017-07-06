@@ -2175,7 +2175,8 @@ Sensible setup found at 'or emacs('.
   (mmm-add-classes
    '((embedded-aql
       :submode aql-mode
-      :front "aql`"
+      :front "^\\(.*aql`\\)"
+      :front-offset (end-of-line 1)
       :back "`"
       :insert ((?a embaql nil
                    @ "var query = aql`" @ "\n" _ "\n" @ "`;" @)))
@@ -2187,11 +2188,12 @@ Sensible setup found at 'or emacs('.
                    @ "$" str " = \"\n" @ _ @ "\n\";" @)
                (?o embsqlsource ?s . "source")
                (?q embsqlsql ?s . "sql"))
-      :front-offset (length "\\$1"))
+      :front-offset (end-of-line 1)
+      :save-matches t)
      (embedded-js
       :submode js2-mode
       :front "^        body: >"
-      :front-offset (end-of-line 11)
+      :front-offset '(end-of-line 11)
       :back  "\\(^      - name: \\)\\|\\(^    types:\\)")))
   (setq mmm-global-mode 'maybe)
   (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)
