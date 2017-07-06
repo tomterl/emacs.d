@@ -7,7 +7,7 @@
  '(ag-highlight-search t)
  '(ag-reuse-buffers t)
  '(ansi-color-names-vector
-   ["black" "#E2434C" "#86B187" "#E0D063" "#84C452" "#E18CBB" "#8AC6F2" "white"])
+   ["black" "#E2434C" "#86B187" "#f0f000" "#84C452" "#E18CBB" "#8AC6F2" "white"])
  '(ansi-term-color-vector
    [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
  '(column-number-mode t)
