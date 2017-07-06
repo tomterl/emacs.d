@@ -914,10 +914,10 @@ Marking the root of a project are only
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "-CTDB-Fira Code-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1"
+  (defvar tom/default-font "-CTDB-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1"
     "The font to use under normal circumstances")
 
-  (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-10-*-*-*-*-0-iso10646-1"
+  (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
 
   (setq default-frame-alist `((font . ,tom/default-font)))
