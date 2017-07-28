@@ -500,7 +500,7 @@ Inspired/copied from endless parentheses blog
 #+BEGIN_SRC emacs-lisp
   (global-set-key
    (kbd "H-L")
-   (defhydra hydra-launch (:color blue)
+   (defhydra hydra-launch (:color blue :timeout 3)
      "launch"
      ("c" calc "calc")
      ("g" git-timemachine "git timemachine")
@@ -532,7 +532,7 @@ Inspired/copied from endless parentheses blog
 #+BEGIN_SRC emacs-lisp
   (global-set-key
    (kbd "H-T")
-   (defhydra hydra-toggle (:color red)
+   (defhydra hydra-toggle (:color red :timeout 3)
      "toggle"
      ("c" column-number-mode "col-nums")
      ("d" toggle-debug-on-error "debug on error")
@@ -666,7 +666,7 @@ Inspired/copied from endless parentheses blog
 #+BEGIN_SRC emacs-lisp
   (global-set-key
    (kbd "H-P")
-   (defhydra hydra-persp (:color red)
+   (defhydra hydra-persp (:color red :timeout 3)
      "Perspective"
      ("d" projectile-persp-switch-project "Switch dired")
      ("s" (call-interactively 'persp-switch) "Switch/Create")
