@@ -1910,6 +1910,10 @@ notification in a given time intervall.
   (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
 #+END_SRC
 * Behaviour
+** Generic Version Control interface
+#+BEGIN_SRC emacs-lisp
+(fullframe vc-annotate quit-window nil)
+#+END_SRC
 ** rgrep
 #+BEGIN_SRC emacs-lisp
 (fullframe/split-screen rgrep quit-window "*grep*" 'horizontal 't)
