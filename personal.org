@@ -2583,7 +2583,8 @@ definitions as used in fb-core et.al.
             indent-tabs-mode nil)
       (yas-minor-mode 1)
       (aggressive-indent-mode nil)
-      (local-set-key (kbd "C-c a") 'tom/edit-sql)))
+      (local-set-key (kbd "C-c a") 'tom/edit-sql)
+      (local-set-key (kbd "C-c C-c") 'sql-send-paragraph)))
   (add-hook 'sql-mode-hook 'tom/sql-mode-hook)
 #+END_SRC
 *** Edit SQL in ~php-mode~
