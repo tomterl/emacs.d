@@ -4,8 +4,6 @@
 (source melpa)
 
 (depends-on "2048-game")
-(depends-on "ac-php")
-(depends-on "ac-php-core")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-window")
 (depends-on "ag")
@@ -227,6 +225,7 @@
 (depends-on "volatile-highlights")
 (depends-on "w3m")
 (depends-on "web-mode")
+(depends-on "websocket")
 (depends-on "wgrep-ag")
 (depends-on "window-jump")
 (depends-on "window-layout")
