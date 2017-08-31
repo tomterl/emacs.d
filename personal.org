@@ -2228,6 +2228,17 @@ Configure the pomidor package.
 #+BEGIN_SRC emacs-lisp
   (setq alert-default-style 'libnotify)
 #+END_SRC
+** Help
+#+BEGIN_SRC emacs-lisp
+  (global-set-key
+   (kbd "H-h")
+   (defhydra hydra-help (:color blue :timeout 3)
+     "launch"
+     ("h" helpful-at-point "Loopup Function/Macro")
+     ("v" helpful-variable "Lookup Variable")
+     ("g" helpful-update "Refresh Helpful Buffer")
+     ))
+#+END_SRC
 * Languages
 ** Elixir
 

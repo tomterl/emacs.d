@@ -104,6 +104,7 @@
 (depends-on "haskell-mode")
 (depends-on "helm")
 (depends-on "helm-core")
+(depends-on "helpful")
 (depends-on "highlight-thing")
 (depends-on "hindent")
 (depends-on "htmlize")
