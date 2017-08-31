@@ -1257,7 +1257,7 @@ This is a birds eye view of the current buffer.
           (setq message-send-mail-function 'smtpmail-send-it)
           (setq smtpmail-smtp-service 25)
           (setq gnus-message-archive-method
-                '(nnimap "franke & bornberg"))
+                '(nnimap "franke_bornberg"))
           (setq gnus-message-archive-group
                 "Gesendete Objekte"))
       (progn
@@ -1298,12 +1298,14 @@ This is a birds eye view of the current buffer.
                        (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
                        (nnimap-stream ssl)
                        )
-            '(nnimap "franke & bornberg"
+            '(nnimap "franke_bornberg"
                      (nnimap-address "zeta")
                      (nnimap-server-port 143)
                      (nnimap-authinfo-file (expand-file-name "~/.authinfo"))
                      (nnimap-stream network)
                      (nnimap-inbox "INBOX")
+                     (nnmail-expiry-target "nnimap+franke_bornberg:Gelöschte Objekte")
+                     (nnmail-expiry-wait 'immediate)
                      )
             ))
     (if (not (tom/work?))
