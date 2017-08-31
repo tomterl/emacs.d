@@ -50,6 +50,8 @@ static char *note[] = {
  '(fringe-mode 4 nil (fringe))
  '(ggtags-highlight-tag 1.0)
  '(ggtags-highlight-tag-delay 1.0)
+ '(gnus-article-sort-functions (quote (gnus-article-sort-by-date)))
+ '(gnus-goto-next-group-when-activating nil)
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
