@@ -2593,9 +2593,9 @@ definitions as used in fb-core et.al.
 #+BEGIN_SRC emacs-lisp
   (defun tom/edit-sql ()
     "If point is inside a `$source = \'...\';' block, create a narrowed,
-      indirect buffer in `sql-mode' to edit the statement.  Press `C-c
-      C-c' inside the buffer to close the window and kill the indirect
-      buffer."
+        indirect buffer in `sql-mode' to edit the statement.  Press `C-c
+        C-c' inside the buffer to close the window and kill the indirect
+        buffer."
     (interactive)
     (tom/edit-narrowed 'sql-mode
                        ".sql"
@@ -2604,7 +2604,8 @@ definitions as used in fb-core et.al.
                        #'(lambda ()
                            (progn
                              (load-library "sql-indent")
-                             (set (make-local-variable 'indent-line-function) 'sql-indent-line)))))
+                             (set (make-local-variable 'indent-line-function) 'sql-indent-line)
+                             (setq sql-product "postgres")))))
 #+END_SRC
 
 * RESTful
