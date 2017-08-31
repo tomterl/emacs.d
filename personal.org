@@ -1365,7 +1365,7 @@ This is a birds eye view of the current buffer.
         (progn
           (advice-add #'eudc-ldap-simple-query-internal :filter-args
                       (lambda (args)
-                          (list (append '(("objectClass" . "user")("cn" . "*")) (car args)) (car (cdr args)))))
+                        (list (append '(("objectClass" . "user")("cn" . "*")) (car args)) (car (cdr args)))))
           (let ((ldapv (netrc-machine (netrc-parse "~/.netrc") "ldapv")))
             (setq eudc-server-hotlist '(("theta" . ldap)))
             (setq ldap-host-parameters-alist
