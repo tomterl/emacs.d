@@ -1128,8 +1128,8 @@ Marking the root of a project are only
 ** Modeline
 
 #+BEGIN_SRC emacs-lisp
+  (setq sml/theme 'powerline)
   (sml/setup)
-  (sml/apply-theme 'powerline)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
