@@ -1129,7 +1129,7 @@ Marking the root of a project are only
 
 #+BEGIN_SRC emacs-lisp
   (sml/setup)
-  (sml/apply-theme 'automatic)
+  (sml/apply-theme 'powerline)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

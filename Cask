@@ -198,6 +198,7 @@
 (depends-on "slime")
 (depends-on "smart-cursor-color")
 (depends-on "smart-mode-line")
+(depends-on "smart-mode-line-powerline-theme")
 (depends-on "smex")
 (depends-on "smooth-scrolling")
 (depends-on "soothe-theme")
