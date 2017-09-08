@@ -2017,7 +2017,7 @@ Context/Language aware region expansion/contraction.
 
   (require 'repl-toggle)
   (setq rtog/mode-repl-alist '(
-                               (php-mode . psysh) 
+                               (php-mode . tom/psysh) 
                                (emacs-lisp-mode . ielm)
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)
@@ -2432,6 +2432,20 @@ Check the doc comment of the current function for @param tags, create them if no
             (cd wd)))))
 #+END_SRC
 
+*** ~psysh~
+#+BEGIN_SRC emacs-lisp
+  (defun tom/psysh ()
+      "Start or switch to a psysh specific to the current
+          projectile project, or the global '*PsySh*' if not in a
+          project"
+    (interactive)
+    (if (projectile-project-p)
+        (let* ((-project-root (projectile-project-root))
+               (-project (projectile-default-project-name -project-root))
+               (-buffer-name (concat "* " -project " psysh *")))
+          (psysh-run -buffer-name "psysh"))
+      (psysh-run "*PsySh*" "psysh")))
+#+END_SRC
 ** C
 *** Indentation
 #+BEGIN_SRC emacs-lisp
