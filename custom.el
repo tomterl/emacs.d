@@ -216,4 +216,5 @@ static char *gnus-pointer[] = {
  '(company-scrollbar-fg ((t (:background "#262626"))))
  '(company-tooltip ((t (:inherit default :background "#545454"))))
  '(company-tooltip-common ((t (:inherit default :background "#3f3f3f" :foreground "#ecece9"))))
- '(company-tooltip-selection ((t (:inherit default :foreground "#3f3f3f" :background "#ecece9")))))
+ '(company-tooltip-selection ((t (:inherit default :foreground "#3f3f3f" :background "#ecece9"))))
+ '(whitespace-newline ((t (:background "#222222" :foreground "#888888")))))
