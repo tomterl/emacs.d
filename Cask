@@ -4,6 +4,7 @@
 (source melpa)
 
 (depends-on "2048-game")
+(depends-on "ac-php-core")
 (depends-on "ace-jump-buffer")
 (depends-on "ace-window")
 (depends-on "ag")
@@ -58,6 +59,7 @@
 (depends-on "drag-stuff")
 (depends-on "ecukes")
 (depends-on "edbi")
+(depends-on "elisp-refs")
 (depends-on "elixir-mode")
 (depends-on "elixir-yasnippets")
 (depends-on "elnode")
@@ -148,6 +150,7 @@
 (depends-on "nodejs-repl")
 (depends-on "noflet")
 (depends-on "notify")
+(depends-on "ob-http")
 (depends-on "omni-scratch")
 (depends-on "org")
 (depends-on "org-journal")

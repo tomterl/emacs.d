@@ -1542,10 +1542,10 @@ The languages I like to use.
 #+BEGIN_SRC emacs-lisp 
   (org-babel-do-load-languages
    'org-babel-load-languages 
-   (quote
-    ((emacs-lisp . t)  (shell . t)
+   '((emacs-lisp . t)  (shell . t)
      (ditaa . t) (sass . t)
-     (lisp . t) (gnuplot . t))))
+     (lisp . t) (gnuplot . t)
+     (http . t)))
 #+END_SRC 
 
 The =ditaa.jar= location;
@@ -1658,12 +1658,12 @@ Settings to set code in latex documents with syntax highlighting.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-listings 'minted)
+  (setq org-latex-packages-alist '(("" "minted")))
   (setq org-latex-custom-lang-environments
         '(
           (emacs-lisp "common-lispcode")
           (lisp "common-lispcode")
-          (R "rcode")
-          ))
+          (R "rcode")))
   (setq org-latex-minted-options
         '(("frame" "lines")
           ("fontsize" "\\scriptsize")
