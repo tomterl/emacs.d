@@ -2001,17 +2001,6 @@ Context/Language aware region expansion/contraction.
   (global-set-key (kbd "C-=") 'er/expand-region)
 #+END_SRC
 
-** Ace jump
-
-#+BEGIN_SRC emacs-lisp
-  (autoload
-    'ace-jump-mode
-    "ace-jump-mode"
-    "Emacs quick move minor mode"
-    t)
-  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-#+END_SRC
-
 ** REPL toggle
 
 #+BEGIN_SRC emacs-lisp
