@@ -2767,7 +2767,7 @@ Tunnel definitions are held outside this config to protect the innocent...
  Ignore all ignore-files :-)
 
 #+BEGIN_SRC emacs-lisp
-(setq ag-arguments (list "-U" "--line-number" "--smart-case" "--nogroup" "--column" "--stats" "--"))
+(setq ag-arguments (list "-U" "--numbers" "--smart-case" "--nogroup" "--column" "--stats" "--"))
 #+END_SRC
 
 Focus on the current window and the ag-result buffer.
@@ -2776,6 +2776,16 @@ Focus on the current window and the ag-result buffer.
 (fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
 #+END_SRC
 
+Delete the ~File:~ prefix appended by ~ag~ to the output, let `compile-find-file` work again.
+
+#+BEGIN_SRC emacs-lisp
+  (define-advice compilation-find-file (:around (orig-fun &rest args) remove-file-prefix -100)
+    (let* ((to-find (car (cdr args)))
+           (newname (s-replace "File: " "" to-find)))
+      (setcar (cdr args) newname)
+      (apply orig-fun args)))
+
+#+END_SRC
 * Passwords
 *** Basic setup
  #+BEGIN_SRC emacs-lisp
