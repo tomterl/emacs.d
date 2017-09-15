@@ -2224,14 +2224,15 @@ Configure the pomidor package.
           (pers (persp-name persp-curr)))
       (pomidor)
       (persp-switch "main")
-      (persp-set-buffer (get-buffer "*pomidor*"))
-      (switch-to-buffer (get-buffer "*pomidor*"))
-      (local-set-key (kbd "q") `(lambda ()
-                                  ""
-                                  (interactive)
-                                  (progn
-                                    (persp-switch ,pers)
-                                    (switch-to-buffer ,buff))))))
+      (let ((pom-buff (get-buffer "*pomidor*")))
+        (persp-set-buffer pom-buff)
+        (switch-to-buffer pom-buff)
+        (local-set-key (kbd "q") `(lambda ()
+                                    ""
+                                    (interactive)
+                                    (progn
+                                      (persp-switch ,pers)
+                                      (switch-to-buffer ,buff)))))))
   (global-set-key (kbd "H-t") 'tom/pomidor)
 #+END_SRC
 ** Help
