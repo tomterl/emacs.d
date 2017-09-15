@@ -425,14 +425,15 @@ Stuff looted from graphene.
 #+END_SRC
 ** look
 #+BEGIN_SRC emacs-lisp
-;; Work around Emacs frame sizing bug when line-spacing
-;; is non-zero, which impacts e.g. grizzl.
-(add-hook 'minibuffer-setup-hook
-          (lambda ()
-            (set (make-local-variable 'line-spacing) 0)
-            (setq resize-mini-windows (featurep 'ido-vertical-mode))))
-
-(setq redisplay-dont-pause t)
+  ;; Work around Emacs frame sizing bug when line-spacing
+  ;; is non-zero, which impacts e.g. grizzl.
+  (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              (set (make-local-variable 'line-spacing) 0)
+              (local-set-key (kbd "C-n") 'ido-next-match)
+              (local-set-key (kbd "C-p") 'ido-prev-match)
+              (setq resize-mini-windows (featurep 'ido-vertical-mode))))
+  (setq redisplay-dont-pause t)
 #+END_SRC
 * Global stuff
 ** Single frame execution
