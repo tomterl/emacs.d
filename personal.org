@@ -2217,6 +2217,22 @@ Sensible setup found at 'or emacs('.
 Configure the pomidor package.
 #+BEGIN_SRC emacs-lisp
   (setq alert-default-style 'libnotify)
+  (defun tom/pomidor ()
+    "Ensure pomidor is started in persp main"
+    (interactive)
+    (let ((buff (current-buffer))
+          (pers (persp-name persp-curr)))
+      (pomidor)
+      (persp-switch "main")
+      (persp-set-buffer (get-buffer "*pomidor*"))
+      (switch-to-buffer (get-buffer "*pomidor*"))
+      (local-set-key (kbd "q") `(lambda ()
+                                  ""
+                                  (interactive)
+                                  (progn
+                                    (persp-switch ,pers)
+                                    (switch-to-buffer ,buff))))))
+  (global-set-key (kbd "H-t") 'tom/pomidor)
 #+END_SRC
 ** Help
 #+BEGIN_SRC emacs-lisp
