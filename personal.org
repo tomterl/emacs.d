@@ -2293,6 +2293,13 @@ Add speedbar support for elixir files.
            '((company-racer :with :sorted company-yasnippet)))))
   (add-hook 'rust-mode-hook 'tom/rust-mode-hook)
 #+END_SRC
+** Shell
+#+BEGIN_SRC emacs-lisp
+  (defun tom/sh-mode-hook ()
+    ""
+    (flycheck-mode 1))
+  (add-hook 'sh-mode-hook 'tom/sh-mode-hook)
+#+END_SRC
 ** PHP
 *** Use php-mode, not web-mode for PHP-code
 
