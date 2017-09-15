@@ -2232,7 +2232,15 @@ Configure the pomidor package.
                                     (interactive)
                                     (progn
                                       (persp-switch ,pers)
-                                      (switch-to-buffer ,buff)))))))
+                                      (switch-to-buffer ,buff))))
+        (local-set-key (kbd "Q") `(lambda ()
+                                    ""
+                                    (interactive)
+                                    (progn
+                                      (persp-remove-buffer ,pom-buff)
+                                      (persp-switch ,pers)
+                                      (switch-to-buffer ,buff)
+                                      (kill-buffer ,pom-buff)))))))
   (global-set-key (kbd "H-t") 'tom/pomidor)
 #+END_SRC
 ** Help
