@@ -1215,7 +1215,7 @@ This is a birds eye view of the current buffer.
        minimap-hide-scroll-bar t
        minimap-hide-fringes t
        )
-  (global-set-key (kbd "H-M") 'minimap-toggle)
+  (global-set-key (kbd "H-M") 'minimap-mode)
   
 #+END_SRC
 
