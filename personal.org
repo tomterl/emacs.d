@@ -2842,6 +2842,7 @@ Always have an emacs server running.
 #+BEGIN_SRC emacs-lisp
 (require 'server)
 (unless (server-running-p)
+  (org-reload) ; switch to newest org from melpa
   (server-start))
 #+END_SRC
 
