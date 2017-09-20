@@ -1721,7 +1721,7 @@ Why the hell do I do this?
                            </div>
                            <hr/>"
                  :html-postamble "<hr/><div class=\"footer\">
-                              <a href=\"imprint.html\">imprint</a>
+                              <a href=\"/imprint.html\">imprint</a>
                             </div>"
                  :html-head "<link rel=\"stylesheet\"
                            href=\"/static/css/style.css\" type=\"text/css\"/>"
