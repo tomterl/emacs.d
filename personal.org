@@ -1102,7 +1102,15 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'sanityinc-tomorrow-night)
+  (setq spacemacs-theme-org-agenda-height nil)
+  (setq spacemacs-theme-org-height nil)
+  (load-theme 'spacemacs-dark)
+  (set-face-attribute 'org-level-1 nil :height 1.0)
+  (set-face-attribute 'org-level-2 nil :height 1.0)
+  (set-face-attribute 'org-level-3 nil :height 1.0)
+  (set-face-attribute 'org-scheduled-today nil :height 1.0)
+  (set-face-attribute 'org-agenda-date-today nil :height 1.1)
+  (set-face-attribute 'org-table nil :foreground "#008787")
 #+END_SRC
 
 *** Adapt company-mode
@@ -1129,8 +1137,10 @@ Marking the root of a project are only
 ** Modeline
 
 #+BEGIN_SRC emacs-lisp
-  (setq sml/theme 'powerline)
-  (sml/setup)
+  (require 'spaceline)
+  (setq powerline-default-separator 'arrow-fade)
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

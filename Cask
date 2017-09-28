@@ -205,6 +205,8 @@
 (depends-on "smex")
 (depends-on "smooth-scrolling")
 (depends-on "soothe-theme")
+(depends-on "spaceline")
+(depends-on "spacemacs-theme")
 (depends-on "spinner")
 (depends-on "sql-indent")
 (depends-on "sr-speedbar")
