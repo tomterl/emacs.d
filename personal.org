@@ -1138,7 +1138,7 @@ Marking the root of a project are only
 
 #+BEGIN_SRC emacs-lisp
   (require 'spaceline)
-  (setq powerline-default-separator 'arrow-fade)
+  (setq powerline-default-separator 'bar)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 #+END_SRC
