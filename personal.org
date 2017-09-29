@@ -1221,10 +1221,6 @@ This is interesting for presentations (e.g.).
 This is a birds eye view of the current buffer.
 
 #+BEGIN_SRC emacs-lisp
-  (setq minimap-dedicated-window t
-       minimap-hide-scroll-bar t
-       minimap-hide-fringes t
-       )
   (global-set-key (kbd "H-M") 'minimap-mode)
   
 #+END_SRC
