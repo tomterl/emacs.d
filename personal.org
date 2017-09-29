@@ -1769,14 +1769,25 @@ A more fluid display setup
    lui-time-stamp-position 'right-margin
    lui-fill-type nil)
 
-  (add-hook 'lui-mode-hook 'tom/lui-setup)
   (defun tom/lui-setup ()
     (setq
      fringes-outside-margins t
      right-margin-width 7
      word-wrap t
      wrap-prefix "    "))
+  (add-hook 'lui-mode-hook 'tom/lui-setup)
+
 #+END_SRC
+
+Put query buffers in the chat Perspective.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tom/circe-query-hook ()
+    (with-perspective "chat"
+      (persp-add-buffer (current-buffer))))
+  (add-hook 'circe-query-mode-hook 'tom/circe-query-hook)
+#+END_SRC
+
 Enable logging for channels, this is nice for bitlbee conversations.
 
 The manual must be out of date, this doesn't load.
@@ -1871,7 +1882,7 @@ notification in a given time intervall.
   (autoload 'enable-circe-notifications "circe-notifications" nil t)
 
   (eval-after-load "circe-notifications"
-    '(setq circe-notifications-watch-strings
+  '(setq circe-notifications-watch-strings
            '("Martin" "mregner" "Sascha" "saschab" "bgeisler" "sabrina" "olivers")
            circe-notifications-timeout 3000))
 
