@@ -1728,6 +1728,7 @@ Why the hell do I do this?
                  :with-todo-keywords nil
                  :with-author nil
                  :with-creator nil
+                 :with-title nil
                  :html-preamble "<div class=\"navi\">
                              <b>
                                <a href=\"/index.html\" class=\"home\">Me+Myself+I</a>
@@ -1742,7 +1743,7 @@ Why the hell do I do this?
                               <a href=\"/imprint.html\">imprint</a>
                             </div>"
                  :html-head "<link rel=\"stylesheet\"
-                           href=\"/static/css/style.css\" type=\"text/css\"/>"
+                           href=\"/static/css/style.css\" type=\"text/css\"/><title>tomsdiner.org</title>"
                  :html-head-include-default-style nil
                  :with-timestamp t
                  :exclude-tags ("noexport" "todo")
