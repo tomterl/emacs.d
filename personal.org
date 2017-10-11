@@ -1136,11 +1136,23 @@ Marking the root of a project are only
 
 ** Modeline
 
+*** circe spaceline segment
+#+BEGIN_SRC emacs-lisp
+  (spaceline-define-segment circe-tracking
+    "Display circe tracking buffers"
+    (when (and active (not (s-blank-str-p tracking-mode-line-buffers)))
+      (s-trim (powerline-raw tracking-mode-line-buffers)))
+    :fallback ".oO(...)"
+    :enable t)
+
+#+END_SRC
+
+*** setup
 #+BEGIN_SRC emacs-lisp
   (require 'spaceline)
   (setq powerline-default-separator 'wave)
   (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
+  (spaceline-spacemacs-theme 'circe-tracking)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1786,6 +1798,7 @@ Put query buffers in the chat Perspective.
     (with-perspective "chat"
       (persp-add-buffer (current-buffer))))
   (add-hook 'circe-query-mode-hook 'tom/circe-query-hook)
+  (add-hook 'circe-mode-hook 'tom/circe-query-hook) 
 #+END_SRC
 
 Enable logging for channels, this is nice for bitlbee conversations.
