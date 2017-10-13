@@ -1168,6 +1168,8 @@ Marking the root of a project are only
   (diminish 'yas-minor-mode)
   (diminish 'whitespace-mode)
   (diminish 'flycheck-mode)
+  (diminish 'repl-toggle-mode)
+  (diminish 'mmm-mode)
 #+END_SRC
 ** Colors on terminals
 
