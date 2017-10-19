@@ -1801,9 +1801,9 @@ Put query buffers in the chat Perspective.
 
 #+BEGIN_SRC emacs-lisp
   (defun tom/circe-query-hook ()
-    (with-perspective "chat"
-      (persp-add-buffer (current-buffer))))
-  (add-hook 'circe-query-mode-hook 'tom/circe-query-hook)
+    (let ((-buff (current-buffer)))
+      (with-perspective "chat"
+        (persp-add-buffer -buff))))
   (add-hook 'circe-mode-hook 'tom/circe-query-hook) 
 #+END_SRC
 
