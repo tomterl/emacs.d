@@ -1142,7 +1142,7 @@ Marking the root of a project are only
   (require 'spaceline)
   (spaceline-define-segment circe-tracking
     "Display circe tracking buffers"
-    (when (and active (listp tracking-mode-line-buffers))
+    (when (listp tracking-mode-line-buffers)
       (apply 'concat (cl-loop for entry in tracking-mode-line-buffers
                               collect (or (plist-get entry :propertize) ""))))
     :fallback ".oO(...)"
