@@ -666,17 +666,34 @@ Inspired/copied from endless parentheses blog
 
 *** perspectives
 #+BEGIN_SRC emacs-lisp
-  (global-set-key
-   (kbd "H-P")
-   (defhydra hydra-persp (:color red :timeout 3)
-     "Perspective"
-     ("d" projectile-persp-switch-project "Switch dired")
-     ("s" (call-interactively 'persp-switch) "Switch/Create")
-     ("m" (call-interactively 'persp-set-buffer) "Move buffer")
-     ("n" persp-next "Next Perspective")
-     ("p" persp-prev "Previous Perspective")
-     ("i" projectile-invalidate-cache "Invalidate file cache")
-     ("q" nil "Quit")))
+    (global-set-key
+     (kbd "H-P")
+     (defhydra hydra-persp (:color red :timeout 3)
+       "Perspective"
+       ("d" projectile-persp-switch-project "Switch dired")
+       ("s" (call-interactively 'persp-switch) "Switch/Create")
+       ("m" (call-interactively 'persp-set-buffer) "Move buffer")
+       ("n" persp-next "Next Perspective")
+       ("p" persp-prev "Previous Perspective")
+       ("i" projectile-invalidate-cache "Invalidate file cache")
+       ("q" nil "Quit")))
+
+  (advice-add #'dashboard-insert-project-list :override
+              #'(lambda (list-display-name list);
+                  "Render LIST-DISPLAY-NAME title and project items of LIST."
+                  (when (car list)
+                    (insert list-display-name)
+                    (mapc (lambda (el)
+                            (insert "\n    ")
+                            (widget-create 'push-button
+                                           :action `(lambda (&rest ignore) (projectile-persp-switch-project ,el))
+                                           :mouse-face 'highlight
+                                           :follow-link "\C-m"
+                                           :button-prefix ""
+                                           :button-suffix ""
+                                           :format "%[%t%]"
+                                           (abbreviate-file-name el)))
+                            list))))
 
 #+END_SRC
 ** COMMENT Tramp Setup
@@ -895,7 +912,7 @@ Marking the root of a project are only
   (add-to-list 'projectile-project-root-files "manifest.json")
   (add-to-list 'projectile-project-root-files ".projectile")
   (setq projectile-project-root-files-functions '(projectile-root-top-down))
-  (setq projectile-switch-project-action 'tom/projectile-ranger)
+  (setq projectile-switch-project-action 'projectile-find-file)
   (setq projectile-find-dir-includes-top-level t)
   (setq projectile-indexing-method 'native)
   (setq projectile-enable-caching t)
@@ -1244,7 +1261,7 @@ This is a birds eye view of the current buffer.
 
 ** Fringe
 #+BEGIN_SRC emacs-lisp
-(fringe-mode (cons nil  8))
+(fringe-mode (cons 16  8))
 #+END_SRC
 
 ** Frametitle
@@ -1257,7 +1274,8 @@ This is a birds eye view of the current buffer.
 ** Dashboard
 
 #+BEGIN_SRC emacs-lisp
-(dashboard-setup-startup-hook)
+  (setq dashboard-items '((projects . 10)(bookmarks . 10)))
+  (dashboard-setup-startup-hook)
 #+END_SRC
 
 * GNUS News and Mail
