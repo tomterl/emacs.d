@@ -2744,6 +2744,13 @@ definitions as used in fb-core et.al.
 
 * Version control
 ** Magit 
+Magithub integration.
+
+#+BEGIN_SRC emacs-lisp
+  (setq magithub-feature-autoinject t)
+  (require 'magithub)
+
+#+END_SRC
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
   (setq magit-last-seen-setup-instructions "1.4.0")
