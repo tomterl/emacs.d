@@ -2867,6 +2867,13 @@ Focus on the current window and the ag-result buffer.
 (fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
 #+END_SRC
 
+Setup `wgrep-ag`.
+
+#+BEGIN_SRC emacs-lisp 
+  (autoload 'wgrep-ag-setup "wgrep-ag")
+  (add-hook 'ag-mode-hook 'wgrep-ag-setup)
+#+END_SRC
+
 Delete the ~File:~ prefix appended by ~ag~ to the output, let `compile-find-file` work again.
 
 #+BEGIN_SRC emacs-lisp
