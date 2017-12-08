@@ -2566,8 +2566,21 @@ Check the doc comment of the current function for @param tags, create them if no
       (yas-minor-mode 1)
       (tern-mode t)
       (company-mode 1)
+      (local-set-key
+       (kbd "H-j")
+       (defhydra hydra-js2-refactor (:color blue :timeout 5)
+         "Refactor javascript"
+         ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arror")))
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
+#+END_SRC
+*** Refectoring 
+#+BEGIN_SRC emacs-lisp
+  (require 'js2-refactor)
+  (js2r-add-keybindings-with-prefix "C-c C-m")
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+
+
 #+END_SRC
 *** Edit js in YAML-files
 #+BEGIN_SRC emacs-lisp
