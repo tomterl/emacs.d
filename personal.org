@@ -1538,7 +1538,7 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
 
 #+BEGIN_SRC emacs-lisp
   (if (tom/work?)
-      (setq org-agenda-files (list org-journal-dir)
+      (setq org-agenda-files nil
             org-agenda-file-regexp "^\[0-9\]+")
     (setq org-agenda-files (quote ("~/ownCloud/org-mode/todos.org"
                                    "~/ownCloud/org-mode/joocom.org"))))
