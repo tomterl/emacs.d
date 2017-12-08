@@ -6,6 +6,7 @@
         c-electric-colon
         c-electric-paren
         delete-indentation
+        insert-semicolon-at-end-of-line
         org-self-insert-command
         smex
         sp--self-insert-command
