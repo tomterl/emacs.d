@@ -834,6 +834,8 @@ the stuff I entered.
 #+END_SRC
 *** Key bindings
 
+Fasten seat belts, we enter hyper space...
+
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-SPC") 'company-complete)
 #+END_SRC
