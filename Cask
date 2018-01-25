@@ -136,6 +136,7 @@
 (depends-on "json-snatcher")
 (depends-on "julia-mode")
 (depends-on "jump")
+(depends-on "kaleidoscope")
 (depends-on "lentic")
 (depends-on "link-hint")
 (depends-on "log4e")
