@@ -227,4 +227,4 @@ static char *gnus-pointer[] = {
  '(company-tooltip ((t (:inherit default :background "#545454"))))
  '(company-tooltip-common ((t (:inherit default :background "#3f3f3f" :foreground "#ecece9"))))
  '(company-tooltip-selection ((t (:inherit default :foreground "#3f3f3f" :background "#ecece9"))))
- '(persp-selected-face ((t (:inherit bold :foreground "burlywood" :weight bold)))))
+ '(persp-selected-face ((t (:foreground "saddle brown" :weight bold)))))
