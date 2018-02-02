@@ -2416,6 +2416,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (company-mode 1)
+      (ac-php-core-eldoc-setup)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
       (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)))
