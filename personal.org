@@ -2571,7 +2571,8 @@ Check the doc comment of the current function for @param tags, create them if no
        (kbd "H-j")
        (defhydra hydra-js2-refactor (:color blue :timeout 5)
          "Refactor javascript"
-         ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arror")))
+         ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
+         ("rv" #'js2r-rename-var "rename variable")))
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
   (add-hook 'js2-mode-hook 'tom/js2-mode-hook)
 #+END_SRC

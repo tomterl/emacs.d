@@ -15,6 +15,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        hydra-js2-refactor/js2r-rename-var-and-exit
         ido-switch-buffer
         tom/mcdwim
         yas-expand
