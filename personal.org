@@ -752,8 +752,8 @@ Inspired/copied from endless parentheses blog
     ;; (add-hook 'persp-after-load-state-functions
     ;;           #'(lambda (&rest args) (persp-auto-persps-pickup-buffers)) t)
     )
-  (projectile-mode)
-  (persp-mode-projectile-bridge-mode 1)
+  ;; (projectile-mode)
+  ;; (persp-mode-projectile-bridge-mode 1)
   (require 'persp-mode)
   (persp-mode)
   (defmacro with-perspective (name &rest body)

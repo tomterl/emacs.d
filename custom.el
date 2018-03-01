@@ -126,6 +126,7 @@ static char *gnus-pointer[] = {
  '(persp-keymap-prefix "p")
  '(persp-mode t nil (persp-mode))
  '(persp-mode-projectile-bridge-mode t nil (persp-mode-projectile-bridge))
+ '(persp-mode-projectile-bridge-persp-name-prefix "")
  '(persp-set-ido-hooks t)
  '(persp-show-modestring (quote (quote header)))
  '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
