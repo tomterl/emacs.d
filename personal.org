@@ -259,6 +259,8 @@ Stuff looted from graphene.
         ido-use-filename-at-point 'guess
         ido-everywhere t
         ido-use-faces t)
+  (require 'ido-completing-read+)
+  (ido-ubiquitous-mode 1)
 
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -1281,7 +1283,7 @@ Marking the root of a project are only
   (diminish 'whitespace-mode)
   (diminish 'flycheck-mode)
   (diminish 'repl-toggle-mode)
-  (diminish 'mmm-mode)
+  (diminish 'mmm-mode) 
   (diminish 'persp-mode)
 #+END_SRC
 ** Colors on terminals
