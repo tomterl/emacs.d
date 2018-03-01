@@ -7,7 +7,7 @@
  '(ag-highlight-search t)
  '(ag-reuse-buffers t)
  '(ansi-color-names-vector
-   ["black" "#E2434C" "#86B187" "#E0D063" "#84C452" "#E18CBB" "#8AC6F2" "white"])
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(ansi-term-color-vector
    [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
  '(column-number-mode t)
@@ -117,8 +117,17 @@ static char *gnus-pointer[] = {
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (rg speed-type ob-http smart-mode-line-powerline-theme link-hint sql-indent ido-vertical-mode dracula-theme badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php ox-reveal outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-cursor-color ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari repl-toggle popwin popup phpunit php-auto-yasnippets persp-projectile paredit pallet origami omni-scratch names minimap lua-mode lentic json-rpc jade-mode jabber ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+    (persp-mode persp-mode-projectile-bridge rg speed-type ob-http smart-mode-line-powerline-theme link-hint sql-indent ido-vertical-mode dracula-theme badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php ox-reveal outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum paradox php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-cursor-color ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari repl-toggle popwin popup phpunit php-auto-yasnippets paredit pallet origami omni-scratch names minimap lua-mode lentic json-rpc jade-mode jabber ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
  '(paradox-automatically-star nil)
+ '(persp-add-buffer-on-after-change-major-mode (quote free))
+ '(persp-auto-resume-time -1.0)
+ '(persp-auto-save-opt 0)
+ '(persp-interactive-completion-system (quote ido))
+ '(persp-keymap-prefix "p")
+ '(persp-mode t nil (persp-mode))
+ '(persp-mode-projectile-bridge-mode t nil (persp-mode-projectile-bridge))
+ '(persp-set-ido-hooks t)
+ '(persp-show-modestring (quote (quote header)))
  '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
  '(pomidor-seconds 1800)
  '(pos-tip-background-color "#eee8d5")
