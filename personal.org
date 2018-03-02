@@ -1279,7 +1279,7 @@ Marking the root of a project are only
   (setq powerline-default-separator 'arrow-fade) 
   (require 'spaceline-config)
   (spaceline-toggle-persp-name-off)
-  (spaceline-emacs-theme 'circe-tracking 'perspective-name)
+  (spaceline-spacemacs-theme 'circe-tracking 'perspective-name)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
