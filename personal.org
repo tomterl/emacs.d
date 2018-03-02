@@ -1273,10 +1273,10 @@ Marking the root of a project are only
 *** setup
 #+BEGIN_SRC emacs-lisp
   (require 'spaceline)
-  (setq powerline-default-separator 'bar)
+  (setq powerline-default-separator 'arrow-fade) 
   (require 'spaceline-config)
   (spaceline-toggle-persp-name-off)
-  (spaceline-spacemacs-theme 'circe-tracking 'perspective-name)
+  (spaceline-emacs-theme 'circe-tracking 'perspective-name)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
