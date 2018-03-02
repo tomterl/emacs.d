@@ -666,12 +666,12 @@ Inspired/copied from endless parentheses blog
       (set-window-dedicated-p curr-win t)))
 #+END_SRC
 
-*** perspectives
+** perspectives
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load "persp-mode"
     (defvar persp-mode-projectile-bridge-before-switch-selected-window-buffer nil)
 
-    ;; (setq persp-add-buffer-on-find-file 'if-not-autopersp)
+    (setq persp-add-buffer-on-find-file 'if-not-autopersp)
 
     (persp-def-auto-persp "projectile"
                           :parameters '((dont-save-to-file . t)
@@ -732,6 +732,7 @@ Inspired/copied from endless parentheses blog
                                    (setcdr (assq :switch state) nil)))
                                 (if (case hook
                                       (projectile-before-switch-project-hook nil)
+                                      (projectile-find-file-hook nil)
                                       (t t))
                                     (persp--auto-persp-default-on-match state)
                                   (setcdr (assq :after-match state) nil)))
@@ -743,7 +744,7 @@ Inspired/copied from endless parentheses blog
                                              #'(lambda (buf persp)
                                                  (when (and (eq persp (get-current-persp))
                                                             (not (eq buf (window-buffer (selected-window)))))
-                                                   ;; (switch-to-buffer buf)
+                                                   ;;(switch-to-buffer buf)
                                                    (persp-add-buffer buf persp t nil)))
                                              (alist-get 'buffer state)
                                              (get-current-persp)))
@@ -752,33 +753,33 @@ Inspired/copied from endless parentheses blog
     ;; (add-hook 'persp-after-load-state-functions
     ;;           #'(lambda (&rest args) (persp-auto-persps-pickup-buffers)) t)
     )
-  ;; (projectile-mode)
-  ;; (persp-mode-projectile-bridge-mode 1)
-  (require 'persp-mode)
-  (persp-mode)
-  (defmacro with-perspective (name &rest body)
-    "Switch to the perspective given by NAME while evaluating BODY."
-    (declare (indent 1))
-    (let ((old (cl-gensym)))
-      `(progn
-         (let ((,old (when (get-current-persp) (persp-name (get-current-persp))))
-               (last-persp-cache persp-last-persp-name))
-           (unwind-protect
-               (progn
-                 (persp-switch ,name)
-                 ,@body)
-             (when ,old (persp-switch ,old)))
-           (setq persp-last-persp-name last-persp-cache)))))
-  (global-set-key (kbd "H-P")
-                  (defhydra hydra-persp (:color red :timeout 3)
-                    "Perspective"
-                    ("d" (call-interactively 'projectile-switch-project) "Switch dired")
-                    ("s" (call-interactively 'persp-switch) "Switch/Create")
-                    ("m" (call-interactively 'persp-set-buffer) "Move buffer")
-                    ("n" persp-next "Next Perspective")
-                    ("p" persp-prev "Previous Perspective")
-                    ("i" projectile-invalidate-cache "Invalidate file cache")
-                    ("q" nil "Quit")))
+    ;; (projectile-mode)
+    ;; (persp-mode-projectile-bridge-mode 1)
+    (require 'persp-mode)
+    (persp-mode)
+    (defmacro with-perspective (name &rest body)
+      "Switch to the perspective given by NAME while evaluating BODY."
+      (declare (indent 1))
+      (let ((old (cl-gensym)))
+        `(progn
+           (let ((,old (when (get-current-persp) (persp-name (get-current-persp))))
+                 (last-persp-cache persp-last-persp-name))
+             (unwind-protect
+                 (progn
+                   (persp-switch ,name)
+                   ,@body)
+               (when ,old (persp-switch ,old)))
+             (setq persp-last-persp-name last-persp-cache)))))
+    (global-set-key (kbd "H-P")
+                    (defhydra hydra-persp (:color red :timeout 3)
+                      "Perspective"
+                      ("d" (call-interactively 'projectile-switch-project) "Switch dired")
+                      ("s" (call-interactively 'persp-switch) "Switch/Create")
+                      ("m" (call-interactively 'persp-set-buffer) "Move buffer")
+                      ("n" persp-next "Next Perspective")
+                      ("p" persp-prev "Previous Perspective")
+                      ("i" projectile-invalidate-cache "Invalidate file cache")
+                      ("q" nil "Quit")))
 
 
 
@@ -987,24 +988,24 @@ Marking the root of a project are only
 - ~.projectile~ as manually added mark for other project types
 
 #+BEGIN_SRC emacs-lisp
-  (require 'projectile)
-  (defun tom/projectile-ranger ()
-    "Open `ranger' at the root of the project."
-    (interactive)
-    (golden-ratio-mode -1)
-    (ranger (projectile-project-root)))
-  (add-to-list 'projectile-globally-ignored-directories ".git")
-  (add-to-list 'projectile-globally-ignored-directories "base/.git")
-  (add-to-list 'projectile-globally-ignored-directories "includes/.git")
-  (add-to-list 'projectile-globally-ignored-directories ".cask")
-  (add-to-list 'projectile-project-root-files "RoboFile.php")
-  (add-to-list 'projectile-project-root-files "manifest.json")
-  (add-to-list 'projectile-project-root-files ".projectile")
-  (setq projectile-project-root-files-functions '(projectile-root-top-down))
-  (setq projectile-switch-project-action 'projectile-find-file)
-  (setq projectile-find-dir-includes-top-level t)
-  (setq projectile-indexing-method 'native)
-  (setq projectile-enable-caching t)
+    (require 'projectile)
+    (defun tom/projectile-ranger ()
+      "Open `ranger' at the root of the project."
+      (interactive)
+      (golden-ratio-mode -1)
+      (ranger (projectile-project-root)))
+    (add-to-list 'projectile-globally-ignored-directories ".git")
+    (add-to-list 'projectile-globally-ignored-directories "base/.git")
+    (add-to-list 'projectile-globally-ignored-directories "includes/.git")
+    (add-to-list 'projectile-globally-ignored-directories ".cask")
+    (add-to-list 'projectile-project-root-files "RoboFile.php")
+    (add-to-list 'projectile-project-root-files "manifest.json")
+    (add-to-list 'projectile-project-root-files ".projectile")
+    (setq projectile-project-root-files-functions '(projectile-root-top-down))
+    (setq projectile-switch-project-action #'projectile-find-file)
+    (setq projectile-find-dir-includes-top-level t)
+    (setq projectile-indexing-method 'native)
+    (setq projectile-enable-caching t)
 
 #+END_SRC
 *** Perspectives
