@@ -1266,7 +1266,10 @@ Marking the root of a project are only
   (require 'spaceline)
   (spaceline-define-segment perspective-name
     "Display persp-mode acive perspective"
-    (persp-name (get-current-persp))
+    (let ((persp (get-current-persp)))
+      (if persp
+          (persp-name (get-current-persp))
+        ""))
     :fallback "none"
     :enable t)
 #+END_SRC
