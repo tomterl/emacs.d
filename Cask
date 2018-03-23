@@ -164,7 +164,6 @@
 (depends-on "org-journal")
 (depends-on "origami")
 (depends-on "outline-magic")
-(depends-on "ox-reveal")
 (depends-on "package-build")
 (depends-on "packed")
 (depends-on "page-break-lines")
