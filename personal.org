@@ -926,6 +926,9 @@ the stuff I entered.
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t)
+  (company-quickhelp-mode)
+  (eval-after-load 'company
+    '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
 #+END_SRC
 *** Key bindings
 
@@ -1218,6 +1221,7 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
+  (require 'moe-theme)
   (load-theme 'moe-dark t)
   (set-face-attribute 'org-level-1 nil :height 1.0)
   (set-face-attribute 'org-level-2 nil :height 1.0)
@@ -2512,15 +2516,15 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
     (progn 
       (require 'company-php)
 
-      (set (make-local-variable 'company-backends)
-           '((company-ac-php-backend :with :sorted company-yasnippet)))
-      (set (make-local-variable 'call-php-tags-func) t)
       (ggtags-mode -1)
       (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (company-mode 1)
       (ac-php-core-eldoc-setup)
+      (set (make-local-variable 'company-backends)
+           '((company-ac-php-backend :with :sorted company-yasnippet)))
+      (set (make-local-variable 'call-php-tags-func) t)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
       (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)

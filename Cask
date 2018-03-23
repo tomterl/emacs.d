@@ -37,6 +37,7 @@
 (depends-on "company")
 (depends-on "company-inf-ruby")
 (depends-on "company-php")
+(depends-on "company-quickhelp")
 (depends-on "company-racer")
 (depends-on "company-tern")
 (depends-on "concurrent")
