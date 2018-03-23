@@ -2482,6 +2482,7 @@ Add speedbar support for elixir files.
 *** Use php-mode, not web-mode for PHP-code
 
 #+BEGIN_SRC emacs-lisp
+(require 'php-mode)
   (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
   (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 #+END_SRC
@@ -2508,13 +2509,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
     ""
     (progn 
       (require 'company-php)
-      (setq tab-width 4
-            c-basic-offset 4
-            indent-tabs-mode nil
-            php-template-compatibility nil
-            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode")
-            php-mode-coding-style (quote wordpress)
-            php-lineup-cascaded-calls t)
+    
       (set (make-local-variable 'company-backends)
            '((company-ac-php-backend :with :sorted company-yasnippet)))
       (set (make-local-variable 'call-php-tags-func) t)
@@ -2526,7 +2521,15 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (ac-php-core-eldoc-setup)
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
       (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
-      (local-set-key (kbd "C-c a") 'tom/edit-sql)))
+      (local-set-key (kbd "C-c a") 'tom/edit-sql)
+      (setq tab-width 4
+            c-basic-offset 4
+            indent-tabs-mode nil
+            php-template-compatibility nil
+            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode")
+            php-mode-coding-style (quote wordpress)
+            php-lineup-cascaded-calls t)
+      (message "tom/php-mode-hook executed")))
 
   (add-hook 'php-mode-hook 'tom/php-mode-hook)
 #+END_SRC
