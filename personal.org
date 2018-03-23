@@ -1572,6 +1572,7 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
       (tom/gnus)))
 #+END_SRC
 * mu4e
+
 #+BEGIN_SRC emacs-lisp 
   (when (not (tom/work?))
     (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
@@ -1625,6 +1626,7 @@ Force unload gnus (all files loaded known to me as of 2014-03-23).
     ;; don't keep message buffers around
     (setq message-kill-buffer-on-exit t))
 #+END_SRC
+
 * org-mode
 ** Variables
    :PROPERTIES:
@@ -2509,7 +2511,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
     ""
     (progn 
       (require 'company-php)
-    
+
       (set (make-local-variable 'company-backends)
            '((company-ac-php-backend :with :sorted company-yasnippet)))
       (set (make-local-variable 'call-php-tags-func) t)
@@ -2862,11 +2864,13 @@ definitions as used in fb-core et.al.
 #+END_SRC
 * Databases
 ** ElasticSearch
+
 #+BEGIN_SRC emacs-lisp
   (autoload 'es-mode "es-mode.el" "Major mode for editing Elasticsearch queries." t)
   (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
   (add-hook 'es-result-mode-hook 'hs-minor-mode)
 #+END_SRC
+
 * Slime
 
 #+BEGIN_SRC emacs-lisp
