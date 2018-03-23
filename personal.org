@@ -541,7 +541,7 @@ Inspired/copied from endless parentheses blog
      ("c" column-number-mode "col-nums")
      ("d" toggle-debug-on-error "debug on error")
      ("f" auto-fill-mode "auto fill")
-     ("l" nlinum-mode "show line numbers")
+     ("l" display-line-numbers-mode "show line numbers")
      ("L" toggle-truncate-lines "truncate lines")
      ("g" golden-ratio-mode "1.61803")
      ("q" toggle-debug-on-quit "debug on quit")
