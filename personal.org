@@ -2382,27 +2382,26 @@ Configure the pomidor package.
 #+BEGIN_SRC emacs-lisp
   (setq alert-default-style 'libnotify)
   (defun tom/pomidor ()
-    "Ensure pomidor is started in persp main"
+    "Ensure pomidor is started in persp none"
     (interactive)
     (let ((buff (current-buffer))
-          (pers (persp-name persp-curr)))
+          (pers (get-current-persp)))
       (pomidor)
-      (persp-switch "main")
+      (persp-switch "none")
       (let ((pom-buff (get-buffer "*pomidor*")))
-        (persp-set-buffer pom-buff)
+        (persp-remove-buffer pom-buff pers)
         (switch-to-buffer pom-buff)
         (local-set-key (kbd "q") `(lambda ()
                                     ""
                                     (interactive)
                                     (progn
-                                      (persp-switch ,pers)
+                                      (persp-switch (persp-name ,pers))
                                       (switch-to-buffer ,buff))))
         (local-set-key (kbd "Q") `(lambda ()
                                     ""
                                     (interactive)
                                     (progn
-                                      (persp-remove-buffer ,pom-buff)
-                                      (persp-switch ,pers)
+                                      (persp-switch (persp-name ,pers))
                                       (switch-to-buffer ,buff)
                                       (kill-buffer ,pom-buff)))))))
   (global-set-key (kbd "H-t") 'tom/pomidor)
