@@ -2522,6 +2522,7 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (local-set-key (kbd "M-.") 'ac-php-find-symbol-at-point)
       (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)
+      (php-enable-wordpress-coding-style)
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
