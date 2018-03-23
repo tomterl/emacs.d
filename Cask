@@ -151,6 +151,7 @@
 (depends-on "material-theme")
 (depends-on "minimap")
 (depends-on "mmm-mode")
+(depends-on "moe-theme")
 (depends-on "monokai-alt-theme")
 (depends-on "multiple-cursors")
 (depends-on "names")
