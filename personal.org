@@ -938,6 +938,11 @@ Fasten seat belts, we enter hyper space...
   (global-set-key (kbd "H-SPC") 'company-complete)
 #+END_SRC
 
+** company-box
+#+BEGIN_SRC emacs-lisp
+  (require 'company-box)
+  (add-hook 'company-mode-hook 'company-box-mode)
+#+END_SRC
 ** GNU global
 
 #+BEGIN_SRC emacs-lisp

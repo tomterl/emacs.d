@@ -35,6 +35,7 @@
 (depends-on "color-theme-sanityinc-tomorrow")
 (depends-on "commander")
 (depends-on "company")
+(depends-on "company-box")
 (depends-on "company-inf-ruby")
 (depends-on "company-php")
 (depends-on "company-quickhelp")
