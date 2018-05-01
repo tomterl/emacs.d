@@ -1304,7 +1304,7 @@ Marking the root of a project are only
   (diminish 'repl-toggle-mode)
   (diminish 'mmm-mode) 
   (diminish 'persp-mode)
-  (diminish 'company-box)
+  (diminish 'company-box-mode)
 #+END_SRC
 ** Colors on terminals
 
