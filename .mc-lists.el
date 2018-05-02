@@ -17,6 +17,7 @@
       '(
         hydra-js2-refactor/js2r-rename-var-and-exit
         ido-switch-buffer
+        js2-indent-bounce
         tom/mcdwim
         yas-expand
         ))
