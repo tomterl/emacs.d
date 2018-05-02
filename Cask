@@ -32,6 +32,7 @@
 (depends-on "clues-theme")
 (depends-on "coffee-mode")
 (depends-on "color-theme-approximate")
+(depends-on "color-theme-sanityinc-solarized")
 (depends-on "color-theme-sanityinc-tomorrow")
 (depends-on "commander")
 (depends-on "company")
