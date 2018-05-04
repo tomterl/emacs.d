@@ -840,17 +840,27 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
   (add-to-list 'eshell-visual-commands "vim")
   (add-hook 'eshell-mode-hook 'eshell-smart-initialize)
   (setq eshell-prompt-regexp "^[^#$]*[#$] ")
+  (defvar tom/shellframe nil)
+  (add-to-list 'frame-inherited-parameters 'alpha)
   (defun tom/eshell ()
     "Start or switch to an eshell specific to the current
         projectile project, or the global '*eshell*' if not in a
         project"
     (interactive)
-    (if (projectile-project-p)
-        (let* ((-project-root (projectile-project-root))
-               (-project (projectile-default-project-name -project-root))
-               (eshell-buffer-name (concat "* " -project " eshell *")))
-          (eshell))
-      (eshell)))
+    (let ((pers (get-current-persp))
+          (proj (if (projectile-project-p) (projectile-project-root))))
+      (unless
+          (and tom/shellframe (framep tom/shellframe) (frame-live-p tom/shellframe))
+        (setq tom/shellframe (make-frame)))
+      (select-frame tom/shellframe)
+      (raise-frame)
+      (if proj
+          (let* ((-project (projectile-default-project-name proj))
+                 (eshell-buffer-name (concat "* " -project " eshell *")))
+            (if pers (persp-switch (persp-name pers)))
+            (cd proj)
+            (eshell))
+        (eshell))))
 #+END_SRC
 
 ** ~eshell~ prompt
@@ -1276,7 +1286,7 @@ Marking the root of a project are only
     "Display persp-mode acive perspective"
     (let ((persp (get-current-persp)))
       (if persp
-          (persp-name (get-current-persp))
+          (persp-name persp)
         ""))
     :fallback "none"
     :enable t)
