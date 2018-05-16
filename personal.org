@@ -1745,6 +1745,11 @@ Use inheritance for properties, needed for e.g. my zshorg project.
 #+BEGIN_SRC emacs-lisp
   (setq org-use-property-inheritance t)
 #+END_SRC
+
+Execute code-blocks on publishing
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-babel-evaluate t)
+#+END_SRC
 ** Tangle hook
 
 Remove code references in code prior to tangling; that way I can use
@@ -1888,6 +1893,8 @@ Why the hell do I do this?
                              </b>
                              &nbsp;&mdash;&nbsp;
                              <a href=\"/myself/index.html\">myself</a>
+                             &nbsp;&mdash;&nbsp;
+                             <a href=\"/blog/index.html\">posts</a>
                              &nbsp;&mdash;&nbsp;
                              <a href=\"http://github.com/tomterl\">projects</a>
                            </div>
