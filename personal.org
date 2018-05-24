@@ -2551,6 +2551,12 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
         (ac-php-remake-tags))
     )
   (add-hook 'after-save-hook 'tom/php-tags-update)
+
+  (defun tom/dtw ()
+    ""
+    (save-excursion
+      (delete-trailing-whitespace)))
+
   (defun tom/php-mode-hook ()
     ""
     (progn 
@@ -2569,14 +2575,15 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (local-set-key (kbd "M-,") 'ac-php-location-stack-back)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)
       (php-enable-wordpress-coding-style)
-      (flycheck-disable-checker 'php-phpmd)
+      (flycheck-may-enable-checker 'php-phpcs)
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
             php-template-compatibility nil
-            flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode")
+            flycheck-phpmd-rulesets '("unusedcode")
             php-mode-coding-style (quote wordpress)
             php-lineup-cascaded-calls t)
+      (add-hook 'write-contents-functions 'tom/dtw nil t)
       (message "tom/php-mode-hook executed")))
 
   (add-hook 'php-mode-hook 'tom/php-mode-hook)
