@@ -1236,7 +1236,7 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'sanityinc-solarized-dark t)
+  (load-theme 'zenburn t)
   (set-face-attribute 'org-level-1 nil :height 1.0)
   (set-face-attribute 'org-level-2 nil :height 1.0)
   (set-face-attribute 'org-level-3 nil :height 1.0)

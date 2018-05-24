@@ -266,3 +266,4 @@
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
 (depends-on "zeal-at-point")
+(depends-on "zenburn-theme")
