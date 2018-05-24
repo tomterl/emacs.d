@@ -191,6 +191,8 @@
 (depends-on "powerline")
 (depends-on "prodigy")
 (depends-on "projectile")
+(depends-on "projectile-ripgrep")
+(depends-on "projectile-speedbar")
 (depends-on "psysh")
 (depends-on "racer")
 (depends-on "railscasts-reloaded-theme")
