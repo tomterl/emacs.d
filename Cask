@@ -182,6 +182,7 @@
 (depends-on "php-auto-yasnippets")
 (depends-on "php-mode")
 (depends-on "php-refactor-mode")
+(depends-on "phpcbf")
 (depends-on "phpunit")
 (depends-on "pkg-info")
 (depends-on "pomidor")
