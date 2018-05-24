@@ -13,4 +13,4 @@ class ${1:`(file-name-base (buffer-name))`} {
     public function __construct() {
         $0
     } 
-};
+}
