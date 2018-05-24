@@ -1300,22 +1300,6 @@ Marking the root of a project are only
   (spaceline-spacemacs-theme 'circe-tracking 'perspective-name)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (diminish 'golden-ratio-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'whitespace-mode)
-  (diminish 'company-mode)
-  (diminish 'org-src-mode)
-  (diminish 'projectile-mode)
-  (diminish 'repl-toggle-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'whitespace-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'repl-toggle-mode)
-  (diminish 'mmm-mode) 
-  (diminish 'persp-mode)
-  (diminish 'company-box-mode)
-#+END_SRC
 ** Colors on terminals
 
 #+BEGIN_SRC emacs-lisp
@@ -3099,6 +3083,30 @@ Delete the ~File:~ prefix appended by ~ag~ to the output, let `compile-find-file
           'org-passwords-open-url)))
 
  #+END_SRC
+
+* Diminish Modes
+
+Do this after everything is setup.
+
+#+BEGIN_SRC emacs-lisp
+  (diminish 'golden-ratio-mode "")
+  (diminish 'undo-tree-mode "")
+  (diminish 'whitespace-mode "")
+  (diminish 'company-mode "")
+  (diminish 'org-src-mode "")
+  (diminish 'projectile-mode "")
+  (diminish 'yas-minor-mode "")
+  (diminish 'flycheck-mode "")
+  (diminish 'repl-toggle-mode "")
+  (diminish 'mmm-mode "") 
+  (diminish 'persp-mode "")
+  (diminish 'company-box-mode "")
+  (diminish 'volatile-highlights-mode "")
+  (diminish 'eldoc-mode "")
+  (diminish 'visual-line-mode "")
+  (diminish 'abbrev-mode "")
+  (diminish 'auto-revert-mode "")
+#+END_SRC
 
 * Server
 ** httpd server
