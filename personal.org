@@ -1102,10 +1102,16 @@ Marking the root of a project are only
           (25 . fa_arrows)) ;; TypeParameter
         )
   (setq company-box-icons-php
-     '((fa_tag :face font-lock-function-name-face) ;; Function
-       (fa_tags :face font-lock-function-name-face) ;; Methods
-       (fa_cog :face font-lock-variable-name-face) ;; Variable
-       (fa_cube :face font-lock-constant-face) ;; Feature
+     '((fa_tasks :face font-lock-function-name-face) ;; Trait
+       (fa_cube :face font-lock-function-name-face) ;; Class
+       (fa_tags :face font-lock-function-name-face) ;; Method
+       (fa_tag :face font-lock-function-name-face) ;; Function
+       (fa_plus_square :face font-lock-function-name-face) ;; Property
+       (fa_bullseye :face font-lock-function-name-face) ;; Constant
+       (fa_cog :face font-lock-function-name-face) ;; Variable
+       (fa_cubes :face font-lock-variable-name-face) ;; Interface
+       (fa_object_group :face font-lock-constant-face) ;; Namespace
+       (fa_stop_circle_o :face font-lock-constant-face) ;; Usetrait
        (md_storage :face font-lock-type-face))) ;; 
 
   (add-to-list 'company-box-icons-functions 'company-box-icons--acphp)
@@ -2166,6 +2172,11 @@ Send them to firefox, with keysnail much better then anything else.
    browse-url-browser-function (quote browse-url-firefox))
 #+END_SRC
 
+** Sidebar
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (concat tom/--emacs-dir "/sidebar.el"))
+  (require 'sidebar)
+#+END_SRC
 ** Speedbar
 *** Automatic update
 
@@ -2179,7 +2190,7 @@ I like speedbar to update automaticly, to always reflect the current state of af
 *** Toggle key
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "H-N") 'sr-speedbar-toggle)
+;(global-set-key (kbd "H-N") 'sr-speedbar-toggle)
 #+END_SRC
 
 ** Scrolling
