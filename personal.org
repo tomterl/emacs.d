@@ -1186,36 +1186,9 @@ Marking the root of a project are only
 
 ** Modeline
 
-*** circe spaceline segment
 #+BEGIN_SRC emacs-lisp
-  (require 'spaceline)
-  (spaceline-define-segment circe-tracking
-    "Display circe tracking buffers"
-    (when (listp tracking-mode-line-buffers)
-      (apply 'concat (cl-loop for entry in tracking-mode-line-buffers
-                              collect (or (plist-get entry :propertize) ""))))
-    :fallback ".oO(...)"
-    :enable t)
-#+END_SRC
-*** persp-mode spaceline segment
-#+BEGIN_SRC emacs-lisp
-  (require 'spaceline)
-  (spaceline-define-segment perspective-name
-    "Display persp-mode acive perspective"
-    (let ((persp (get-current-persp)))
-      (if persp
-          (persp-name persp)
-        ""))
-    :fallback "none"
-    :enable t)
-#+END_SRC
-*** setup
-#+BEGIN_SRC emacs-lisp
-  (require 'spaceline)
-  (setq powerline-default-separator 'arrow-fade) 
-  (require 'spaceline-config)
-  (spaceline-toggle-persp-name-off)
-  (spaceline-spacemacs-theme 'circe-tracking 'perspective-name)
+  (require 'smart-mode-line)
+  (sml/setup)
 #+END_SRC
 
 ** Colors on terminals
