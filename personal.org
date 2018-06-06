@@ -861,6 +861,21 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
             (cd proj)
             (eshell))
         (eshell))))
+  (defun tom/short-path (p-lst)
+    (if (> (length p-lst) 3)
+        (concat
+         (mapconcat (lambda (elm) (if (zerop (length elm)) ""
+                                    (substring elm 0 1)))
+                    (butlast p-lst 3)
+                    "/")
+         "/"
+         (mapconcat (lambda (elm) elm)
+                    (last p-lst 3)
+                    "/"))
+      (mapconcat (lambda (elm) elm)
+                 p-lst
+                 "/")))
+
 #+END_SRC
 
 ** ~eshell~ prompt
@@ -896,21 +911,10 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
   (setq eshell-prompt-function
         (lambda ()
           (concat
-           (propertize ((lambda (p-lst)
-              (if (> (length p-lst) 3)
-                  (concat
-                   (mapconcat (lambda (elm) (if (zerop (length elm)) ""
-                                              (substring elm 0 1)))
-                              (butlast p-lst 3)
-                              "/")
-                   "/"
-                   (mapconcat (lambda (elm) elm)
-                              (last p-lst 3)
-                              "/"))
-                (mapconcat (lambda (elm) elm)
-                           p-lst
-                           "/")))
-            (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "darkorange"))
+           (propertize
+            (tom/short-path
+             (split-string (pwd-repl-home (eshell/pwd)) "/"))
+            'face `(:foreground "darkorange"))
            (or (curr-dir-git-branch-string (eshell/pwd)))
            (propertize "$ " 'face 'default))))
 
@@ -1221,7 +1225,6 @@ characters and newlines is a possible lifesaver.
   (add-hook 'text-mode-hook 'whitespace-mode)
 #+END_SRC
 
-	
 ** Hide the mode line
 
 This is interesting for presentations (e.g.).
@@ -1269,10 +1272,15 @@ This is a birds eye view of the current buffer.
 
 ** Frametitle
 #+BEGIN_SRC emacs-lisp
-  (setq frame-title-format
-        '("" invocation-name ": "(:eval (if (buffer-name)
-                                            (abbreviate-file-name (buffer-name))
-                                          "%b"))))
+  (setq-default frame-title-format
+        '("" (:eval
+              (if (projectile-project-p)
+                  (projectile-project-name)
+                invocation-name))
+          ": " (:eval
+                (if (buffer-file-name)
+                    (tom/short-path (split-string (abbreviate-file-name (buffer-file-name)) "/"))
+                  "%b"))))
 #+END_SRC
 ** Dashboard
 
