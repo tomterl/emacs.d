@@ -1273,14 +1273,23 @@ This is a birds eye view of the current buffer.
 ** Frametitle
 #+BEGIN_SRC emacs-lisp
   (setq-default frame-title-format
-        '("" (:eval
-              (if (projectile-project-p)
-                  (projectile-project-name)
-                invocation-name))
-          ": " (:eval
-                (if (buffer-file-name)
-                    (tom/short-path (abbreviate-file-name (buffer-file-name)))
-                  "%b"))))
+                '("" (:eval
+                      (if (projectile-project-p)
+                          (projectile-project-name)
+                        invocation-name))
+                  ": " (:eval
+                        (if (buffer-file-name)
+                            (tom/short-path (abbreviate-file-name (buffer-file-name)))
+                          "%b"))))
+  (add-hook 'focus-out-hook (lambda ()
+                              (set-frame-parameter (selected-frame)
+                                                   'title (if (projectile-project-p)
+                                                             (projectile-project-name)
+                                                           invocation-name))))
+  (add-hook 'focus-in-hook (lambda ()
+                             (set-frame-parameter (selected-frame)
+                                                  'title nil)))
+
 #+END_SRC
 ** Dashboard
 
