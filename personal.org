@@ -861,17 +861,18 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
             (cd proj)
             (eshell))
         (eshell))))
-  (defun tom/short-path (p-lst)
-    (let ((path (if (listp p-lst) p-lst (split-string p-lst "/"))))
-      (if (> (length path) 3)
+  (defun tom/short-path (p-lst &optional len)
+    (let ((len (or len 3))
+          (path (if (listp p-lst) p-lst (split-string p-lst "/"))))
+      (if (> (length path) len)
           (concat
            (mapconcat (lambda (elm) (if (zerop (length elm)) ""
                                       (substring elm 0 1)))
-                      (butlast path 3)
+                      (butlast path len)
                       "/")
            "/"
            (mapconcat (lambda (elm) elm)
-                      (last path 3)
+                      (last path len)
                       "/"))
         (mapconcat (lambda (elm) elm)
                    path
@@ -1279,7 +1280,7 @@ This is a birds eye view of the current buffer.
                         invocation-name))
                   ": " (:eval
                         (if (buffer-file-name)
-                            (tom/short-path (abbreviate-file-name (buffer-file-name)))
+                            (tom/short-path (abbreviate-file-name (buffer-file-name)) 1)
                           "%b"))))
   (add-hook 'focus-out-hook (lambda ()
                               (set-frame-parameter (selected-frame)
