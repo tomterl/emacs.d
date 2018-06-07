@@ -862,19 +862,20 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
             (eshell))
         (eshell))))
   (defun tom/short-path (p-lst)
-    (if (> (length p-lst) 3)
-        (concat
-         (mapconcat (lambda (elm) (if (zerop (length elm)) ""
-                                    (substring elm 0 1)))
-                    (butlast p-lst 3)
-                    "/")
-         "/"
-         (mapconcat (lambda (elm) elm)
-                    (last p-lst 3)
-                    "/"))
-      (mapconcat (lambda (elm) elm)
-                 p-lst
-                 "/")))
+    (let ((path (if (listp p-lst) p-lst (split-string p-lst "/"))))
+      (if (> (length path) 3)
+          (concat
+           (mapconcat (lambda (elm) (if (zerop (length elm)) ""
+                                      (substring elm 0 1)))
+                      (butlast path 3)
+                      "/")
+           "/"
+           (mapconcat (lambda (elm) elm)
+                      (last path 3)
+                      "/"))
+        (mapconcat (lambda (elm) elm)
+                   path
+                   "/"))))
 
 #+END_SRC
 
@@ -912,8 +913,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
         (lambda ()
           (concat
            (propertize
-            (tom/short-path
-             (split-string (pwd-repl-home (eshell/pwd)) "/"))
+            (tom/short-path (pwd-repl-home (eshell/pwd)))
             'face `(:foreground "darkorange"))
            (or (curr-dir-git-branch-string (eshell/pwd)))
            (propertize "$ " 'face 'default))))
@@ -1279,7 +1279,7 @@ This is a birds eye view of the current buffer.
                 invocation-name))
           ": " (:eval
                 (if (buffer-file-name)
-                    (tom/short-path (split-string (abbreviate-file-name (buffer-file-name)) "/"))
+                    (tom/short-path (abbreviate-file-name (buffer-file-name)))
                   "%b"))))
 #+END_SRC
 ** Dashboard
