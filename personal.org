@@ -2558,6 +2558,7 @@ Check the doc comment of the current function for @param tags, create them if no
       (push 'tom/company-transformer company-transformers)
         (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
         (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+        (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
       (local-set-key
        (kbd "H-j")
        (defhydra hydra-js2-refactor (:color blue :timeout 5)

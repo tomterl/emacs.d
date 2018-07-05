@@ -123,7 +123,6 @@ static char *gnus-pointer[] = {
  '(paradox-async-display-buffer-function nil)
  '(paradox-automatically-star nil)
  '(paradox-execute-asynchronously nil)
- '(paradox-github-token "fa8c4c3a03139ff9585dc5166f8de1a1ae8fe0b9")
  '(paradox-spinner-type 'progress-bar-filled)
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(persp-add-buffer-on-after-change-major-mode 'free)
