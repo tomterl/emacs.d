@@ -678,7 +678,7 @@ Inspired/copied from endless parentheses blog
 
 
 #+END_SRC
-** COMMENT Tramp Setup
+** Tramp Setup
 #+BEGIN_SRC emacs-lisp
   (setq tramp-shell-prompt-pattern "\\(?:^\\| \\)[^]#$%>❯\n]*#?[]#$%>❯] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
 #+END_SRC
