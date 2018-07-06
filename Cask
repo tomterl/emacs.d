@@ -127,6 +127,7 @@
 (depends-on "helpful")
 (depends-on "highlight-thing")
 (depends-on "hindent")
+(depends-on "hook-helpers")
 (depends-on "htmlize")
 (depends-on "httprepl")
 (depends-on "hydra")
