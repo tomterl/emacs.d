@@ -1187,6 +1187,12 @@ This is a birds eye view of the current buffer.
   (dashboard-setup-startup-hook)
 #+END_SRC
 
+** coloured parenthesis
+#+BEGIN_SRC emacs-lisp
+  (require 'rainbow-delimiters)
+  (define-hook-helper prog-mode () 
+    (rainbow-delimiters-mode 1))
+#+END_SRC
 * GNUS News and Mail
 
 #+BEGIN_SRC emacs-lisp

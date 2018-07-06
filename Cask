@@ -212,6 +212,7 @@
 (depends-on "psysh")
 (depends-on "racer")
 (depends-on "railscasts-reloaded-theme")
+(depends-on "rainbow-delimiters")
 (depends-on "ranger")
 (depends-on "repl-toggle")
 (depends-on "request")
