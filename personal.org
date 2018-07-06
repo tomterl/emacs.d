@@ -422,7 +422,7 @@ Inspired/copied from endless parentheses blog
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key
-   (kbd "H-T")
+   (kbd "H-t")
    (defhydra hydra-toggle (:color red :timeout 3)
      "toggle"
      ("c" column-number-mode "col-nums")
