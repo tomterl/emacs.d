@@ -2232,35 +2232,6 @@ Sensible setup found at 'or emacs('.
          (pop-to-buffer bufname))))
 
 #+END_SRC
-** pomodoro
-Configure the pomidor package.
-#+BEGIN_SRC emacs-lisp
-  (setq alert-default-style 'libnotify)
-  (defun tom/pomidor ()
-    "Ensure pomidor is started in persp none"
-    (interactive)
-    (let ((buff (current-buffer))
-          (pers (get-current-persp)))
-      (pomidor)
-      (persp-switch "none")
-      (let ((pom-buff (get-buffer "*pomidor*")))
-        (persp-remove-buffer pom-buff pers)
-        (switch-to-buffer pom-buff)
-        (local-set-key (kbd "q") `(lambda ()
-                                    ""
-                                    (interactive)
-                                    (progn
-                                      (persp-switch (persp-name ,pers))
-                                      (switch-to-buffer ,buff))))
-        (local-set-key (kbd "Q") `(lambda ()
-                                    ""
-                                    (interactive)
-                                    (progn
-                                      (persp-switch (persp-name ,pers))
-                                      (switch-to-buffer ,buff)
-                                      (kill-buffer ,pom-buff)))))))
-  (global-set-key (kbd "H-t") 'tom/pomidor)
-#+END_SRC
 ** Help
 #+BEGIN_SRC emacs-lisp
   (global-set-key

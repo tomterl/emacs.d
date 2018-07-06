@@ -202,7 +202,6 @@
 (depends-on "phpcbf")
 (depends-on "phpunit")
 (depends-on "pkg-info")
-(depends-on "pomidor")
 (depends-on "popup")
 (depends-on "popwin")
 (depends-on "prodigy")
