@@ -108,7 +108,22 @@ static char *gnus-pointer[] = {
  '(lsp-php-workspace-root-detectors
    '(".projectile " lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robot"))
  '(lsp-ui-peek-always-show t)
+ '(lsp-ui-peek-fontify 'always)
  '(lsp-ui-sideline-update-mode 'line)
+ '(magit-blame-echo-style 'headings)
+ '(magit-blame-styles
+   '((headings
+      (heading-format . "%-20a %C %s
+"))
+     (margin
+      (margin-format " %s%f" " %C %a" " %H")
+      (margin-width . 42)
+      (margin-face . magit-blame-margin)
+      (margin-body-face magit-blame-dimmed))
+     (highlight
+      (highlight-face . magit-blame-highlight))
+     (lines
+      (show-lines . t))))
  '(magit-diff-use-overlays nil)
  '(magit-pull-arguments '("--rebase"))
  '(magit-use-overlays nil t)
