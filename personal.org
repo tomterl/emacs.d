@@ -2568,6 +2568,10 @@ Check the doc comment of the current function for @param tags, create them if no
   (require 'nodejs-repl)
   (add-to-list 'nodejs-repl-arguments "--harmony_regexp_property")
 #+END_SRC
+*** `.aql` files 
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.aql" . js-mode))
+#+END_SRC
 ** YAML
 
 Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
