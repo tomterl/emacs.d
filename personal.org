@@ -2245,6 +2245,10 @@ Sensible setup found at 'or emacs('.
      ("g" helpful-update "Refresh Helpful Buffer")
      ))
 #+END_SRC
+** todo-extraction
+#+BEGIN_SRC emacs-lisp
+  (require 'doom-todo-ido)
+#+END_SRC
 * Languages
 ** Elixir
 
