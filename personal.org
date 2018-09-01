@@ -943,7 +943,7 @@ Marking the root of a project are only
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "-ADBE-Source Code Pro-semibold-normal-normal-*-12-*-*-*-m-0-iso10646-1"
+  (defvar tom/default-font "Courier Prime Code-11"
     "The font to use under normal circumstances")
 
   (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
@@ -1049,7 +1049,9 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
+  (setq kaolin-themes-hl-line-colored t)
   (load-theme 'kaolin-ocean t)
+
   (set-face-attribute 'org-level-1 nil :height 1.0)
   (set-face-attribute 'org-level-2 nil :height 1.0)
   (set-face-attribute 'org-level-3 nil :height 1.0)
