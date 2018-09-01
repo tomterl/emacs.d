@@ -1,6 +1,5 @@
 (source SC)
 (source gnu)
-(source marmalade)
 (source melpa)
 
 (depends-on "2048-game")
