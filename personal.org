@@ -2252,6 +2252,15 @@ Sensible setup found at 'or emacs('.
   (require 'doom-todo-ido)
 #+END_SRC
 * Languages
+** General
+*** lsp initialization
+#+BEGIN_SRC emacs-lisp
+  (require 'lsp-mode)
+  (require 'lsp-imenu)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  (require 'lsp-ui)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+#+END_SRC
 ** Elixir
 
 Automatically add =end= when typing =do=.
@@ -2303,7 +2312,23 @@ Add speedbar support for elixir files.
 ** Shell
 #+BEGIN_SRC emacs-lisp
   (define-hook-helper sh-mode ()
-    (flycheck-mode 1))
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+    (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions))
+
+  (require 'lsp-sh)
+  (add-hook 'sh-mode-hook #'lsp-sh-enable)
+  (add-hook 'sh-mode-hook #'flycheck-mode)
+
+  (flycheck-define-generic-checker 'lsp-shell-ui
+    "A syntax checker using the Language Server Protocol (RLS)
+      provided by lsp-mode.
+      See https://github.com/emacs-lsp/lsp-mode."
+    :start #'lsp-ui-flycheck--start
+    :modes '(sh-mode) ; Need a default mode
+    :predicate (lambda () lsp-mode)
+    :error-explainer (lambda (e) (flycheck-error-message e))
+    :next-checkers '((warning . shell)))
 #+END_SRC
 ** PHP
 *** Use php-mode, not web-mode for PHP-code
@@ -2366,11 +2391,6 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (setq-local flycheck-checker 'lsp-php-ui)
       (message "tom/php-mode-hook executed")))
 
-  (require 'lsp-mode)
-  (require 'lsp-imenu)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-  (require 'lsp-ui)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
   (require 'lsp-php)
   (add-hook 'php-mode-hook #'lsp-php-enable)

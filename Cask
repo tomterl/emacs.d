@@ -162,6 +162,7 @@
 (depends-on "lsp-javascript-typescript")
 (depends-on "lsp-mode")
 (depends-on "lsp-php")
+(depends-on "lsp-sh")
 (depends-on "lsp-ui")
 (depends-on "lua-mode")
 (depends-on "m-buffer")
