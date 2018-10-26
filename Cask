@@ -159,6 +159,7 @@
 (depends-on "klere-theme")
 (depends-on "lentic")
 (depends-on "link-hint")
+(depends-on "linum-relative")
 (depends-on "liso-theme")
 (depends-on "log4e")
 (depends-on "lsp-javascript-typescript")

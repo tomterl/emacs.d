@@ -2253,6 +2253,13 @@ Sensible setup found at 'or emacs('.
 #+END_SRC
 * Languages
 ** General
+*** line numbers
+#+BEGIN_SRC emacs-lisp
+  (require 'linum-relative)
+  (setq linum-relative-current-symbol "")
+  (setq linum-relative-backend 'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook 'linum-relative-mode)
+#+END_SRC
 *** lsp initialization
 #+BEGIN_SRC emacs-lisp
   (require 'lsp-mode)
