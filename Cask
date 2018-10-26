@@ -256,6 +256,7 @@
 (depends-on "stylus-mode")
 (depends-on "swiper")
 (depends-on "sws-mode")
+(depends-on "sx")
 (depends-on "tern")
 (depends-on "thinks")
 (depends-on "tide")

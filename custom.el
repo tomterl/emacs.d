@@ -29,25 +29,7 @@
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
-    (image :type xpm :ascent center :data "/* XPM */
-static char *note[] = {
-/* width height num_colors chars_per_pixel */
-\"    10   11        2            1\",
-/* colors */
-\". c #1fb3b3\",
-\"# c None s None\",
-/* pixels */
-\"###...####\",
-\"###.#...##\",
-\"###.###...\",
-\"###.#####.\",
-\"###.#####.\",
-\"#...#####.\",
-\"....#####.\",
-\"#..######.\",
-\"#######...\",
-\"######....\",
-\"#######..#\" };")))
+    (image :type xpm :ascent center :data "/* XPM */\nstatic char *note[] = {\n/* width height num_colors chars_per_pixel */\n\"    10   11        2            1\",\n/* colors */\n\". c #1fb3b3\",\n\"# c None s None\",\n/* pixels */\n\"###...####\",\n\"###.#...##\",\n\"###.###...\",\n\"###.#####.\",\n\"###.#####.\",\n\"#...#####.\",\n\"....#####.\",\n\"#..######.\",\n\"#######...\",\n\"######....\",\n\"#######..#\" };")))
  '(es-always-pretty-print t)
  '(es-cc-endpoint "http://192.168.16.249:9200/")
  '(es-default-url "http://192.168.16.249:9200/_search?pretty=true")
@@ -59,27 +41,7 @@ static char *note[] = {
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
-    (image :type xpm :ascent center :data "/* XPM */
-static char *gnus-pointer[] = {
-/* width height num_colors chars_per_pixel */
-\"    18    13        2            1\",
-/* colors */
-\". c #1fb3b3\",
-\"# c None s None\",
-/* pixels */
-\"##################\",
-\"######..##..######\",
-\"#####........#####\",
-\"#.##.##..##...####\",
-\"#...####.###...##.\",
-\"#..###.######.....\",
-\"#####.########...#\",
-\"###########.######\",
-\"####.###.#..######\",
-\"######..###.######\",
-\"###....####.######\",
-\"###..######.######\",
-\"###########.######\" };")) t)
+    (image :type xpm :ascent center :data "/* XPM */\nstatic char *gnus-pointer[] = {\n/* width height num_colors chars_per_pixel */\n\"    18    13        2            1\",\n/* colors */\n\". c #1fb3b3\",\n\"# c None s None\",\n/* pixels */\n\"##################\",\n\"######..##..######\",\n\"#####........#####\",\n\"#.##.##..##...####\",\n\"#...####.###...##.\",\n\"#..###.######.....\",\n\"#####.########...#\",\n\"###########.######\",\n\"####.###.#..######\",\n\"######..###.######\",\n\"###....####.######\",\n\"###..######.######\",\n\"###########.######\" };")) t)
  '(golden-ratio-mode nil)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -132,8 +94,7 @@ static char *gnus-pointer[] = {
  '(magit-blame-styles
    (quote
     ((headings
-      (heading-format . "%-20a %C %s
-"))
+      (heading-format . "%-20a %C %s\n"))
      (margin
       (margin-format " %s%f" " %C %a" " %H")
       (margin-width . 42)
@@ -155,7 +116,7 @@ static char *gnus-pointer[] = {
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (lsp-sh darkburn-theme jazz-theme obsidian-theme popup-imenu klere-theme dakrone-theme liso-theme deadgrep kaolin-themes hook-helpers rainbow-delimiters js3-mode atom-dark-theme calmer-forest-theme exotica-theme lsp-javascript-typescript lsp-ui company-lsp lsp-mode lsp-php eglot frame-local ov editorconfig editorconfig-charset-extras editorconfig-custom-majormode editorconfig-domain-specific zenburn-theme phpcbf projectile-ripgrep projectile-speedbar company-box moe-theme kaleidoscope ido-completing-read+ persp-mode persp-mode-projectile-bridge rg speed-type ob-http smart-mode-line-powerline-theme link-hint sql-indent ido-vertical-mode dracula-theme badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-cursor-color ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari repl-toggle popwin popup phpunit php-auto-yasnippets paredit pallet origami omni-scratch names minimap lua-mode lentic json-rpc jade-mode jabber ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
+    (sx lsp-sh darkburn-theme jazz-theme obsidian-theme popup-imenu klere-theme dakrone-theme liso-theme deadgrep kaolin-themes hook-helpers rainbow-delimiters js3-mode atom-dark-theme calmer-forest-theme exotica-theme lsp-javascript-typescript lsp-ui company-lsp lsp-mode lsp-php eglot frame-local ov editorconfig editorconfig-charset-extras editorconfig-custom-majormode editorconfig-domain-specific zenburn-theme phpcbf projectile-ripgrep projectile-speedbar company-box moe-theme kaleidoscope ido-completing-read+ persp-mode persp-mode-projectile-bridge rg speed-type ob-http smart-mode-line-powerline-theme link-hint sql-indent ido-vertical-mode dracula-theme badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme tracking sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smooth-scrolling smex smart-cursor-color ruby-tools ruby-test-mode ruby-refactor ruby-end ruby-dev rotate rinari repl-toggle popwin popup phpunit php-auto-yasnippets paredit pallet origami omni-scratch names minimap lua-mode lentic json-rpc jade-mode jabber ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist aggressive-indent ag ace-window ace-jump-buffer 2048-game)))
  '(paradox-async-display-buffer-function nil)
  '(paradox-automatically-star nil)
  '(paradox-execute-asynchronously nil)
