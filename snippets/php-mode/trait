@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: trait
+# key: trait
+# --
+/**
+* @author `fb-author`
+* @since  `(tom/insert-current-date 4)`
+*/
+trait ${1:`(file-name-base (buffer-name))`} {
+$0
+}
