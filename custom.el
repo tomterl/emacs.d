@@ -29,7 +29,25 @@
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
-    (image :type xpm :ascent center :data "/* XPM */\nstatic char *note[] = {\n/* width height num_colors chars_per_pixel */\n\"    10   11        2            1\",\n/* colors */\n\". c #1fb3b3\",\n\"# c None s None\",\n/* pixels */\n\"###...####\",\n\"###.#...##\",\n\"###.###...\",\n\"###.#####.\",\n\"###.#####.\",\n\"#...#####.\",\n\"....#####.\",\n\"#..######.\",\n\"#######...\",\n\"######....\",\n\"#######..#\" };")))
+    (image :type xpm :ascent center :data "/* XPM */
+static char *note[] = {
+/* width height num_colors chars_per_pixel */
+\"    10   11        2            1\",
+/* colors */
+\". c #1fb3b3\",
+\"# c None s None\",
+/* pixels */
+\"###...####\",
+\"###.#...##\",
+\"###.###...\",
+\"###.#####.\",
+\"###.#####.\",
+\"#...#####.\",
+\"....#####.\",
+\"#..######.\",
+\"#######...\",
+\"######....\",
+\"#######..#\" };")))
  '(es-always-pretty-print t)
  '(es-cc-endpoint "http://192.168.16.249:9200/")
  '(es-default-url "http://192.168.16.249:9200/_search?pretty=true")
@@ -41,7 +59,27 @@
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
-    (image :type xpm :ascent center :data "/* XPM */\nstatic char *gnus-pointer[] = {\n/* width height num_colors chars_per_pixel */\n\"    18    13        2            1\",\n/* colors */\n\". c #1fb3b3\",\n\"# c None s None\",\n/* pixels */\n\"##################\",\n\"######..##..######\",\n\"#####........#####\",\n\"#.##.##..##...####\",\n\"#...####.###...##.\",\n\"#..###.######.....\",\n\"#####.########...#\",\n\"###########.######\",\n\"####.###.#..######\",\n\"######..###.######\",\n\"###....####.######\",\n\"###..######.######\",\n\"###########.######\" };")) t)
+    (image :type xpm :ascent center :data "/* XPM */
+static char *gnus-pointer[] = {
+/* width height num_colors chars_per_pixel */
+\"    18    13        2            1\",
+/* colors */
+\". c #1fb3b3\",
+\"# c None s None\",
+/* pixels */
+\"##################\",
+\"######..##..######\",
+\"#####........#####\",
+\"#.##.##..##...####\",
+\"#...####.###...##.\",
+\"#..###.######.....\",
+\"#####.########...#\",
+\"###########.######\",
+\"####.###.#..######\",
+\"######..###.######\",
+\"###....####.######\",
+\"###..######.######\",
+\"###########.######\" };")) t)
  '(golden-ratio-mode nil)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -94,7 +132,8 @@
  '(magit-blame-styles
    (quote
     ((headings
-      (heading-format . "%-20a %C %s\n"))
+      (heading-format . "%-20a %C %s
+"))
      (margin
       (margin-format " %s%f" " %C %a" " %H")
       (margin-width . 42)
