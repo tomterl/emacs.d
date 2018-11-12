@@ -8,6 +8,7 @@
         delete-indentation
         insert-semicolon-at-end-of-line
         org-self-insert-command
+        self-insert-command
         smex
         sp--self-insert-command
         wgrep-finish-edit
@@ -15,6 +16,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        c-electric-backspace
         hydra-js2-refactor/js2r-rename-var-and-exit
         ido-switch-buffer
         js2-indent-bounce

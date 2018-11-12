@@ -1896,6 +1896,16 @@ notification in a given time intervall.
   (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
 #+END_SRC
 * Behaviour
+** Modal editing
+#+BEGIN_SRC emacs-lisp
+  (require 'boon-qwerty)
+  (boon-mode)
+#+END_SRC
+*** `geben` buffers 
+#+BEGIN_SRC emacs-lisp
+  (define-hook-helper geben-mode ()
+    (boon-set-state 'boon-special-state))
+#+END_SRC
 ** Generic Version Control interface
 #+BEGIN_SRC emacs-lisp
 (fullframe vc-annotate quit-window nil)

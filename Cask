@@ -24,6 +24,7 @@
 (depends-on "badger-theme")
 (depends-on "bash-completion")
 (depends-on "bind-key")
+(depends-on "boon")
 (depends-on "calmer-forest-theme")
 (depends-on "cargo")
 (depends-on "cask")
