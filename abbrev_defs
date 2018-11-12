@@ -199,6 +199,10 @@
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
+(define-abbrev-table 'mu4e-org-mode-abbrev-table '())
+
+(define-abbrev-table 'mu4e~update-mail-mode-abbrev-table '())
+
 (define-abbrev-table 'objc-mode-abbrev-table
   '(
    ))
@@ -238,6 +242,14 @@
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'ruby-mode-abbrev-table '())
+
+(define-abbrev-table 'reb-lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'reb-mode-abbrev-table '())
+
+(define-abbrev-table 'ruby-mode-abbrev-table '())
+
+(define-abbrev-table 'rxt-help-mode-abbrev-table '())
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
