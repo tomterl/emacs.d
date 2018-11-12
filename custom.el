@@ -106,8 +106,8 @@ static char *gnus-pointer[] = {
  '(hl-fg-colors
    '("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3"))
  '(hl-sexp-background-color "#1c1f26")
- '(ibuffer-deletion-face (quote diredp-deletion-file-name))
- '(ibuffer-marked-face (quote diredp-flag-mark))
+ '(ibuffer-deletion-face 'diredp-deletion-file-name)
+ '(ibuffer-marked-face 'diredp-flag-mark)
  '(ivy-case-fold-search-default t)
  '(ivy-display-function 'ivy-display-function-overlay)
  '(js2-global-externs nil)
