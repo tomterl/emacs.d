@@ -1906,6 +1906,12 @@ notification in a given time intervall.
   (define-hook-helper geben-mode ()
     (boon-set-state 'boon-special-state))
 #+END_SRC
+** Display available keys 
+#+BEGIN_SRC emacs-lisp
+  (require 'which-key)
+  (setq which-key-popup-type 'side-window)
+  (which-key-setup-side-window-bottom)
+#+END_SRC
 ** Generic Version Control interface
 #+BEGIN_SRC emacs-lisp
 (fullframe vc-annotate quit-window nil)

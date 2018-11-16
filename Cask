@@ -279,6 +279,7 @@
 (depends-on "web-mode")
 (depends-on "websocket")
 (depends-on "wgrep-ag")
+(depends-on "which-key")
 (depends-on "window-jump")
 (depends-on "window-layout")
 (depends-on "with-editor")
