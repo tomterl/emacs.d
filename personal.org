@@ -17,6 +17,10 @@ Lambda as λ
 #+END_SRC
 
 * Initial Setup
+** define `when-let*`
+#+BEGIN_SRC emacs-lisp
+(require 'subr-x)
+#+END_SRC
 ** Packages
 
  Package management and loading of utility packages.
@@ -222,8 +226,6 @@ Stuff looted from graphene.
   (setq blink-matching-paren t)
   (electric-pair-mode t)
 
-  (require 'flycheck)
-  (flycheck-mode)
 
   (push '("\\.json\\'" . json-mode) auto-mode-alist)
 
@@ -2372,11 +2374,11 @@ Sensible setup found at 'or emacs('.
 #+END_SRC
 *** lsp initialization
 #+BEGIN_SRC emacs-lisp
-  (require 'lsp-mode)
-  (require 'lsp-imenu)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  (require 'lsp)
+  (require 'lsp-clients)
   (require 'lsp-ui)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (setq lsp-prefer-flymake t)
+  (add-hook 'prog-mode-hook 'lsp)
 #+END_SRC
 *** Flycheck Hydra
 #+BEGIN_SRC emacs-lisp
@@ -2448,20 +2450,12 @@ Add speedbar support for elixir files.
     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
     (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "bash-language-server")
+                    :major-modes '(sh-mode)
+                    :server-id 'bls))
+                                          ;  (add-hook 'sh-mode-hook #'flycheck-mode)
 
-  (require 'lsp-sh)
-  (add-hook 'sh-mode-hook #'lsp-sh-enable)
-  (add-hook 'sh-mode-hook #'flycheck-mode)
-
-  (flycheck-define-generic-checker 'lsp-shell-ui
-    "A syntax checker using the Language Server Protocol (RLS)
-      provided by lsp-mode.
-      See https://github.com/emacs-lsp/lsp-mode."
-    :start #'lsp-ui-flycheck--start
-    :modes '(sh-mode) ; Need a default mode
-    :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e))
-    :next-checkers '((warning . shell)))
 #+END_SRC
 ** PHP
 *** Use php-mode, not web-mode for PHP-code
@@ -2484,60 +2478,52 @@ Use ~web-mode~ for smarty templates.
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
 
 #+BEGIN_SRC emacs-lisp
-  (defun tom/php-tags-update ()
-    ""
-    (if (and (boundp 'call-php-tags-func) call-php-tags-func)
-        (ac-php-remake-tags)))
-  ;;  (add-hook 'after-save-hook 'tom/php-tags-update)
+    (defun tom/php-tags-update ()
+      ""
+      (if (and (boundp 'call-php-tags-func) call-php-tags-func)
+          (ac-php-remake-tags)))
+    ;;  (add-hook 'after-save-hook 'tom/php-tags-update)
 
-  (defun tom/dtw ()
-    ""
-    (save-excursion
-      (delete-trailing-whitespace)))
+    (defun tom/dtw ()
+      ""
+      (save-excursion
+        (delete-trailing-whitespace)))
 
-  (define-hook-helper php-mode ()
-    (progn 
-      (require 'company-php)
+    (define-hook-helper php-mode ()
+      (progn 
+                                            ;(require 'company-php)
+        (require 'lsp-php)
+        (ggtags-mode -1)
+        (repl-toggle-mode 1)
+        (yas-minor-mode 1)
+                                          ;(company-mode 1)
+        (set (make-local-variable 'call-php-tags-func) t)
+        (local-set-key (kbd "C-c a") 'tom/edit-sql)
+        (php-enable-wordpress-coding-style)
 
-      (ggtags-mode -1)
-      (repl-toggle-mode 1)
-      (yas-minor-mode 1)
-      (company-mode 1)
-      (set (make-local-variable 'call-php-tags-func) t)
-      (local-set-key (kbd "C-c a") 'tom/edit-sql)
-      (php-enable-wordpress-coding-style)
+        (setq tab-width 4
+              c-basic-offset 4
+              indent-tabs-mode nil
+              php-template-compatibility nil
 
-      (setq tab-width 4
-            c-basic-offset 4
-            indent-tabs-mode nil
-            php-template-compatibility nil
-            flycheck-phpmd-rulesets '("unusedcode")
-
-            php-mode-coding-style (quote wordpress)
-            php-lineup-cascaded-calls t)
-      (add-hook 'write-contents-functions 'tom/dtw nil t)
-      (flycheck-may-enable-checker 'php-phpcs)
-      (flycheck-disable-checker 'php-phpmd)
-      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-      (setq-local flycheck-checker nil)
-      (setq-local flycheck-checker 'lsp-php-ui)
-      (message "tom/php-mode-hook executed")))
+              php-mode-coding-style (quote wordpress)
+              php-lineup-cascaded-calls t)
+        (add-hook 'write-contents-functions 'tom/dtw nil t)
+        (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+        (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+        
+        (message "tom/php-mode-hook executed")))
 
 
-  (require 'lsp-php)
-  (add-hook 'php-mode-hook #'lsp-php-enable)
-  (add-hook 'php-mode-hook 'flycheck-mode)
-
-  (flycheck-define-generic-checker 'lsp-php-ui
-    "A syntax checker using the Language Server Protocol (RLS)
-    provided by lsp-mode.
-    See https://github.com/emacs-lsp/lsp-mode."
-    :start #'lsp-ui-flycheck--start
-    :modes '(php-mode) ; Need a default mode
-    :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e))
-    :next-checkers '((warning . php)))
+  ;; (flycheck-define-generic-checker 'lsp-php-ui
+  ;;   "A syntax checker using the Language Server Protocol (RLS)
+  ;;     provided by lsp-mode.
+  ;;     See https://github.com/emacs-lsp/lsp-mode."
+  ;;   :start #'lsp-ui-sideline--flycheck
+  ;;   :modes '(php-mode) ; Need a default mode
+  ;;   :predicate (lambda () lsp-mode)
+  ;;   :error-explainer (lambda (e) (flycheck-error-message e))
+  ;;   :next-checkers '((warning . php)))
 #+END_SRC
 *** Remote debugging
 
@@ -2675,7 +2661,6 @@ Check the doc comment of the current function for @param tags, create them if no
   (define-hook-helper js2-mode ()
     (progn
       (ggtags-mode -1)
-      (flycheck-mode 1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
       (company-mode 1)
@@ -2692,17 +2677,8 @@ Check the doc comment of the current function for @param tags, create them if no
          ("rv" #'js2r-rename-var "rename variable")))
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
 
-  (require 'lsp-javascript-typescript)
-  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
-  (flycheck-define-generic-checker 'lsp-js-ui
-    "A syntax checker using the Language Server Protocol (RLS)
-    provided by lsp-mode.
-    See https://github.com/emacs-lsp/lsp-mode."
-    :start #'lsp-ui-flycheck--start
-    :modes '(js2-mode) ; Need a default mode
-    :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e))
-    :next-checkers '((warning . javascript)))
+      ;;;  (require 'lsp-javascript-typescript)
+  ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
 #+END_SRC
 *** Refectoring 
 #+BEGIN_SRC emacs-lisp
