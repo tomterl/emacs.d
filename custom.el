@@ -140,6 +140,7 @@ static char *gnus-pointer[] = {
    '(".projectile " lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robot"))
  '(lsp-ui-doc-include-signature t)
  '(lsp-ui-doc-position 'top)
+ '(lsp-ui-doc-use-childframe nil)
  '(lsp-ui-peek-always-show t)
  '(lsp-ui-peek-fontify 'always)
  '(lsp-ui-sideline-update-mode 'line)
