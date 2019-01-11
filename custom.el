@@ -262,6 +262,7 @@ static char *gnus-pointer[] = {
      (340 . "#2790C3")
      (360 . "#268bd2")))
  '(vc-annotate-very-old-color nil)
+ '(web-mode-script-padding 4)
  '(weechat-color-list
    '(unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
 (custom-set-faces
