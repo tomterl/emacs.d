@@ -2473,6 +2473,7 @@ Use ~web-mode~ for smarty templates.
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
 #+END_SRC
+
 *** Indentation and behaviour
 
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
@@ -2500,7 +2501,9 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (set (make-local-variable 'call-php-tags-func) t)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)
       (php-enable-wordpress-coding-style)
-
+      (flycheck-may-enable-checker 'php-phpcs)
+      (flycheck-disable-checker 'php-phpmd)
+      (setq-local flycheck-checker 'lsp-php-ui)
       (setq tab-width 4
             c-basic-offset 4
             indent-tabs-mode nil
@@ -2509,22 +2512,22 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
             php-mode-coding-style (quote wordpress)
             php-lineup-cascaded-calls t)
       (add-hook 'write-contents-functions 'tom/dtw nil t)
-      (add-hook 'php-mode-hook 'flycheck-mode)
       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-    
+
       (message "tom/php-mode-hook executed")))
+  (add-hook 'php-mode-hook 'flycheck-mode)
 
 
-  ;; (flycheck-define-generic-checker 'lsp-php-ui
-  ;;   "A syntax checker using the Language Server Protocol (RLS)
-  ;;     provided by lsp-mode.
-  ;;     See https://github.com/emacs-lsp/lsp-mode."
-  ;;   :start #'lsp-ui-sideline--flycheck
-  ;;   :modes '(php-mode) ; Need a default mode
-  ;;   :predicate (lambda () lsp-mode)
-  ;;   :error-explainer (lambda (e) (flycheck-error-message e))
-  ;;   :next-checkers '((warning . php)))
+  (flycheck-define-generic-checker 'lsp-php-ui
+    "A syntax checker using the Language Server Protocol (RLS)
+      provided by lsp-mode.
+      See https://github.com/emacs-lsp/lsp-mode."
+    :start #'lsp-ui-flycheck--start
+    :modes '(php-mode) ; Need a default mode
+    :predicate (lambda () lsp-mode)
+    :error-explainer (lambda (e) (flycheck-error-message e))
+    :next-checkers '((warning . php)))
 #+END_SRC
 *** Remote debugging
 
@@ -2671,6 +2674,7 @@ Check the doc comment of the current function for @param tags, create them if no
       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
       (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
       (add-hook 'js2-mode-hook 'flycheck-mode)
+      (setq-local flycheck-checker 'lsp-js-ui)
       (local-set-key
        (kbd "H-j")
        (defhydra hydra-js2-refactor (:color blue :timeout 5)
@@ -2678,6 +2682,14 @@ Check the doc comment of the current function for @param tags, create them if no
          ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
          ("rv" #'js2r-rename-var "rename variable")))
       (local-set-key (kbd "C-c a") 'tom/edit-aql)))
+  (flycheck-define-generic-checker 'lsp-js-ui
+    "A syntax checker using the Language Server Protocol (RLS)
+    provided by lsp-mode.
+    See https://github.com/emacs-lsp/lsp-mode."
+    :start #'lsp-ui-flycheck--start
+    :modes '(js2-mode) ; Need a default mode
+    :predicate (lambda () lsp-mode)
+    :error-explainer (lambda (e) (flycheck-error-message e))
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
