@@ -2377,7 +2377,7 @@ Sensible setup found at 'or emacs('.
   (require 'lsp)
   (require 'lsp-clients)
   (require 'lsp-ui)
-  (setq lsp-prefer-flymake t)
+  (setq lsp-prefer-flymake nil)
   (add-hook 'prog-mode-hook 'lsp)
 #+END_SRC
 *** Flycheck Hydra
@@ -2478,41 +2478,42 @@ Use ~web-mode~ for smarty templates.
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
 
 #+BEGIN_SRC emacs-lisp
-    (defun tom/php-tags-update ()
-      ""
-      (if (and (boundp 'call-php-tags-func) call-php-tags-func)
-          (ac-php-remake-tags)))
-    ;;  (add-hook 'after-save-hook 'tom/php-tags-update)
+  (defun tom/php-tags-update ()
+    ""
+    (if (and (boundp 'call-php-tags-func) call-php-tags-func)
+        (ac-php-remake-tags)))
+  ;;  (add-hook 'after-save-hook 'tom/php-tags-update)
 
-    (defun tom/dtw ()
-      ""
-      (save-excursion
-        (delete-trailing-whitespace)))
+  (defun tom/dtw ()
+    ""
+    (save-excursion
+      (delete-trailing-whitespace)))
 
-    (define-hook-helper php-mode ()
-      (progn 
-                                            ;(require 'company-php)
-        (require 'lsp-php)
-        (ggtags-mode -1)
-        (repl-toggle-mode 1)
-        (yas-minor-mode 1)
+  (define-hook-helper php-mode ()
+    (progn 
+                                          ;(require 'company-php)
+      (require 'lsp-php)
+      (ggtags-mode -1)
+      (repl-toggle-mode 1)
+      (yas-minor-mode 1)
                                           ;(company-mode 1)
-        (set (make-local-variable 'call-php-tags-func) t)
-        (local-set-key (kbd "C-c a") 'tom/edit-sql)
-        (php-enable-wordpress-coding-style)
+      (set (make-local-variable 'call-php-tags-func) t)
+      (local-set-key (kbd "C-c a") 'tom/edit-sql)
+      (php-enable-wordpress-coding-style)
 
-        (setq tab-width 4
-              c-basic-offset 4
-              indent-tabs-mode nil
-              php-template-compatibility nil
+      (setq tab-width 4
+            c-basic-offset 4
+            indent-tabs-mode nil
+            php-template-compatibility nil
 
-              php-mode-coding-style (quote wordpress)
-              php-lineup-cascaded-calls t)
-        (add-hook 'write-contents-functions 'tom/dtw nil t)
-        (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-        (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-        
-        (message "tom/php-mode-hook executed")))
+            php-mode-coding-style (quote wordpress)
+            php-lineup-cascaded-calls t)
+      (add-hook 'write-contents-functions 'tom/dtw nil t)
+      (add-hook 'php-mode-hook 'flycheck-mode)
+      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+    
+      (message "tom/php-mode-hook executed")))
 
 
   ;; (flycheck-define-generic-checker 'lsp-php-ui
@@ -2669,6 +2670,7 @@ Check the doc comment of the current function for @param tags, create them if no
       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
       (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
+      (add-hook 'js2-mode-hook 'flycheck-mode)
       (local-set-key
        (kbd "H-j")
        (defhydra hydra-js2-refactor (:color blue :timeout 5)
