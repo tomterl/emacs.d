@@ -2377,6 +2377,7 @@ Sensible setup found at 'or emacs('.
   (require 'lsp)
   (require 'lsp-clients)
   (require 'lsp-ui)
+  (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
   (setq lsp-prefer-flymake nil)
   (add-hook 'prog-mode-hook 'lsp)
 #+END_SRC
