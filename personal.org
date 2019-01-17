@@ -2451,7 +2451,7 @@ Add speedbar support for elixir files.
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
     (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions))
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "bash-language-server")
+   (make-lsp-client :new-connection (lsp-stdio-connection "bash-language-server start")
                     :major-modes '(sh-mode)
                     :server-id 'bls))
                                           ;  (add-hook 'sh-mode-hook #'flycheck-mode)
