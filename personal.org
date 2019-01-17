@@ -2689,7 +2689,7 @@ Check the doc comment of the current function for @param tags, create them if no
     :start #'lsp-ui-flycheck--start
     :modes '(js2-mode) ; Need a default mode
     :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e))
+    :error-explainer (lambda (e) (flycheck-error-message e)))
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
