@@ -154,6 +154,7 @@ static char *gnus-pointer[] = {
  '(lsp-ui-doc-use-childframe nil)
  '(lsp-ui-peek-always-show t)
  '(lsp-ui-peek-fontify (quote always))
+ '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-update-mode (quote line))
  '(magit-blame-echo-style (quote headings))
  '(magit-blame-styles
