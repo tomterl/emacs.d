@@ -945,7 +945,7 @@ Marking the root of a project are only
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "Courier Prime Code-11"
+  (defvar tom/default-font "Courier Prime Code-9"
     "The font to use under normal circumstances")
 
   (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
@@ -2371,6 +2371,12 @@ Sensible setup found at 'or emacs('.
 #+END_SRC
 * Languages
 ** General
+*** completion
+#+BEGIN_SRC emacs-lisp
+  (defun tom/company-transformer (candidates)
+    (let ((completion-ignore-case t))
+      (all-completions (company-grab-symbol) candidates)))
+#+END_SRC
 *** line numbers
 #+BEGIN_SRC emacs-lisp
   (require 'linum-relative)
@@ -2500,10 +2506,13 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
   (define-hook-helper php-mode ()
     (progn 
                                           ;(require 'company-php)
-      (require 'lsp-php)
+      ;(require 'lsp-php)
       (ggtags-mode -1)
       (repl-toggle-mode 1)
       (yas-minor-mode 1)
+      (company-mode 1)
+      (make-local-variable 'company-transformers)
+      (push 'tom/company-transformer company-transformers)
                                           ;(company-mode 1)
       (set (make-local-variable 'call-php-tags-func) t)
       (local-set-key (kbd "C-c a") 'tom/edit-sql)
@@ -2671,9 +2680,6 @@ Check the doc comment of the current function for @param tags, create them if no
 *** Completion
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
-  (defun tom/company-transformer (candidates)
-    (let ((completion-ignore-case t))
-      (all-completions (company-grab-symbol) candidates)))
 
   (define-hook-helper js2-mode ()
     (progn
