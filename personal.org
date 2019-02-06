@@ -2537,7 +2537,13 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
     :next-checkers '((warning . php)))
 #+END_SRC
 *** Remote debugging
+**** dap
+#+BEGIN_SRC emacs-lisp
+(require 'dap-php)
+(define-key php-mode-map (kbd "H-d") 'dap-hydra)
 
+#+END_SRC
+**** geben
 Geben has a new maintainer, it has some issues, but is overall working sufficiently well.
 
  #+BEGIN_SRC emacs-lisp

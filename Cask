@@ -50,6 +50,7 @@
 (depends-on "csv-mode")
 (depends-on "ctable")
 (depends-on "dakrone-theme")
+(depends-on "dap-mode")
 (depends-on "darkburn-theme")
 (depends-on "darktooth-theme")
 (depends-on "dash")
