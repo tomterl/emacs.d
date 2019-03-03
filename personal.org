@@ -1051,15 +1051,7 @@ Marking the root of a project are only
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
 #+BEGIN_SRC emacs-lisp
- (setq kaolin-themes-hl-line-colored t)
-  (load-theme 'kaolin-galaxy t)
-
-  (set-face-attribute 'org-level-1 nil :height 1.0)
-  (set-face-attribute 'org-level-2 nil :height 1.0)
-  (set-face-attribute 'org-level-3 nil :height 1.0)
-  (set-face-attribute 'org-scheduled-today nil :height 1.0)
-  (set-face-attribute 'org-agenda-date-today nil :height 1.1)
-  (set-face-attribute 'org-table nil :foreground "#008787")
+  (load-theme 'doneburn t)
 #+END_SRC
 
 *** Adapt company-mode
@@ -1086,8 +1078,18 @@ Marking the root of a project are only
 ** Modeline
 
 #+BEGIN_SRC emacs-lisp
-  (require 'smart-mode-line)
-  (sml/setup)
+    (require 'smart-mode-line)
+    (sml/setup)
+  (let ((line (face-attribute 'mode-line :underline)))
+    (set-face-attribute 'mode-line          nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :underline  line)
+    (set-face-attribute 'mode-line          nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :background "#888888"))
+  (require 'moody)
+  (moody-replace-vc-mode)
+  (moody-replace-sml/mode-line-buffer-identification)
 #+END_SRC
 
 ** Colors on terminals
@@ -1209,7 +1211,7 @@ This is a birds eye view of the current buffer.
     (require 'gnus)
     (require 'gnus-util)
     (require 'smtpmail)
-    (require 'nnimap)
+    
 
     (if (tom/work?)
         (progn
