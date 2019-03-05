@@ -555,6 +555,13 @@ Inspired/copied from endless parentheses blog
       (set-window-dedicated-p curr-win t)))
 #+END_SRC
 
+** Projects
+I use ~projectile~ to manage my projects.
+
+#+BEGIN_SRC emacs-lisp
+(require 'projectile)
+(projectile-global-mode)
+#+END_SRC
 ** perspectives
 #+BEGIN_SRC emacs-lisp
     (with-eval-after-load "persp-mode"
