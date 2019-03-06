@@ -75,6 +75,7 @@
 (depends-on "editorconfig-custom-majormode")
 (depends-on "editorconfig-domain-specific")
 (depends-on "eglot")
+(depends-on "ein")
 (depends-on "elisp-refs")
 (depends-on "elixir-mode")
 (depends-on "elixir-yasnippets")
