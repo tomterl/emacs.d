@@ -738,6 +738,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
   (setq eshell-prompt-regexp "^[^#$]*[#$] ")
   (defvar tom/shellframe nil)
   (add-to-list 'frame-inherited-parameters 'alpha)
+
   (defun tom/eshell ()
     "Start or switch to an eshell specific to the current
         projectile project, or the global '*eshell*' if not in a
@@ -759,6 +760,7 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
                 (switch-to-buffer eshell-buffer-name)
               (eshell)))
         (eshell))))
+
   (defun tom/short-path (p-lst &optional len)
     (let ((len (or len 3))
           (path (if (listp p-lst) p-lst (split-string p-lst "/"))))
@@ -1085,8 +1087,6 @@ Marking the root of a project are only
 ** Modeline
 
 #+BEGIN_SRC emacs-lisp
-    (require 'smart-mode-line)
-    (sml/setup)
   (let ((line (face-attribute 'mode-line :underline)))
     (set-face-attribute 'mode-line          nil :overline   line)
     (set-face-attribute 'mode-line-inactive nil :overline   line)
@@ -1096,7 +1096,7 @@ Marking the root of a project are only
     (set-face-attribute 'mode-line-inactive nil :background "#888888"))
   (require 'moody)
   (moody-replace-vc-mode)
-  (moody-replace-sml/mode-line-buffer-identification)
+  (moody-replace-mode-line-buffer-identification)
 #+END_SRC
 
 ** Colors on terminals
