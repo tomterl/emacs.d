@@ -2138,9 +2138,11 @@ Sensible setup found at 'or emacs('.
 #+END_SRC
 ** Popup Imenu
 #+BEGIN_SRC emacs-lisp
-(require 'popup-imenu)
-(global-set-key (kbd "H-i") 'popup-imenu)
-(define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
+  (require 'popup-imenu)
+  (global-set-key (kbd "H-i") 'popup-imenu)
+  (setq popup-imenu-position 'point)
+  (setq popup-imenu-force-position nil)
+  (define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
 #+END_SRC
 * Languages
 ** General
