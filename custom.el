@@ -150,8 +150,9 @@ static char *gnus-pointer[] = {
    (quote
     (".projectile " lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robot")))
  '(lsp-ui-doc-include-signature t)
- '(lsp-ui-doc-position (quote top))
- '(lsp-ui-doc-use-childframe nil)
+ '(lsp-ui-doc-position (quote bottom))
+ '(lsp-ui-doc-use-childframe t)
+ '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-peek-always-show t)
  '(lsp-ui-peek-fontify (quote always))
  '(lsp-ui-sideline-ignore-duplicate t)
