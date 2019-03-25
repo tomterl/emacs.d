@@ -956,7 +956,8 @@ Marking the root of a project are only
 #+BEGIN_SRC emacs-lisp
   (defvar tom/default-font "Courier Prime Code-9"
     "The font to use under normal circumstances")
-
+  (unless (tom/work?)
+    (setq tom/default-font "Courier Prime Code-11"))
   (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
 
