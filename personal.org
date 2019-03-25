@@ -2265,26 +2265,26 @@ Use ~web-mode~ for smarty templates.
 #+END_SRC
 
 *** Indentation and behaviour
-# **** intelephense
-# #+BEGIN_SRC emacs-lisp
-# ;; PHP  intelephense
-# (defgroup lsp-php-iph nil
-#   "PHP."
-#   :group 'lsp-mode
-#   :tag "PHP")
+**** intelephense
+#+BEGIN_SRC emacs-lisp
+;; PHP  intelephense
+(defgroup lsp-php-iph nil
+  "PHP."
+  :group 'lsp-mode
+  :tag "PHP")
 
-# (defcustom lsp-clients-php-iph-server-command
-#   `("intelephense" "--stdio")
-#   "Install directory for php-language-server."
-#   :group 'lsp-php-ip
-#   :type '(repeat string))
+(defcustom lsp-clients-php-iph-server-command
+  `("intelephense" "--stdio")
+  "Install directory for php-language-server."
+  :group 'lsp-php-ip
+  :type '(repeat string))
 
-# (lsp-register-client
-#  (make-lsp-client :new-connection (lsp-stdio-connection lsp-clients-php-server-command)
-#                   :major-modes '(php-mode)
-#                   :priority 2
-#                   :server-id 'iph))
-# #+END_SRC
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection lsp-clients-php-server-command)
+                  :major-modes '(php-mode)
+                  :priority 2
+                  :server-id 'iph))
+#+END_SRC
 
 
 Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
