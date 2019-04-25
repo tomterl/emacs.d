@@ -1198,6 +1198,11 @@ This is a birds eye view of the current buffer.
   (define-hook-helper prog-mode () 
     (rainbow-delimiters-mode 1))
 #+END_SRC
+** no modeline
+#+BEGIN_SRC emacs-lisp
+  (require 'awesome-tray)
+  (awesome-tray-mode 1)
+#+END_SRC
 * org-mode
 ** Variables
    :PROPERTIES:
@@ -1509,9 +1514,6 @@ today :-).
 
 Reduce the 'leaving/enter' messages.
 
-#+BEGIN_SRC emacs-lisp
-  (enable-circe-color-nicks)
-#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (setq circe-reduce-lurker-spam t)
@@ -1552,7 +1554,9 @@ The manual must be out of date, this doesn't load.
 #+END_SRC
 
 ** Color the nicknames.
-
+#+BEGIN_SRC emacs-lisp
+  (enable-circe-color-nicks)
+#+END_SRC
 
 ** Don't show the names list at join
 #+BEGIN_SRC emacs-lisp

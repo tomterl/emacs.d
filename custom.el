@@ -13,6 +13,7 @@
    ["#110F13" "#B13120" "#719F34" "#CEAE3E" "#7C9FC9" "#7868B5" "#009090" "#F4EAD5"])
  '(ansi-term-color-vector
    [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
+ '(awesome-tray-active-modules (quote ("location" "parent-dir" "git" "mode-name" "circe")))
  '(boon-enclosures
    (quote
     ((65 "⟨" "⟩")
@@ -298,6 +299,7 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(awesome-tray-module-circe-face ((t (:foreground "#dd3322" :weight bold))))
  '(company-scrollbar-bg ((t (:background "#3f3f3f"))))
  '(company-scrollbar-fg ((t (:background "#262626"))))
  '(company-tooltip ((t (:inherit default :background "#545454"))))
