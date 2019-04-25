@@ -1203,6 +1203,31 @@ This is a birds eye view of the current buffer.
   (require 'awesome-tray)
   (awesome-tray-mode 1)
 #+END_SRC
+** shorten mode names
+#+BEGIN_SRC emacs-lisp
+  (setq
+   cyphejor-rules
+   '(:upcase
+     ("bookmark"    "→")
+     ("buffer"      "β")
+     ("diff"        "Δ")
+     ("dired"       "δ")
+     ("emacs"       "ε")
+     ("fundamental" "Ⓕ")
+     ("inferior"    "i" :prefix)
+     ("interaction" "i" :prefix)
+     ("interactive" "i" :prefix)
+     ("lisp"        "λ" :postfix)
+     ("menu"        "▤" :postfix)
+     ("mode"        "")
+     ("package"     "↓")
+     ("python"      "π")
+     ("php"         "Ψ")
+     ("shell"       "sh" :postfix)
+     ("text"        "ξ")
+     ("wdired"      "↯δ")))
+  (cyphejor-mode 1)
+#+END_SRC
 * org-mode
 ** Variables
    :PROPERTIES:

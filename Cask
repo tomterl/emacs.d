@@ -50,6 +50,7 @@
 (depends-on "creamsody-theme")
 (depends-on "csv-mode")
 (depends-on "ctable")
+(depends-on "cyphejor")
 (depends-on "dakrone-theme")
 (depends-on "dap-mode")
 (depends-on "darkburn-theme")
