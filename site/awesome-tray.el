@@ -271,13 +271,13 @@ Maybe you need set this option with bigger value to speedup on Windows platform.
                       :background (nth 1 awesome-tray-mode-line-colors)
                       :family (nth 2 awesome-tray-mode-line-colors)
                       :box (nth 3 awesome-tray-mode-line-colors)
-                      :height 1)
+                      :height 10)
   (set-face-attribute 'mode-line-inactive nil
                       :foreground (nth 4 awesome-tray-mode-line-colors)
                       :background (nth 5 awesome-tray-mode-line-colors)
                       :family (nth 6 awesome-tray-mode-line-colors)
                       :box (nth 7 awesome-tray-mode-line-colors)
-                      :height 1)
+                      :height 10)
   ;; Cancel timer.
   (when (timerp awesome-tray-timer)
     (cancel-timer awesome-tray-timer))
@@ -351,9 +351,9 @@ Maybe you need set this option with bigger value to speedup on Windows platform.
   (let* ((bottom-line (line-number-at-pos (point-max)))
          (location-percent
           (cond ((equal (line-number-at-pos) 1)
-                 "top")
+                 "t")
                 ((equal (line-number-at-pos) bottom-line)
-                 "bottom")
+                 "b")
                 (t
                  (format "%.f%%" (* (/ (float (line-number-at-pos)) bottom-line) 100))))
           ))
@@ -386,13 +386,13 @@ Maybe you need set this option with bigger value to speedup on Windows platform.
   (let* ((tray-info (awesome-tray-build-info)))
     (with-current-buffer " *Minibuf-0*"
       (erase-buffer)
-      (insert (concat (make-string (max 0 (- (frame-width) (length tray-info) awesome-tray-info-padding-right)) ?\ ) tray-info)))))
+      (insert (concat (make-string (max 0 (- (frame-width) (length tray-info))) ?\ ) tray-info)))))
 
 (defun awesome-tray-get-echo-format-string (message-string)
   (let* ((tray-info (awesome-tray-build-info))
-         (blank-length (- (frame-width) (length tray-info) (length message-string) awesome-tray-info-padding-right))
-         (empty-fill-string (make-string (max 0 (- (frame-width) (length tray-info) awesome-tray-info-padding-right)) ?\ ))
-         (message-fill-string (make-string (max 0 (- (frame-width) (length message-string) (length tray-info) awesome-tray-info-padding-right)) ?\ ))
+         (blank-length (- (frame-width) (length tray-info) (length message-string)))
+         (empty-fill-string (make-string (max 0 (- (frame-width) (length tray-info))) ?\ ))
+         (message-fill-string (make-string (max 0 (- (frame-width) (length message-string) (length tray-info))) ?\ ))
          )
     (prog1
         (if (> blank-length 0)

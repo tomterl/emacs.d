@@ -1198,11 +1198,6 @@ This is a birds eye view of the current buffer.
   (define-hook-helper prog-mode () 
     (rainbow-delimiters-mode 1))
 #+END_SRC
-** no modeline
-#+BEGIN_SRC emacs-lisp
-  (require 'awesome-tray)
-  (awesome-tray-mode 1)
-#+END_SRC
 ** shorten mode names
 #+BEGIN_SRC emacs-lisp
   (setq
@@ -1227,6 +1222,10 @@ This is a birds eye view of the current buffer.
      ("text"        "ξ")
      ("wdired"      "↯δ")))
   (cyphejor-mode 1)
+#+END_SRC
+** modeline
+#+BEGIN_SRC emacs-lisp
+  (doom-modeline-mode 1)
 #+END_SRC
 * org-mode
 ** Variables
