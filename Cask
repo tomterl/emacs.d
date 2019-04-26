@@ -69,6 +69,7 @@
 (depends-on "dockerfile-mode")
 (depends-on "doneburn-theme")
 (depends-on "doom-modeline")
+(depends-on "doom-themes")
 (depends-on "dracula-theme")
 (depends-on "drag-stuff")
 (depends-on "ecukes")
