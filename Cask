@@ -185,7 +185,6 @@
 (depends-on "markdown-mode")
 (depends-on "markdown-preview-mode")
 (depends-on "material-theme")
-(depends-on "minimap")
 (depends-on "mmm-mode")
 (depends-on "moe-theme")
 (depends-on "monokai-alt-theme")
