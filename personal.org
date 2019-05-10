@@ -567,6 +567,7 @@ I use ~projectile~ to manage my projects.
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (counsel-projectile-mode 1)
+(setq projectile-completion-system 'ivy)
 #+END_SRC
 ** perspectives
 #+BEGIN_SRC emacs-lisp
