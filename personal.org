@@ -247,25 +247,38 @@ Stuff looted from graphene.
 #+END_SRC
 ** env
 #+BEGIN_SRC emacs-lisp
-  (require 'smex)
-  (require 'flx-ido)
-  (smex-initialize)
+  (require 'ivy)
+  (require 'swiper)
+  (require 'counsel)
+  (require 'counsel-projectile)
+  
+  (global-set-key "\C-s" 'swiper)
 
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
   (setq inhibit-startup-message t
         color-theme-is-global t
         uniquify-buffer-name-style 'forward
         backup-directory-alist `((".*" . ,temporary-file-directory))
-        auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-        ido-mode 1
-        flx-ido-mode 1
-        ido-enable-flex-matching t
-        ido-auto-merge-work-directories-length nil
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-everywhere t
-        ido-use-faces t)
-  (require 'ido-completing-read+)
-  (ido-ubiquitous-mode 1)
+        auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -274,10 +287,6 @@ Stuff looted from graphene.
 
   (global-auto-revert-mode t)
 
-  (ido-mode 1)
-  (ido-vertical-mode 1)
-  (put 'ido-complete 'disabled nil)
-  (put 'ido-exit-minibuffer 'disabled nil)
   (put 'autopair-newline 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
@@ -320,11 +329,6 @@ Stuff looted from graphene.
 #+BEGIN_SRC emacs-lisp
   ;; Work around Emacs frame sizing bug when line-spacing
   ;; is non-zero, which impacts e.g. grizzl.
-  (define-hook-helper minibuffer-setup ()
-    (set (make-local-variable 'line-spacing) 0)
-    (local-set-key (kbd "C-n") 'ido-next-match)
-    (local-set-key (kbd "C-p") 'ido-prev-match)
-    (setq resize-mini-windows (featurep 'ido-vertical-mode)))
   (setq redisplay-dont-pause t)
 #+END_SRC
 * Global stuff
@@ -561,6 +565,8 @@ I use ~projectile~ to manage my projects.
 #+BEGIN_SRC emacs-lisp
 (require 'projectile)
 (projectile-global-mode)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(counsel-projectile-mode 1)
 #+END_SRC
 ** perspectives
 #+BEGIN_SRC emacs-lisp
@@ -1906,10 +1912,6 @@ Indent autimatically as aggressive as possible:
   (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
 #+END_SRC 
 
-#+BEGIN_SRC emacs-lisp
-  (require 'flyspell-correct-ido)
-  (define-key flyspell-mode-map (kbd "H-;") 'flyspell-correct-previous-word-generic)
-#+END_SRC
 ** Multiple Cursors
 
 #+BEGIN_SRC emacs-lisp
@@ -2156,10 +2158,6 @@ Sensible setup found at 'or emacs('.
      ("v" helpful-variable "Lookup Variable")
      ("g" helpful-update "Refresh Helpful Buffer")
      ))
-#+END_SRC
-** todo-extraction
-#+BEGIN_SRC emacs-lisp
-  (require 'doom-todo-ido)
 #+END_SRC
 ** Popup Imenu
 #+BEGIN_SRC emacs-lisp
@@ -2715,8 +2713,6 @@ definitions as used in fb-core et.al.
 *** Configuration
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
-  (setq magit-last-seen-setup-instructions "1.4.0")
-  (setq magit-completing-read-function 'magit-ido-completing-read)
 #+END_SRC
    
 *** Key bindings

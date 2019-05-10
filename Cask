@@ -47,6 +47,7 @@
 (depends-on "company-tern")
 (depends-on "concurrent")
 (depends-on "counsel")
+(depends-on "counsel-projectile")
 (depends-on "creamsody-theme")
 (depends-on "csv-mode")
 (depends-on "ctable")
