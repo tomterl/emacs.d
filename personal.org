@@ -2714,6 +2714,7 @@ definitions as used in fb-core et.al.
 *** Configuration
 #+BEGIN_SRC emacs-lisp
   (require 'magit)
+  (setq magit-completing-read-function 'ivy-completing-read)
 #+END_SRC
    
 *** Key bindings
