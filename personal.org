@@ -248,10 +248,11 @@ Stuff looted from graphene.
 ** env
 #+BEGIN_SRC emacs-lisp
   (require 'ivy)
+  (require 'all-the-icons-ivy)
   (require 'swiper)
   (require 'counsel)
   (require 'counsel-projectile)
-  
+
   (global-set-key "\C-s" 'swiper)
 
   (ivy-mode 1)
@@ -291,6 +292,15 @@ Stuff looted from graphene.
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
   (put 'narrow-to-region 'disabled nil)
+  (require 'lv)
+
+  (defun ivy-display-function-lv (text)
+    (let ((lv-force-update t))
+      (lv-message
+       (if (string-match "\\`\n" text)
+           (substring text 1)
+         text))))
+  (all-the-icons-ivy-setup)
 #+END_SRC
 ** keys
 #+BEGIN_SRC emacs-lisp
@@ -939,7 +949,7 @@ Marking the root of a project are only
     (add-to-list 'projectile-project-root-files "manifest.json")
     (add-to-list 'projectile-project-root-files ".projectile")
     (setq projectile-project-root-files-functions '(projectile-root-top-down))
-    (setq projectile-switch-project-action #'projectile-find-file)
+
     (setq projectile-find-dir-includes-top-level t)
     (setq projectile-indexing-method 'native)
     (setq projectile-enable-caching t)
@@ -977,58 +987,6 @@ Marking the root of a project are only
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
   (require 'icons-in-terminal)
-  (require 'company-box)
-  (setq company-box-icons-unknown 'fa_question_circle)
-
-  (setq company-box-icons-elisp
-     '((fa_tag :face font-lock-function-name-face) ;; Function
-       (fa_cog :face font-lock-variable-name-face) ;; Variable
-       (fa_cube :face font-lock-constant-face) ;; Feature
-       (md_color_lens :face font-lock-doc-face))) ;; Face
-
-  (setq company-box-icons-yasnippet 'fa_bookmark)
-
-  (setq company-box-icons-lsp
-        '((1 . fa_text_height) ;; Text
-          (2 . (fa_tags :face font-lock-function-name-face)) ;; Method
-          (3 . (fa_tag :face font-lock-function-name-face)) ;; Function
-          (4 . (fa_tag :face font-lock-function-name-face)) ;; Constructor
-          (5 . (fa_cog :foreground "#FF9800")) ;; Field
-          (6 . (fa_cog :foreground "#FF9800")) ;; Variable
-          (7 . (fa_cube :foreground "#7C4DFF")) ;; Class
-          (8 . (fa_cube :foreground "#7C4DFF")) ;; Interface
-          (9 . (fa_cube :foreground "#7C4DFF")) ;; Module
-          (10 . (fa_cog :foreground "#FF9800")) ;; Property
-          (11 . md_settings_system_daydream) ;; Unit
-          (12 . (fa_cog :foreground "#FF9800")) ;; Value
-          (13 . (md_storage :face font-lock-type-face)) ;; Enum
-          (14 . (md_closed_caption :foreground "#009688")) ;; Keyword
-          (15 . md_closed_caption) ;; Snippet
-          (16 . (md_color_lens :face font-lock-doc-face)) ;; Color
-          (17 . fa_file_text_o) ;; File
-          (18 . md_refresh) ;; Reference
-          (19 . fa_folder_open) ;; Folder
-          (20 . (md_closed_caption :foreground "#009688")) ;; EnumMember
-          (21 . (fa_square :face font-lock-constant-face)) ;; Constant
-          (22 . (fa_cube :face font-lock-type-face)) ;; Struct
-          (23 . fa_calendar) ;; Event
-          (24 . fa_square_o) ;; Operator
-          (25 . fa_arrows)) ;; TypeParameter
-        )
-  (setq company-box-icons-acphp
-     '((fa_tasks :face font-lock-function-name-face) ;; Trait
-       (fa_cube :face font-lock-function-name-face) ;; Class
-       (fa_tags :face font-lock-function-name-face) ;; Method
-       (fa_tag :face font-lock-function-name-face) ;; Function
-       (fa_plus_square :face font-lock-function-name-face) ;; Property
-       (fa_bullseye :face font-lock-function-name-face) ;; Constant
-       (fa_cog :face font-lock-function-name-face) ;; Variable
-       (fa_cubes :face font-lock-variable-name-face) ;; Interface
-       (fa_object_group :face font-lock-constant-face) ;; Namespace
-       (fa_stop_circle_o :face font-lock-constant-face) ;; Usetrait
-       (md_storage :face font-lock-type-face))) ;; 
-
-  (add-to-list 'company-box-icons-functions 'company-box-icons--acphp)
 #+END_SRC
 ** Fontlock et.al.
    :PROPERTIES:
@@ -2172,6 +2130,7 @@ Sensible setup found at 'or emacs('.
 ** General
 *** completion
 #+BEGIN_SRC emacs-lisp
+  (require 'company-lsp)
   (defun tom/company-transformer (candidates)
     (let ((completion-ignore-case t))
       (all-completions (company-grab-symbol) candidates)))
