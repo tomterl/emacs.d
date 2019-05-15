@@ -205,6 +205,7 @@
 (depends-on "omni-scratch")
 (depends-on "org")
 (depends-on "org-journal")
+(depends-on "org-projectile")
 (depends-on "org-re-reveal")
 (depends-on "origami")
 (depends-on "outline-magic")

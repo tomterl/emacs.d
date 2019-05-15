@@ -309,8 +309,6 @@ Stuff looted from graphene.
                 'kill-default-buffer)
 (global-set-key (kbd "C-x C-k")
                 'kill-buffer-and-window)
-(global-set-key (kbd "C-c n")
-                'create-new-buffer)
 (global-set-key (kbd "C-c N")
                 'new-emacs-instance)
 (global-set-key (kbd "C-;")
@@ -576,8 +574,23 @@ I use ~projectile~ to manage my projects.
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+#+END_SRC
+*** Completion
+
+Use ivy/counsel for Completion
+#+BEGIN_SRC emacs-lisp
 (counsel-projectile-mode 1)
 (setq projectile-completion-system 'ivy)
+#+END_SRC
+*** keep project todos in org-mode file(s)
+#+BEGIN_SRC emacs-lisp
+  (require 'org-projectile)
+  (setq org-projectile-projects-file
+        (concat tom/--emacs-dir "/projects_todos.org"))
+  (push (org-projectile-project-todo-entry) org-capture-templates)
+  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
 #+END_SRC
 ** perspectives
 #+BEGIN_SRC emacs-lisp
@@ -1207,7 +1220,8 @@ This is a birds eye view of the current buffer.
       org-src-fontify-natively t
       org-tags-exclude-from-inheritance '("PROJECT")
       org-list-allow-alphabetical nil
-      org-agenda-include-inactive-timestamps t)
+      org-agenda-include-inactive-timestamps t
+      org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "PAUSED(p)" "BLOCKED(b)" "DONE(d)")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
