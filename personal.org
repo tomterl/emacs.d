@@ -1214,14 +1214,21 @@ This is a birds eye view of the current buffer.
 *** Basis / Agenda
 
 #+BEGIN_SRC emacs-lisp
-     (setq
-      org-directory "~/ownCloud/org-mode"
-      org-return-follows-link t
-      org-src-fontify-natively t
-      org-tags-exclude-from-inheritance '("PROJECT")
-      org-list-allow-alphabetical nil
-      org-agenda-include-inactive-timestamps t
-      org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "PAUSED(p)" "BLOCKED(b)" "DONE(d)")))
+  (setq
+   org-directory "~/ownCloud/org-mode"
+   org-return-follows-link t
+   org-src-fontify-natively t
+   org-tags-exclude-from-inheritance '("PROJECT")
+   org-list-allow-alphabetical nil
+   org-agenda-include-inactive-timestamps t
+   org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "PAUSED(p)" "BLOCKED(b)" "CANCELED(c)" "DONE(d)"))
+   org-todo-keyword-faces '(
+                            ("TODO" . org-warning)
+                            ("ACTIVE" . "yellow")
+                            ("PAUSED" . "darkyellow")
+                            ("BLOCKED" . "red")
+                            ("CANCELED" . (:foreground "#3333cc" :weight bold))
+                            ("DONE" . "darkgreen")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
