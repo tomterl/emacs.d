@@ -664,7 +664,7 @@ Use ivy/counsel for Completion
     (let ((before-persp (safe-persp-name (get-current-persp)))
           (after-persp (apply switch-fun args)))
       (when (not (string= before-persp after-persp))
-        (setq +workspaces-last-persp before-persp))))
+        (setq tom/workspaces-last-persp before-persp))))
 
   (advice-add #'persp-switch :around #'tom/workspaces*track-last-persp)
 
