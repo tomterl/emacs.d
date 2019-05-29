@@ -652,7 +652,7 @@ Use ivy/counsel for Completion
              (when ,old (persp-switch ,old)))
            (setq persp-last-persp-name last-persp-cache)))))
   (setq wg-morph-on nil
-        persp-autokill-buffer-on-remove 'kill-weak
+        persp-autokill-buffer-on-remove 'kill
         persp-nil-name "nil"
         persp-nil-hidden t
         persp-auto-save-fname "autosave"
