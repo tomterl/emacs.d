@@ -1186,13 +1186,14 @@ This is a birds eye view of the current buffer.
    org-tags-exclude-from-inheritance '("PROJECT")
    org-list-allow-alphabetical nil
    org-agenda-include-inactive-timestamps t
-   org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "PAUSED(p)" "BLOCKED(b)" "CANCELED(c)" "DONE(d)"))
+   org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "PAUSED(p)" "BLOCKED(b)" "CANCELED(c)" "DELEGATED(D)" "DONE(d)"))
    org-todo-keyword-faces '(
                             ("TODO" . org-warning)
                             ("ACTIVE" . "yellow")
                             ("PAUSED" . "darkyellow")
                             ("BLOCKED" . "red")
                             ("CANCELED" . (:foreground "#3333cc" :weight bold))
+                            ("DELEGATED" . "purple")
                             ("DONE" . "darkgreen")))
 #+END_SRC
 
