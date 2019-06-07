@@ -24,6 +24,7 @@
 (depends-on "avy")
 (depends-on "badger-theme")
 (depends-on "bash-completion")
+(depends-on "beacon")
 (depends-on "bind-key")
 (depends-on "boon")
 (depends-on "calmer-forest-theme")

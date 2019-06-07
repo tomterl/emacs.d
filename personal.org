@@ -1170,6 +1170,12 @@ This is a birds eye view of the current buffer.
 #+BEGIN_SRC emacs-lisp
   (doom-modeline-mode 1)
 #+END_SRC
+** Cursor
+Allways find the cursor.
+#+BEGIN_SRC emacs-lisp
+  (require 'beacon)
+  (beacon-mode 1)
+#+END_SRC
 * org-mode
 ** Variables
    :PROPERTIES:
