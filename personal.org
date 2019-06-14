@@ -2573,6 +2573,8 @@ definitions as used in fb-core et.al.
       (yas-minor-mode 1)
       (aggressive-indent-mode nil)))
 #+END_SRC
+(sql-set-product "postgres")
+(define-hook-helper sql-mode ()
 * RESTful
 ** Extract json-field data
 #+BEGIN_SRC emacs-lisp
