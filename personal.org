@@ -1487,6 +1487,10 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
     '(add-to-list 'org-export-filter-headline-functions
                   'org/ensure-latex-clearpage))
 #+END_SRC
+** Edit src-blocks inline
+#+BEGIN_SRC 
+(add-hook 'org-mode-hook 'poly-org-mode)
+#+END_SRC
 * Chat and instant messaging 
 
 I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
@@ -1940,138 +1944,130 @@ enough context around point visible.
 
 ** Insert current date
 
-Use the 'calendar' to get and format the date.
+   Use the 'calendar' to get and format the date.
 
-#+BEGIN_SRC emacs-lisp
-  (require 'calendar)
+   #+BEGIN_SRC emacs-lisp
+     (require 'calendar)
 
-  (defun tom/insert-current-date (&optional omit-day-of-week-p)
-    "Insert today's date using the current locale.
+(defun tom/insert-current-date (&optional omit-day-of-week-p)
+  "Insert today's date using the current locale.
       With a prefix argument, the date is inserted without the day of
       the week."
-    (interactive "P*")
-    (insert (calendar-date-string (calendar-current-date) nil
-                                  omit-day-of-week-p)))
-  (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
-#+END_SRC
+  (interactive "P*")
+  (insert (calendar-date-string (calendar-current-date) nil
+                                omit-day-of-week-p)))
+     (global-set-key (kbd "\C-c d") 'tom/insert-current-date)
+   #+END_SRC
 ** Window movement
 
-See hydra above for movement!
+   See hydra above for movement!
 
 *** Window Layouts / Rotation
 
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-r") 'rotate-window)
-  (global-set-key (kbd "H-C-l") 'rotate-layout)
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "H-r") 'rotate-window)
+(global-set-key (kbd "H-C-l") 'rotate-layout)
+    #+END_SRC
+    
 ** EDiff
 
-Sensible setup found at 'or emacs('.
+   Sensible setup found at 'or emacs('.
 
-#+BEGIN_SRC emacs-lisp
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  (setq ediff-split-window-function 'split-window-horizontally)
-  (setq ediff-diff-options "-w")
-  (defun tom/ediff-hook ()
-    (ediff-setup-keymap)
-    (define-key ediff-mode-map "j" 'ediff-next-difference)
-    (define-key ediff-mode-map "k" 'ediff-previous-difference))
+   #+BEGIN_SRC emacs-lisp
+     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-diff-options "-w")
+(defun tom/ediff-hook ()
+  (ediff-setup-keymap)
+  (define-key ediff-mode-map "j" 'ediff-next-difference)
+  (define-key ediff-mode-map "k" 'ediff-previous-difference))
 
-  (add-hook 'ediff-mode-hook 'tom/ediff-hook)
+(add-hook 'ediff-mode-hook 'tom/ediff-hook)
 
 #+END_SRC
 ** dired
-#+BEGIN_SRC emacs-lisp
-  (require 'dired-x)
-  (put 'dired-find-alternate-file 'disabled nil)
-  (setq dired-omit-files "^\\..*$")
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'dired-x)
+(put 'dired-find-alternate-file 'disabled nil)
+(setq dired-omit-files "^\\..*$")
+   #+END_SRC
 ** highlights
-#+BEGIN_SRC emacs-lisp
-  (require 'volatile-highlights)
-  (vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
-  (vhl/load-extension 'ut)
-  (define-hook-helper prog-mode ()
-    (volatile-highlights-mode 1))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'volatile-highlights)
+(vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
+     (vhl/load-extension 'ut)
+     (define-hook-helper prog-mode ()
+       (volatile-highlights-mode 1))
+   #+END_SRC
 ** Edit as root
-#+BEGIN_SRC emacs-lisp
-  (defun tom/sudo ()
-    "Use TRAMP to `sudo' the current buffer"
-    (interactive)
-    (when buffer-file-name
-      (find-alternate-file
-       (concat "/sudo:root@localhost:"
-               buffer-file-name))))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (defun tom/sudo ()
+       "Use TRAMP to `sudo' the current buffer"
+       (interactive)
+       (when buffer-file-name
+         (find-alternate-file
+          (concat "/sudo:root@localhost:"
+                  buffer-file-name))))
+   #+END_SRC
 ** Case handling
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-c") 'string-inflection-all-cycle)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "H-c") 'string-inflection-all-cycle)
+   #+END_SRC
 ** Lookup documentation 
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-z") 'zeal-at-point)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "H-z") 'zeal-at-point)
+   #+END_SRC
 ** Occur ~word-at-point~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/occur-tap ()
-    "Call occur with word-at-point"
-    (interactive)
-    (occur (word-at-point))
-    )
-  (defun tom/kill-occur-window ()
-    "Kill the *Occur* buffer/window"
-    (interactive)
-    (let ((buffer (get-buffer "*Occur*")))
-      (when buffer
-        (with-current-buffer-window
-         buffer
-         nil
-         nil
-         (kill-buffer-and-window)))))
-  (global-set-key (kbd "H-f") 'tom/occur-tap)
-  (global-set-key (kbd "H-F") 'tom/kill-occur-window)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (defun tom/occur-tap ()
+       "Call occur with word-at-point"
+       (interactive)
+       (occur (word-at-point))
+       )
+     (defun tom/kill-occur-window ()
+       "Kill the *Occur* buffer/window"
+       (interactive)
+       (let ((buffer (get-buffer "*Occur*")))
+         (when buffer
+           (with-current-buffer-window
+            buffer
+            nil
+            nil
+            (kill-buffer-and-window)))))
+     (global-set-key (kbd "H-f") 'tom/occur-tap)
+     (global-set-key (kbd "H-F") 'tom/kill-occur-window)
+   #+END_SRC
 ** View buffers
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "H-v") 'view-mode)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "H-v") 'view-mode)
+   #+END_SRC
 ** Multiple Major Modes
-#+BEGIN_SRC emacs-lisp
-  (require 'mmm-mode)
-  (mmm-add-classes
-   '((embedded-aql
-      :submode aql-mode
-      :front "^\\(.*aql`\\)"
-      :front-offset (end-of-line 1)
-      :back "`"
-      :insert ((?a embaql nil
-                   @ "var query = aql`" @ "\n" _ "\n" @ "`;" @)))
-     (embedded-sql
-      :submode sql-mode
-      :front "^\\(.*$\\(source\\|sql\\) = [\"']\\)"
-      :back "[\"'];"
-      :insert ((?s embsql "Varname (source|sql)? "
-                   @ "$" str " = \"\n" @ _ @ "\n\";" @)
-               (?o embsqlsource ?s . "source")
-               (?q embsqlsql ?s . "sql"))
-      :front-offset (end-of-line 1)
-      :save-matches t)
-     (embedded-js
-      :submode js2-mode
-      :front "^        body: >"
-      :front-offset '(end-of-line 11)
-      :back  "\\(^      - name: \\)\\|\\(^    types:\\)")))
-  (setq mmm-global-mode 'maybe)
-  (mmm-add-mode-ext-class 'js2-mode nil 'embedded-aql)
-  (mmm-add-mode-ext-class 'php-mode nil 'embedded-sql)
-  (mmm-add-mode-ext-class 'yaml-mode nil 'embedded-js)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'polymode)
+(require 'aql-mode)
+     (define-hostmode poly-php-hostmode
+       :mode 'php-mode)
+     (define-innermode poly-php-aql-innermode
+       :mode 'aql-mode
+       :head-matcher "^[ \t]*protected static $source = <<<AQL\n"
+       :tail-matcher "^AQL;\n"
+       :head-mode 'fundamental-mode
+       :tail-mode 'fundamental-mode)
+     (define-innermode poly-php-sql-innermode
+       :mode 'sql-mode
+       :head-matcher "^[ \t]*protected static $source = ['\"](?\n"
+       :tail-matcher "['\"];\n"
+       :head-mode 'host
+       :tail-mode 'host)
+(define-polymode poly-php-mode
+  :hostmode 'poly-php-hostmode
+  :innermodes '(poly-php-aql-innermode
+                poly-php-sql-innermode))
+   #+END_SRC
 *** Edit in different mode in narrowed buffer
-#+BEGIN_SRC emacs-lisp
-  (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
-    "If point is inside a `begin...end' block, create a narrowed,
+    #+BEGIN_SRC emacs-lisp
+      (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
+        "If point is inside a `begin...end' block, create a narrowed,
     indirect buffer in `mode' to edit the contents between those
     markers. 
 
@@ -2081,44 +2077,44 @@ Sensible setup found at 'or emacs('.
     `mark' is used in the construction of the name for the indirect buffer.
 
     If `fun' is given, it is called with the narrowed buffer as current buffer."
-    `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
-       (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
-         (unless (buffer-narrowed-p)
-           (let ((max (- (search-forward-regexp ,end) (- (match-end 0) (match-beginning 0))))
-                 (min (+ (search-backward-regexp ,begin) (- (match-end 0) (match-beginning 0)))))
-             (narrow-to-region min max)))
-         (funcall ,mode)
-         (aggressive-indent-mode nil)
-         (font-lock-fontify-block)
-         (if (functionp ,fun) (funcall ,fun))
-         (local-set-key (kbd "C-c C-c") #'(lambda ()
-                                            (interactive)
-                                            (progn
-                                              (kill-this-buffer)
-                                              (delete-window (selected-window))
-                                              (mmm-parse-buffer))))
-         (pop-to-buffer bufname))))
+        `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
+           (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
+             (unless (buffer-narrowed-p)
+               (let ((max (- (search-forward-regexp ,end) (- (match-end 0) (match-beginning 0))))
+                     (min (+ (search-backward-regexp ,begin) (- (match-end 0) (match-beginning 0)))))
+                 (narrow-to-region min max)))
+             (funcall ,mode)
+           (aggressive-indent-mode nil)
+             (font-lock-fontify-block)
+             (if (functionp ,fun) (funcall ,fun))
+             (local-set-key (kbd "C-c C-c") #'(lambda ()
+                                                (interactive)
+                                                (progn
+                                                  (kill-this-buffer)
+                                                  (delete-window (selected-window))
+                                                  (mmm-parse-buffer))))
+             (pop-to-buffer bufname))))
 
-#+END_SRC
+    #+END_SRC
 ** Help
-#+BEGIN_SRC emacs-lisp
-  (global-set-key
-   (kbd "H-h")
-   (defhydra hydra-help (:color blue :timeout 3)
-     "launch"
-     ("h" helpful-at-point "Loopup Function/Macro")
-     ("v" helpful-variable "Lookup Variable")
-     ("g" helpful-update "Refresh Helpful Buffer")
-     ))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key
+      (kbd "H-h")
+      (defhydra hydra-help (:color blue :timeout 3)
+        "launch"
+        ("h" helpful-at-point "Loopup Function/Macro")
+        ("v" helpful-variable "Lookup Variable")
+        ("g" helpful-update "Refresh Helpful Buffer")
+        ))
+   #+END_SRC
 ** Popup Imenu
-#+BEGIN_SRC emacs-lisp
-  (require 'popup-imenu)
-  (global-set-key (kbd "H-i") 'popup-imenu)
-  (setq popup-imenu-position 'point)
-  (setq popup-imenu-force-position nil)
-  (define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'popup-imenu)
+(global-set-key (kbd "H-i") 'popup-imenu)
+(setq popup-imenu-position 'point)
+(setq popup-imenu-force-position nil)
+(define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
+   #+END_SRC
 * Languages
 ** General
 *** completion
@@ -2226,7 +2222,7 @@ Add speedbar support for elixir files.
 *** Use php-mode, not web-mode for PHP-code
 
 #+BEGIN_SRC emacs-lisp
-(require 'php-mode)
+  (require 'php-mode)
   (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
   (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 #+END_SRC
@@ -2236,7 +2232,7 @@ Add speedbar support for elixir files.
 Use ~web-mode~ for smarty templates.
 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
 #+END_SRC
 
 *** Indentation and behaviour
@@ -2283,7 +2279,8 @@ Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "clea
       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
-      (message "tom/php-mode-hook executed")))
+      (message "tom/php-mode-hook executed")
+      (poly-php-mode))
   (add-hook 'php-mode-hook 'flycheck-mode)
 
 
@@ -2491,7 +2488,7 @@ Check the doc comment of the current function for @param tags, create them if no
 #+END_SRC
 *** `.aql` files 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.aql" . js-mode))
+  (add-to-list 'auto-mode-alist '("\\.aql" . js-mode))
 #+END_SRC
 ** YAML
 
@@ -2563,18 +2560,7 @@ definitions as used in fb-core et.al.
             c-basic-offset 2
             indent-tabs-mode nil)
       (yas-minor-mode 1)
-      (aggressive-indent-mode -1)
-      (local-set-key (kbd "C-c a") 'tom/edit-aql)))
-#+END_SRC
-*** Edit AQL in ~js2-mode~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/edit-aql ()
-    "If point is inside a `aql\`...\`' block, create a narrowed,
-  indirect buffer in `aql-mode' to edit the statement.  Press `C-c
-  C-c' inside the buffer to close the window and kill the indirect
-  buffer."
-    (interactive)
-    (tom/edit-narrowed 'aql-mode ".aql" "aql`" "`"))
+      (aggressive-indent-mode -1)))
 #+END_SRC
 ** SQL
 #+BEGIN_SRC emacs-lisp
@@ -2585,29 +2571,8 @@ definitions as used in fb-core et.al.
             c-basic-offset 2
             indent-tabs-mode nil)
       (yas-minor-mode 1)
-      (aggressive-indent-mode nil)
-      (local-set-key (kbd "C-c a") 'tom/edit-sql)
-      (local-set-key (kbd "C-c C-c") 'sql-send-paragraph)))
+      (aggressive-indent-mode nil)))
 #+END_SRC
-*** Edit SQL in ~php-mode~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/edit-sql ()
-    "If point is inside a `$source = \'...\';' block, create a narrowed,
-        indirect buffer in `sql-mode' to edit the statement.  Press `C-c
-        C-c' inside the buffer to close the window and kill the indirect
-        buffer."
-    (interactive)
-    (tom/edit-narrowed 'sql-mode
-                       ".sql"
-                       "$\\(source\\|sql\\) = [\"']"
-                       "[\"'];"
-                       #'(lambda ()
-                           (progn
-                             (load-library "sql-indent")
-                             (set (make-local-variable 'indent-line-function) 'sql-indent-line)
-                             (setq sql-product "postgres")))))
-#+END_SRC
-
 * RESTful
 ** Extract json-field data
 #+BEGIN_SRC emacs-lisp
