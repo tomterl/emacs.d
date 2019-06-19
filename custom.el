@@ -256,6 +256,7 @@ static char *gnus-pointer[] = {
            (package-build-minor-mode)))))
  '(smartparens-global-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(sql-product (quote postgres))
  '(subatomic-high-contrast t)
  '(subatomic-more-visible-comment-delimiters t)
  '(syslog-debug-face
