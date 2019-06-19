@@ -2651,6 +2651,7 @@ enough context around point visible.
 *** Key bindings
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "<f7>") 'magit-status)
+      (global-set-key (kbd "H-g") 'magit-file-dispatch)
     #+END_SRC
     
 *** Fullscreen
