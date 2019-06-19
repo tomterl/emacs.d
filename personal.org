@@ -1994,7 +1994,7 @@ enough context around point visible.
 ** highlights
    #+BEGIN_SRC emacs-lisp
      (require 'volatile-highlights)
-(vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
+     (vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
      (vhl/load-extension 'ut)
      (define-hook-helper prog-mode ()
        (volatile-highlights-mode 1))
@@ -2133,645 +2133,644 @@ enough context around point visible.
 ** Popup Imenu
    #+BEGIN_SRC emacs-lisp
      (require 'popup-imenu)
-(global-set-key (kbd "H-i") 'popup-imenu)
-(setq popup-imenu-position 'point)
-(setq popup-imenu-force-position nil)
-(define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
+     (global-set-key (kbd "H-i") 'popup-imenu)
+     (setq popup-imenu-position 'point)
+     (setq popup-imenu-force-position nil)
+     (define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
    #+END_SRC
 * Languages
 ** General
 *** completion
-#+BEGIN_SRC emacs-lisp
-  (require 'company-lsp)
-  (defun tom/company-transformer (candidates)
-    (let ((completion-ignore-case t))
-      (all-completions (company-grab-symbol) candidates)))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (require 'company-lsp)
+      (defun tom/company-transformer (candidates)
+        (let ((completion-ignore-case t))
+          (all-completions (company-grab-symbol) candidates)))
+    #+END_SRC
 *** line numbers
-#+BEGIN_SRC emacs-lisp
-  (require 'linum-relative)
-  (setq linum-relative-current-symbol "")
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  (add-hook 'prog-mode-hook 'linum-relative-mode)
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (require 'linum-relative)
+      (setq linum-relative-current-symbol "")
+      (setq linum-relative-backend 'display-line-numbers-mode)
+      (add-hook 'prog-mode-hook 'linum-relative-mode)
+    #+END_SRC
 *** lsp initialization
-#+BEGIN_SRC emacs-lisp
-  (require 'lsp)
-  (require 'lsp-clients)
-  (require 'lsp-ui)
-  (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
-  (setq lsp-prefer-flymake nil)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (add-hook 'prog-mode-hook 'lsp)
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (require 'lsp)
+      (require 'lsp-clients)
+      (require 'lsp-ui)
+      (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
+      (setq lsp-prefer-flymake nil)
+      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      (add-hook 'prog-mode-hook 'lsp)
+    #+END_SRC
 *** Flycheck Hydra
-#+BEGIN_SRC emacs-lisp
-  (global-set-key
-   (kbd "H-e")
-   (defhydra hydra-flycheck
-     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-           :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-           :hint nil)
-     "Errors"
-     ("f"  flycheck-error-list-set-filter                            "Filter")
-     ("j"  flycheck-next-error                                       "Next")
-     ("k"  flycheck-previous-error                                   "Previous")
-     ("gg" flycheck-first-error                                      "First")
-     ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-     ("q"  nil)))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key
+       (kbd "H-e")
+       (defhydra hydra-flycheck
+         (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+               :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+               :hint nil)
+         "Errors"
+         ("f"  flycheck-error-list-set-filter                            "Filter")
+         ("j"  flycheck-next-error                                       "Next")
+         ("k"  flycheck-previous-error                                   "Previous")
+         ("gg" flycheck-first-error                                      "First")
+         ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+         ("q"  nil)))
+    #+END_SRC
 ** Elixir
 
-Automatically add =end= when typing =do=.
+   Automatically add =end= when typing =do=.
 
-#+BEGIN_SRC emacs-lisp
-  (require 'elixir-mode)
-  (add-to-list
-   'elixir-mode-hook
-   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
-     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
-          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
-     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
-     (ruby-end-mode +1)))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp
-  (define-hook-helper elixir-mode ()
-    (progn 
-      (require 'alchemist)
-      (set (make-local-variable 'company-backends)
-           '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
-      (flycheck-mode 1)
-      (yas-minor-mode 1)))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'elixir-mode)
+     (add-to-list
+      'elixir-mode-hook
+      (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+        (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+             "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+        (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+        (ruby-end-mode +1)))
+   #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (define-hook-helper elixir-mode ()
+       (progn 
+         (require 'alchemist)
+         (set (make-local-variable 'company-backends)
+              '((Alchemist-company :with company-yasnippet company-dabbrev-code)))
+         (flycheck-mode 1)
+         (yas-minor-mode 1)))
+   #+END_SRC
 *** Imenu 
 
-Add speedbar support for elixir files.
+    Add speedbar support for elixir files.
 
-#+BEGIN_SRC emacs-lisp
-  (require 'speedbar)
-  (speedbar-add-supported-extension ".ex")
-  (speedbar-add-supported-extension ".exs")
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (require 'speedbar)
+      (speedbar-add-supported-extension ".ex")
+      (speedbar-add-supported-extension ".exs")
+    #+END_SRC
+    
 ** Rust
 
-#+BEGIN_SRC emacs-lisp
-  (setenv "RUST_SRC_PATH" "/home/tom/Projects/rust/src")
-  (define-hook-helper rust-mode ()
-    (progn
-      (require 'company-racer)
-      (setq tab-width 4
-            c-basic-offset 4
-            indent-tabs-mode nil
-            )
-      (set (make-local-variable 'company-backends)
-           '((company-racer :with :sorted company-yasnippet)))
-      (cargo-minor-mode 1)))
+   #+BEGIN_SRC emacs-lisp
+     (setenv "RUST_SRC_PATH" "/home/tom/Projects/rust/src")
+     (define-hook-helper rust-mode ()
+       (progn
+         (require 'company-racer)
+         (setq tab-width 4
+               c-basic-offset 4
+               indent-tabs-mode nil
+               )
+         (set (make-local-variable 'company-backends)
+              '((company-racer :with :sorted company-yasnippet)))
+         (cargo-minor-mode 1)))
 #+END_SRC
 ** Shell
-#+BEGIN_SRC emacs-lisp
-  (define-hook-helper sh-mode ()
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-    (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "bash-language-server start")
-                    :major-modes '(sh-mode)
-                    :server-id 'bls))
-                                          ;  (add-hook 'sh-mode-hook #'flycheck-mode)
+   #+BEGIN_SRC emacs-lisp
+     (define-hook-helper sh-mode ()
+       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+       (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions))
+     (lsp-register-client
+      (make-lsp-client :new-connection (lsp-stdio-connection "bash-language-server start")
+                       :major-modes '(sh-mode)
+                       :server-id 'bls))
+     ;;  (add-hook 'sh-mode-hook #'flycheck-mode)
 
-#+END_SRC
+   #+END_SRC
 ** PHP
 *** Use php-mode, not web-mode for PHP-code
 
-#+BEGIN_SRC emacs-lisp
-  (require 'php-mode)
-  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (require 'php-mode)
+      (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+      (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+    #+END_SRC
+    
 *** smarty 
 
-Use ~web-mode~ for smarty templates.
+    Use ~web-mode~ for smarty templates.
 
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
+    #+END_SRC
+    
 *** Indentation and behaviour
 
-Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
+    Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
 
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-tags-update ()
-    ""
-    (if (and (boundp 'call-php-tags-func) call-php-tags-func)
-        (ac-php-remake-tags)))
-  ;;  (add-hook 'after-save-hook 'tom/php-tags-update)
+    #+BEGIN_SRC emacs-lisp
+      (defun tom/php-tags-update ()
+        ""
+        (if (and (boundp 'call-php-tags-func) call-php-tags-func)
+            (ac-php-remake-tags)))
+;;  (add-hook 'after-save-hook 'tom/php-tags-update)
 
-  (defun tom/dtw ()
-    ""
-    (save-excursion
-      (delete-trailing-whitespace)))
+      (defun tom/dtw ()
+        ""
+        (save-excursion
+          (delete-trailing-whitespace)))
 
-  (define-hook-helper php-mode ()
-    (progn 
-                                          ;(require 'company-php)
-      ;(require 'lsp-php)
-      (ggtags-mode -1)
-      (repl-toggle-mode 1)
-      (yas-minor-mode 1)
-      (company-mode 1)
-      (make-local-variable 'company-transformers)
-      (push 'tom/company-transformer company-transformers)
-                                          ;(company-mode 1)
-      (set (make-local-variable 'call-php-tags-func) t)
-      (local-set-key (kbd "C-c a") 'tom/edit-sql)
-      (php-enable-wordpress-coding-style)
-      (flycheck-may-enable-checker 'php-phpcs)
-      (flycheck-disable-checker 'php-phpmd)
-      (setq-local flycheck-checker 'lsp-php-ui)
-      (setq tab-width 4
-            c-basic-offset 4
-            indent-tabs-mode nil
-            php-template-compatibility nil
+      (define-hook-helper php-mode ()
+        (progn 
+                                        ;(require 'company-php)
+                                        ;(require 'lsp-php)
+          (ggtags-mode -1)
+          (repl-toggle-mode 1)
+          (yas-minor-mode 1)
+          (company-mode 1)
+          (make-local-variable 'company-transformers)
+          (push 'tom/company-transformer company-transformers)
+                                        ;(company-mode 1)
+          (set (make-local-variable 'call-php-tags-func) t)
+          (local-set-key (kbd "C-c a") 'tom/edit-sql)
+          (php-enable-wordpress-coding-style)
+          (flycheck-may-enable-checker 'php-phpcs)
+          (flycheck-disable-checker 'php-phpmd)
+          (setq-local flycheck-checker 'lsp-php-ui)
+          (setq tab-width 4
+                c-basic-offset 4
+                indent-tabs-mode nil
+                php-template-compatibility nil
 
-            php-mode-coding-style (quote wordpress)
-            php-lineup-cascaded-calls t)
-      (add-hook 'write-contents-functions 'tom/dtw nil t)
-      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+                php-mode-coding-style (quote wordpress)
+                php-lineup-cascaded-calls t)
+          (add-hook 'write-contents-functions 'tom/dtw nil t)
+          (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+          (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+          (poly-php-mode 1)          
+          (message "tom/php-mode-hook executed")))
+      (add-hook 'php-mode-hook 'flycheck-mode)
 
-      (message "tom/php-mode-hook executed")
-      (poly-php-mode))
-  (add-hook 'php-mode-hook 'flycheck-mode)
 
-
-  (flycheck-define-generic-checker 'lsp-php-ui
-    "A syntax checker using the Language Server Protocol (RLS)
+      (flycheck-define-generic-checker 'lsp-php-ui
+        "A syntax checker using the Language Server Protocol (RLS)
       provided by lsp-mode.
       See https://github.com/emacs-lsp/lsp-mode."
-    :start #'lsp-ui-flycheck--start
-    :modes '(php-mode) ; Need a default mode
-    :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e))
-    :next-checkers '((warning . php)))
-#+END_SRC
+        :start #'lsp-ui-flycheck--start
+        :modes '(php-mode) ; Need a default mode
+        :predicate (lambda () lsp-mode)
+        :error-explainer (lambda (e) (flycheck-error-message e))
+        :next-checkers '((warning . php)))
+    #+END_SRC
 *** Remote debugging
 **** dap
-#+BEGIN_SRC emacs-lisp
-  (require 'dap-php)
-  (setq dap-auto-show-output nil)
-  (setq dap-inhibit-io nil)
-  (define-key php-mode-map (kbd "H-d") 'dap-hydra)
-
-#+END_SRC
+     #+BEGIN_SRC emacs-lisp
+       (require 'dap-php)
+       (setq dap-auto-show-output nil)
+       (setq dap-inhibit-io nil)
+       (define-key php-mode-map (kbd "H-d") 'dap-hydra)
+ 
+     #+END_SRC
 **** geben
-Geben has a new maintainer, it has some issues, but is overall working sufficiently well.
+     Geben has a new maintainer, it has some issues, but is overall working sufficiently well.
 
- #+BEGIN_SRC emacs-lisp
-   (setq geben-dbgp-default-port 9000)
-   (setq geben-display-window-function 'switch-to-buffer)
-   (setq geben-full-frame-mode t)
- #+END_SRC
+     #+BEGIN_SRC emacs-lisp
+       (setq geben-dbgp-default-port 9000)
+       (setq geben-display-window-function 'switch-to-buffer)
+       (setq geben-full-frame-mode t)
+     #+END_SRC
+     
+     Reroute remote paths to my dev-server and the vagrant user via tramp.
 
-Reroute remote paths to my dev-server and the vagrant user via tramp.
-
-#+BEGIN_SRC emacs-lisp
-  (defun tom/geben-tramp-spec (remote-path)
-    ""
-    (print "/sshx:vagrant@192.168.254.254:"))
-  (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
-#+END_SRC
-
-Make the context window sticky
-#+BEGIN_SRC emacs-lisp
-  (setq tom/geben-context-buffer-name "*GEBEN<127.0.0.1:9000> context*")
-  (defadvice geben-display-context (after sticky-geben-context-window activate)
-    (tom/sticky-window tom/geben-context-buffer-name))
-  (defadvice geben-display-context (before sticky-geben-context-window activate)
-    (unless (buffer-live-p (get-buffer tom/geben-context-buffer-name))
-      (split-window-right)))
-#+END_SRC
+     #+BEGIN_SRC emacs-lisp
+       (defun tom/geben-tramp-spec (remote-path)
+         ""
+         (print "/sshx:vagrant@192.168.254.254:"))
+       (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
+     #+END_SRC
+     
+     Make the context window sticky
+     #+BEGIN_SRC emacs-lisp
+       (setq tom/geben-context-buffer-name "*GEBEN<127.0.0.1:9000> context*")
+       (defadvice geben-display-context (after sticky-geben-context-window activate)
+         (tom/sticky-window tom/geben-context-buffer-name))
+       (defadvice geben-display-context (before sticky-geben-context-window activate)
+         (unless (buffer-live-p (get-buffer tom/geben-context-buffer-name))
+           (split-window-right)))
+     #+END_SRC
 *** Check/correct @param tags
-Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
+    Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
 
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-check-params ()
-    ""
-    (interactive)
-    (save-excursion
-      (narrow-to-defun t)
-      (goto-char (point-min))
-      (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
-      (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
-        (dolist (param params)
-          (let* ((parts (split-string param " "))
-                 (pname (if (cadr parts) (cadr parts) (car parts)))
-                 (param-parts (split-string pname "=" t " "))
-                 (type (if (cadr parts) (car parts) nil))
-                 (name (car param-parts))
-                 (default (cadr param-parts))
-                 (typemsg (if type type (if (numberp default) "int" "mixed")))
-                 (defaultmsg (if default
-                                 (concat "optional, default '"
-                                         (if (numberp default)
-                                             (number-to-string default)
-                                           default)
-                                         "'")
-                               "")))
-            (save-excursion
-              (unless (search-backward-regexp (concat "@param .*" name) nil t)
-                (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
-                       (param-text (s-join " " (list "\n* @param" text1))))
-                  (if (> (length text1) 0)
-                      (progn
-                        (goto-char (point-max))
-                        (if (search-backward-regexp "^ +\\* *$" nil t)
-                            (goto-char (line-end-position))
+    #+BEGIN_SRC emacs-lisp
+      (defun tom/php-check-params ()
+        ""
+        (interactive)
+        (save-excursion
+          (narrow-to-defun t)
+          (goto-char (point-min))
+          (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
+          (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
+            (dolist (param params)
+              (let* ((parts (split-string param " "))
+                     (pname (if (cadr parts) (cadr parts) (car parts)))
+                     (param-parts (split-string pname "=" t " "))
+                     (type (if (cadr parts) (car parts) nil))
+                     (name (car param-parts))
+                     (default (cadr param-parts))
+                     (typemsg (if type type (if (numberp default) "int" "mixed")))
+                     (defaultmsg (if default
+                                     (concat "optional, default '"
+                                             (if (numberp default)
+                                                 (number-to-string default)
+                                               default)
+                                             "'")
+                                   "")))
+                (save-excursion
+                  (unless (search-backward-regexp (concat "@param .*" name) nil t)
+                    (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
+                           (param-text (s-join " " (list "\n* @param" text1))))
+                      (if (> (length text1) 0)
                           (progn
-                            (goto-char (point-min))
-                            (insert "/**\n*/\n")(backward-char 4)))
-                        (insert param-text)
-                        (indent-according-to-mode)
-                        (insert "\n* ")
-                        (indent-according-to-mode)))))))))
-      (widen)))
-#+END_SRC
+                            (goto-char (point-max))
+                            (if (search-backward-regexp "^ +\\* *$" nil t)
+                                (goto-char (line-end-position))
+                              (progn
+                                (goto-char (point-min))
+                                (insert "/**\n*/\n")(backward-char 4)))
+                            (insert param-text)
+                            (indent-according-to-mode)
+                            (insert "\n* ")
+                            (indent-according-to-mode)))))))))
+          (widen)))
+    #+END_SRC
 *** ~phpunit~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/php-unit ()
-    ""
-    (interactive)
-    (let* ((pr (projectile-project-root))
-           (confdir (concat pr "/tests"))
-           (conf (concat confdir "/phpunit.xml"))
-           (wd default-directory))
-      (if (and (file-directory-p confdir) (file-exists-p conf))
-          (progn
-            (cd confdir)
-            (phpunit-run '())
-            (cd wd)))))
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (defun tom/php-unit ()
+        ""
+        (interactive)
+        (let* ((pr (projectile-project-root))
+               (confdir (concat pr "/tests"))
+               (conf (concat confdir "/phpunit.xml"))
+               (wd default-directory))
+          (if (and (file-directory-p confdir) (file-exists-p conf))
+              (progn
+                (cd confdir)
+                (phpunit-run '())
+                (cd wd)))))
+    #+END_SRC
+    
 *** ~psysh~
-#+BEGIN_SRC emacs-lisp
-  (defun tom/psysh ()
-    "Start or switch to a psysh specific to the current
+    #+BEGIN_SRC emacs-lisp
+      (defun tom/psysh ()
+        "Start or switch to a psysh specific to the current
             projectile project, or the global '*PsySh*' if not in a
             project"
-    (interactive)
-    (if (projectile-project-p)
-        (let* ((-project-root (projectile-project-root))
-               (-project (projectile-default-project-name -project-root))
-               (-buffer-name (concat "* " -project " psysh *")))
-          (ansi-term (concat -project-root "bin/shell.php") -buffer-name))
-      (psysh-run "*PsySh*" "psysh")))
+        (interactive)
+        (if (projectile-project-p)
+            (let* ((-project-root (projectile-project-root))
+                   (-project (projectile-default-project-name -project-root))
+                   (-buffer-name (concat "* " -project " psysh *")))
+              (ansi-term (concat -project-root "bin/shell.php") -buffer-name))
+          (psysh-run "*PsySh*" "psysh")))
 
-  (define-hook-helper psysh-mode () 
-    (progn (company-mode -1) (auto-complete-mode)))
-#+END_SRC
+      (define-hook-helper psysh-mode () 
+        (progn (company-mode -1) (auto-complete-mode)))
+    #+END_SRC
 ** C
 *** Indentation
-#+BEGIN_SRC emacs-lisp
-  (define-hook-helper c-mode ()
-    (setq tab-width 2
-          c-basic-offset 2
-          indent-tabs-mode nil))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (define-hook-helper c-mode ()
+        (setq tab-width 2
+              c-basic-offset 2
+              indent-tabs-mode nil))
+    #+END_SRC
 ** JavaScript
 *** Indentation etc
-#+BEGIN_SRC emacs-lisp
-  (if (tom/work?)
-      (setq js-indent-level 4
-            js2-basic-offset 4
-            js2-bounce-indent-p t)
-    (setq js-indent-level 2
-          js2-basic-offset 2
-          js2-bounce-indent-p t))
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (if (tom/work?)
+        (setq js-indent-level 4
+                js2-basic-offset 4
+              js2-bounce-indent-p t)
+      (setq js-indent-level 2
+              js2-basic-offset 2
+            js2-bounce-indent-p t))
+      (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+    #+END_SRC
 *** Completion
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
 
-  (define-hook-helper js2-mode ()
-    (progn
-      (ggtags-mode -1)
-      (repl-toggle-mode 1)
-      (yas-minor-mode 1)
-      (company-mode 1)
-      (make-local-variable 'company-transformers)
-      (push 'tom/company-transformer company-transformers)
-      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-      (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
-      (add-hook 'js2-mode-hook 'flycheck-mode)
-      (setq-local flycheck-checker 'lsp-js-ui)
-      (local-set-key
-       (kbd "H-j")
-       (defhydra hydra-js2-refactor (:color blue :timeout 5)
-         "Refactor javascript"
-         ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
-         ("rv" #'js2r-rename-var "rename variable")))
-      (local-set-key (kbd "C-c a") 'tom/edit-aql)))
-  (flycheck-define-generic-checker 'lsp-js-ui
-    "A syntax checker using the Language Server Protocol (RLS)
+      (define-hook-helper js2-mode ()
+        (progn
+          (ggtags-mode -1)
+          (repl-toggle-mode 1)
+          (yas-minor-mode 1)
+          (company-mode 1)
+          (make-local-variable 'company-transformers)
+          (push 'tom/company-transformer company-transformers)
+          (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+          (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+          (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
+          (add-hook 'js2-mode-hook 'flycheck-mode)
+          (setq-local flycheck-checker 'lsp-js-ui)
+          (local-set-key
+           (kbd "H-j")
+           (defhydra hydra-js2-refactor (:color blue :timeout 5)
+             "Refactor javascript"
+             ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
+             ("rv" #'js2r-rename-var "rename variable")))
+          (local-set-key (kbd "C-c a") 'tom/edit-aql)))
+      (flycheck-define-generic-checker 'lsp-js-ui
+        "A syntax checker using the Language Server Protocol (RLS)
     provided by lsp-mode.
     See https://github.com/emacs-lsp/lsp-mode."
-    :start #'lsp-ui-flycheck--start
-    :modes '(js2-mode) ; Need a default mode
-    :predicate (lambda () lsp-mode)
-    :error-explainer (lambda (e) (flycheck-error-message e)))
+        :start #'lsp-ui-flycheck--start
+        :modes '(js2-mode) ; Need a default mode
+        :predicate (lambda () lsp-mode)
+        :error-explainer (lambda (e) (flycheck-error-message e)))
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
-#+END_SRC
+    #+END_SRC
 *** Refectoring 
-#+BEGIN_SRC emacs-lisp
-  (require 'js2-refactor)
-  (js2r-add-keybindings-with-prefix "C-c C-m")
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
-
-
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (require 'js2-refactor)
+      (js2r-add-keybindings-with-prefix "C-c C-m")
+      (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    #+END_SRC
 *** Edit js in YAML-files
-#+BEGIN_SRC emacs-lisp
-  (defun tom/edit-js ()
-    "If point is between a `^ body: > ... \\(^ - name: \\)\\|\\(^ types:\\)'
-  block, create a narrowed, indirect buffer in `js2-mode' to edit the
-  function-body.  Press `C-c C-c' inside the buffer to close the window
-  and kill the indirect buffer."
-    (interactive)
-    (tom/edit-narrowed 'js2-mode ".js" "^        body: >" "\\(^      - name: \\)\\|\\(^    types:\\)"))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (defun tom/edit-js ()
+        "If point is between a `^ body: > ... \\(^ - name:
+         \\)\\|\\(^ types:\\)' block, create a narrowed, indirect
+         buffer in `js2-mode' to edit the function-body.  Press
+         `C-c C-c' inside the buffer to close the window and kill
+         the indirect buffer."
+        (interactive)
+        (tom/edit-narrowed 'js2-mode ".js" "^        body: >" "\\(^      - name: \\)\\|\\(^    types:\\)"))
+    #+END_SRC
 *** nodejs-repl 
-#+BEGIN_SRC emacs-lisp
-  (require 'nodejs-repl)
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (require 'nodejs-repl)
+    #+END_SRC
 *** `.aql` files 
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.aql" . js-mode))
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'auto-mode-alist '("\\.aql" . js-mode))
+    #+END_SRC
 ** YAML
 
-Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
-definitions as used in fb-core et.al.
+   Associate ~yaml-mode~ with formular (~.frm~) and table (~.tbl~)
+   definitions as used in fb-core et.al.
 
-#+BEGIN_SRC emacs-lisp
-  (require 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
-  (define-hook-helper yaml-mode ()
-    (progn
-      (setq tab-width 2
-            c-basic-offset 2
-            indent-tabs-mode nil)
-      (yas-minor-mode 1)
-      (aggressive-indent-mode -1)
-      (local-set-key (kbd "C-c a") 'tom/edit-js)))
-#+END_SRC
-
+   #+BEGIN_SRC emacs-lisp
+     (require 'yaml-mode)
+     (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+     (add-to-list 'auto-mode-alist '("\\.frm$" . yaml-mode))
+     (add-to-list 'auto-mode-alist '("\\.tbl$" . yaml-mode))
+     (define-hook-helper yaml-mode ()
+       (progn
+         (setq tab-width 2
+               c-basic-offset 2
+               indent-tabs-mode nil)
+         (yas-minor-mode 1)
+       (aggressive-indent-mode -1)
+       (local-set-key (kbd "C-c a") 'tom/edit-js)))
+   #+END_SRC
+   
 ** Groovy
+   
+   #+BEGIN_SRC emacs-lisp
+     ;;;  (require 'inf-groovy)
+     (add-to-list 'auto-mode-alist '("\\.gvy$" . groovy-mode))
+     (rtog/add-repl 'groovy-mode (rtog/switch-to-shell-buffer "*groovy*" 'run-groovy))
+   #+END_SRC
+   
+   #+BEGIN_SRC emacs-lisp
+     (define-hook-helper haskell-mode ()
+       (progn
+         (hindent-mode 1)
+       (aggressive-indent-mode -1)))
 
-#+BEGIN_SRC emacs-lisp
-;;;  (require 'inf-groovy)
-  (add-to-list 'auto-mode-alist '("\\.gvy$" . groovy-mode))
-  (rtog/add-repl 'groovy-mode (rtog/switch-to-shell-buffer "*groovy*" 'run-groovy))
-#+END_SRC
+     (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+       (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
+       (add-to-list 'exec-path my-cabal-path))
+     (custom-set-variables '(haskell-tags-on-save t))
+     (custom-set-variables
+      '(haskell-process-suggest-remove-import-lines t)
+      '(haskell-process-auto-import-loaded-modules t)
+      '(haskell-process-log t)
+      '(haskell-process-type 'cabal-repl)
+      '(hindent-style "gibiansky"))
 
-#+BEGIN_SRC emacs-lisp
-  (define-hook-helper haskell-mode ()
-    (progn
-      (hindent-mode 1)
-      (aggressive-indent-mode -1)))
-
-  (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-    (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
-    (add-to-list 'exec-path my-cabal-path))
-  (custom-set-variables '(haskell-tags-on-save t))
-  (custom-set-variables
-   '(haskell-process-suggest-remove-import-lines t)
-   '(haskell-process-auto-import-loaded-modules t)
-   '(haskell-process-log t)
-   '(haskell-process-type 'cabal-repl)
-   '(hindent-style "gibiansky"))
-
-  (eval-after-load 'haskell-mode
-    '(progn
-       (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-       (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-       (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
-       (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
-       (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
-       (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)))
-  (eval-after-load 'haskell-cabal
-    '(progn
-       (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-       (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-       (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-       (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
-#+END_SRC
-
+     (eval-after-load 'haskell-mode
+       '(progn
+          (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+          (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+          (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+          (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+          (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+          (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)))
+     (eval-after-load 'haskell-cabal
+       '(progn
+          (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+          (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+          (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+          (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
+   #+END_SRC
+   
 ** AQL
-#+BEGIN_SRC emacs-lisp
-  (require 'aql-mode)
-  (define-hook-helper aql-mode ()
-    (progn
-      (setq tab-width 2
-            c-basic-offset 2
-            indent-tabs-mode nil)
-      (yas-minor-mode 1)
-      (aggressive-indent-mode -1)))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'aql-mode)
+     (define-hook-helper aql-mode ()
+       (progn
+         (setq tab-width 2
+               c-basic-offset 2
+               indent-tabs-mode nil)
+         (yas-minor-mode 1)
+       (aggressive-indent-mode nil)))
+   #+END_SRC
 ** SQL
-#+BEGIN_SRC emacs-lisp
-  (require 'sql)
-  (define-hook-helper sql-mode ()
-    (progn
-      (setq tab-width 2
-            c-basic-offset 2
-            indent-tabs-mode nil)
-      (yas-minor-mode 1)
-      (aggressive-indent-mode nil)))
-#+END_SRC
-(sql-set-product "postgres")
-(define-hook-helper sql-mode ()
+   #+BEGIN_SRC emacs-lisp
+     (require 'sql)
+     (require 'sql-indent)
+     (sql-set-product "postgres")
+     (define-hook-helper sql-mode ()
+       (progn
+         (setq tab-width 2
+               c-basic-offset 2
+               indent-tabs-mode nil)
+         (yas-minor-mode 1)
+       (aggressive-indent-mode nil)
+       (sqlind-minor-mode 1)))
+   #+END_SRC
 * RESTful
 ** Extract json-field data
-#+BEGIN_SRC emacs-lisp
-  (defun tom/extract-json (name)
-    "Extract the field `NAME' from the restclient-result buffer (`*HTTP Response*'). 
-  Caution: This parses the hole buffer as json-data, so may be costly.
+   #+BEGIN_SRC emacs-lisp
+     (defun tom/extract-json (name)
+       "Extract the field `NAME' from the restclient-result
+        buffer (`*HTTP Response*').  Caution: This parses the
+        hole buffer as json-data, so may be costly.
 
-  `NAME' may be given as dotted path to address nested json-objects
-  "
-    (with-current-buffer "*HTTP Response*"
-      (let* ((json-object-type 'hash-table)
-             (json-array-type 'list)
-             (json-key-type 'string)
-             (names (split-string name "\\." t))
-             (result nil)
-             (data (json-read-from-string (buffer-string))))
-        (reduce #'(lambda (value key) "" (gethash key value)) names :initial-value data))))
-#+END_SRC
-
+        `NAME' may be given as dotted path to address nested json-objects"
+       (with-current-buffer "*HTTP Response*"
+         (let* ((json-object-type 'hash-table)
+                (json-array-type 'list)
+                (json-key-type 'string)
+                (names (split-string name "\\." t))
+                (result nil)
+                (data (json-read-from-string (buffer-string))))
+           (reduce #'(lambda (value key) "" (gethash key value)) names :initial-value data))))
+   #+END_SRC
+   
 ** Use ~outline-cycle~ in rest-buffers
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'outline
-    '(progn
-       (require 'outline-magic)
-       (define-key outline-minor-mode-map
-         (kbd "<C-tab>")
-         'outline-cycle)))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (eval-after-load 'outline
+       '(progn
+          (require 'outline-magic)
+          (define-key outline-minor-mode-map
+            (kbd "<C-tab>")
+            'outline-cycle)))
+   #+END_SRC
 * Databases
 ** ElasticSearch
 
-#+BEGIN_SRC emacs-lisp
-  (autoload 'es-mode "es-mode.el" "Major mode for editing Elasticsearch queries." t)
-  (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
-  (add-hook 'es-result-mode-hook 'hs-minor-mode)
-#+END_SRC
-
+   #+BEGIN_SRC emacs-lisp
+     (autoload 'es-mode "es-mode.el" "Major mode for editing Elasticsearch queries." t)
+     (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
+     (add-hook 'es-result-mode-hook 'hs-minor-mode)
+   #+END_SRC
+   
 * Slime
 
-#+BEGIN_SRC emacs-lisp
-  ;;;(load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
-#+END_SRC
-
+  #+BEGIN_SRC emacs-lisp
+    ;;;(load (expand-file-name "~/quicklisp/slime-helper.el"))
+    ;; Replace "sbcl" with the path to your implementation
+    (setq inferior-lisp-program "sbcl")
+  #+END_SRC
+  
 * Version control
 ** Magit 
  
 *** Magithub integration.
 
-#+BEGIN_SRC emacs-lisp
-  (setq magithub-feature-autoinject t)
-  (require 'magithub)
+    #+BEGIN_SRC emacs-lisp
+      (setq magithub-feature-autoinject t)
+      (require 'magithub)
 
-#+END_SRC
+    #+END_SRC
 *** Configuration
-#+BEGIN_SRC emacs-lisp
-  (require 'magit)
-  (setq magit-completing-read-function 'ivy-completing-read)
-#+END_SRC
-   
+    #+BEGIN_SRC emacs-lisp
+      (require 'magit)
+      (setq magit-completing-read-function 'ivy-completing-read)
+    #+END_SRC
+    
 *** Key bindings
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f7>") 'magit-status)
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "<f7>") 'magit-status)
+    #+END_SRC
+    
 *** Fullscreen
 
-#+BEGIN_SRC emacs-lisp
-(fullframe magit-status magit-mode-quit-window nil)
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (fullframe magit-status magit-mode-quit-window nil)
+    #+END_SRC
+    
 * Services
 ** =ssh= tunnel
 
-Manage ssh tunnel via prodigy.
+   Manage ssh tunnel via prodigy.
 
-#+BEGIN_SRC emacs-lisp
-(require 'prodigy)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'prodigy)
+   #+END_SRC
 *** Helper functions
 
 **** Build the argument list
 
-#+BEGIN_SRC emacs-lisp
-  (defun tom/build-tunnel-args (args)
-    "Assemble the ssh tunnel argument list."
-    `("-v" ;; allows us to parse for the ready message
-      "-N" ;; don't start an interactive shell remotely
-      "-L" ,(concat (getf args :localport) ;; the tunnel spec
-                    ":"
-                    (getf args :tunnel-ip)
-                    ":"
-                    (getf args :tunnel-port))
-      "-l" ,(getf args :user) ;; the username
-      "-p" ,(getf args :port) ;; the remote port
-      ,(getf args :host)))    ;; the remote host
-#+END_SRC
-
+     #+BEGIN_SRC emacs-lisp
+       (defun tom/build-tunnel-args (args)
+         "Assemble the ssh tunnel argument list."
+         `("-v" ;; allows us to parse for the ready message
+           "-N" ;; don't start an interactive shell remotely
+           "-L" ,(concat (getf args :localport) ;; the tunnel spec
+                         ":"
+                         (getf args :tunnel-ip)
+                         ":"
+                         (getf args :tunnel-port))
+           "-l" ,(getf args :user) ;; the username
+           "-p" ,(getf args :port) ;; the remote port
+           ,(getf args :host)))    ;; the remote host
+     #+END_SRC
+     
 *** Tunnel tag
 
-#+BEGIN_SRC emacs-lisp
-  (prodigy-define-tag
-    :name 'ssh-tunnel
-    :command "ssh"
-    :cwd (getenv "HOME")
-    :args (prodigy-callback (service)
-            (tom/build-tunnel-args
-             (getf service :tunnel)))
-    :ready-message "debug1: Entering interactive session.")
-#+END_SRC
-
+    #+BEGIN_SRC emacs-lisp
+      (prodigy-define-tag
+        :name 'ssh-tunnel
+        :command "ssh"
+        :cwd (getenv "HOME")
+        :args (prodigy-callback (service)
+                                (tom/build-tunnel-args
+                                 (getf service :tunnel)))
+        :ready-message "debug1: Entering interactive session.")
+    #+END_SRC
+    
 *** Tunnel services
 
-Tunnel definitions are held outside this config to protect the innocent...
+    Tunnel definitions are held outside this config to protect the innocent...
 
-#+BEGIN_SRC emacs-lisp
-(load-file "~/ownCloud/dotfiles/prodigy.el")
+    #+BEGIN_SRC emacs-lisp
+      (load-file "~/ownCloud/dotfiles/prodigy.el")
 
-#+END_SRC
+    #+END_SRC
 ** Work Services
-#+BEGIN_SRC emacs-lisp
-  (when (tom/work?)
-    (load-file "~/ownCloud/dotfiles/workservices.el"))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (when (tom/work?)
+       (load-file "~/ownCloud/dotfiles/workservices.el"))
+   #+END_SRC
 * Paste services
 ** ix.io
 
-#+BEGIN_SRC emacs-lisp
-  (let ((ix-io (netrc-machine (netrc-parse "~/.netrc") "ix-io")))
-    (setq ix-user (netrc-get ix-io "login"))
-    (setq ix-token (netrc-get ix-io "password")))
-#+END_SRC
-
+   #+BEGIN_SRC emacs-lisp
+     (let ((ix-io (netrc-machine (netrc-parse "~/.netrc") "ix-io")))
+       (setq ix-user (netrc-get ix-io "login"))
+       (setq ix-token (netrc-get ix-io "password")))
+   #+END_SRC
+   
 ** yagist
 
-#+BEGIN_SRC emacs-lisp
-  (let ((github (netrc-machine (netrc-parse "~/.netrc") "yagist")))
-    (setq yagist-github-token (netrc-get github "password")))
-#+END_SRC
-
+   #+BEGIN_SRC emacs-lisp
+     (let ((github (netrc-machine (netrc-parse "~/.netrc") "yagist")))
+       (setq yagist-github-token (netrc-get github "password")))
+   #+END_SRC
+   
 * Search 
 ** the silver searcher
 
- I use ag.el to interact with ag, a fine replacement for grep.
- Ignore all ignore-files :-)
+   I use ag.el to interact with ag, a fine replacement for grep.
+   Ignore all ignore-files :-)
 
-#+BEGIN_SRC emacs-lisp
-(setq ag-arguments (list "-U" "--numbers" "--smart-case" "--nogroup" "--column" "--stats" "--"))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (setq ag-arguments (list "-U" "--numbers" "--smart-case" "--nogroup" "--column" "--stats" "--"))
+   #+END_SRC
 
-Focus on the current window and the ag-result buffer.
+   Focus on the current window and the ag-result buffer.
 
-#+BEGIN_SRC emacs-lisp
-(fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (fullframe/split-screen ag quit-window "*ag search*" 'horizontal 't)
+   #+END_SRC
 
-Setup `wgrep-ag`.
+   Setup `wgrep-ag`.
 
-#+BEGIN_SRC emacs-lisp 
-  (autoload 'wgrep-ag-setup "wgrep-ag")
-  (add-hook 'ag-mode-hook 'wgrep-ag-setup)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp 
+     (autoload 'wgrep-ag-setup "wgrep-ag")
+     (add-hook 'ag-mode-hook 'wgrep-ag-setup)
+   #+END_SRC
 
-Delete the ~File:~ prefix appended by ~ag~ to the output, let `compile-find-file` work again.
+   Delete the ~File:~ prefix appended by ~ag~ to the output, let `compile-find-file` work again.
 
-#+BEGIN_SRC emacs-lisp
-  (define-advice compilation-find-file (:around (orig-fun &rest args) remove-file-prefix -100)
-    (let* ((to-find (car (cdr args)))
-           (newname (s-replace "File: " "" to-find)))
-      (setcar (cdr args) newname)
-      (apply orig-fun args)))
+   #+BEGIN_SRC emacs-lisp
+     (define-advice compilation-find-file (:around (orig-fun &rest args) remove-file-prefix -100)
+       (let* ((to-find (car (cdr args)))
+              (newname (s-replace "File: " "" to-find)))
+         (setcar (cdr args) newname)
+         (apply orig-fun args)))
 
-#+END_SRC
+   #+END_SRC
 * Passwords
 *** Basic setup
  #+BEGIN_SRC emacs-lisp
@@ -2828,17 +2827,17 @@ Do this after everything is setup.
 
 * Server
 ** httpd server
-#+BEGIN_SRC emacs-lisp
-  (setq httpd-port 8081)
-  (setq httpd-host "0.0.0.0")
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (setq httpd-port 8081)
+     (setq httpd-host "0.0.0.0")
+   #+END_SRC
 ** emacs server
-Always have an emacs server running.
+   Always have an emacs server running.
 
-#+BEGIN_SRC emacs-lisp
-(require 'server)
-(unless (server-running-p)
-  (org-reload) ; switch to newest org from melpa
-  (server-start))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (require 'server)
+     (unless (server-running-p)
+       (org-reload) ; switch to newest org from melpa
+       (server-start))
+   #+END_SRC
 
