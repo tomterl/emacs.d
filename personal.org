@@ -1849,11 +1849,6 @@ Indent using spaces, 2 spaces for each indentation step.
 (setq-default c-basic-offset 2)
 #+END_SRC
 
-Indent autimatically as aggressive as possible:
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'prog-mode-hook 'aggressive-indent-mode)
-#+END_SRC
 ** Flyspell: Change dictionary; key-bindings
 
 #+BEGIN_SRC emacs-lisp
@@ -2107,7 +2102,6 @@ enough context around point visible.
                      (min (+ (search-backward-regexp ,begin) (- (match-end 0) (match-beginning 0)))))
                  (narrow-to-region min max)))
              (funcall ,mode)
-           (aggressive-indent-mode nil)
              (font-lock-fontify-block)
              (if (functionp ,fun) (funcall ,fun))
              (local-set-key (kbd "C-c C-c") #'(lambda ()
@@ -2527,7 +2521,6 @@ enough context around point visible.
                c-basic-offset 2
                indent-tabs-mode nil)
          (yas-minor-mode 1)
-       (aggressive-indent-mode -1)
        (local-set-key (kbd "C-c a") 'tom/edit-js)))
    #+END_SRC
    
@@ -2543,7 +2536,6 @@ enough context around point visible.
      (define-hook-helper haskell-mode ()
        (progn
          (hindent-mode 1)
-       (aggressive-indent-mode -1)))
 
      (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
        (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
@@ -2581,7 +2573,6 @@ enough context around point visible.
                c-basic-offset 2
                indent-tabs-mode nil)
          (yas-minor-mode 1)
-       (aggressive-indent-mode nil)))
    #+END_SRC
 ** SQL
    #+BEGIN_SRC emacs-lisp
@@ -2594,7 +2585,6 @@ enough context around point visible.
                c-basic-offset 2
                indent-tabs-mode nil)
          (yas-minor-mode 1)
-       (aggressive-indent-mode nil)
        (sqlind-minor-mode 1)))
    #+END_SRC
 * RESTful

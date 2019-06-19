@@ -7,7 +7,6 @@
 (depends-on "ace-jump-buffer")
 (depends-on "ace-window")
 (depends-on "ag")
-(depends-on "aggressive-indent")
 (depends-on "alchemist")
 (depends-on "alect-themes")
 (depends-on "alert")
