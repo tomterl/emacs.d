@@ -300,6 +300,7 @@ static char *gnus-pointer[] = {
      (340 . "#2790C3")
      (360 . "#268bd2"))))
  '(vc-annotate-very-old-color nil)
+ '(warning-minimum-level :error)
  '(web-mode-script-padding 4)
  '(weechat-color-list
    (quote
