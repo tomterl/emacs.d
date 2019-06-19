@@ -302,6 +302,7 @@
 (depends-on "wgrep")
 (depends-on "wgrep-ag")
 (depends-on "which-key")
+(depends-on "which-key-posframe")
 (depends-on "window-jump")
 (depends-on "window-layout")
 (depends-on "with-editor")

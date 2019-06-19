@@ -2132,6 +2132,14 @@ enough context around point visible.
      (setq popup-imenu-force-position nil)
      (define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
    #+END_SRC
+** Which key?
+#+BEGIN_SRC emacs-lisp
+  (require 'which-key)
+  (require 'which-key-posframe)
+  (which-key-mode 1)
+  (which-key-posframe-mode 1)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner)
+#+END_SRC
 * Languages
 ** General
 *** completion
