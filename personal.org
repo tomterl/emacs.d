@@ -2044,26 +2044,49 @@ enough context around point visible.
 ** Multiple Major Modes
    #+BEGIN_SRC emacs-lisp
      (require 'polymode)
-(require 'aql-mode)
-     (define-hostmode poly-php-hostmode
-       :mode 'php-mode)
-     (define-innermode poly-php-aql-innermode
-       :mode 'aql-mode
-       :head-matcher "^[ \t]*protected static $source = <<<AQL\n"
-       :tail-matcher "^AQL;\n"
-       :head-mode 'fundamental-mode
-       :tail-mode 'fundamental-mode)
-     (define-innermode poly-php-sql-innermode
-       :mode 'sql-mode
-       :head-matcher "^[ \t]*protected static $source = ['\"](?\n"
-       :tail-matcher "['\"];\n"
-       :head-mode 'host
-       :tail-mode 'host)
-(define-polymode poly-php-mode
-  :hostmode 'poly-php-hostmode
-  :innermodes '(poly-php-aql-innermode
-                poly-php-sql-innermode))
+     (require 'aql-mode)
    #+END_SRC
+*** Languagues embedded in `php-mode`-buffers
+    #+BEGIN_SRC emacs-lisp
+      (define-hostmode poly-php-hostmode
+        :mode 'php-mode)
+       
+      (define-innermode poly-php-aql-innermode
+        :mode 'aql-mode
+        :head-matcher "^[ \t]*protected static $source = <<<AQL\n"
+        :tail-matcher "^AQL;\n"
+        :head-mode 'fundamental-mode
+        :tail-mode 'fundamental-mode)
+       
+      (define-innermode poly-php-sql-innermode
+        :mode 'sql-mode
+        :head-matcher "^[ \t]*protected static $source = ['\"](?\n"
+        :tail-matcher "^.*)?['\"];\n"
+        :head-mode 'host
+        :tail-mode 'host)
+       
+      (define-polymode poly-php-mode
+        :hostmode 'poly-php-hostmode
+        :innermodes '(poly-php-aql-innermode
+                      poly-php-sql-innermode))
+    #+END_SRC
+*** Languages embedded in `js2-mode`-buffers
+    #+BEGIN_SRC emacs-lisp
+      (define-hostmode poly-js2-hostmode
+        :mode 'js2-mode)
+       
+      (define-innermode poly-js2-aql-innermode
+        :mode 'aql-mode
+        :head-matcher "aql`"
+        :tail-matcher "`"
+        :head-mode 'fundamental-mode
+        :tail-mode 'fundamental-mode)
+       
+      (define-polymode poly-js2-mode
+        :hostmode 'poly-js2-hostmode
+        :innermodes '(poly-js2-aql-innermode))
+    
+    #+END_SRC
 *** Edit in different mode in narrowed buffer
     #+BEGIN_SRC emacs-lisp
       (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
