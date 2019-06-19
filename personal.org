@@ -2535,7 +2535,7 @@ enough context around point visible.
    #+BEGIN_SRC emacs-lisp
      (define-hook-helper haskell-mode ()
        (progn
-         (hindent-mode 1)
+         (hindent-mode 1)))
 
      (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
        (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
@@ -2572,7 +2572,7 @@ enough context around point visible.
          (setq tab-width 2
                c-basic-offset 2
                indent-tabs-mode nil)
-         (yas-minor-mode 1)
+         (yas-minor-mode 1)))
    #+END_SRC
 ** SQL
    #+BEGIN_SRC emacs-lisp
