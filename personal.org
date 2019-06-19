@@ -2467,7 +2467,8 @@ enough context around point visible.
              "Refactor javascript"
              ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
              ("rv" #'js2r-rename-var "rename variable")))
-          (local-set-key (kbd "C-c a") 'tom/edit-aql)))
+          (local-set-key (kbd "C-c a") 'tom/edit-aql)
+          (poly-js2-mode 1)))
       (flycheck-define-generic-checker 'lsp-js-ui
         "A syntax checker using the Language Server Protocol (RLS)
     provided by lsp-mode.
