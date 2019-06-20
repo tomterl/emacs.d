@@ -87,6 +87,7 @@
 (depends-on "elixir-mode")
 (depends-on "elixir-yasnippets")
 (depends-on "elnode")
+(depends-on "engine-mode")
 (depends-on "epc")
 (depends-on "epl")
 (depends-on "epresent")
