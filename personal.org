@@ -2322,6 +2322,7 @@ enough context around point visible.
 **** dap
      #+BEGIN_SRC emacs-lisp
        (require 'dap-php)
+       (dap-php-setup)
        (setq dap-auto-show-output nil)
        (setq dap-inhibit-io nil)
        (define-key php-mode-map (kbd "H-d") 'dap-hydra)
