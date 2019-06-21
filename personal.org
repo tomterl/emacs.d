@@ -2297,6 +2297,8 @@ enough context around point visible.
     Use ~web-mode~ for smarty templates.
 
     #+BEGIN_SRC emacs-lisp
+      (setq web-mode-engines-alist
+            '(("smarty"    . "\\.tpl$")))
       (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
     #+END_SRC
     
