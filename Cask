@@ -226,6 +226,7 @@
 (depends-on "phpcbf")
 (depends-on "phpunit")
 (depends-on "pkg-info")
+(depends-on "plantuml-mode")
 (depends-on "poly-org")
 (depends-on "polymode")
 (depends-on "popup")

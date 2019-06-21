@@ -1256,13 +1256,19 @@ The languages I like to use.
    '((emacs-lisp . t)  (shell . t)
      (ditaa . t) (sass . t)
      (lisp . t) (gnuplot . t)
-     (http . t)))
+     (http . t) (plantuml .t)))
 #+END_SRC 
-
 The =ditaa.jar= location;
 
 #+BEGIN_SRC emacs-lisp
   (setq org-ditaa-jar-path  (concat tom/--emacs-dir "/site/ditaa.jar"))
+#+END_SRC
+
+The =plantuml.jar= location
+
+#+BEGIN_SRC emacs-lisp
+  (require 'plantuml-mode)
+  (setq org-plantuml-jar-path (concat tom/--emacs-dir "/site/plantuml.jar"))
 #+END_SRC
 
 I really like org-babel to use zsh
