@@ -1,0 +1,10 @@
+
+' MunichRE Logo
+sprite $munichre [32x32/16z] {
+hT873iCW30LGRqRlVzys2PZbQFP9QB3v6FwAqaBsuVnPs3uk5tO809mtYM36TPTmdT2eOwG7mc3b9E2al8oZXjWNVaArxqqQ4uIEKo3_6iE5IWtrCzXUA5sh
+pT8Bylj7Mix8p19XZnSjbv1u-BLiwaNXXoxdvXVq_o-h18xBAHCCsB5Av_NdmfmL5fpB9Jkvy-rKxIBeWdohmOfi8GX_zGK
+}
+' Franke & Bornberg Logo (Double vertical bar)
+sprite $fundb [32x32/16z] {
+       xPAr0O0040E9xJyosk9krxv_KkmD9M8u3DdcIDp9CN6Gn4YyMsmi7klfyJykUopUsMGuFipsk4VY0ujjfW8
+}
