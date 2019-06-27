@@ -2088,37 +2088,24 @@ enough context around point visible.
         :innermodes '(poly-js2-aql-innermode))
     
     #+END_SRC
-*** Edit in different mode in narrowed buffer
+*** Languages embedded in `yaml-mode`-buffers
     #+BEGIN_SRC emacs-lisp
-      (defmacro tom/edit-narrowed (mode mark begin end &optional fun)
-        "If point is inside a `begin...end' block, create a narrowed,
-    indirect buffer in `mode' to edit the contents between those
-    markers. 
-
-    Press `C-c C-c' inside the buffer to close the window
-    and kill the indirect buffer.
-
-    `mark' is used in the construction of the name for the indirect buffer.
-
-    If `fun' is given, it is called with the narrowed buffer as current buffer."
-        `(let ((bufname (concat " *"(buffer-name) "." ,mark  "*")))
-           (with-current-buffer (if (get-buffer bufname) bufname (clone-indirect-buffer bufname nil))
-             (unless (buffer-narrowed-p)
-               (let ((max (- (search-forward-regexp ,end) (- (match-end 0) (match-beginning 0))))
-                     (min (+ (search-backward-regexp ,begin) (- (match-end 0) (match-beginning 0)))))
-                 (narrow-to-region min max)))
-             (funcall ,mode)
-             (font-lock-fontify-block)
-             (if (functionp ,fun) (funcall ,fun))
-             (local-set-key (kbd "C-c C-c") #'(lambda ()
-                                                (interactive)
-                                                (progn
-                                                  (kill-this-buffer)
-                                                  (delete-window (selected-window))
-                                                  (mmm-parse-buffer))))
-             (pop-to-buffer bufname))))
-
+      (define-hostmode poly-yaml-hostmode
+        :mode 'yaml-mode)
+       
+      (define-innermode poly-yaml-js-innermode
+        :mode 'js-mode
+        :head-matcher "body: >"
+        :tail-matcher "^ *\\(- \\)?[a-z_-]+:"
+        :head-mode 'fundamental-mode
+        :tail-mode 'fundamental-mode)
+       
+      (define-polymode poly-yaml-mode
+        :hostmode 'poly-yaml-hostmode
+        :innermodes '(poly-yaml-js-innermode))
+    
     #+END_SRC
+    
 ** Help
    #+BEGIN_SRC emacs-lisp
      (global-set-key
@@ -2579,6 +2566,7 @@ enough context around point visible.
                c-basic-offset 2
                indent-tabs-mode nil)
          (yas-minor-mode 1)
+         (poly-yaml-mode 1)
        (local-set-key (kbd "C-c a") 'tom/edit-js)))
    #+END_SRC
    
