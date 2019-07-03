@@ -2054,7 +2054,7 @@ enough context around point visible.
        
       (define-innermode poly-php-aql-innermode
         :mode 'aql-mode
-        :head-matcher "^[ \t]*protected static $source = <<<AQL\n"
+        :head-matcher "^[ \t]*protected static $source = <<<'?AQL'?\n"
         :tail-matcher "^AQL;\n"
         :head-mode 'fundamental-mode
         :tail-mode 'fundamental-mode)
