@@ -8,5 +8,6 @@
  * Date: `(format-time-string "%d.%m.%Y")`
  * Time: `(format-time-string "%H:%M")`
  */
+declare(strict_types=1);
 
 $0
