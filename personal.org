@@ -567,31 +567,6 @@ Inspired/copied from endless parentheses blog
       (set-window-dedicated-p curr-win t)))
 #+END_SRC
 
-** Projects
-I use ~projectile~ to manage my projects.
-
-#+BEGIN_SRC emacs-lisp
-(require 'projectile)
-(projectile-global-mode)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-#+END_SRC
-*** Completion
-
-Use ivy/counsel for Completion
-#+BEGIN_SRC emacs-lisp
-(counsel-projectile-mode 1)
-(setq projectile-completion-system 'ivy)
-#+END_SRC
-*** keep project todos in org-mode file(s)
-#+BEGIN_SRC emacs-lisp
-  (require 'org-projectile)
-  (setq org-projectile-projects-file
-        (concat tom/--emacs-dir "/projects_todos.org"))
-  (push (org-projectile-project-todo-entry) org-capture-templates)
-  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
-#+END_SRC
 ** perspectives
 #+BEGIN_SRC emacs-lisp
   (defvar tom/workspaces-last-persp nil
@@ -894,7 +869,14 @@ Fasten seat belts, we enter hyper space...
 (add-hook 'after-save-hook 'gtags-update-hook)
 #+END_SRC
 * Projects
-** projectile
+
+I use ~projectile~ to manage my projects.
+
+#+BEGIN_SRC emacs-lisp
+(require 'projectile)
+(projectile-global-mode)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+#+END_SRC
 
 Use projectile automatically.
 
@@ -933,16 +915,37 @@ Marking the root of a project are only
     (setq projectile-enable-caching t)
 
 #+END_SRC
-*** Perspectives
+** Perspectives
 #+BEGIN_SRC emacs-lisp
 (when (not (fboundp 'make-variable-frame-local))
   (defun make-variable-frame-local (variable) variable))
 (persp-mode)
 #+END_SRC
-*** Keys
+** Keys
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-p") 'projectile-commander)
 
+#+END_SRC
+
+** Completion
+
+Use ivy/counsel for Completion
+#+BEGIN_SRC emacs-lisp
+(counsel-projectile-mode 1)
+(setq projectile-completion-system 'ivy)
+#+END_SRC
+** keep project todos in org-mode file(s)
+#+BEGIN_SRC emacs-lisp
+  (require 'org-projectile)
+  (setq org-projectile-projects-file
+        (concat tom/--emacs-dir "/projects_todos.org"))
+  (add-to-list 'org-capture-templates
+               (org-projectile-project-todo-entry
+                :capture-character "t"))
+              
+  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+  (global-set-key (kbd "C-c o") 'org-capture)
+  (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
 #+END_SRC
 
 * Appearance
