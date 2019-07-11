@@ -1002,6 +1002,23 @@ Use ivy/counsel for Completion
     (menu-bar-mode -1))
 #+END_SRC
 
+** Tabs
+   #+BEGIN_SRC emacs-lisp
+     (require 'centaur-tabs)
+     (setq centaur-tabs-style "wave")
+     (setq centaur-tabs-set-icons t)
+     (setq centaur-tabs-set-bar 'over)
+     (centaur-tabs-headline-match)
+     (setq centaur-tabs-set-modified-marker t)
+     (centaur-tabs-mode t)
+     (global-set-key (kbd "H-j")  'centaur-tabs-backward)
+     (global-set-key (kbd "H-k") 'centaur-tabs-forward)
+     (add-hook 'eshell-mode-hook 'centaur-tabs-local-mode)
+   #+END_SRC
+
+   #+RESULTS:
+   : centaur-tabs-forward
+
 ** Color Theme
    :PROPERTIES:
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
