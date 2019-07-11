@@ -1005,9 +1005,10 @@ Use ivy/counsel for Completion
 ** Tabs
    #+BEGIN_SRC emacs-lisp
      (require 'centaur-tabs)
-     (setq centaur-tabs-style "wave")
+     (setq centaur-tabs-style "bar")
      (setq centaur-tabs-set-icons t)
-     (setq centaur-tabs-set-bar 'over)
+     (setq centaur-tabs-set-bar 'left)
+     (centaur-tabs-inherit-tabbar-faces)
      (centaur-tabs-headline-match)
      (setq centaur-tabs-set-modified-marker t)
      (centaur-tabs-mode t)
@@ -2077,8 +2078,8 @@ enough context around point visible.
         :mode 'aql-mode
         :head-matcher "^[ \t]*protected static $source = <<<'?AQL'?\n"
         :tail-matcher "^AQL;\n"
-        :head-mode 'fundamental-mode
-        :tail-mode 'fundamental-mode)
+        :head-mode 'host
+        :tail-mode 'host)
        
       (define-innermode poly-php-sql-innermode
         :mode 'sql-mode
@@ -2101,8 +2102,8 @@ enough context around point visible.
         :mode 'aql-mode
         :head-matcher "aql`"
         :tail-matcher "`"
-        :head-mode 'fundamental-mode
-        :tail-mode 'fundamental-mode)
+        :head-mode 'host
+        :tail-mode 'host)
        
       (define-polymode poly-js2-mode
         :hostmode 'poly-js2-hostmode
@@ -2118,8 +2119,8 @@ enough context around point visible.
         :mode 'js-mode
         :head-matcher "body: >"
         :tail-matcher "^ *\\(- \\)?[a-z_-]+:"
-        :head-mode 'fundamental-mode
-        :tail-mode 'fundamental-mode)
+        :head-mode 'host
+        :tail-mode 'host)
        
       (define-polymode poly-yaml-mode
         :hostmode 'poly-yaml-hostmode
