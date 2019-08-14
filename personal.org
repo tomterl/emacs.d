@@ -1006,13 +1006,13 @@ Use ivy/counsel for Completion
    :PROPERTIES:
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
-#+BEGIN_SRC emacs-lisp
-  (load-theme 'doom-city-lights t)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (load-theme 'kaolin-dark t)
+   #+END_SRC
 
 *** Adapt company-mode
-#+BEGIN_SRC emacs-lisp
-  (require 'color)
+    #+BEGIN_SRC emacs-lisp
+      (require 'color)
 
   (let ((bg (face-attribute 'default :background))
         (fg (face-attribute 'default :foreground)))
