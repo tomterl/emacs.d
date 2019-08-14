@@ -30,7 +30,6 @@
 (depends-on "cargo")
 (depends-on "cask")
 (depends-on "caskxy")
-(depends-on "centaur-tabs")
 (depends-on "centered-cursor-mode")
 (depends-on "chyla-theme")
 (depends-on "circe")
