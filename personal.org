@@ -2365,7 +2365,15 @@ enough context around point visible.
        (setq dap-auto-show-output nil)
        (setq dap-inhibit-io nil)
        (define-key php-mode-map (kbd "H-d") 'dap-hydra)
- 
+       (dap-register-debug-template "Php SOE"
+                             (list :type "php"
+                                   :cwd nil
+                                   :request "launch"
+                                   :name "Php SOE Debug"
+                                   :stopOnEntry t
+                                   :args '("--server=4711")
+                                   :sourceMaps t
+                                   ))
      #+END_SRC
 **** geben
      Geben has a new maintainer, it has some issues, but is overall working sufficiently well.
