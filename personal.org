@@ -799,21 +799,22 @@ code traversal and (additional) completion.
 
 ** Configure ~company-mode~
 
-Use ~company-mode~ globally.
+   Use ~company-mode~ globally.
 
-I live in a case sensitive world, so don't alter the case of
-completions, but provide completions without regard for the case fo
-the stuff I entered.
+   I live in a case sensitive world, so don't alter the case of
+   completions, but provide completions without regard for the case fo
+   the stuff I entered.
 
-#+BEGIN_SRC emacs-lisp
-                                          ;(global-auto-complete-mode -1)
-  (require 'company)
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-dabbrev-downcase nil
-        company-dabbrev-ignore-case t)
-  (eval-after-load 'company
-    '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     ;(global-auto-complete-mode -1)
+     (require 'company)
+     (add-hook 'after-init-hook 'global-company-mode)
+     (setq company-dabbrev-downcase nil
+           company-dabbrev-ignore-case t)
+     (eval-after-load 'company
+       '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
+   #+END_SRC
+
 *** Key bindings
 
 Fasten seat belts, we enter hyper space...
@@ -827,6 +828,7 @@ Fasten seat belts, we enter hyper space...
   (require 'company-box)
   (add-hook 'company-mode-hook 'company-box-mode)
 #+END_SRC
+
 ** GNU global
 
 #+BEGIN_SRC emacs-lisp
@@ -868,6 +870,7 @@ Fasten seat belts, we enter hyper space...
 
 (add-hook 'after-save-hook 'gtags-update-hook)
 #+END_SRC
+
 * Projects
 
 I use ~projectile~ to manage my projects.
@@ -951,7 +954,7 @@ Use ivy/counsel for Completion
 * Appearance
 ** Font
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (defvar tom/default-font "Courier Prime Code-9"
     "The font to use under normal circumstances")
   (unless (tom/work?)
@@ -969,6 +972,7 @@ Use ivy/counsel for Completion
   (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
   (require 'icons-in-terminal)
 #+END_SRC
+
 ** Fontlock et.al.
    :PROPERTIES:
    :ID:       7edcd500-dcee-4484-9f44-9a65a3f29c71
@@ -1022,7 +1026,7 @@ Use ivy/counsel for Completion
      `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 2)))))
      `(company-tooltip-selection ((t (:inherit default :foreground ,(color-lighten-name bg 12) :background ,(color-lighten-name fg 20)))))
      `(company-tooltip-common ((t (:inherit default :background ,(color-lighten-name bg 12) :foreground ,(color-lighten-name fg 20)))))))
-#+END_SRC
+    #+END_SRC
 ** TreeView
 
 *** Show nice(?) icons
@@ -1178,6 +1182,11 @@ Allways find the cursor.
 #+BEGIN_SRC emacs-lisp
   (require 'beacon)
   (beacon-mode 1)
+#+END_SRC
+** Alert notifications
+#+BEGIN_SRC emacs-lisp
+  (require 'alert)
+  (setq alert-default-style 'libnotify)
 #+END_SRC
 * org-mode
 ** Variables
@@ -2199,9 +2208,12 @@ enough context around point visible.
       (require 'lsp-clients)
       (require 'lsp-ui)
       (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
+      (require 'lsp-origami)
       (setq lsp-prefer-flymake nil)
+      (setq lsp-auto-guess-root 't)
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
       (add-hook 'prog-mode-hook 'lsp)
+      (add-hook 'origami-mode-hook #'lsp-origami-mode)
     #+END_SRC
 *** Flycheck Hydra
     #+BEGIN_SRC emacs-lisp
@@ -2323,6 +2335,7 @@ enough context around point visible.
           (repl-toggle-mode 1)
           (yas-minor-mode 1)
           (company-mode 1)
+          (modify-syntax-entry ?$ "_")
           (make-local-variable 'company-transformers)
           (push 'tom/company-transformer company-transformers)
                                         ;(company-mode 1)
@@ -2358,49 +2371,25 @@ enough context around point visible.
         :next-checkers '((warning . php)))
     #+END_SRC
 *** Remote debugging
-**** dap
+
+    dap is the way to go...
+
      #+BEGIN_SRC emacs-lisp
        (require 'dap-php)
        (dap-php-setup)
+       (dap-tooltip-mode 1)
+       (tooltip-mode 1)
        (setq dap-auto-show-output nil)
        (setq dap-inhibit-io nil)
        (define-key php-mode-map (kbd "H-d") 'dap-hydra)
-       (dap-register-debug-template "Php SOE"
+       (dap-register-debug-template "Php Stop On Entry"
                              (list :type "php"
                                    :cwd nil
                                    :request "launch"
                                    :name "Php SOE Debug"
                                    :stopOnEntry t
-                                   :args '("--server=4711")
                                    :sourceMaps t
                                    ))
-     #+END_SRC
-**** geben
-     Geben has a new maintainer, it has some issues, but is overall working sufficiently well.
-
-     #+BEGIN_SRC emacs-lisp
-       (setq geben-dbgp-default-port 9000)
-       (setq geben-display-window-function 'switch-to-buffer)
-       (setq geben-full-frame-mode t)
-     #+END_SRC
-     
-     Reroute remote paths to my dev-server and the vagrant user via tramp.
-
-     #+BEGIN_SRC emacs-lisp
-       (defun tom/geben-tramp-spec (remote-path)
-         ""
-         (print "/sshx:vagrant@192.168.254.254:"))
-       (fset 'geben-get-tramp-spec-for 'tom/geben-tramp-spec)
-     #+END_SRC
-     
-     Make the context window sticky
-     #+BEGIN_SRC emacs-lisp
-       (setq tom/geben-context-buffer-name "*GEBEN<127.0.0.1:9000> context*")
-       (defadvice geben-display-context (after sticky-geben-context-window activate)
-         (tom/sticky-window tom/geben-context-buffer-name))
-       (defadvice geben-display-context (before sticky-geben-context-window activate)
-         (unless (buffer-live-p (get-buffer tom/geben-context-buffer-name))
-           (split-window-right)))
      #+END_SRC
 *** Check/correct @param tags
     Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
@@ -2673,6 +2662,7 @@ enough context around point visible.
             (kbd "<C-tab>")
             'outline-cycle)))
    #+END_SRC
+
 * Databases
 ** ElasticSearch
 
@@ -2820,6 +2810,7 @@ enough context around point visible.
          (apply orig-fun args)))
 
    #+END_SRC
+
 * Passwords
 *** Basic setup
  #+BEGIN_SRC emacs-lisp

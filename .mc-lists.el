@@ -7,6 +7,7 @@
         c-electric-paren
         delete-indentation
         insert-semicolon-at-end-of-line
+        mc/keyboard-quit
         org-self-insert-command
         self-insert-command
         smex
@@ -20,6 +21,7 @@
         hydra-js2-refactor/js2r-rename-var-and-exit
         ido-switch-buffer
         js2-indent-bounce
+        previous-line
         tom/mcdwim
         yas-expand
         ))

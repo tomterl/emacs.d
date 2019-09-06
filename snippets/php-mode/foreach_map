@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: forEach Map
-# key: for
+# key: form
 # --
 foreach(${1:\$iterator} as ${2:\$key} => ${3:\$value}) {
     $0
