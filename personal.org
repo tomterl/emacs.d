@@ -13,7 +13,7 @@ Lambda as λ
        (interactive)
        ,@body))
 
-  (global-set-key (kbd "H-l") (λ (insert "\u03bb")))
+  (global-set-key (kbd "C-M-l") (λ (insert "\u03bb")))
 #+END_SRC
 
 * Initial Setup
@@ -1870,17 +1870,33 @@ Indent using spaces, 2 spaces for each indentation step.
 
 ** Flyspell: Change dictionary; key-bindings
 
-#+BEGIN_SRC emacs-lisp
-  (defun fd-switch-dictionary()
-    (interactive)
-    (let* ((dic ispell-current-dictionary)
-           (change (if (string= dic "deutsch") "english" "deutsch")))
-      (ispell-change-dictionary change)
-      (message "Dictionary switched from %s to %s" dic change)
-      ))
-  
-  (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
-#+END_SRC 
+    #+BEGIN_SRC emacs-lisp
+      (flyspell-abbrev-p t)
+      (flyspell-issue-message-flag nil)
+      (flyspell-issue-welcome-flag nil)
+      (require 'flyspell-correct-ivy)
+      (setq lyspell-correct-interface 'flyspell-correct-ivy)
+      (global-set-key
+       (kbd "H-s")
+       (defhydra hydra-spelling (:color blue)
+        "
+  ^
+  ^Spelling^          ^Errors^            ^Checker^
+  ^────────^──────────^──────^────────────^───────^───────
+  _q_ quit            _<_ previous        _c_ correction
+  ^^                  _>_ next            _d_ dictionary
+  ^^                  _f_ check           _m_ mode
+  ^^                  ^^                  ^^
+  "
+        ("q" nil)
+        ("<" flyspell-correct-previous :color pink)
+        (">" flyspell-correct-next :color pink)
+        ("c" ispell)
+        ("d" ispell-change-dictionary)
+        ("f" flyspell-buffer)
+        ("m" flyspell-mode)))
+
+    #+END_SRC 
 
 ** Multiple Cursors
 
@@ -2214,6 +2230,34 @@ enough context around point visible.
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
       (add-hook 'prog-mode-hook 'lsp)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key
+       (kbd "H-l")
+       (defhydra hydra-lsp (:exit t :hint nil)
+         "
+ Buffer^^               Server^^                   Symbol
+-------------------------------------------------------------------------------------
+ [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+ [_m_] imenu            [_S_]   shutdown           [_D_] definition   [_t_] type            [_r_] rename
+ [_x_] execute action   [_M-s_] describe session   [_R_] references   [_s_] signature"
+         ("d" lsp-find-declaration)
+         ("D" lsp-ui-peek-find-definitions)
+         ("R" lsp-ui-peek-find-references)
+         ("i" lsp-ui-peek-find-implementation)
+         ("t" lsp-find-type-definition)
+         ("s" lsp-signature-help)
+         ("o" lsp-describe-thing-at-point)
+         ("r" lsp-rename)
+
+         ("f" lsp-format-buffer)
+         ("m" lsp-ui-imenu)
+         ("x" lsp-execute-code-action)
+
+         ("M-s" lsp-describe-session)
+         ("M-r" lsp-restart-workspace)
+         ("S" lsp-shutdown-workspace)))
     #+END_SRC
 *** Flycheck Hydra
     #+BEGIN_SRC emacs-lisp

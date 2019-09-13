@@ -112,6 +112,7 @@
 (depends-on "flymake-elixir")
 (depends-on "flymake-yaml")
 (depends-on "flyspell-correct")
+(depends-on "flyspell-correct-ivy")
 (depends-on "focus")
 (depends-on "fountain-mode")
 (depends-on "frame-local")
