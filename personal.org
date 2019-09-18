@@ -248,6 +248,7 @@ Stuff looted from graphene.
 ** env
 #+BEGIN_SRC emacs-lisp
   (require 'ivy)
+  (require 'all-the-icons)
   (require 'all-the-icons-ivy)
   (require 'swiper)
   (require 'counsel)
@@ -2204,13 +2205,6 @@ enough context around point visible.
 #+END_SRC
 * Languages
 ** General
-*** completion
-    #+BEGIN_SRC emacs-lisp
-      (require 'company-lsp)
-      (defun tom/company-transformer (candidates)
-        (let ((completion-ignore-case t))
-          (all-completions (company-grab-symbol) candidates)))
-    #+END_SRC
 *** line numbers
     #+BEGIN_SRC emacs-lisp
       (require 'linum-relative)
@@ -2220,18 +2214,28 @@ enough context around point visible.
     #+END_SRC
 *** lsp initialization
     #+BEGIN_SRC emacs-lisp
+      (setq lsp-enable-file-watchers nil)
+      (setq lsp-prefer-flymake nil)
+      (setq lsp-auto-guess-root 't)
       (require 'lsp)
       (require 'lsp-clients)
       (require 'lsp-ui)
       (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
+      (require 'origami)
       (require 'lsp-origami)
-      (setq lsp-prefer-flymake nil)
-      (setq lsp-auto-guess-root 't)
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-      (add-hook 'prog-mode-hook 'lsp)
+      (add-hook 'prog-mode-hook #'lsp)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
     #+END_SRC
 
+**** completion
+    #+BEGIN_SRC emacs-lisp
+      (require 'company-lsp)
+      (defun tom/company-transformer (candidates)
+        (let ((completion-ignore-case t))
+          (all-completions (company-grab-symbol) candidates)))
+    #+END_SRC
+**** hydra
     #+BEGIN_SRC emacs-lisp
       (global-set-key
        (kbd "H-l")
@@ -2371,6 +2375,16 @@ enough context around point visible.
         (save-excursion
           (delete-trailing-whitespace)))
 
+      (flycheck-define-generic-checker 'lsp-php-ui
+        "A syntax checker using the Language Server Protocol (RLS)
+      provided by lsp-mode.
+      See https://github.com/emacs-lsp/lsp-mode."
+        :start #'lsp-ui-flycheck--start
+        :modes '(php-mode) ; Need a default mode
+        :predicate (lambda () lsp-mode)
+        :error-explainer (lambda (e) (flycheck-error-message e))
+        :next-checkers '((warning . php)))
+
       (define-hook-helper php-mode ()
         (progn 
                                         ;(require 'company-php)
@@ -2379,6 +2393,7 @@ enough context around point visible.
           (repl-toggle-mode 1)
           (yas-minor-mode 1)
           (company-mode 1)
+          (lsp)
           (modify-syntax-entry ?$ "_")
           (make-local-variable 'company-transformers)
           (push 'tom/company-transformer company-transformers)
@@ -2404,15 +2419,6 @@ enough context around point visible.
       (add-hook 'php-mode-hook 'flycheck-mode)
 
 
-      (flycheck-define-generic-checker 'lsp-php-ui
-        "A syntax checker using the Language Server Protocol (RLS)
-      provided by lsp-mode.
-      See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp-ui-flycheck--start
-        :modes '(php-mode) ; Need a default mode
-        :predicate (lambda () lsp-mode)
-        :error-explainer (lambda (e) (flycheck-error-message e))
-        :next-checkers '((warning . php)))
     #+END_SRC
 *** Remote debugging
 
@@ -2537,6 +2543,14 @@ enough context around point visible.
     #+BEGIN_SRC emacs-lisp
       (add-to-list 'load-path "/usr/lib/node_modules/tern/emacs")
 
+      (flycheck-define-generic-checker 'lsp-js-ui
+        "A syntax checker using the Language Server Protocol (RLS)
+    provided by lsp-mode.
+    See https://github.com/emacs-lsp/lsp-mode."
+        :start #'lsp-ui-flycheck--start
+        :modes '(js2-mode) ; Need a default mode
+        :predicate (lambda () lsp-mode)
+        :error-explainer (lambda (e) (flycheck-error-message e)))
       (define-hook-helper js2-mode ()
         (progn
           (ggtags-mode -1)
@@ -2558,14 +2572,6 @@ enough context around point visible.
              ("rv" #'js2r-rename-var "rename variable")))
           (local-set-key (kbd "C-c a") 'tom/edit-aql)
           (poly-js2-mode 1)))
-      (flycheck-define-generic-checker 'lsp-js-ui
-        "A syntax checker using the Language Server Protocol (RLS)
-    provided by lsp-mode.
-    See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp-ui-flycheck--start
-        :modes '(js2-mode) ; Need a default mode
-        :predicate (lambda () lsp-mode)
-        :error-explainer (lambda (e) (flycheck-error-message e)))
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
@@ -2922,6 +2928,7 @@ Do this after everything is setup.
      (require 'server)
      (unless (server-running-p)
        (org-reload) ; switch to newest org from melpa
-       (server-start))
+       (server-start)
+       (message "Server started."))
    #+END_SRC
 

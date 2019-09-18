@@ -10,6 +10,7 @@
 (depends-on "alchemist")
 (depends-on "alect-themes")
 (depends-on "alert")
+(depends-on "all-the-icons")
 (depends-on "all-the-icons-ivy")
 (depends-on "ample-theme")
 (depends-on "ansi")
