@@ -1871,9 +1871,9 @@ Indent using spaces, 2 spaces for each indentation step.
 ** Flyspell: Change dictionary; key-bindings
 
     #+BEGIN_SRC emacs-lisp
-      (flyspell-abbrev-p t)
-      (flyspell-issue-message-flag nil)
-      (flyspell-issue-welcome-flag nil)
+      (setq flyspell-abbrev-p t
+      flyspell-issue-message-flag nil
+      flyspell-issue-welcome-flag nil)
       (require 'flyspell-correct-ivy)
       (setq lyspell-correct-interface 'flyspell-correct-ivy)
       (global-set-key
