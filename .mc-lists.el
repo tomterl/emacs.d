@@ -18,6 +18,7 @@
 (setq mc/cmds-to-run-once
       '(
         c-electric-backspace
+        delete-backward-char
         hydra-js2-refactor/js2r-rename-var-and-exit
         ido-switch-buffer
         js2-indent-bounce

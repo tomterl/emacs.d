@@ -1012,7 +1012,10 @@ Use ivy/counsel for Completion
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'sanityinc-tomorrow-night t)
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
+     (load-theme 'wilmersdorf t)
+     (require 'solaire-mode)
+     (solaire-global-mode +1)
    #+END_SRC
 
 *** Adapt company-mode
@@ -2374,7 +2377,8 @@ enough context around point visible.
         ""
         (save-excursion
           (delete-trailing-whitespace)))
-
+      (require 'flycheck-phpstan)
+      (setq flycheck-phpstan-executable "/home/tregner/bin/phpstan")
       (flycheck-define-generic-checker 'lsp-php-ui
         "A syntax checker using the Language Server Protocol (RLS)
       provided by lsp-mode.
@@ -2393,7 +2397,6 @@ enough context around point visible.
           (repl-toggle-mode 1)
           (yas-minor-mode 1)
           (company-mode 1)
-          (lsp)
           (modify-syntax-entry ?$ "_")
           (make-local-variable 'company-transformers)
           (push 'tom/company-transformer company-transformers)
@@ -2402,6 +2405,7 @@ enough context around point visible.
           (local-set-key (kbd "C-c a") 'tom/edit-sql)
           (php-enable-wordpress-coding-style)
           (flycheck-may-enable-checker 'php-phpcs)
+          (flycheck-disable-checker 'phpstan)
           (flycheck-disable-checker 'php-phpmd)
           (setq-local flycheck-checker 'lsp-php-ui)
           (setq tab-width 4
@@ -2415,6 +2419,7 @@ enough context around point visible.
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
           (poly-php-mode 1)          
+          (lsp)
           (message "tom/php-mode-hook executed")))
       (add-hook 'php-mode-hook 'flycheck-mode)
 
