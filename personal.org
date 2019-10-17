@@ -2352,6 +2352,10 @@ Send them to firefox, with keysnail much better then anything else.
       (add-to-list 'auto-mode-alist '("\\.tpl$" . web-mode))
     #+END_SRC
     
+    #+BEGIN_SRC emacs-lisp
+      (when (tom/work?)
+          (setq web-mode-engine "smarty"))
+    #+END_SRC
 *** Indentation and behaviour
 
     Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
