@@ -1012,8 +1012,8 @@ Use ivy/counsel for Completion
    :ID:       eb979d64-dc35-4bdd-879c-9a73408096f2
    :END:
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'wilmersdorf t)
+     ;;     (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
+     (load-theme 'doom-challenger-deep t)
      (require 'solaire-mode)
      (solaire-global-mode +1)
    #+END_SRC
