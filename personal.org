@@ -1966,20 +1966,6 @@ Send them to firefox, with keysnail much better then anything else.
   (require 'sidebar)
   (global-set-key (kbd "H-s") 'sidebar-open)
 #+END_SRC
-** Scrolling
-
-Scroll faster in large buffers; using poly-modes heavily in js or php
-files slows emacs down a lot.
-
-#+BEGIN_SRC emacs-lisp
-(require 'fast-scroll)
-(add-hook 'fast-scroll-start-hook (lambda () (flycheck-mode -1)))
-(add-hook 'fast-scroll-end-hook (lambda () (flycheck-mode 1)))
-(add-hook 'fast-scroll-start-hook (lambda () (beacon-mode -1)))
-(add-hook 'fast-scroll-end-hook (lambda () (beacon-mode 1)))
-(fast-scroll-config)
-(fast-scroll-mode 1)
-#+END_SRC
 ** Insert current date
 
    Use the 'calendar' to get and format the date.
