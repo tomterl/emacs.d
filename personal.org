@@ -2108,21 +2108,21 @@ files slows emacs down a lot.
         :innermodes '(poly-php-aql-innermode
                       poly-php-sql-innermode))
     #+END_SRC
-*** Languages embedded in `js2-mode`-buffers
+*** Languages embedded in `js-mode`-buffers
     #+BEGIN_SRC emacs-lisp
-      (define-hostmode poly-js2-hostmode
-        :mode 'js2-mode)
+      (define-hostmode poly-js-hostmode
+        :mode 'js-mode)
        
-      (define-innermode poly-js2-aql-innermode
+      (define-innermode poly-js-aql-innermode
         :mode 'aql-mode
         :head-matcher "aql`"
         :tail-matcher "`"
         :head-mode 'host
         :tail-mode 'host)
        
-      (define-polymode poly-js2-mode
-        :hostmode 'poly-js2-hostmode
-        :innermodes '(poly-js2-aql-innermode))
+      (define-polymode poly-js-mode
+        :hostmode 'poly-js-hostmode
+        :innermodes '(poly-js-aql-innermode))
     
     #+END_SRC
 *** Languages embedded in `yaml-mode`-buffers
@@ -2546,7 +2546,7 @@ files slows emacs down a lot.
       (setq js-indent-level 2
               js2-basic-offset 2
             js2-bounce-indent-p t))
-      (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+      (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
     #+END_SRC
 *** Completion
     #+BEGIN_SRC emacs-lisp
@@ -2557,10 +2557,10 @@ files slows emacs down a lot.
     provided by lsp-mode.
     See https://github.com/emacs-lsp/lsp-mode."
         :start #'lsp-ui-flycheck--start
-        :modes '(js2-mode) ; Need a default mode
+        :modes '(js-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e)))
-      (define-hook-helper js2-mode ()
+      (define-hook-helper js-mode ()
         (progn
           (ggtags-mode -1)
           (repl-toggle-mode 1)
@@ -2571,25 +2571,13 @@ files slows emacs down a lot.
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
           (define-key lsp-ui-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
-          (add-hook 'js2-mode-hook 'flycheck-mode)
+          (add-hook 'js-mode-hook 'flycheck-mode)
           (setq-local flycheck-checker 'lsp-js-ui)
-          (local-set-key
-           (kbd "H-j")
-           (defhydra hydra-js2-refactor (:color blue :timeout 5)
-             "Refactor javascript"
-             ("ta" #'js2r-toggle-arrow-function-and-expression "toggle arrow")
-             ("rv" #'js2r-rename-var "rename variable")))
           (local-set-key (kbd "C-c a") 'tom/edit-aql)
-          (poly-js2-mode 1)))
+          (poly-js-mode 1)))
 
       ;;;  (require 'lsp-javascript-typescript)
-  ;;;(add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
-    #+END_SRC
-*** Refectoring 
-    #+BEGIN_SRC emacs-lisp
-      (require 'js2-refactor)
-      (js2r-add-keybindings-with-prefix "C-c C-m")
-      (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  ;;;(add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
     #+END_SRC
 *** Edit js in YAML-files
     #+BEGIN_SRC emacs-lisp
