@@ -886,6 +886,7 @@ Use projectile automatically.
 
 #+BEGIN_SRC emacs-lisp
   (define-hook-helper prog-mode ()
+    :name projectile
     (progn (require 'dash)(projectile-mode 1)))
 #+END_SRC 
 
@@ -1147,7 +1148,8 @@ This is a birds eye view of the current buffer.
 ** coloured parenthesis
 #+BEGIN_SRC emacs-lisp
   (require 'rainbow-delimiters)
-  (define-hook-helper prog-mode () 
+  (define-hook-helper prog-mode ()
+    :name rainbow
     (rainbow-delimiters-mode 1))
 #+END_SRC
 ** shorten mode names
@@ -1193,6 +1195,7 @@ Allways find the cursor.
 ** Indentation highlight
 #+BEGIN_SRC emacs-lisp
   (define-hook-helper prog-mode ()
+    :name indent-guide
     (indent-guide-mode t))
 #+END_SRC
 * org-mode
@@ -2024,6 +2027,7 @@ Send them to firefox, with keysnail much better then anything else.
      (vhl/define-extension 'ut 'undo-tree-redo 'undo-tree-undo)
      (vhl/load-extension 'ut)
      (define-hook-helper prog-mode ()
+       :name volatile-highlight
        (volatile-highlights-mode 1))
    #+END_SRC
 ** Edit as root
@@ -2220,7 +2224,6 @@ Send them to firefox, with keysnail much better then anything else.
       (require 'origami)
       (require 'lsp-origami)
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-      (add-hook 'prog-mode-hook #'lsp)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
     #+END_SRC
 
@@ -2387,6 +2390,7 @@ Send them to firefox, with keysnail much better then anything else.
         :next-checkers '((warning . php)))
 
       (define-hook-helper php-mode ()
+        :name php-personal
         (progn 
                                         ;(require 'company-php)
                                         ;(require 'lsp-php)
@@ -2416,10 +2420,9 @@ Send them to firefox, with keysnail much better then anything else.
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
           (poly-php-mode 1)          
-          (lsp)
           (message "tom/php-mode-hook executed")))
       (add-hook 'php-mode-hook 'flycheck-mode)
-
+      (add-hook 'php-mode-hook #'lsp)
 
     #+END_SRC
 *** Remote debugging
@@ -2554,6 +2557,7 @@ Send them to firefox, with keysnail much better then anything else.
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e)))
       (define-hook-helper js-mode ()
+        :name js-personal
         (progn
           (ggtags-mode -1)
           (repl-toggle-mode 1)
@@ -2568,6 +2572,7 @@ Send them to firefox, with keysnail much better then anything else.
           (setq-local flycheck-checker 'lsp-js-ui)
           (local-set-key (kbd "C-c a") 'tom/edit-aql)
           (poly-js-mode 1)))
+      (add-hook 'php-mode-hook #'lsp)
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
