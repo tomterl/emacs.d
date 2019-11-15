@@ -1014,7 +1014,7 @@ Use ivy/counsel for Completion
    :END:
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'darkplus t)
+     (load-theme 'kaolin-temple t)
    #+END_SRC
 
 *** Adapt company-mode
@@ -2572,7 +2572,7 @@ Send them to firefox, with keysnail much better then anything else.
           (setq-local flycheck-checker 'lsp-js-ui)
           (local-set-key (kbd "C-c a") 'tom/edit-aql)
           (poly-js-mode 1)))
-      (add-hook 'php-mode-hook #'lsp)
+      (add-hook 'js-mode-hook #'lsp)
 
       ;;;  (require 'lsp-javascript-typescript)
   ;;;(add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
@@ -2739,6 +2739,8 @@ Send them to firefox, with keysnail much better then anything else.
     #+BEGIN_SRC emacs-lisp
       (require 'magit)
       (setq magit-completing-read-function 'ivy-completing-read)
+      (setq magit-wip-merge-branch t)
+      (magit-wip-mode 1)
     #+END_SRC
     
 *** Key bindings
