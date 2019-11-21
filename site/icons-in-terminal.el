@@ -1,0 +1,1 @@
+/usr/share/icons-in-terminal/icons-in-terminal.el
