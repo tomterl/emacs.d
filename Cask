@@ -293,6 +293,7 @@
 (depends-on "tide")
 (depends-on "tracking")
 (depends-on "transient")
+(depends-on "treemacs")
 (depends-on "treepy")
 (depends-on "twilight-anti-bright-theme")
 (depends-on "twilight-bright-theme")
