@@ -709,7 +709,10 @@ I use =vim= and =htop=, so let's add those to =eshell-visual-commands=.
   (setq eshell-prompt-regexp "^[^#$]*[#$] ")
   (defvar tom/shellframe nil)
   (add-to-list 'frame-inherited-parameters 'alpha)
-
+  (define-hook-helper eshell-mode ()
+    :name eshell_hide_modeline
+    (setq mode-line-format nil))
+  
   (defun tom/eshell ()
     "Start or switch to an eshell specific to the current
         projectile project, or the global '*eshell*' if not in a
@@ -955,15 +958,53 @@ Use ivy/counsel for Completion
 
 * Appearance
 ** Font
-
+-> ==
    #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "Courier Prime Code-11"
+  (defvar tom/default-font "Fira Code-11"
     "The font to use under normal circumstances")
   (unless (tom/work?)
     (setq tom/default-font "Courier Prime Code-12"))
   (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
     "Font to use, if the default font misses a glyph.")
-
+  (require 'composite)
+  (defvar composition-ligature-table (make-char-table nil))
+  (define-hook-helper prog-mode ()
+    :name pm-ligatures
+    (progn (setq-local composition-function-table composition-ligature-table)
+           (let ((alist
+                  '((?! . ".\\(?:\\(==\\|[!=]\\)[!=]?\\)")
+                    (?# . ".\\(?:\\(###?\\|_(\\|[(:=?[_{]\\)[#(:=?[_{]?\\)")
+                    (?$ . ".\\(?:\\(>\\)>?\\)")
+                    (?% . ".\\(?:\\(%\\)%?\\)")
+                    (?& . ".\\(?:\\(&\\)&?\\)")
+                    (?* . ".\\(?:\\(\\*\\*\\|[*>]\\)[*>]?\\)")
+                    ;; (?* . ".\\(?:\\(\\*\\*\\|[*/>]\\).?\\)")
+                    (?+ . ".\\(?:\\([>]\\)>?\\)")
+                    ;; (?+ . ".\\(?:\\(\\+\\+\\|[+>]\\).?\\)")
+                    (?- . ".\\(?:\\(-[->]\\|<<\\|>>\\|[-<>|~]\\)[-<>|~]?\\)")
+                    ;; (?. . ".\\(?:\\(\\.[.<]\\|[-.=]\\)[-.<=]?\\)")
+                    (?. . ".\\(?:\\(\\.<\\|[-=]\\)[-<=]?\\)")
+                    (?/ . ".\\(?:\\(//\\|==\\|[=>]\\)[/=>]?\\)")
+                    ;; (?/ . ".\\(?:\\(//\\|==\\|[*/=>]\\).?\\)")
+                    (?0 . ".\\(?:\\(x[a-fA-F0-9]\\).?\\)")
+                    (?: . ".\\(?:\\(::\\|[:<=>]\\)[:<=>]?\\)")
+                    (59 . ".\\(?:\\(;\\);?\\)")    ;; 59 is ;
+                    (?< . ".\\(?:\\(!--\\|\\$>\\|\\*>\\|\\+>\\|-[-<>|]\\|/>\\|<[-<=]\\|=[<>|]\\|==>?\\||>\\||||?\\|~[>~]\\|[$*+/:<=>|~-]\\)[$*+/:<=>|~-]?\\)")
+                    (?= . ".\\(?:\\(!=\\|/=\\|:=\\|<<\\|=[=>]\\|>>\\|[=>]\\)[=<>]?\\)")
+                    (?> . ".\\(?:\\(->\\|=>\\|>[-=>]\\|[-:=>]\\)[-:=>]?\\)")
+                    (?? . ".\\(?:\\([.:=?]\\)[.:=?]?\\)")
+                    (91 . ".\\(?:\\(|\\)[]|]?\\)") ;; 91 is [
+                    ;; (?\ . ".\\(?:\\([\\n]\\)[\\]?\\)")
+                    (?^ . ".\\(?:\\(=\\)=?\\)")
+                    (?_ . ".\\(?:\\(|_\\|[_]\\)_?\\)")
+                    (?w . ".\\(?:\\(ww\\)w?\\)")
+                    (?{ . ".\\(?:\\(|\\)[|}]?\\)")
+                    (?| . ".\\(?:\\(->\\|=>\\||[-=>]\\||||*>\\|[]=>|}-]\\).?\\)")
+                    (?~ . ".\\(?:\\(~>\\|[-=>@~]\\)[-=>@~]?\\)"))))
+             (dolist (char-regexp alist)
+               (set-char-table-range composition-ligature-table (car char-regexp)
+                                     `([,(cdr char-regexp) 0 font-shape-gstring]))))
+               ))
   (setq default-frame-alist `((font . ,tom/default-font)))
 
   (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
@@ -1014,7 +1055,7 @@ Use ivy/counsel for Completion
    :END:
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'kaolin-temple t)
+     (load-theme 'vscode-dark-plus t)
    #+END_SRC
 
 *** Adapt company-mode
@@ -1279,7 +1320,8 @@ The languages I like to use.
    '((emacs-lisp . t)  (shell . t)
      (ditaa . t) (sass . t)
      (lisp . t) (gnuplot . t)
-     (http . t) (plantuml .t)))
+     (http . t) (plantuml .t)
+     (sql-mode .t)))
 #+END_SRC 
 The =ditaa.jar= location;
 
@@ -1435,6 +1477,17 @@ Why the hell do I do this?
 #+BEGIN_SRC emacs-lisp
 (require 'org-macs)
 #+END_SRC
+** Notes
+#+BEGIN_SRC emacs-lisp
+  (require 'org-popnote)
+  (setq org-popnote-file (concat tom/--emacs-dir "/notes.org"))
+  (require 'yequake)
+  (setq yequake-frames
+        (list (cons "org-popnote"
+                    (list (cons 'buffer-fns '(org-popnote))
+                          (cons 'width 0.25)
+                          (cons 'height 0.5)))))
+#+END_SRC
 ** Journal
 #+BEGIN_SRC emacs-lisp
   (if (not (tom/work?))
@@ -1517,8 +1570,25 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
                   'org/ensure-latex-clearpage))
 #+END_SRC
 ** Edit src-blocks inline
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook 'poly-org-mode)
+#+END_SRC
+** Postgres 
+#+BEGIN_SRC emacs-lisp
+  (require 'company-postgresql)
+  (require 'ob-sql-mode)
+  (sql-set-product-feature 'postgres :prompt-regexp "^[-[:alnum:]_]*=[#>] ")
+  (sql-set-product-feature 'postgres :prompt-cont-regexp
+                           "^[-[:alnum:]_]*[-(][#>] ")
+  
+  (define-hook-helper sql-mode ()
+    :name pqsql-completion
+    (progn
+      (setq company-sql-db-host "postgres.toolserver.fbr")
+      (setq company-sql-db-name "fbtools")
+      (setq company-sql-db-user "fbtools")
+      (set (make-local-variable 'company-backends)
+           '((company-postgresql)))))
 #+END_SRC
 * Chat and instant messaging 
 
@@ -2216,7 +2286,7 @@ Send them to firefox, with keysnail much better then anything else.
     #+BEGIN_SRC emacs-lisp
       (setq lsp-enable-file-watchers nil)
       (setq lsp-prefer-flymake nil)
-      (setq lsp-auto-guess-root 't)
+      (setq lsp-auto-guess-root nil)
       (require 'lsp)
       (require 'lsp-clients)
       (require 'lsp-ui)
@@ -2448,48 +2518,12 @@ Send them to firefox, with keysnail much better then anything else.
      #+END_SRC
 *** Check/correct @param tags
     Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
-
+    
     #+BEGIN_SRC emacs-lisp
-      (defun tom/php-check-params ()
-        ""
-        (interactive)
-        (save-excursion
-          (narrow-to-defun t)
-          (goto-char (point-min))
-          (search-forward-regexp "function[^(]*(\\(.*\\))\\(?:;\\| {\\)")
-          (let ((params (split-string (match-string-no-properties 1) ", " t " ")))
-            (dolist (param params)
-              (let* ((parts (split-string param " "))
-                     (pname (if (cadr parts) (cadr parts) (car parts)))
-                     (param-parts (split-string pname "=" t " "))
-                     (type (if (cadr parts) (car parts) nil))
-                     (name (car param-parts))
-                     (default (cadr param-parts))
-                     (typemsg (if type type (if (numberp default) "int" "mixed")))
-                     (defaultmsg (if default
-                                     (concat "optional, default '"
-                                             (if (numberp default)
-                                                 (number-to-string default)
-                                               default)
-                                             "'")
-                                   "")))
-                (save-excursion
-                  (unless (search-backward-regexp (concat "@param .*" name) nil t)
-                    (let* ((text1 (s-trim (s-join " " (list typemsg name defaultmsg))))
-                           (param-text (s-join " " (list "\n* @param" text1))))
-                      (if (> (length text1) 0)
-                          (progn
-                            (goto-char (point-max))
-                            (if (search-backward-regexp "^ +\\* *$" nil t)
-                                (goto-char (line-end-position))
-                              (progn
-                                (goto-char (point-min))
-                                (insert "/**\n*/\n")(backward-char 4)))
-                            (insert param-text)
-                            (indent-according-to-mode)
-                            (insert "\n* ")
-                            (indent-according-to-mode)))))))))
-          (widen)))
+      (require 'php-doc-block)
+      (define-hook-helper php-mode ()
+        :name phpdoc
+        (local-set-key (kbd "<C-tab>") 'php-doc-block))
     #+END_SRC
 *** ~phpunit~
     #+BEGIN_SRC emacs-lisp
