@@ -10,5 +10,5 @@
  * @since  `(tom/insert-current-date 4)`
  */
 ${2:$$(yas-choose-value '("public" "protected" "private"))}${3:$$(yas-choose-value '(" " "static "))}function ${4:name}(${5:\$params}) {
-    ${6: $(tom/php-check-params)}$0
+    ${6: $(php-doc-block)}$0
 } 
