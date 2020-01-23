@@ -960,7 +960,7 @@ Use ivy/counsel for Completion
 ** Font
 -> ==
    #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "Fira Code-11"
+  (defvar tom/default-font "Victor Mono Semibold-11"
     "The font to use under normal circumstances")
   (unless (tom/work?)
     (setq tom/default-font "Courier Prime Code-12"))

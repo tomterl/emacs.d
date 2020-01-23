@@ -51,6 +51,7 @@
  '(dap-ui-mode t nil (dap-ui))
  '(debug-on-error nil)
  '(diary-entry-marker 'font-lock-variable-name-face)
+ '(display-line-numbers-type 'relative)
  '(emms-mode-line-icon-image-cache
    '(image :type xpm :ascent center :data "/* XPM */
 static char *note[] = {
@@ -181,7 +182,6 @@ static char *gnus-pointer[] = {
  '(main-line-color1 "#1E1E1E")
  '(main-line-color2 "#111111")
  '(main-line-separator-style 'chamfer)
- '(menu-bar-mode nil)
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(objed-cursor-color "#BF616A")
@@ -247,6 +247,7 @@ static char *gnus-pointer[] = {
                    (cons ".." load-path)))
                (require 'package-build)))
            (package-build-minor-mode))))
+ '(show-paren-mode t)
  '(smartparens-global-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(sql-product 'postgres)
@@ -265,6 +266,7 @@ static char *gnus-pointer[] = {
    '((t :background unspecified :foreground "#cb4b16" :weight bold)))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
+ '(tool-bar-mode nil)
  '(tramp-syntax 'default nil (tramp))
  '(undo-tree-visualizer-timestamps t)
  '(vc-annotate-background nil)
@@ -303,6 +305,7 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Hasklig" :foundry "ADBO" :slant normal :weight normal :height 117 :width normal))))
  '(awesome-tray-module-circe-face ((t (:foreground "#dd3322" :weight bold))))
  '(centaur-tabs-default ((t (:inherit tabbar-default))))
  '(centaur-tabs-selected ((t (:inherit tabbar-selected))))
