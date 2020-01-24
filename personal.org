@@ -2150,7 +2150,7 @@ Send them to firefox, with keysnail much better then anything else.
        
       (define-innermode poly-php-aql-innermode
         :mode 'aql-mode
-        :head-matcher "^[ \t]*protected static $source = <<<'?AQL'?\n"
+        :head-matcher "^[ \t]*protected static $[a-z]* = <<<'?AQL'?\n"
         :tail-matcher "^AQL;\n"
         :head-mode 'host
         :tail-mode 'host)
