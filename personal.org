@@ -17,6 +17,12 @@ Lambda as λ
 #+END_SRC
 
 * Initial Setup
+** Optimization
+   #+BEGIN_SRC emacs-lisp
+     (setq read-process-output-max (* 1024 1024))
+     (defvar tom/gc-cons-threshold (* 4 1024 1024) "Don't make this too big")
+     (setq gc-cons-threshold most-positive-fixnum) ; don't gc during startup
+   #+END_SRC
 ** define `when-let*`
 #+BEGIN_SRC emacs-lisp
 (require 'subr-x)
@@ -2942,7 +2948,11 @@ Do this after everything is setup.
   (diminish 'auto-revert-mode "")
 #+END_SRC
 
-* Server
+* Finishing
+** Enable gc
+   #+BEGIN_SRC emacs-lisp
+   (setq gc-cons-threshold tom/gc-cons-threshold)
+   #+END_SRC
 ** httpd server
    #+BEGIN_SRC emacs-lisp
      (setq httpd-port 8081)
