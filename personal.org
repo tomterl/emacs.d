@@ -19,6 +19,7 @@ Lambda as λ
 * Initial Setup
 ** Optimization
    #+BEGIN_SRC emacs-lisp
+      (setq lsp-keymap-prefix "H-y")
      (setq read-process-output-max (* 1024 1024))
      (defvar tom/gc-cons-threshold (* 4 1024 1024) "Don't make this too big")
      (setq gc-cons-threshold most-positive-fixnum) ; don't gc during startup
@@ -2289,15 +2290,22 @@ Send them to firefox, with keysnail much better then anything else.
       (setq lsp-enable-file-watchers nil)
       (setq lsp-prefer-flymake nil)
       (setq lsp-auto-guess-root nil)
+      (require 'lsp-mode)
       (require 'lsp)
       (require 'lsp-clients)
       (require 'lsp-ui)
       (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
       (require 'origami)
       (require 'lsp-origami)
+      (require 'lsp-treemacs)
+      (require 'lsp-ivy)
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
-    #+END_SRC
+      (lsp-treemacs-sync-mode 1)
+      (with-eval-after-load 'lsp-mode
+        (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+  #+END_SRC
 
 **** completion
     #+BEGIN_SRC emacs-lisp
@@ -2439,22 +2447,15 @@ Send them to firefox, with keysnail much better then anything else.
     Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
 
     #+BEGIN_SRC emacs-lisp
-      (defun tom/php-tags-update ()
-        ""
-        (if (and (boundp 'call-php-tags-func) call-php-tags-func)
-            (ac-php-remake-tags)))
-;;  (add-hook 'after-save-hook 'tom/php-tags-update)
-
       (defun tom/dtw ()
-        ""
+        "Delete trailing whitespace in a save excursion."
         (save-excursion
           (delete-trailing-whitespace)))
-      (require 'flycheck-phpstan)
-      (setq flycheck-phpstan-executable "/home/tregner/bin/phpstan")
+    
       (flycheck-define-generic-checker 'lsp-php-ui
         "A syntax checker using the Language Server Protocol (RLS)
-      provided by lsp-mode.
-      See https://github.com/emacs-lsp/lsp-mode."
+            provided by lsp-mode.
+            See https://github.com/emacs-lsp/lsp-mode."
         :start #'lsp-ui-flycheck--start
         :modes '(php-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
@@ -2464,8 +2465,6 @@ Send them to firefox, with keysnail much better then anything else.
       (define-hook-helper php-mode ()
         :name php-personal
         (progn 
-                                        ;(require 'company-php)
-                                        ;(require 'lsp-php)
           (ggtags-mode -1)
           (repl-toggle-mode 1)
           (yas-minor-mode 1)
@@ -2473,8 +2472,6 @@ Send them to firefox, with keysnail much better then anything else.
           (modify-syntax-entry ?$ "_")
           (make-local-variable 'company-transformers)
           (push 'tom/company-transformer company-transformers)
-                                        ;(company-mode 1)
-          (set (make-local-variable 'call-php-tags-func) t)
           (local-set-key (kbd "C-c a") 'tom/edit-sql)
           (php-enable-wordpress-coding-style)
           (flycheck-may-enable-checker 'php-phpcs)
@@ -2491,8 +2488,8 @@ Send them to firefox, with keysnail much better then anything else.
           (add-hook 'write-contents-functions 'tom/dtw nil t)
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-          (poly-php-mode 1)          
-          (message "tom/php-mode-hook executed")))
+          (poly-php-mode 1)))
+    
       (add-hook 'php-mode-hook 'flycheck-mode)
       (add-hook 'php-mode-hook #'lsp)
 
@@ -2509,17 +2506,11 @@ Send them to firefox, with keysnail much better then anything else.
        (setq dap-auto-show-output nil)
        (setq dap-inhibit-io nil)
        (define-key php-mode-map (kbd "H-d") 'dap-hydra)
-       (dap-register-debug-template "Php Stop On Entry"
-                             (list :type "php"
-                                   :cwd nil
-                                   :request "launch"
-                                   :name "Php SOE Debug"
-                                   :stopOnEntry t
-                                   :sourceMaps t
-                                   ))
      #+END_SRC
 *** Check/correct @param tags
-    Check the doc comment of the current function for @param tags, create them if not present. This is used in the function-snippet, but needs an overhaul...
+    Check the doc comment of the current function for @param tags,
+    create them if not present. This is used in the function-snippet,
+    but needs an overhaul...
     
     #+BEGIN_SRC emacs-lisp
       (require 'php-doc-block)
