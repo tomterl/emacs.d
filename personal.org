@@ -32,6 +32,11 @@ Lambda as λ
 
  Package management and loading of utility packages.
 
+*** elpa keyring
+ #+BEGIN_SRC emacs-lisp
+   (require 'gnu-elpa-keyring-update)
+   (gnu-elpa-keyring-update)
+ #+END_SRC
 *** Management
 
  Cask manages the packages installed.
@@ -423,7 +428,7 @@ Inspired/copied from endless parentheses blog
      ("G" rgrep "grep")
      ("h" man "man")
      ("p" paradox-list-packages "packages")
-     ("s" tom/eshell "shell")
+     ("s" tom/vterm "shell")
      ("t" proced "proced")
      ))
 
@@ -700,6 +705,27 @@ helps for remote sessions.
 
 * Emacs shell
 
+** `vterm`
+  #+BEGIN_SRC emacs-lisp
+    (defun tom/vterm ()
+    "Run projectile-run-vterm in a dedicated frame."
+    (interactive)
+    (unless
+        (and tom/shellframe (framep tom/shellframe) (frame-live-p tom/shellframe))
+      (setq tom/shellframe (make-frame)))
+    (let ((proj (if (projectile-project-p) (substring (projectile-project-root) 0 -1)))
+          (projectile-switch-project-action '(lambda () (projectile-run-vterm))))
+      (select-frame tom/shellframe)
+      (raise-frame)
+      (message (concat "Project " proj))
+      (projectile-switch-project-by-name (file-name-nondirectory proj))))
+
+    (define-hook-helper vterm-mode ()
+      :name vterm_hide_modeline
+      (setq mode-line-format nil))
+  #+END_SRC
+
+** `eshell`
 I use =vim= and =htop=, so let's add those to =eshell-visual-commands=. 
 
 #+BEGIN_SRC emacs-lisp
@@ -1770,6 +1796,7 @@ notification in a given time intervall.
   (define-hook-helper geben-mode ()
     (boon-set-state 'boon-special-state))
 #+END_SRC
+
 ** Display available keys 
 #+BEGIN_SRC emacs-lisp
   (require 'which-key)
