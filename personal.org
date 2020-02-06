@@ -260,8 +260,6 @@ Stuff looted from graphene.
 ** env
 #+BEGIN_SRC emacs-lisp
   (require 'ivy)
-  (require 'all-the-icons)
-  (require 'all-the-icons-ivy)
   (require 'swiper)
   (require 'counsel)
   (require 'counsel-projectile)
@@ -1036,7 +1034,14 @@ Use ivy/counsel for Completion
                ))
   (setq default-frame-alist `((font . ,tom/default-font)))
 
-  (set-fontset-font "fontset-default" '(#x10000 . #x1ffff) tom/fallback-font)
+  (require 'all-the-icons)
+  (require 'all-the-icons-ivy)
+;(set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+;(set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+;(set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
+;(set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+;(set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+;(set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)
 #+END_SRC 
 
 *** icons-in-terminal integration
