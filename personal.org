@@ -32,11 +32,6 @@ Lambda as λ
 
  Package management and loading of utility packages.
 
-*** elpa keyring
- #+BEGIN_SRC emacs-lisp
-   (require 'gnu-elpa-keyring-update)
-   (gnu-elpa-keyring-update)
- #+END_SRC
 *** Management
 
  Cask manages the packages installed.
@@ -57,6 +52,11 @@ Lambda as λ
  (pallet-mode t)
  #+END_SRC
 
+*** elpa keyring
+ #+BEGIN_SRC emacs-lisp
+   (require 'gnu-elpa-keyring-update)
+   (gnu-elpa-keyring-update)
+ #+END_SRC
 **** Code Loading
 
  Recompile elisp code on load or require.
