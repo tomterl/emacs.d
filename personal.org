@@ -2786,11 +2786,6 @@ Send them to firefox, with keysnail much better then anything else.
   
 * Version control
 ** Magit 
-*** Github forge 
-    #+BEGIN_SRC emacs-lisp
-      (with-eval-after-load 'magit
-        (require 'forge))
-    #+END_SRC
 *** Magithub integration.
 
     #+BEGIN_SRC emacs-lisp
@@ -2806,6 +2801,11 @@ Send them to firefox, with keysnail much better then anything else.
       (magit-wip-mode 1)
     #+END_SRC
     
+*** Github forge 
+    #+BEGIN_SRC emacs-lisp
+      (with-eval-after-load 'magit
+        (require 'forge))
+    #+END_SRC
 *** Key bindings
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "<f7>") 'magit-status)
