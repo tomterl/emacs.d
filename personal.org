@@ -21,7 +21,7 @@ Lambda as λ
    #+BEGIN_SRC emacs-lisp
       (setq lsp-keymap-prefix "H-y")
      (setq read-process-output-max (* 1024 1024))
-     (defvar tom/gc-cons-threshold (* 4 1024 1024) "Don't make this too big")
+     (defvar tom/gc-cons-threshold (* 100 1024 1024) "Don't make this too big")
      (setq gc-cons-threshold most-positive-fixnum) ; don't gc during startup
    #+END_SRC
 ** define `when-let*`
@@ -991,57 +991,57 @@ Use ivy/counsel for Completion
 ** Font
 -> ==
    #+BEGIN_SRC emacs-lisp
-  (defvar tom/default-font "Fira Code Medium-11"
-    "The font to use under normal circumstances")
-  (unless (tom/work?)
-    (setq tom/default-font "Courier Prime Code-12"))
-  (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
-    "Font to use, if the default font misses a glyph.")
-  (require 'composite)
-  (defvar composition-ligature-table (make-char-table nil))
-  (define-hook-helper prog-mode ()
-    :name pm-ligatures
-    (progn (setq-local composition-function-table composition-ligature-table)
-(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-               (36 . ".\\(?:>\\)")
-               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-               (48 . ".\\(?:x[a-zA-Z]\\)")
-               (58 . ".\\(?:::\\|[:=]\\)")
-               (59 . ".\\(?:;;\\|;\\)")
-               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-               (91 . ".\\(?:]\\)")
-               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-               (94 . ".\\(?:=\\)")
-               (119 . ".\\(?:ww\\)")
-               (123 . ".\\(?:-\\)")
-               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-               )
-             ))
-  (dolist (char-regexp alist)
-    (set-char-table-range composition-function-table (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
-               ))
-  (setq default-frame-alist `((font . ,tom/default-font)))
+       (defvar tom/default-font "Fira Code Medium-11"
+         "The font to use under normal circumstances")
+       (unless (tom/work?)
+         (setq tom/default-font "Courier Prime Code-12"))
+       (defvar tom/fallback-font "-Free-Symbola-normal-normal-semicondensed-*-12-*-*-*-*-0-iso10646-1"
+         "Font to use, if the default font misses a glyph.")
+       (require 'composite)
+       (defvar composition-ligature-table (make-char-table nil))
+       (define-hook-helper prog-mode ()
+         :name pm-ligatures
+         (progn (setq-local composition-function-table composition-ligature-table)
+     (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+                    (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+                    (36 . ".\\(?:>\\)")
+                    (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+                    (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+                    (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+                    (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+                    (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+                    (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+                    (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+                    (48 . ".\\(?:x[a-zA-Z]\\)")
+                    (58 . ".\\(?:::\\|[:=]\\)")
+                    (59 . ".\\(?:;;\\|;\\)")
+                    (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+                    (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+                    (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+                    (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+                    (91 . ".\\(?:]\\)")
+                    (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+                    (94 . ".\\(?:=\\)")
+                    (119 . ".\\(?:ww\\)")
+                    (123 . ".\\(?:-\\)")
+                    (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+                    (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+                    )
+                  ))
+       (dolist (char-regexp alist)
+         (set-char-table-range composition-function-table (car char-regexp)
+                               `([,(cdr char-regexp) 0 font-shape-gstring]))))
+                    ))
+       (setq default-frame-alist `((font . ,tom/default-font)))
 
-  (require 'all-the-icons)
-  (require 'all-the-icons-ivy)
-;(set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)
+       ;; (require 'all-the-icons)
+       ;; (require 'all-the-icons-ivy)
+     ;(set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+     ;(set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+     ;(set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
+     ;(set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+     ;(set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+     ;(set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)
 #+END_SRC 
 
 *** icons-in-terminal integration
@@ -2488,7 +2488,7 @@ Send them to firefox, with keysnail much better then anything else.
         "A syntax checker using the Language Server Protocol (RLS)
             provided by lsp-mode.
             See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp-ui-flycheck--start
+        :start #'lsp--flycheck-start
         :modes '(php-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e))
@@ -2611,7 +2611,7 @@ Send them to firefox, with keysnail much better then anything else.
         "A syntax checker using the Language Server Protocol (RLS)
     provided by lsp-mode.
     See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp-ui-flycheck--start
+        :start #'lsp--flycheck-start
         :modes '(js-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e)))
@@ -2817,7 +2817,46 @@ Send them to firefox, with keysnail much better then anything else.
     #+BEGIN_SRC emacs-lisp
       (fullframe magit-status magit-mode-quit-window nil)
     #+END_SRC
-    
+*** Merging diffs   
+    #+BEGIN_SRC emacs-lisp
+      (defhydra tom/smerge-hydra
+        (:color pink :hint nil :post (smerge-auto-leave))
+        "
+^Move^       ^Keep^               ^Diff^                 ^Other^
+^^-----------^^-------------------^^---------------------^^-------
+_n_ext       _b_ase               _<_: upper/base        _C_ombine
+_p_rev       _u_pper              _=_: upper/lower       _r_esolve
+^^           _l_ower              _>_: base/lower        _k_ill current
+^^           _a_ll                _R_efine
+^^           _RET_: current       _E_diff
+"
+        ("n" smerge-next)
+        ("p" smerge-prev)
+        ("b" smerge-keep-base)
+        ("u" smerge-keep-upper)
+        ("l" smerge-keep-lower)
+        ("a" smerge-keep-all)
+        ("RET" smerge-keep-current)
+        ("\C-m" smerge-keep-current)
+        ("<" smerge-diff-base-upper)
+        ("=" smerge-diff-upper-lower)
+        (">" smerge-diff-base-lower)
+        ("R" smerge-refine)
+        ("E" smerge-ediff)
+        ("C" smerge-combine-with-next)
+        ("r" smerge-resolve)
+        ("k" smerge-kill-current)
+        ("ZZ" (lambda ()
+                (interactive)
+                (save-buffer)
+                (bury-buffer))
+         "Save and bury buffer" :color blue)
+        ("q" nil "cancel" :color blue))
+      (define-hook-helper magit-diff-visit-file ()
+        :name magit-smerge-diff
+        (when smerge-mode
+          (tom/smerge-hydra/body)))
+    #+END_SRC
 * Services
 ** =ssh= tunnel
 
