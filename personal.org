@@ -1089,7 +1089,7 @@ Use ivy/counsel for Completion
    :END:
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'vscode-dark-plus t)
+     (load-theme 'kaolin-galaxy t)
    #+END_SRC
 
 *** Adapt company-mode
