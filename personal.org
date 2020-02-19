@@ -272,6 +272,8 @@ Stuff looted from graphene.
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus) (t . ivy--regex-fuzzy)))
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "<f6>") 'ivy-resume)
+  (all-the-icons-ivy-rich-mode 1)
+  (ivy-rich-mode 1)
   (setq inhibit-startup-message t
         color-theme-is-global t
         uniquify-buffer-name-style 'forward
@@ -1861,6 +1863,7 @@ Both commands are from Bozhidar Batsov.
 ** =ibuffer= as buffer screen
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (all-the-icons-ibuffer-mode 1)
 #+END_SRC
 *** Hydra
 #+BEGIN_SRC emacs-lisp
@@ -2256,8 +2259,10 @@ Send them to firefox, with keysnail much better then anything else.
    #+BEGIN_SRC emacs-lisp
      (require 'popup-imenu)
      (global-set-key (kbd "H-i") 'popup-imenu)
+     (setq popup-use-optimized-column-computation nil)
      (setq popup-imenu-position 'point)
-     (setq popup-imenu-force-position nil)
+     (setq popup-imenu-force-position t)
+     (setq popup-imenu-style 'indent)
      (define-key popup-isearch-keymap (kbd "H-i") 'popup-isearch-cancel)
    #+END_SRC
 ** Which key?
