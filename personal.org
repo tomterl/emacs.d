@@ -708,17 +708,20 @@ helps for remote sessions.
 ** `vterm`
   #+BEGIN_SRC emacs-lisp
     (defun tom/vterm ()
-    "Run projectile-run-vterm in a dedicated frame."
-    (interactive)
-    (unless
-        (and tom/shellframe (framep tom/shellframe) (frame-live-p tom/shellframe))
-      (setq tom/shellframe (make-frame)))
-    (let ((proj (if (projectile-project-p) (substring (projectile-project-root) 0 -1)))
-          (projectile-switch-project-action '(lambda () (projectile-run-vterm))))
-      (select-frame tom/shellframe)
-      (raise-frame)
-      (message (concat "Project " proj))
-      (projectile-switch-project-by-name (file-name-nondirectory proj))))
+      "Run projectile-run-vterm in a dedicated frame."
+      (interactive)
+      (unless
+          (and tom/shellframe (framep tom/shellframe) (frame-live-p tom/shellframe))
+        (setq tom/shellframe (make-frame)))
+      
+      (if (projectile-project-p) 
+          (let* ((proj (projectile-ensure-project (projectile-project-p)))
+                 (projectile-switch-project-action #'(lambda () t)))
+            (select-frame tom/shellframe)
+            (raise-frame)
+            (projectile-with-default-dir proj
+              (projectile-run-vterm)))
+        (projectile-run-vterm)))
 
     (define-hook-helper vterm-mode ()
       :name vterm_hide_modeline
