@@ -2581,11 +2581,15 @@ Send them to firefox, with keysnail much better then anything else.
             projectile project, or the global '*PsySh*' if not in a
             project"
         (interactive)
-        (if (projectile-project-p)
+        (if (projectile-ensure-project (projectile-project-p))
             (let* ((-project-root (projectile-project-root))
                    (-project (projectile-default-project-name -project-root))
                    (-buffer-name (concat "* " -project " psysh *")))
-              (ansi-term (concat -project-root "bin/shell.php") -buffer-name))
+                   
+              (projectile-with-default-dir -project-root
+                (vterm -buffer-name)
+                (vterm-send-string "./bin/shell.php")
+                (vterm-send-return)))
           (psysh-run "*PsySh*" "psysh")))
 
       (define-hook-helper psysh-mode () 
