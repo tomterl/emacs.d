@@ -2348,7 +2348,7 @@ Send them to firefox, with keysnail much better then anything else.
       (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
       (lsp-treemacs-sync-mode 1)
-  #+END_SRC
+    #+END_SRC
 
 **** completion
     #+BEGIN_SRC emacs-lisp
