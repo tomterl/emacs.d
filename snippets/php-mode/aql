@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: AQL Statement
+# key: aql
+# --
+/**
+ * @var string
+ */
+protected static $aql${1} = <<<AQL
+ $0
+AQL;
