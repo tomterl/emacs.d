@@ -2511,6 +2511,7 @@ Send them to firefox, with keysnail much better then anything else.
           (repl-toggle-mode 1)
           (yas-minor-mode 1)
           (company-mode 1)
+          (origami-mode 1)
           (modify-syntax-entry ?$ "_")
           (make-local-variable 'company-transformers)
           (push 'tom/company-transformer company-transformers)
