@@ -603,8 +603,8 @@ Inspired/copied from endless parentheses blog
   (defun tom/workspace-switch-project ()
     (interactive)
     (ivy-read "Switch to Project Perspective: "
-              (if (projectile-project-p)
-                  (cons (abbreviate-file-name (projectile-project-root))
+              (if (projectile-ensure-project (projectile-project-p))
+                  (cons (projectile-default-project-name (projectile-project-root))
                         (projectile-relevant-known-projects))
                 projectile-known-projects)
               :action (lambda (project)
