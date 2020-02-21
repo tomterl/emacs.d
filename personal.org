@@ -2497,13 +2497,15 @@ Send them to firefox, with keysnail much better then anything else.
                                ""
                                "@return ${1:$SYMBOL_TYPE} $2"
                                "@throws ${1:$SYMBOL_TYPE} $2"
-                               "@author tregner")))))
+                               "@author `fb-author`"
+                               "@since  `(tom/insert-current-date 4)`")))))
       (lsp-register-custom-settings
        `(("intelephense.phpdoc.classTemplate"
           ,(list :summary "$1"
                  :tags (vector ""
-                               "@author tregner"
-                               "@package ${1:$SYMBOL_NAMESPACE}")))))
+                               "@author `fb-author`"
+                               "@package ${1:$SYMBOL_NAMESPACE}"
+                               "@since `(tom/insert-current-date 4)`")))))
       (defun tom/dtw ()
         "Delete trailing whitespace in a save excursion."
         (save-excursion
