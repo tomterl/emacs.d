@@ -533,19 +533,20 @@ Inspired/copied from endless parentheses blog
 #+END_SRC
 *** Code Folding
 #+BEGIN_SRC emacs-lisp
-  (vimish-fold-global-mode 1)
   (global-set-key
    (kbd "H-C-f")
    (defhydra hydra-folding (:color red)
      "
-      _o_pen fold   open _a_ll folds    
-      _c_lose fold  _r_efold    
-      "
-     ("o" vimish-fold-unfold)
-     ("c" vimish-fold)
-     ("a" vimish-fold-unfold-all)
-     ("r" vimish-fold-refold)
-     ("y" vimish-fold-avy)))
+      _o_pen node    _n_ext fold       toggle _f_orward  _s_how current only
+      _c_lose node   _p_revious fold   toggle _a_ll
+     "
+     ("o" origami-open-node)
+     ("c" origami-close-node)
+     ("n" origami-next-fold)
+     ("p" origami-previous-fold)
+     ("f" origami-forward-toggle-node)
+     ("a" origami-toggle-all-nodes)
+     ("s" origami-show-only-node)))
 #+END_SRC
 ** Undo as tree
 
