@@ -2327,9 +2327,13 @@ Send them to firefox, with keysnail much better then anything else.
     #+END_SRC
 *** lsp initialization
     #+BEGIN_SRC emacs-lisp
+      (with-eval-after-load 'lsp-intelephense
+        (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+      (with-eval-after-load 'lsp-mode
+        (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
       (setq lsp-enable-file-watchers nil)
       (setq lsp-prefer-flymake nil)
-      (setq lsp-auto-guess-root nil)
+      (setq lsp-auto-guess-root t)
       (require 'lsp-mode)
       (require 'lsp)
       (require 'lsp-clients)
@@ -2343,8 +2347,6 @@ Send them to firefox, with keysnail much better then anything else.
       (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
       (lsp-treemacs-sync-mode 1)
-      (with-eval-after-load 'lsp-mode
-        (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
   #+END_SRC
 
 **** completion
