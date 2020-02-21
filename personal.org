@@ -2063,7 +2063,7 @@ Context/Language aware region expansion/contraction.
                                (elixir-mode . elixir-mode-iex)
                                (ruby-mode . inf-ruby)
                                (js2-mode . nodejs-repl)
-(js3-mode . nodejs-repl)))
+                               (js3-mode . nodejs-repl)))
   (setq rtog/fullscreen t)
   (setq rtog/split-screen t)
 #+END_SRC
@@ -2587,9 +2587,15 @@ Send them to firefox, with keysnail much better then anything else.
                    (-buffer-name (concat "* " -project " psysh *")))
                    
               (projectile-with-default-dir -project-root
-                (vterm -buffer-name)
-                (vterm-send-string "./bin/shell.php")
-                (vterm-send-return)))
+                
+                (if (and (buffer-live-p (get-buffer -buffer-name)))
+                    (progn (switch-to-buffer -buffer-name))
+                    (progn
+                      (vterm -buffer-name)
+                      (vterm-send-string "set -k")
+                      (vterm-send-return)
+                      (vterm-send-string "if [ -f ./bin/shell.php ]; then ./bin/shell.php; else psysh; fi #")
+                    (vterm-send-return)))))
           (psysh-run "*PsySh*" "psysh")))
 
       (define-hook-helper psysh-mode () 
