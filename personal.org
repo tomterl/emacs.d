@@ -2490,6 +2490,7 @@ Send them to firefox, with keysnail much better then anything else.
     Indent with 4 spaces. Use flycheck, but dont't use the "controversial" and "cleancode" rulesets of phpmd. Use ~ac-php~ as company backend. Recreate the tags when a file is saved.
 
     #+BEGIN_SRC emacs-lisp
+      (setq lsp-intelephense-licence-key (expand-file-name "~/.config/intelephense/licence.txt"))
       (lsp-register-custom-settings
        `(("intelephense.phpdoc.functionTemplate"
           ,(list :summary "$1"
