@@ -1222,9 +1222,12 @@ This is a birds eye view of the current buffer.
 ** Dashboard
 
 #+BEGIN_SRC emacs-lisp
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-navigator t)
   (setq dashboard-items '((projects . 10)(bookmarks . 10)))
   (dashboard-setup-startup-hook)
-#+END_SRC
+  #+END_SRC
 
 ** coloured parenthesis
 #+BEGIN_SRC emacs-lisp
