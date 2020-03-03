@@ -727,6 +727,9 @@ helps for remote sessions.
     (define-hook-helper vterm-mode ()
       :name vterm_hide_modeline
       (setq mode-line-format nil))
+    (define-hook-helper vterm-mode ()
+      :name vterm_ctrl_y
+      (local-set-key (kbd "C-y") 'vterm--self-insert))
   #+END_SRC
 
 ** `eshell`
