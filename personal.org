@@ -2003,7 +2003,7 @@ Indent using spaces, 2 spaces for each indentation step.
       flyspell-issue-message-flag nil
       flyspell-issue-welcome-flag nil)
       (require 'flyspell-correct-ivy)
-      (setq lyspell-correct-interface 'flyspell-correct-ivy)
+      (setq flyspell-correct-interface 'flyspell-correct-ivy)
       (global-set-key
        (kbd "H-s")
        (defhydra hydra-spelling (:color blue)
@@ -2011,8 +2011,8 @@ Indent using spaces, 2 spaces for each indentation step.
   ^
   ^Spelling^          ^Errors^            ^Checker^
   ^────────^──────────^──────^────────────^───────^───────
-  _q_ quit            _<_ previous        _c_ correction
-  ^^                  _>_ next            _d_ dictionary
+  _q_ quit            _<_ cor. previous   _c_ correction
+  ^^                  _>_ cor. next       _d_ dictionary
   ^^                  _f_ check           _m_ mode
   ^^                  ^^                  ^^
   "
