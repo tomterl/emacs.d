@@ -2208,10 +2208,21 @@ Send them to firefox, with keysnail much better then anything else.
         :head-mode 'host
         :tail-mode 'host)
        
+      (define-innermode poly-php-js-innermode
+        :mode 'js-mode
+        :head-matcher "^[ \t]*\\(protected static \\)?$[a-z]* = <<<'?JST'?\n"
+        :tail-matcher "^JST;\n"
+        :head-mode 'host
+        :tail-mode 'host)
+       
+      (define-polymode poly-yaml-mode
+        :hostmode 'poly-yaml-hostmode
+        :innermodes '(poly-yaml-js-innermode))
       (define-polymode poly-php-mode
         :hostmode 'poly-php-hostmode
         :innermodes '(poly-php-aql-innermode
-                      poly-php-sql-innermode))
+                      poly-php-sql-innermode
+                      poly-php-js-innermode))
     #+END_SRC
 *** Languages embedded in `js-mode`-buffers
     #+BEGIN_SRC emacs-lisp
