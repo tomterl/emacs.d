@@ -2196,7 +2196,7 @@ Send them to firefox, with keysnail much better then anything else.
        
       (define-innermode poly-php-aql-innermode
         :mode 'aql-mode
-        :head-matcher "^[ \t]*protected static $[a-z]* = <<<'?AQL'?\n"
+        :head-matcher "^[ \t]*\\(protected \\|private \\)?\\(static \\)?$[_a-zA-Z0-9]* = <<<'?AQL'?\n"
         :tail-matcher "^AQL;\n"
         :head-mode 'host
         :tail-mode 'host)
@@ -2210,14 +2210,11 @@ Send them to firefox, with keysnail much better then anything else.
        
       (define-innermode poly-php-js-innermode
         :mode 'js-mode
-        :head-matcher "^[ \t]*\\(protected static \\)?$[a-z]* = <<<'?JST'?\n"
+        :head-matcher "^[ \t]*\\(protected static \\)?$[_a-zA-Z0-9]* = <<<'?JST'?\n"
         :tail-matcher "^JST;\n"
         :head-mode 'host
         :tail-mode 'host)
        
-      (define-polymode poly-yaml-mode
-        :hostmode 'poly-yaml-hostmode
-        :innermodes '(poly-yaml-js-innermode))
       (define-polymode poly-php-mode
         :hostmode 'poly-php-hostmode
         :innermodes '(poly-php-aql-innermode
