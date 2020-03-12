@@ -1367,7 +1367,7 @@ The languages I like to use.
      (ditaa . t) (sass . t)
      (lisp . t) (gnuplot . t)
      (http . t) (plantuml .t)
-     (sql-mode .t)))
+     (sql-mode .t) (mermaid . t)))
 #+END_SRC 
 The =ditaa.jar= location;
 
@@ -1382,6 +1382,10 @@ The =plantuml.jar= location
   (setq org-plantuml-jar-path (concat tom/--emacs-dir "/site/plantuml.jar"))
 #+END_SRC
 
+The ~mermaid.cli~ location
+#+BEGIN_SRC emacs-lisp
+  (setq ob-mermaid-cli-path (concat  (expand-file-name "~") "/bin/mmdc"))
+#+END_SRC
 I really like org-babel to use zsh
 
 #+BEGIN_SRC emacs-lisp
