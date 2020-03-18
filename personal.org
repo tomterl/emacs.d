@@ -729,7 +729,8 @@ helps for remote sessions.
       (setq mode-line-format nil))
     (define-hook-helper vterm-mode ()
       :name vterm_ctrl_y
-      (local-set-key (kbd "C-y") 'vterm--self-insert))
+      (local-set-key (kbd "C-y") 'vterm--self-insert)
+      (local-set-key (kbd "TAB") 'vterm--self-insert))
   #+END_SRC
 
 ** `eshell`
@@ -1098,7 +1099,7 @@ Use ivy/counsel for Completion
    :END:
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'kaolin-galaxy t)
+     (load-theme 'modus-vivendi t)
    #+END_SRC
 
 *** Adapt company-mode
@@ -1358,17 +1359,9 @@ x#+END_SRC
 
 *** babel
 
-The languages I like to use.
+Set the converter paths before loading the languages, some packages
+need them at load time.
 
-#+BEGIN_SRC emacs-lisp 
-  (org-babel-do-load-languages
-   'org-babel-load-languages 
-   '((emacs-lisp . t)  (shell . t)
-     (ditaa . t) (sass . t)
-     (lisp . t) (gnuplot . t)
-     (http . t) (plantuml .t)
-     (sql-mode .t) (mermaid . t)))
-#+END_SRC 
 The =ditaa.jar= location;
 
 #+BEGIN_SRC emacs-lisp
@@ -1391,6 +1384,19 @@ I really like org-babel to use zsh
 #+BEGIN_SRC emacs-lisp
   (setq org-babel-sh-command "zsh")
 #+END_SRC
+
+
+The languages I like to use.
+
+#+BEGIN_SRC emacs-lisp 
+  (org-babel-do-load-languages
+   'org-babel-load-languages 
+   '((emacs-lisp . t)  (shell . t)
+     (ditaa . t) (sass . t)
+     (lisp . t) (gnuplot . t)
+     (http . t) (plantuml .t)
+     (sql-mode .t) (mermaid . t)))
+#+END_SRC 
 
 Don't confirm evaluation.
 #+BEGIN_SRC emacs-lisp
@@ -1824,6 +1830,15 @@ notification in a given time intervall.
   (setq which-key-popup-type 'side-window)
   (which-key-setup-side-window-bottom)
 #+END_SRC
+** minibuffer
+   #+BEGIN_SRC emacs-lisp
+     (custom-set-variables
+      '(mini-frame-show-parameters
+        '((top . 10)
+          (width . 0.7)
+          (left . 0.5))))
+     (mini-frame-mode)
+   #+END_SRC
 ** Generic Version Control interface
 #+BEGIN_SRC emacs-lisp
 (fullframe vc-annotate quit-window nil)
@@ -2623,11 +2638,11 @@ Send them to firefox, with keysnail much better then anything else.
                 
                 (if (and (buffer-live-p (get-buffer -buffer-name)))
                     (progn (switch-to-buffer -buffer-name))
-                    (progn
-                      (vterm -buffer-name)
-                      (vterm-send-string "set -k")
-                      (vterm-send-return)
-                      (vterm-send-string "if [ -f ./bin/shell.php ]; then ./bin/shell.php; else psysh; fi #")
+                  (progn
+                    (vterm -buffer-name)
+                    (vterm-send-string "set -k")
+                    (vterm-send-return)
+                    (vterm-send-string "if [ -f ./bin/shell.php ]; then ./bin/shell.php; else psysh; fi #")
                     (vterm-send-return)))))
           (psysh-run "*PsySh*" "psysh")))
 

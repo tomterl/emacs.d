@@ -208,6 +208,7 @@
 (depends-on "material-theme")
 (depends-on "memoize")
 (depends-on "mermaid-mode")
+(depends-on "mini-frame")
 (depends-on "mmm-mode")
 (depends-on "modus-vivendi-theme")
 (depends-on "moe-theme")
