@@ -185,6 +185,7 @@ static char *gnus-pointer[] = {
  '(main-line-color1 "#1E1E1E")
  '(main-line-color2 "#111111")
  '(main-line-separator-style 'chamfer)
+ '(mini-frame-show-parameters '((top . 10) (width . 0.7) (left . 0.5)))
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(objed-cursor-color "#BF616A")
