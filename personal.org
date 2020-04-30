@@ -1813,6 +1813,10 @@ notification in a given time intervall.
   (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
 #+END_SRC
 * Behaviour
+** kill-ring
+  #+BEGIN_SRC emacs-lisp
+    (setq save-interprogram-paste-before-kill t)
+  #+END_SRC
 ** Modal editing
 #+BEGIN_SRC emacs-lisp
   (require 'boon-qwerty)
