@@ -2373,17 +2373,15 @@ Send them to firefox, with keysnail much better then anything else.
       (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
       (require 'origami)
       (require 'lsp-origami)
-      (require 'lsp-treemacs)
       (require 'lsp-ivy)
       (add-hook 'lsp-mode-hook 'lsp-ui-mode)
       (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
       (add-hook 'origami-mode-hook #'lsp-origami-mode)
-      (lsp-treemacs-sync-mode 1)
     #+END_SRC
 
 **** completion
     #+BEGIN_SRC emacs-lisp
-      (require 'company-lsp)
+      (require 'company-capf)
       (defun tom/company-transformer (candidates)
         (let ((completion-ignore-case t))
           (all-completions (company-grab-symbol) candidates)))
