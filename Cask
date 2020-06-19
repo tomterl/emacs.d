@@ -37,6 +37,7 @@
 (depends-on "centered-cursor-mode")
 (depends-on "chyla-theme")
 (depends-on "circe")
+(depends-on "closql")
 (depends-on "clues-theme")
 (depends-on "coffee-mode")
 (depends-on "color-theme-approximate")
