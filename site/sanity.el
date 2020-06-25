@@ -23,6 +23,7 @@
 (setq initial-major-mode 'org-mode)
 (setq-default indent-tabs-mode nil)
 (setq pop-up-windows t)
+(menu-bar-mode 0)
 (tool-bar-mode 0)
 (tooltip-mode  0)
 (scroll-bar-mode 0)
