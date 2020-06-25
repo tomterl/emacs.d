@@ -1099,7 +1099,7 @@ Use ivy/counsel for Completion
    :END:
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
-     (load-theme 'modus-vivendi t)
+     (load-file "~/.emacs.d/site/elegance.el")
    #+END_SRC
 
 *** Adapt company-mode
@@ -1195,7 +1195,7 @@ This is a birds eye view of the current buffer.
 
 ** Fringe
 #+BEGIN_SRC emacs-lisp
-(fringe-mode (cons 16  8))
+(fringe-mode (cons 10  8))
 #+END_SRC
 
 ** Frametitle
@@ -1645,172 +1645,6 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
       (setq company-sql-db-user "fbtools")
       (set (make-local-variable 'company-backends)
            '((company-postgresql)))))
-#+END_SRC
-* Chat and instant messaging 
-
-I used to use =erc=, but I'm giving circe a try -- it just turned 1.5
-today :-). 
-
-** =circe= Options
-
-Reduce the 'leaving/enter' messages.
-
-
-#+BEGIN_SRC emacs-lisp
-  (setq circe-reduce-lurker-spam t)
-#+END_SRC
-
-A more fluid display setup 
-#+BEGIN_SRC emacs-lisp
-  (setq
-   lui-time-stamp-position 'right-margin
-   lui-fill-type nil)
-
-  (define-hook-helper lui-mode ()
-    (setq
-     fringes-outside-margins t
-     right-margin-width 7
-     word-wrap t
-     wrap-prefix "    "))
-#+END_SRC
-
-Put query buffers in the chat Perspective.
-
-#+BEGIN_SRC emacs-lisp
-
-  (define-hook-helper circe-mode ()
-    (let ((-buff (current-buffer)))
-      (with-perspective "chat"
-        (persp-add-buffer -buff))))
-#+END_SRC
-
-Enable logging for channels, this is nice for bitlbee conversations.
-
-The manual must be out of date, this doesn't load.
-
-#+BEGIN_SRC emacs-lisp
-;  (require 'circe)
-;  (require 'lui-autoloads)
-;  (enable-lui-logging)
-#+END_SRC
-
-** Color the nicknames.
-#+BEGIN_SRC emacs-lisp
-  (enable-circe-color-nicks)
-#+END_SRC
-
-** Don't show the names list at join
-#+BEGIN_SRC emacs-lisp
-;(circe-set-display-handler "353" (lambda (&rest args) nil))
-#+END_SRC
-** Spellchecking
-
-#+BEGIN_SRC emacs-lisp
-  (setq lui-flyspell-p t
-        lui-flyspell-alist '((".*" "american")))
-#+END_SRC
-
-** Server 
-#+BEGIN_SRC emacs-lisp
-  (defun tom/set-circe-options ()
-    "Set the networks options dynamically just before connection,
-      after loading the passwords"
-    (if (tom/work?)
-        (let ((--bitlbee (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
-          (setq circe-network-options
-                (list
-                 (list "Bitlbee"
-                       :nick (netrc-get --bitlbee "login")
-                       :nickserv-password (netrc-get --bitlbee "password")))))
-      (let ((--freenode (netrc-machine (netrc-parse "~/.netrc") "freenode" t))
-            (--bitlbee  (netrc-machine (netrc-parse "~/.netrc") "bitlbee" t)))
-        (setq circe-network-options
-              (list
-               (list "ZNC"
-                     :user (netrc-get --freenode "login")
-                     :host "muehlenweg.dyndns-home.com"
-                     :pass (netrc-get --freenode "password")
-                     :port 6667
-                     )
-               (list "Bitlbee"
-                     :nick (netrc-get --bitlbee "login")
-                     :nickserv-password (netrc-get --bitlbee "password")))))))
-#+END_SRC
-   
-** Smart connect
-
-Straight out of the =circe= wiki
-
-#+BEGIN_SRC emacs-lisp
-  (defun circe-network-connected-p (network)
-    "Return non-nil if there's any Circe server-buffer whose
-  `circe-server-netwok' is NETWORK."
-    (catch 'return
-      (dolist (buffer (circe-server-buffers))
-        (with-current-buffer buffer
-          (if (string= network circe-server-network)
-              (throw 'return t))))))
-
-  (defun circe-maybe-connect (network)
-    "Connect to NETWORK, but ask user for confirmation if it's
-  already been connected to."
-    (interactive "sNetwork: ")
-    (if (or (not (circe-network-connected-p network))
-            (y-or-n-p (format "Already connected to %s, reconnect?" network)))
-        (circe network)))
-  (defun irc ()
-    "Connect to all configured IRC servers"
-    (interactive)
-    (persp-switch "chat")
-    (tom/set-circe-options)
-    (if (not (tom/work?))
-        (circe-maybe-connect "ZNC"))
-    (circe-maybe-connect "Bitlbee"))
-#+END_SRC
-
-** Desktop notifications
-
-Ruben Maher expanded my idea to a full-fledged solution available on
-github: [[https://github.com/eqyiel/circe-notifications]].
-
-Notify me when tracked buffers have activity -- but not more than one
-notification in a given time intervall.
-
-#+BEGIN_SRC emacs-lisp
-  (autoload 'enable-circe-notifications "circe-notifications" nil t)
-
-  (eval-after-load "circe-notifications"
-  '(setq circe-notifications-watch-strings
-           '("Martin" "mregner" "Sascha" "saschab" "bgeisler" "sabrina" "olivers")
-           circe-notifications-timeout 3000))
-
-  (add-hook 'circe-server-connected-hook 'enable-circe-notifications)
-#+END_SRC
-** Away/Return
-#+BEGIN_SRC emacs-lisp
-  (defun tom/chataway ()
-    "Set status to 'away NA' and reduce priority to 0"
-(interactive)
-    (with-current-buffer "&bitlbee"
-      (goto-char (point-max))
-      (insert "acc jabber set priority 0")
-      (call-interactively 'lui-send-input)
-      (insert "/away NA")
-      (call-interactively 'lui-send-input)
-      (message "You are away... (&bitlbee)")))
-  (global-set-key (kbd "H-C-a") (λ (tom/chataway)))
-
-  (defun tom/chatreturn ()
-    "Set status to 'away NA' and reduce priority to 0"
-(interactive)
-    (with-current-buffer "&bitlbee"
-      (goto-char (point-max))
-      (insert "acc jabber set priority 10")
-      (call-interactively 'lui-send-input)
-      (insert "/away")
-      (call-interactively 'lui-send-input)
-      (message "Welcome back... (&bitlbee)")))
-  (global-set-key (kbd "H-C-r") (λ (tom/chatreturn)))
 #+END_SRC
 * Behaviour
 ** kill-ring
@@ -3083,6 +2917,10 @@ Do this after everything is setup.
 #+END_SRC
 
 * Finishing
+** sanity
+  #+BEGIN_SRC emacs-lisp
+    (load-file "~/.emacs.d/site/sanity.el")
+  #+END_SRC
 ** Enable gc
    #+BEGIN_SRC emacs-lisp
    (setq gc-cons-threshold tom/gc-cons-threshold)
