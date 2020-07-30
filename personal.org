@@ -2419,11 +2419,13 @@ answered yes the last couple of years.
                 php-template-compatibility nil
 
                 php-mode-coding-style (quote wordpress)
-                php-lineup-cascaded-calls t)
+                php-lineup-cascaded-calls t
+                lsp-enable-semantic-highlighting nil)
           (add-hook 'write-contents-functions 'tom/dtw nil t)
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-          (poly-php-mode 1)))
+          (poly-php-mode 1)
+          (font-lock-mode 1)))
     
       (add-hook 'php-mode-hook 'flycheck-mode)
       (add-hook 'php-mode-hook #'lsp)
