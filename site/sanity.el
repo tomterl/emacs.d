@@ -40,5 +40,5 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-x C-x") 'execute-extended-command)
 
-(setq-default mode-line-format'(""))
+(setq-default mode-line-format '(""))
 (provide 'sanity)
