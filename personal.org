@@ -2186,6 +2186,13 @@ Send them to firefox, with keysnail much better then anything else.
     :docstring "Searchin' the wikis.")
   (engine-mode t)
 #+END_SRC
+** On exit
+Don't ask for confirmation to kill running processes on exit; I always
+answered yes the last couple of years.
+
+#+BEGIN_SRC emacs-lisp
+(setq confirm-kill-processes nil)
+#+END_SRC
 * Languages
 ** General
 *** line numbers
