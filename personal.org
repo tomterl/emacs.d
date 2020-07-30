@@ -1002,6 +1002,8 @@ Use ivy/counsel for Completion
 ** Font
 -> ==
    #+BEGIN_SRC emacs-lisp
+     (require 'unicode-fonts)
+     (unicode-fonts-setup)
        (defvar tom/default-font "Fira Code Medium-11"
          "The font to use under normal circumstances")
        (unless (tom/work?)
@@ -1101,6 +1103,7 @@ Use ivy/counsel for Completion
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/site/themes/")
      (load-file "~/.emacs.d/site/elegance.el")
+     (load-theme 'doom-dark+ t)
    #+END_SRC
 
 *** Adapt company-mode
