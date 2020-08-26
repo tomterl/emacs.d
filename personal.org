@@ -2213,9 +2213,10 @@ answered yes the last couple of years.
       (setq lsp-auto-guess-root t)
       (require 'lsp-mode)
       (require 'lsp)
-      (require 'lsp-clients)
+      ;(require 'lsp-clients)
+      (require 'lsp-php)
       (require 'lsp-ui)
-      (require 'lsp-ui-flycheck) ; for lsp-ui-flycheck--start
+      (require 'lsp-diagnostics) ; for lsp-ui-flycheck--start
       (require 'origami)
       (require 'lsp-origami)
       (require 'lsp-ivy)
@@ -2390,7 +2391,7 @@ answered yes the last couple of years.
         "A syntax checker using the Language Server Protocol (RLS)
             provided by lsp-mode.
             See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp--flycheck-start
+        :start #'lsp-diagnostics--flycheck-start
         :modes '(php-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e))
@@ -2412,7 +2413,7 @@ answered yes the last couple of years.
           (flycheck-may-enable-checker 'php-phpcs)
           (flycheck-disable-checker 'phpstan)
           (flycheck-disable-checker 'php-phpmd)
-          (setq-local flycheck-checker 'lsp-php-ui)
+          
           (setq tab-width 4
                 c-basic-offset 4
                 indent-tabs-mode nil
@@ -2425,7 +2426,8 @@ answered yes the last couple of years.
           (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
           (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
           (poly-php-mode 1)
-          (font-lock-mode 1)))
+          (font-lock-mode 1)
+          (setq-local flycheck-checker 'lsp-php-ui)))
     
       (add-hook 'php-mode-hook 'flycheck-mode)
       (add-hook 'php-mode-hook #'lsp)
@@ -2526,7 +2528,7 @@ answered yes the last couple of years.
         "A syntax checker using the Language Server Protocol (RLS)
     provided by lsp-mode.
     See https://github.com/emacs-lsp/lsp-mode."
-        :start #'lsp--flycheck-start
+        :start #'lsp-diagnostics--flycheck-start
         :modes '(js-mode) ; Need a default mode
         :predicate (lambda () lsp-mode)
         :error-explainer (lambda (e) (flycheck-error-message e)))
