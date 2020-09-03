@@ -1004,7 +1004,7 @@ Use ivy/counsel for Completion
    #+BEGIN_SRC emacs-lisp
      (require 'unicode-fonts)
      (unicode-fonts-setup)
-       (defvar tom/default-font "Fira Code Medium-11"
+       (defvar tom/default-font "Fira Code Medium-10"
          "The font to use under normal circumstances")
        (unless (tom/work?)
          (setq tom/default-font "Courier Prime Code-12"))
