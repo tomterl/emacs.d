@@ -75,6 +75,8 @@
 (depends-on "diminish")
 (depends-on "dired-single")
 (depends-on "direx")
+(depends-on "docker")
+(depends-on "docker-compose-mode")
 (depends-on "dockerfile-mode")
 (depends-on "doneburn-theme")
 (depends-on "doom-modeline")
