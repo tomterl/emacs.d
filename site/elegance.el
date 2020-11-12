@@ -158,10 +158,11 @@ background color that is barely perceptible."
                          'mouse-face 'mode-line-highlight
                          'local-map   mode-line-major-mode-keymap)
          " %b "
-         (if (and buffer-file-name (buffer-modified-p))
+         (if (and buffer-file-name (buffer-modified-p)) 
              (propertize "(modified)" 'face `(:inherit face-faded)))))
-       (format-mode-line
-        (propertize "%4l:%2c  " 'face `(:inherit face-faded)))))))
+       (format-mode-line (list
+        (propertize "%4l:%2c  " 'face `(:inherit face-faded))
+        (propertize (swsw-format-id (selected-window)) 'face `(:inherit face-faded))))))))
 
 
 ;; Comment if you want to keep the modeline at the bottom

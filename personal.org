@@ -376,6 +376,13 @@ Stuff looted from graphene.
 #+END_SRC
 
 *** Window switching/handling
+
+Try out ~swsw.el~,
+#+BEGIN_SRC emacs-lisp
+  (require 'swsw)
+  (swsw-mode t)
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   (global-set-key
    (kbd "H-o")
@@ -401,7 +408,7 @@ Stuff looted from graphene.
      ("^" enlarge-window)
      ("t" transpose-frame "'")
      ("o" delete-other-windows "one" :color blue)
-     ("a" ace-window "ace")
+     ("a" (lambda () (interactive) (call-interactively 'swsw-select)) "swsw" :color blue)
      ("s" ace-swap-window "swap")
      ("d" ace-delete-window "del")
      ("i" ace-maximize-window "ace-one" :color blue)
