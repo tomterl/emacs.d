@@ -9,6 +9,7 @@
 ;; load Org-mode and gnus from source.
 
 ;; Variables
+(setq comp-deferred-compilation t)
 (setq auto-save-list-file-prefix nil)
 (defvar tom/--emacs-dir (expand-file-name "~/.emacs.d")
   "Directory of the Emacs setup.")
