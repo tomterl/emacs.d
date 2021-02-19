@@ -17,7 +17,8 @@
  '(awesome-tray-active-modules '("location" "parent-dir" "git" "mode-name" "circe"))
  '(beacon-color "#cc6666")
  '(boon-enclosures
-   '((65 "⟨" "⟩")
+   (quote
+    ((65 "⟨" "⟩")
      (97 "<" ">")
      (98 "[" "]")
      (99 "{-" "-}")
@@ -31,17 +32,18 @@
      (113 "'" "'")
      (114 "{" "}")
      (116 "~" "~")
-     (96 "`" "`")))
+     (96 "`" "`"))))
  '(boon-mode nil)
  '(boon-special-mode-list
-   '(Buffer-menu-mode debugger-mode ediff-mode git-rebase-mode mu4e-headers-mode mu4e-view-mode org-agenda-mode cfw:calendar-mode geben-mode))
+   (quote
+    (Buffer-menu-mode debugger-mode ediff-mode git-rebase-mode mu4e-headers-mode mu4e-view-mode org-agenda-mode cfw:calendar-mode geben-mode)))
  '(column-number-mode t)
- '(company-box-icons-alist 'company-box-icons-all-the-icons)
+ '(company-box-icons-alist (quote company-box-icons-all-the-icons))
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(company-racer-executable "~/bin/racer")
- '(compilation-message-face 'default)
- '(csv-separators '("," "	" ";"))
+ '(compilation-message-face (quote default))
+ '(csv-separators (quote ("," "	" ";")))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#657b83")
  '(cua-overwrite-cursor-color "#b58900")
@@ -54,7 +56,8 @@
  '(display-line-numbers-type 'relative)
  '(eldoc-echo-area-use-multiline-p nil)
  '(emms-mode-line-icon-image-cache
-   '(image :type xpm :ascent center :data "/* XPM */
+   (quote
+    (image :type xpm :ascent center :data "/* XPM */
 static char *note[] = {
 /* width height num_colors chars_per_pixel */
 \"    10   11        2            1\",
@@ -72,23 +75,26 @@ static char *note[] = {
 \"#..######.\",
 \"#######...\",
 \"######....\",
-\"#######..#\" };"))
- '(engine/browser-function 'eww-browse-url)
+\"#######..#\" };")))
+ '(engine-mode t)
+ '(engine/browser-function (quote eww-browse-url))
  '(es-always-pretty-print t)
  '(es-cc-endpoint "http://192.168.16.249:9200/")
  '(es-default-url "http://192.168.16.249:9200/_search?pretty=true")
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#383838")
- '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(flycheck-jshintrc (expand-file-name "~/.jshintrc"))
  '(flycheck-typescript-tslint-config (expand-file-name "~/.tslint.json"))
- '(frame-background-mode 'dark)
+ '(frame-background-mode (quote dark))
+ '(fringe-mode 4 nil (fringe))
  '(ggtags-highlight-tag 1.0)
  '(ggtags-highlight-tag-delay 1.0)
  '(global-dmacro-mode t)
  '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
  '(gnus-mode-line-image-cache
-   '(image :type xpm :ascent center :data "/* XPM */
+   (quote
+    (image :type xpm :ascent center :data "/* XPM */
 static char *gnus-pointer[] = {
 /* width height num_colors chars_per_pixel */
 \"    18    13        2            1\",
@@ -108,32 +114,37 @@ static char *gnus-pointer[] = {
 \"######..###.######\",
 \"###....####.######\",
 \"###..######.######\",
-\"###########.######\" };") t)
+\"###########.######\" };")) t)
+ '(golden-ratio-mode nil)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type 'cabal-repl)
+ '(haskell-process-type (quote cabal-repl))
  '(haskell-tags-on-save t)
- '(highlight-changes-colors '("#d33682" "#6c71c4"))
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
     (solarized-color-blend it "#fdf6e3" 0.25)
-    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
  '(highlight-symbol-foreground-color "#586e75")
  '(highlight-tail-colors
-   '(("#eee8d5" . 0)
+   (quote
+    (("#eee8d5" . 0)
      ("#B4C342" . 20)
      ("#69CABF" . 30)
      ("#69B7F0" . 50)
      ("#DEB542" . 60)
      ("#F2804F" . 70)
      ("#F771AC" . 85)
-     ("#eee8d5" . 100)))
+     ("#eee8d5" . 100))))
  '(hindent-style "gibiansky")
  '(hl-bg-colors
-   '("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342"))
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
  '(hl-fg-colors
-   '("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3"))
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(hl-sexp-background-color "#1c1f26")
  '(hl-todo-keyword-faces
    '(("TODO" . "#dc752f")
@@ -154,7 +165,7 @@ static char *gnus-pointer[] = {
  '(ibuffer-deletion-face 'diredp-deletion-file-name)
  '(ibuffer-marked-face 'diredp-flag-mark)
  '(ivy-case-fold-search-default t)
- '(ivy-display-function 'ivy-display-function-lv t)
+ '(ivy-display-function (quote ivy-display-function-lv) t)
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#D08770"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#A3BE8C"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#4f5b66"))
@@ -165,22 +176,25 @@ static char *gnus-pointer[] = {
  '(lsp-intelephense-completion-insert-use-declaration nil)
  '(lsp-intelephense-format-enable nil)
  '(lsp-php-language-server-command
-   '("php7.2" "/home/tregner/.composer/vendor/bin/php-language-server.php"))
+   (quote
+    ("php7.2" "/home/tregner/.composer/vendor/bin/php-language-server.php")))
  '(lsp-php-show-file-parse-notifications nil)
  '(lsp-php-workspace-root-detectors
-   '(".projectile " lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robot"))
+   (quote
+    (".projectile " lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robot")))
  '(lsp-ui-doc-include-signature t)
- '(lsp-ui-doc-position 'top)
+ '(lsp-ui-doc-position (quote top))
  '(lsp-ui-doc-use-childframe nil)
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-peek-always-show t)
- '(lsp-ui-peek-fontify 'always)
+ '(lsp-ui-peek-fontify (quote always))
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-show-hover t)
- '(lsp-ui-sideline-update-mode 'point)
- '(magit-blame-echo-style 'headings)
+ '(lsp-ui-sideline-update-mode (quote line))
+ '(magit-blame-echo-style (quote headings))
  '(magit-blame-styles
-   '((headings
+   (quote
+    ((headings
       (heading-format . "%-20a %C %s
 "))
      (margin
@@ -191,16 +205,17 @@ static char *gnus-pointer[] = {
      (highlight
       (highlight-face . magit-blame-highlight))
      (lines
-      (show-lines . t))))
+      (show-lines . t)))))
  '(magit-diff-use-overlays nil)
- '(magit-pull-arguments '("--rebase"))
+ '(magit-pull-arguments (quote ("--rebase")))
  '(magit-use-overlays nil t)
  '(main-line-color1 "#1E1E1E")
  '(main-line-color2 "#111111")
- '(main-line-separator-style 'chamfer)
- '(mini-frame-show-parameters '((top . 10) (width . 0.7) (left . 0.5)))
+ '(main-line-separator-style (quote chamfer))
+ '(menu-bar-mode nil)
  '(nrepl-message-colors
-   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(objed-cursor-color "#BF616A")
  '(org-sidebar-tree-side 'right)
  '(origami-fold-replacement ">>>")
@@ -209,17 +224,17 @@ static char *gnus-pointer[] = {
  '(paradox-async-display-buffer-function nil)
  '(paradox-automatically-star nil)
  '(paradox-execute-asynchronously nil)
- '(paradox-spinner-type 'progress-bar-filled)
- '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
- '(persp-add-buffer-on-after-change-major-mode 'free)
+ '(paradox-spinner-type (quote progress-bar-filled))
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(persp-add-buffer-on-after-change-major-mode (quote free))
  '(persp-add-buffer-on-find-file nil)
  '(persp-auto-resume-time -1.0)
  '(persp-auto-save-opt 0)
- '(persp-interactive-completion-system 'ido)
+ '(persp-interactive-completion-system (quote ido))
  '(persp-keymap-prefix "p")
  '(persp-mode-projectile-bridge-persp-name-prefix "")
  '(persp-set-ido-hooks t)
- '(persp-show-modestring ''header)
+ '(persp-show-modestring (quote (quote header)))
  '(php-lineup-cascaded-calls nil)
  '(php-mode-lineup-cascaded-calls nil)
  '(php-refactor-patch-command "patch --no-backup-if-mismatch -p1")
@@ -233,7 +248,8 @@ static char *gnus-pointer[] = {
  '(rustic-ansi-faces
    ["#232530" "#e95678" "#09f7a0" "#fab795" "#21bfc2" "#6c6f93" "#59e3e3" "#c7c9cb"])
  '(safe-local-variable-values
-   '((engine . smarty)
+   (quote
+    ((engine . smarty)
      (php-project-root projectile-project-root)
      (php-project-root . auto)
      (web-mode-enable-auto-indentation)
@@ -241,7 +257,8 @@ static char *gnus-pointer[] = {
      (projectile-indexing-method . native)
      (projectile-enable-caching . t)
      (eval when
-           (fboundp 'rainbow-mode)
+           (fboundp
+            (quote rainbow-mode))
            (rainbow-mode 1))
      (firestarter . ert-run-tests-interactively)
      (encoding . utf-8)
@@ -256,37 +273,45 @@ static char *gnus-pointer[] = {
                             (buffer-file-name)))
            (emacs-lisp-mode)
            (when
-               (fboundp 'flycheck-mode)
+               (fboundp
+                (quote flycheck-mode))
              (flycheck-mode -1))
            (unless
-               (featurep 'package-build)
+               (featurep
+                (quote package-build))
              (let
                  ((load-path
                    (cons ".." load-path)))
-               (require 'package-build)))
-           (package-build-minor-mode))))
+               (require
+                (quote package-build))))
+           (package-build-minor-mode)))))
  '(smartparens-global-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(sql-product 'postgres)
+ '(sql-product (quote postgres))
  '(subatomic-high-contrast t)
  '(subatomic-more-visible-comment-delimiters t)
  '(syslog-debug-face
-   '((t :background unspecified :foreground "#2aa198" :weight bold)))
+   (quote
+    ((t :background unspecified :foreground "#2aa198" :weight bold))))
  '(syslog-error-face
-   '((t :background unspecified :foreground "#dc322f" :weight bold)))
- '(syslog-hour-face '((t :background unspecified :foreground "#859900")))
+   (quote
+    ((t :background unspecified :foreground "#dc322f" :weight bold))))
+ '(syslog-hour-face (quote ((t :background unspecified :foreground "#859900"))))
  '(syslog-info-face
-   '((t :background unspecified :foreground "#268bd2" :weight bold)))
- '(syslog-ip-face '((t :background unspecified :foreground "#b58900")))
- '(syslog-su-face '((t :background unspecified :foreground "#d33682")))
+   (quote
+    ((t :background unspecified :foreground "#268bd2" :weight bold))))
+ '(syslog-ip-face (quote ((t :background unspecified :foreground "#b58900"))))
+ '(syslog-su-face (quote ((t :background unspecified :foreground "#d33682"))))
  '(syslog-warn-face
-   '((t :background unspecified :foreground "#cb4b16" :weight bold)))
+   (quote
+    ((t :background unspecified :foreground "#cb4b16" :weight bold))))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
  '(undo-tree-visualizer-timestamps t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
-   '((20 . "#dc322f")
+   (quote
+    ((20 . "#dc322f")
      (40 . "#CF4F1F")
      (60 . "#C26C0F")
      (80 . "#b58900")
@@ -303,7 +328,7 @@ static char *gnus-pointer[] = {
      (300 . "#299BA6")
      (320 . "#2896B5")
      (340 . "#2790C3")
-     (360 . "#268bd2")))
+     (360 . "#268bd2"))))
  '(vc-annotate-very-old-color nil)
  '(warning-minimum-level :error)
  '(web-mode-enable-engine-detection t)
