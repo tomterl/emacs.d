@@ -15,21 +15,33 @@
   "Directory of the Emacs setup.")
 (defvar tom/--src-base (expand-file-name "~/.emacs.src.d")
   "Location of local repositories.")
-(defvar tom/--org-base (expand-file-name "org-mode" tom/--src-base)
-  "Location of `org-mode'.")
+;(defvar tom/--org-base (expand-file-name "org-mode" tom/--src-base)
+;  "Location of `org-mode'.")
 
 ;; Code
-(require 'cl-lib)
+(eval-when-compile
+  (require 'cl-lib))
 
 ;; local, not packaged extensions
 (add-to-list 'load-path (expand-file-name "site" tom/--emacs-dir))
 
 ;; load personal.org
-(let ((org-lisp-dir (expand-file-name "lisp" tom/--org-base)))
   (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir)))
-    (when (file-directory-p org-lisp-dir)
-      (add-to-list 'load-path org-lisp-dir)
       (require 'org)
-      (org-babel-load-file org-file))))
+      (org-babel-load-file org-file))
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   '((projectile-indexing-method . native)
+     (projectile-enable-caching . t))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -229,6 +229,7 @@
 (depends-on "nodejs-repl")
 (depends-on "noflet")
 (depends-on "notify")
+(depends-on "oauth2")
 (depends-on "ob-http")
 (depends-on "ob-mermaid")
 (depends-on "ob-rust")
