@@ -90,17 +90,17 @@ Lambda as λ
      (file-exists-p (expand-file-name "~/.work")))
  #+END_SRC
 
+** Hook helper
+#+BEGIN_SRC emacs-lisp
+  (require 'hook-helpers)
+#+END_SRC
+
 ** Emacs =custom=
 
  #+BEGIN_SRC emacs-lisp
    (setq custom-file "~/.emacs.d/custom.el")
    (load custom-file)
  #+END_SRC
-
-** Hook helper
-#+BEGIN_SRC emacs-lisp
-  (require 'hook-helpers)
-#+END_SRC
 ** Helper functions
 *** Escape HTML entities
 
