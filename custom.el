@@ -202,13 +202,14 @@ static char *gnus-pointer[] = {
  '(main-line-color2 "#111111")
  '(main-line-separator-style 'chamfer)
  '(menu-bar-mode nil)
+ '(mini-frame-show-parameters '((top . 10) (width . 0.7) (left . 0.5)))
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(objed-cursor-color "#BF616A")
  '(org-sidebar-tree-side 'right)
  '(origami-fold-replacement ">>>")
  '(package-selected-packages
-   '(undo-fu docker docker-compose-mode mermaid-mode ob-mermaid all-the-icons-ibuffer all-the-icons-ivy-rich gnu-elpa-keyring-update yequake ob-sql-mode emacsql emacsql-psql counsel-jq indent-guide crux flycheck-phpstan all-the-icons flyspell-correct-ivy lsp-origami plantuml-mode engine-mode which-key-posframe poly-org beacon subatomic-theme org-projectile company-web all-the-icons-ivy counsel-projectile cyphejor doneburn-theme linum-relative sx lsp-sh darkburn-theme obsidian-theme popup-imenu klere-theme dakrone-theme liso-theme deadgrep hook-helpers rainbow-delimiters atom-dark-theme calmer-forest-theme exotica-theme lsp-javascript-typescript lsp-php frame-local ov editorconfig editorconfig-charset-extras editorconfig-custom-majormode editorconfig-domain-specific zenburn-theme phpcbf projectile-ripgrep projectile-speedbar company-box moe-theme kaleidoscope ido-completing-read+ persp-mode persp-mode-projectile-bridge rg speed-type ob-http sql-indent ido-vertical-mode badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smex smart-cursor-color ruby-tools ruby-refactor ruby-end ruby-dev rotate rinari popwin popup phpunit php-auto-yasnippets paredit pallet origami omni-scratch names minimap lentic json-rpc jade-mode ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist ag ace-window ace-jump-buffer 2048-game))
+   '(bufler undo-fu docker docker-compose-mode mermaid-mode ob-mermaid all-the-icons-ibuffer all-the-icons-ivy-rich gnu-elpa-keyring-update yequake ob-sql-mode emacsql emacsql-psql counsel-jq indent-guide crux flycheck-phpstan all-the-icons flyspell-correct-ivy lsp-origami plantuml-mode engine-mode which-key-posframe poly-org beacon subatomic-theme org-projectile company-web all-the-icons-ivy counsel-projectile cyphejor doneburn-theme linum-relative sx lsp-sh darkburn-theme obsidian-theme popup-imenu klere-theme dakrone-theme liso-theme deadgrep hook-helpers rainbow-delimiters atom-dark-theme calmer-forest-theme exotica-theme lsp-javascript-typescript lsp-php frame-local ov editorconfig editorconfig-charset-extras editorconfig-custom-majormode editorconfig-domain-specific zenburn-theme phpcbf projectile-ripgrep projectile-speedbar company-box moe-theme kaleidoscope ido-completing-read+ persp-mode persp-mode-projectile-bridge rg speed-type ob-http sql-indent ido-vertical-mode badger-theme flyspell-correct urlenc railscasts-reloaded-theme creamsody-theme material-theme zeal-at-point company-php outline-magic firebelly-theme diminish notify company-racer company-tern flycheck-rust racer rustfmt nlinum php-refactor-mode ac-php httpd inf-groovy magit-tramp elixir-mix yagist xml-rpc wrap-region window-layout wgrep-ag volatile-highlights vagrant underwater-theme twilight-bright-theme twilight-anti-bright-theme sunrise-x-mirror sunrise-x-loop stylus-mode stumpwm-mode string-inflection sr-speedbar soothe-theme smex smart-cursor-color ruby-tools ruby-refactor ruby-end ruby-dev rotate rinari popwin popup phpunit php-auto-yasnippets paredit pallet origami omni-scratch names minimap lentic json-rpc jade-mode ix impatient-mode image+ httprepl handlebars-mode grunt groovy-mode golden-ratio go-errcheck go-eldoc go-direx git-timemachine fringe-helper flymake-yaml flymake-elixir flymake-cursor flx-isearch flx-ido flatland-theme expand-region erc-tweet epresent elnode elixir-yasnippets edbi drag-stuff dockerfile-mode db-pg csv-mode company-inf-ruby color-theme-approximate coffee-mode clues-theme centered-cursor-mode caskxy ample-theme alect-themes alchemist ag ace-window ace-jump-buffer 2048-game))
  '(paradox-async-display-buffer-function nil)
  '(paradox-automatically-star nil)
  '(paradox-execute-asynchronously nil)
@@ -236,38 +237,8 @@ static char *gnus-pointer[] = {
  '(rustic-ansi-faces
    ["#232530" "#e95678" "#09f7a0" "#fab795" "#21bfc2" "#6c6f93" "#59e3e3" "#c7c9cb"])
  '(safe-local-variable-values
-   '((engine . smarty)
-     (php-project-root projectile-project-root)
-     (php-project-root . auto)
-     (web-mode-enable-auto-indentation)
-     (projectile-ignored-directories list ".cask")
-     (projectile-indexing-method . native)
-     (projectile-enable-caching . t)
-     (eval when
-           (fboundp 'rainbow-mode)
-           (rainbow-mode 1))
-     (firestarter . ert-run-tests-interactively)
-     (encoding . utf-8)
-     (org-confirm-babel-evaluate)
-     (eval hs-hide-all)
-     (eval when
-           (and
-            (buffer-file-name)
-            (file-regular-p
-             (buffer-file-name))
-            (string-match-p "^[^.]"
-                            (buffer-file-name)))
-           (emacs-lisp-mode)
-           (when
-               (fboundp 'flycheck-mode)
-             (flycheck-mode -1))
-           (unless
-               (featurep 'package-build)
-             (let
-                 ((load-path
-                   (cons ".." load-path)))
-               (require 'package-build)))
-           (package-build-minor-mode))))
+   '((projectile-indexing-method . native)
+     (projectile-enable-caching . t)))
  '(smartparens-global-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(sql-product 'postgres)

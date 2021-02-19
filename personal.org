@@ -1667,11 +1667,6 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
   (require 'boon-qwerty)
   (boon-mode)
 #+END_SRC
-*** `geben` buffers 
-#+BEGIN_SRC emacs-lisp
-  (define-hook-helper geben-mode ()
-    (boon-set-state 'boon-special-state))
-#+END_SRC
 
 ** Display available keys 
 #+BEGIN_SRC emacs-lisp
@@ -2224,7 +2219,7 @@ answered yes the last couple of years.
       (require 'lsp-mode)
       (require 'lsp)
       ;(require 'lsp-clients)
-      (require 'lsp-php)
+      ;(require 'lsp-php)
       (require 'lsp-ui)
       (require 'lsp-diagnostics) ; for lsp-ui-flycheck--start
       (require 'origami)
@@ -2935,37 +2930,7 @@ Set an org-mode html export as readme text for a sourcehut repository.  Use ~bin
          (apply orig-fun args)))
 
    #+END_SRC
-
-* Passwords
-*** Basic setup
- #+BEGIN_SRC emacs-lisp
-   (require 'org-passwords)
-   (setq org-passwords-file "~/.auth.gpg")
-   (setq org-passwords-random-words-dictionary "/etc/dictionaries-common/words")
- #+END_SRC
-*** capture template
- #+BEGIN_SRC emacs-lisp
-   (require 'org-capture)
-   (add-to-list 'org-capture-templates
-                '("p" "password" entry (file "~/.auth.gpg")
-                  "* %^{Title}\n  %^{URL}p %^{USERNAME}p %^{PASSWORD}p"))
- #+END_SRC
-*** keybindings
- #+BEGIN_SRC emacs-lisp
-   (eval-after-load "org-passwords"
-     '(progn
-        (define-key org-passwords-mode-map
-          (kbd "C-c C-c")
-          'org-passwords-copy-username)
-        (define-key org-passwords-mode-map
-          (kbd "C-c C-p")
-          'org-passwords-copy-password)
-        (define-key org-passwords-mode-map
-          (kbd "C-c C-o")
-          'org-passwords-open-url)))
-
- #+END_SRC
-
+   
 * Diminish Modes
 
 Do this after everything is setup.
