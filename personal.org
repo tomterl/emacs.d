@@ -1664,6 +1664,28 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
            '((company-postgresql)))))
 #+END_SRC
 ** Bug Tracker
+
+Make it easier to reference tickets.  
+se
+#+begin_src emacs-lisp
+(require 'bug-reference)
+(define-hook-helper bug-reference-mode ()
+  "Setup bug reference links"
+  :name bug-reference-org
+  (progn
+    (let* ((bugs (netrc-machine (netrc-parse "~/.netrc") "bugs" t))
+         (bug-url (netrc-get bugs "default")))
+    (setq bug-reference-url-format bug-url
+          bug-reference-bug-regexp (if (tom/work?)
+                                       "\\(##\\)\\([A-Z]\\{3,7\\}\\-[0-9][0-9]*\\)"
+                                     "\\(##\\)\\([0-9][0-9]*\\)")))))
+(define-hook-helper org-mode
+  :name org-bug-reference
+  (bug-reference-mode))
+
+      
+#+end_src
+
 * Behaviour
 ** kill-ring
   #+BEGIN_SRC emacs-lisp
