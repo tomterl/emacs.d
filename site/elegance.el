@@ -295,7 +295,7 @@ background color that is barely perceptible."
     (with-eval-after-load 'cus-edit (set-button-faces)))
 
 ;; ;; Set theme
-(load-theme 'autumn-light t)
+(load-theme 'kaolin-light t)
 (set-modeline-faces)
 ;; (elegance-light)
 
