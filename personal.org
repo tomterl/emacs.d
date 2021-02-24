@@ -1004,7 +1004,13 @@ Use ivy/counsel for Completion
   (global-set-key (kbd "C-c o") 'org-capture)
   (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
 #+END_SRC
-
+** Search for and checkout projects `in the wild`
+#+BEGIN_SRC emacs-lisp
+  (require 'elescope)
+  (setf elescope-root-folder "~/projects"
+        elescope-use-full-path t
+        elescope-clone-depth nil)
+#+END_SRC
 * Appearance
 ** Font
 -> ==
@@ -1657,6 +1663,7 @@ Sections marked with `:newpage` will start on a new page when exporting to LaTeX
       (set (make-local-variable 'company-backends)
            '((company-postgresql)))))
 #+END_SRC
+** Bug Tracker
 * Behaviour
 ** kill-ring
   #+BEGIN_SRC emacs-lisp

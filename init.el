@@ -27,7 +27,7 @@
 
 ;; load personal.org
   (let ((org-file (expand-file-name "personal.org" tom/--emacs-dir)))
-      (require 'org)
+    (require 'org)
       (org-babel-load-file org-file))
 
 ;;; init.el ends here
