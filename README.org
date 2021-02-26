@@ -1,3 +1,5 @@
+This repository moved to https://git.sr.ht/~tomterl/emacsd
+
 * Emacs setup
 
 This is a =graphene=, =org-mode= and =cask= based emacs-setup.
